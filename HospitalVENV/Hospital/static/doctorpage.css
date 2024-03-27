@@ -1,0 +1,120 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  list-style: none;
+  text-decoration: none;
+}
+header {
+  position: flex;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 33px 9%;
+  background: #F2CED8;
+  border-radius: 20px 20px 0 0;
+}
+body {
+  background-color: white;
+}
+.logo-name {
+  float: left
+}
+.logo-name img {
+  max-width: 55px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+.logo-name a {
+  font-size: 30px;
+  font-weight: 700;
+  color: #0487d9;
+  text-decoration: none;
+}
+.navlist {
+  display: flex;
+  margin-top: 15px;
+}
+.navlist a{
+  color: #0487d9;
+  margin-left: 60px;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all .55s ease;
+  text-decoration: none;
+}
+.navlist a:hover{
+  border-bottom: 2px solid #0487d9;
+}
+header .btn-primary {
+  font-size: 20px;
+  margin-right: 25px;
+  background-color: #ff66b2;
+  border-color: #ff66b2;
+  color: white;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  --bs-btn-padding-x: 1rem;
+}
+header button:hover {
+  --bs-btn-hover-bg: whitesmoke transparent;
+  --bs-btn-hover-border-color: 1px solid whitesmoke;
+  transform: translateY(-8px);
+}
+header .btn-primary a{
+  color: white;
+  text-decoration: none;
+  font-size: 20px
+}
+section {
+  padding: 0 2%;
+}
+.displaybox {
+  height: 80%;
+  width: 80%;
+  min-height: 75vh;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 0.5fr);
+  gap: 2rem;
+  background-color: rgba(4, 135, 217, 0.3);
+  box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+  border-radius: 47px;
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 1%;
+
+}
+.textbox {
+  line-height: 0.75cm;
+  display: block;
+}
+.textbox h2 {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: 5%;
+}
+.textbox p {
+  border-bottom: 2px solid black;
+  font-size: 16px;
+}
+.textbox h6{
+  font-size: 20px;
+}
+.textboxIDDoc h6{
+  color: #ff66b2;
+  font-size: 20px;
+}
+.textboxIDDoc p{
+  border-bottom: 2px solid black;
+  font-size: 16px;
+}
