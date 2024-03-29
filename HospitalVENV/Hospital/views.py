@@ -3,17 +3,44 @@ from django.apps import apps
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-import random
+import uuid
 
 from .forms import UserForm
 
-def connectDB():
+def connectDBPatient():
     if not firebase_admin._apps:
         cred = credentials.Certificate("hospital-admin-key.json")
         firebase_admin.initialize_app(cred, {
             "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
         })
-    dbconn = db.reference("Account")
+    dbconn = db.reference("Patient")
+    return dbconn
+
+def connectDBDoctor():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("Doctor")
+    return dbconn
+
+def connectDBManager():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("Manager")
+    return dbconn
+
+def connectDBAdmin():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("Admin")
     return dbconn
 
 def mainpage(request):
@@ -29,9 +56,8 @@ def signup(request):
             password = form.cleaned_data.get("password")
             gender = form.cleaned_data.get("gender")
             date = form.cleaned_data.get("date")
-            id_number = random.randint(000000, 999999)
-            user_id = "PA" + str(id_number)
-        dbconn = connectDB()
+            user_id = uuid.uuid4().hex
+        dbconn = connectDBPatient()
         dbconn.push({"ID": user_id,"Gmail": gmail, "Name": name, "Password": password, "Date of Birth" : date,
                     "Gender": gender})
         return redirect('mainpage')
@@ -44,47 +70,75 @@ def loginpage(request):
     if request.method == 'POST':
         gmail = request.POST.get("gmail")
         password = request.POST.get("password")
-        if confirm(gmail, password):
-            userID = get_ID(gmail, password)
-            if "DOC" in userID:
-                return redirect('doctorpage', id = userID)
-            elif "PA" in userID:
-                return redirect('patientpage', id = userID)
-            elif "AD" in userID:
-                return redirect('managerpage', id = userID)
+        global userKey
+        global userRole
+        
+        if checkValidate(gmail, password):
+            if "Patient" == userRole:
+                dbconn = connectDBPatient()
+                user_data = dbconn.child(userKey).get()
+                userID = user_data.get("ID")
+                return redirect('patientpage', userID)
+            elif "Doctor" == userRole:
+                dbconn = connectDBDoctor()
+                user_data = dbconn.child(userKey).get()
+                userID = user_data.get("ID")
+                return redirect('doctorpage', userID)
+            elif "Manager" == userRole:
+                dbconn = connectDBManager()
+                user_data = dbconn.child(userKey).get()
+                userID = user_data.get("ID")
+                return redirect('managerpage', userID)
+            elif "Admin" == userRole:
+                dbconn = connectDBAdmin()
+                user_data = dbconn.child(userKey).get()
+                userID = user_data.get("ID")
+                return redirect('adminpage', userID)
             else:
                 return render(request, 'loginpage.html')
         else:
             return render(request, 'loginpage.html')
 
-def confirm(gmail, password):
-    dbconn = connectDB()
+def checkValidate(gmail, password):
+    global userKey
+    global userRole
+    dbconn = connectDBPatient()
     tableUser = dbconn.get()
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
+            userKey = key
+            userRole = "Patient"
             return True
-    return False
-
-def get_doctor_info(id):
-    docInfo = []
-    dbconn = connectDB()
+        
+    dbconn = connectDBDoctor()
     tableUser = dbconn.get()
     for key, value in tableUser.items():
-        if value.get("ID") == id:
-            docInfo.append({
-                'id': value.get("ID"),
-                'name': value.get("Name"),
-                'department': value.get("Department"),
-                'phone': value.get("Phone"),
-                'gmail':value.get("Gmail"),
-                'level': value.get("Level")
-            })
-            return docInfo[0]
-    return None
+        if value.get("Gmail") == gmail and value.get("Password") == password:
+            userKey = key
+            userRole = "Doctor"
+            return True
+    
+    dbconn = connectDBManager()
+    tableUser = dbconn.get()
+    for key, value in tableUser.items():
+        if value.get("Gmail") == gmail and value.get("Password") == password:
+            userKey = key
+            userRole = "Manager"
+            return True
+        
+    dbconn = connectDBAdmin()
+    tableUser = dbconn.get()
+    for key, value in tableUser.items():
+        if value.get("Gmail") == gmail and value.get("Password") == password:
+            userKey = key
+            userRole = "Admin"
+            return True
+        
+    return False
 
 def get_patient_info(id):
     PatientInfo = []
-    dbconn = connectDB()
+    dbconn = connectDBPatient()
     tableUser = dbconn.get()
     for key, value in tableUser.items():
         if value.get("ID") == id:
@@ -99,9 +153,41 @@ def get_patient_info(id):
             return PatientInfo[0]
     return None
 
+def get_doctor_info(id):
+    docInfo = []
+    dbconn = connectDBDoctor()
+    tableUser = dbconn.get()
+    for key, value in tableUser.items():
+        if value.get("ID") == id:
+            docInfo.append({
+                'id': value.get("ID"),
+                'name': value.get("Name"),
+                'department': value.get("Department"),
+                'phone': value.get("Phone"),
+                'gmail':value.get("Gmail"),
+                'level': value.get("Level")
+            })
+            return docInfo[0]
+    return None
+
+def get_manager_info(id):
+    ManagerInfo = []
+    dbconn = connectDBManager()
+    tableUser = dbconn.get()
+    for key, value in tableUser.items():
+        if value.get("ID") == id:
+            ManagerInfo.append({
+                'id': value.get("ID"),
+                'name': value.get("Name"),
+                'phone': value.get("Phone"),
+                'gmail':value.get("Gmail")
+            })
+            return ManagerInfo[0]
+    return None
+
 def get_admin_info(id):
     AdminInfo = []
-    dbconn = connectDB()
+    dbconn = connectDBAdmin()
     tableUser = dbconn.get()
     for key, value in tableUser.items():
         if value.get("ID") == id:
@@ -114,22 +200,22 @@ def get_admin_info(id):
             return AdminInfo[0]
     return None
 
-def get_ID(gmail, password):
-    dbconn = connectDB()
-    tableUser = dbconn.get()
-    for key, value in tableUser.items():
-        if value.get("Gmail") == gmail and value.get("Password") == password:
-            return value.get("ID")
-    return None
+def patientpage(request, id):
+    paInfo = get_patient_info(id)
+    return render(request, 'patientpage.html', {'patient': paInfo})
 
 def doctorpage(request, id):
     docInfo = get_doctor_info(id)
     return render(request, 'doctorpage.html', {'doctor': docInfo})
 
-def patientpage(request, id):
-    paInfo = get_patient_info(id)
-    return render(request, 'patientpage.html', {'patient': paInfo})
-
 def managerpage(request, id):
+    managerInfo = get_manager_info(id)
+    return render(request, 'managerpage.html', {'manager': managerInfo})
+
+def adminpage(request, id):
     adInfo = get_admin_info(id)
-    return render(request, 'managerpage.html', {'admin': adInfo})
+    return render(request, 'adminpage.html', {'admin': adInfo})
+
+# class MedicalRecord:
+#     def __init__(self, MedicID, DoctorID, PatientID, PrescriptionID, Diagnose):
+        

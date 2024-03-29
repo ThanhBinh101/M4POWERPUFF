@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M3PowerPuff</title>
-    {%load static%}
+    {% load static%}
     <link rel="icon" type="image/x-icon" href="{%static 'logo.png'%}">
 
-    <link rel="stylesheet" type ="text/css" href="{%static 'doctorpage.css'%}">
+    <link rel="stylesheet" type ="text/css" href="{%static 'adminpage.css'%}">
 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
@@ -40,42 +40,27 @@
         </button>
 
     </header>
-
+    
     <section class = "displaybox">
         <div class = "textbox">
-            <h2>Doctor Information</h2>
+            <h2>Admin Information</h2>
             <div class = "textboxIDDoc">
                 <h6>ID*</h6>
-                <p id = "DoctorID">{{doctor.id}}</p>
+                <p id = "AdminID">{{admin.id}}</p>
             </div>
             <h6>Name</h6>
-            <p id = "DoctorName">{{doctor.name}}</p>
-            <h6>Department</h6>
-            <p id = "DoctorDepartment">{{doctor.department}}</p>
+            <p id = "AdminName">{{admin.name}}</p>
             <h6>Phone</h6>
-            <p id = "DoctorPhone">{{doctor.phone}}</p>
+            <p id = "AdminPhone">{{admin.phone}}</p>
             <h6>Gmail</h6>
-            <p id = "DoctorGmail">{{doctor.gmail}}</p>
-            <h6>Level</h6>
-            <p id = "DoctorLevel">{{doctor.level}}</p>
+            <p id = "AdminGmail">{{admin.gmail}}</p>
         </div> 
 
-        <div class = "doctorinfo">
-            <div class = "doctorimg">
-                <img src="{%static 'doctor1.jpg'%}">
-            </div>
+        <div class = "tablebox">
 
-            <div class = "doctorbutton">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-                    <a href=''>Add Prescription</a>
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-                    <a href=''>History</a>
-                </button>
-            </div>
         </div>
 
     </section>
-    
+
 </body>
 </html>
