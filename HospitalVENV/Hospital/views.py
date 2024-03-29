@@ -133,3 +133,6 @@ def patientpage(request, id):
 def managerpage(request, id):
     adInfo = get_admin_info(id)
     return render(request, 'managerpage.html', {'admin': adInfo})
+
+def hrpatientpage(request):
+    return render(request, 'hrpatientpage.html')

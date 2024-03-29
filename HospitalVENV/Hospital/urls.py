@@ -7,5 +7,6 @@ urlpatterns = [
     path('loginpage', views.loginpage, name = "loginpage"),
     path('doctor/<str:id>', views.doctorpage, name = "doctorpage"),
     path('patient/<str:id>', views.patientpage, name = "patientpage"),
-    path('manager/<str:id>', views.managerpage, name = "managerpage")
+    path('manager/<str:id>', views.managerpage, name = "managerpage"),
+    path('hrpatientpage', views.hrpatientpage, name = "hrpatientpage")
 ]
