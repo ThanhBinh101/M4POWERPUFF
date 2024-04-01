@@ -11,21 +11,40 @@ firebase_admin.initialize_app(cred, {
 
 dbref = db.reference("Doctor")
 user_id = uuid.uuid4().hex
-dbref.push({"ID": user_id, "Name":"Ngoc Nhon", "Department": "Brain", "Phone": 6969, 
-            "Gmail": "doctor@gmail.com", "Level":"Bachelor", "Password": "123456"})
+dbref.push({"ID": user_id, "Name":"Le Vy", "Department": "Heart", "Phone": "0901812806", 
+            "Gmail": "doctor1@gmail.com", "Level":"Bachelor", "Password": "123456"})
 
-dbref = db.reference("Manager")
-user_id = uuid.uuid4().hex
-dbref.push({"ID": user_id, "Name":"Ngoc Nhon", "Phone": 9696, 
-            "Gmail": "manager@gmail.com", "Password": "123456"})
+# dbref = db.reference("Manager")
+# user_id = uuid.uuid4().hex
+# dbref.push({"ID": user_id, "Name":"Ngoc Nhon", "Phone": 9696, 
+#             "Gmail": "manager@gmail.com", "Password": "123456"})
 
-dbref = db.reference("Admin")
-user_id = uuid.uuid4().hex
-dbref.push({"ID": user_id, "Name":"Ngoc Nhon", "Phone": 1123, 
-            "Gmail": "Admin@gmail.com", "Password": "123456"})
+# dbref = db.reference("Admin")
+# user_id = uuid.uuid4().hex
+# dbref.push({"ID": user_id, "Name":"Ngoc Nhon", "Phone": 1123, 
+#             "Gmail": "Admin@gmail.com", "Password": "123456"})
 
-# dbref.push({"ID": 10, "Name":"Ngoc Nhon", "Department": "Brain", "Phone": 6969, 
-#             "Gmail": "testing@gmail.com", "Level":"Bachelor", "Password": "1234567890"})
+# dbref = db.reference("Medicine/Storage")
+# user_id = uuid.uuid4().hex
+# dbref.push({"ID": user_id, "Name": "Pencillin", "Quantity": 200, "ImportData": "30/3/2024", "ExpireDate": "30/3/2030"})
+# dbref = db.reference("Medicine/Storage")
+# user_id = uuid.uuid4().hex
+# dbref.push({"ID": user_id, "Name": "Insulin", "Quantity": 200, "ImportData": "30/3/2024", "ExpireDate": "30/3/2030"})
+# dbref = db.reference("Medicine/Storage")
+# user_id = uuid.uuid4().hex
+# dbref.push({"ID": user_id, "Name": "Morphin", "Quantity": 200, "ImportData": "30/3/2024", "ExpireDate": "30/3/2030"})
+# dbref = db.reference("Medicine/Storage")
+# user_id = uuid.uuid4().hex
+# dbref.push({"ID": user_id, "Name": "Aspirin", "Quantity": 200, "ImportData": "30/3/2024", "ExpireDate": "30/3/2030"})
+# dbref = db.reference("Medicine/Storage")
+# user_id = uuid.uuid4().hex
+# dbref.push({"ID": user_id, "Name": "Chlorpomazin", "Quantity": 200, "ImportData": "30/3/2024", "ExpireDate": "30/3/2030"})
+# dbref = db.reference("Medicine/Storage")
+# user_id = uuid.uuid4().hex
+# dbref.push({"ID": user_id, "Name": "Ether", "Quantity": 200, "ImportData": "30/3/2024", "ExpireDate": "30/3/2030"})
+# dbref = db.reference("Medicine/Storage")
+# user_id = uuid.uuid4().hex
+# dbref.push({"ID": user_id, "Name": "Paracetamol", "Quantity": 200, "ImportData": "30/3/2024", "ExpireDate": "30/3/2030"})
 
 # class Item:
 #     def __init__(self, name: str, price: float, quanity = 0):
