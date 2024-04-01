@@ -1,84 +1,9 @@
-from django.shortcuts import render, redirect
-from django.apps import apps
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import db
-import uuid
-import datetime
+from .classes.lib import *
+from .classes.database import *
+from .classes.patient import *
+from .classes.prescription import *
 
-from .forms import UserForm
-
-def connectDBPatient():
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Patient")
-    return dbconn
-
-def connectDBDoctor():
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Doctor")
-    return dbconn
-
-def connectDBManager():
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Manager")
-    return dbconn
-
-def connectDBAdmin():
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Admin")
-    return dbconn
-
-def connectDBMedicine():
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Medicine")
-    return dbconn
-
-def connectDBMedicineStorage():
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Medicine/Storage")
-    return dbconn
-
-def connectDBMedicineHistory():
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Medicine/History")
-    return dbconn
-
-def connectDBDoctorHistory(key):
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Doctor/{}/History".format(key))
-    return dbconn
+from .classes.forms import UserForm
 
 def mainpage(request):
     
@@ -93,10 +18,9 @@ def signup(request):
             password = form.cleaned_data.get("password")
             gender = form.cleaned_data.get("gender")
             date = form.cleaned_data.get("date")
-            user_id = uuid.uuid4().hex
         dbconn = connectDBPatient()
-        dbconn.push({"ID": user_id,"Gmail": gmail, "Name": name, "Password": password, "Date of Birth" : date,
-                    "Gender": gender})
+        p = patient(name, gmail, password, date, gender)
+        dbconn.push(p.to_dict())
         return redirect('mainpage')
     return render(request, 'signup.html')
 
@@ -265,48 +189,31 @@ def prescriptionpage(request, id):
         dbconn = connectDBMedicineStorage()
         tbleMedicines = dbconn.get()
         for key, value in tbleMedicines.items():
-            medicines.append({"name": value["Name"]})
-            
-        update_patient = None
-        if 'update_patient' in request.session:
-            update_patient = request.session['update_patient']
-            uppatient = get_patient_info(update_patient)
-            del request.session['update_patient']
+            medicines.append({"name": value["Name"], "ID": value["ID"]})
                     
-        return render(request, 'prescriptionpage.html', {'patients': patients, 'medicines': medicines, 'UpPatient': uppatient})
+        return render(request, 'prescriptionpage.html', {'patients': patients, 'medicines': medicines,})
     
     if request.method == 'POST':
-        prescriptionID = uuid.uuid4().hex
         patientID = request.POST.get("patientid")
-        patientName = request.POST.get("patientname")
         patientDiagnose = request.POST.get("patientdiagnose")
         patientMedicine = request.POST.get("patientmedicine")
-        DoctorInfo = get_doctor_info(id)
-        doctorName = DoctorInfo['name']
-        today = datetime.date.today()
-        PreToday = str(today.strftime("%d/%m/%Y"))
+        
+        p = Prescription(id, patientID, patientDiagnose, patientMedicine)
         
         dbconn = connectDBMedicineHistory()
-        dbconn.push({"ID": prescriptionID, "PatientID": patientID, "PatientName": patientName, 
-                     "PatientDiagnose": patientDiagnose, "PatientMedicine": patientMedicine, 
-                     "DoctorID": id, "DoctorName": doctorName, "PrescriptionDate": PreToday})
+        dbconn.push(p.to_dict())
         
-        medicinesList = patientMedicine.split(', ')
-        for medicine in medicinesList:
-            name, quantity = medicine.split(' (')
-            quantity = int(quantity[:-1])
-            removePills(name, quantity)
         
-        addMedicalRecord(id, prescriptionID)
+        #addMedicalRecord(id, p.to_dict())
                 
     return redirect('doctorpage', id)       
 
-def removePills(name, deleteQuantity):
+def removePills(id, deleteQuantity):
     dbconn = connectDBMedicineStorage()
     tblMedicines = dbconn.get()
     
     for key, value in tblMedicines.items():
-        if(value["Name"] == name):
+        if(value["ID"] == id):
             Quantity = value.get("Quantity")
             updateQuanity = Quantity - deleteQuantity
             updateitem = dbconn.child(key)
@@ -352,7 +259,6 @@ def historypatient(request, doctor_id, patient_id):
     if haveHistory:
         return render(request, 'historypatient.html', {'medicalRecords': medicalRecords})
     else:
-        request.session['update_patient'] = patient_id
         return redirect('prescriptionpage', doctor_id)
        
 # class MedicalRecord:

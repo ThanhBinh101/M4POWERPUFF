@@ -15,12 +15,10 @@ class medicine:
         self.number = number
         self.history = []
 
-    @classmethod
-    def use_medicine(self, number, reason):
+    def RemoveMedicine(self, number, reason):
         self.number = self.number - number
         self.history.append(medicalHistory(number, reason))
 
-    @classmethod
     def cancel_medicine(self, reason):
         self.history.append(medicalHistory(self.number, reason))
         self.number = 0
