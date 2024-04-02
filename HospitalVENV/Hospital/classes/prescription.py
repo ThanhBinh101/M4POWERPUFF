@@ -2,15 +2,10 @@ from .database import *
 from .lib import *
 from .medicine import *
 
-class MedicineList:
-    def __init__(self, medicineID, number):
-        self.medicineID = medicineID
-        self.number = number
-
 class Prescription:
     def __init__(self, doctorid, patientid, diagnose, medicines):
         self.id = uuid.uuid4().hex
-        self.date =  datetime.date.today()
+        self.date = datetime.date.today()
         self.doctorid = doctorid
         self.patientid = patientid
         self.diagnose = diagnose
@@ -19,17 +14,21 @@ class Prescription:
         medicinesList1 = medicines.split(', ')
         for medicine in medicinesList1:
             name, quantity = medicine.split(' (')
-            quantity = int(quantity[:-1])
-            self.add_medicine(name, quantity)
+            UseQuantity = int(quantity[:-1])
+            self.add_medicine_prescription(name, UseQuantity)
             
-    def add_medicine(self, name, number):
-        dbconn = connectDBMedicineStorage()
+        for medicine in self.medicinelist:
+            medicine.RemoveMedicine(self.id)
+            
+    def add_medicine_prescription(self, name, UseQuantity):
+        dbconn = connectDBMedicine()
         tblMedicines = dbconn.get()
         for key, value in tblMedicines.items():
             if(value["Name"] == name):
-                self.medicinelist.append(MedicineList(value["ID"], number))
-                db_object = dbconn.child(key).get()
-                db_object.RemoveMedicine(number, self.id)
+                name = value["Name"]
+                quantity = value["Quantity"]
+                medicineid = value["ID"]
+                self.medicinelist.append(UseMedicine(medicineid, name, quantity, UseQuantity))
                 
     def to_dict(self):
         return {
@@ -37,7 +36,17 @@ class Prescription:
             "DoctorID": self.doctorid,
             "PatientID": self.patientid,
             "Diagnose": self.diagnose,
-            "Date": self.date
+            "Date": self.date.strftime('%d/%m/%Y')
         }
 
-        
+    def CreatePrescriptionMedicineList(self):
+        dbconn = connectDBPrescription()
+        tblPrescription = dbconn.get()
+        for key, value in tblPrescription.items():
+            if value["ID"] == self.id:
+                dbconn_prescription = connectDBPrescriptionMedicineList(key)
+                medicine_data = {medicine.name: medicine.useQuantity for medicine in self.medicinelist}
+                dbconn_prescription.set(medicine_data)
+        return None
+    
+    

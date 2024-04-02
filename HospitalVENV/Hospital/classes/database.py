@@ -56,24 +56,6 @@ def connectDBMedicine():
     dbconn = db.reference("Medicine")
     return dbconn
 
-def connectDBMedicineStorage():
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Medicine/Storage")
-    return dbconn
-
-def connectDBMedicineHistory():
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    dbconn = db.reference("Medicine/History")
-    return dbconn
-
 def connectDBDoctorHistory(key):
     if not firebase_admin._apps:
         cred = credentials.Certificate("hospital-admin-key.json")
@@ -81,4 +63,22 @@ def connectDBDoctorHistory(key):
             "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
         })
     dbconn = db.reference("Doctor/{}/History".format(key))
+    return dbconn
+
+def connectDBMedicineHistory(key):
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("Medicine/{}/History".format(key))
+    return dbconn
+
+def connectDBPrescriptionMedicineList(key):
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("Prescription/{}/MedicineList".format(key))
     return dbconn

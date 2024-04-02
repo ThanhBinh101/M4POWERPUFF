@@ -186,7 +186,7 @@ def prescriptionpage(request, id):
             patients.append({"id": value["ID"], "name": value["Name"]})
             
         medicines = []
-        dbconn = connectDBMedicineStorage()
+        dbconn = connectDBMedicine()
         tbleMedicines = dbconn.get()
         for key, value in tbleMedicines.items():
             medicines.append({"name": value["Name"], "ID": value["ID"]})
@@ -200,26 +200,13 @@ def prescriptionpage(request, id):
         
         p = Prescription(id, patientID, patientDiagnose, patientMedicine)
         
-        dbconn = connectDBMedicineHistory()
+        dbconn = connectDBPrescription()
         dbconn.push(p.to_dict())
         
-        
+        p.CreatePrescriptionMedicineList()
         #addMedicalRecord(id, p.to_dict())
                 
     return redirect('doctorpage', id)       
-
-def removePills(id, deleteQuantity):
-    dbconn = connectDBMedicineStorage()
-    tblMedicines = dbconn.get()
-    
-    for key, value in tblMedicines.items():
-        if(value["ID"] == id):
-            Quantity = value.get("Quantity")
-            updateQuanity = Quantity - deleteQuantity
-            updateitem = dbconn.child(key)
-            updateitem.update({"Quantity": updateQuanity})
-            
-    return None
 
 def addMedicalRecord(doctorID, prescriptionID):
     dbconn = connectDBDoctor()
@@ -245,7 +232,7 @@ def doctorhistory(request, id):
 
 def historypatient(request, doctor_id, patient_id):
     medicalRecords = []
-    dbconn = connectDBMedicineHistory()
+    dbconn = connectDBPrescription()
     tblMedicalRecord = dbconn.get()
     
     haveHistory = False
