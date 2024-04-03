@@ -1,9 +1,6 @@
-from .classes.lib import *
-from .classes.database import *
-from .classes.patient import *
-from .classes.prescription import *
-
-from .classes.forms import UserForm
+from .models import *
+from .database import *
+from .forms import UserForm
 
 def mainpage(request):
     
@@ -19,7 +16,7 @@ def signup(request):
             gender = form.cleaned_data.get("gender")
             date = form.cleaned_data.get("date")
         dbconn = connectDBPatient()
-        p = patient(name, gmail, password, date, gender)
+        p = Patient(name, gmail, password, date, gender)
         dbconn.push(p.to_dict())
         return redirect('mainpage')
     return render(request, 'signup.html')
@@ -246,7 +243,3 @@ def historypatient(request, doctor_id, patient_id):
         return render(request, 'historypatient.html', {'medicalRecords': medicalRecords})
     else:
         return redirect('prescriptionpage', doctor_id)
-       
-# class MedicalRecord:
-#     def __init__(self, MedicID, DoctorID, PatientID, PrescriptionID, Diagnose):
-        
