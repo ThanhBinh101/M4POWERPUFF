@@ -204,7 +204,6 @@ def prescriptionpage(request, id):
         dbconn.push(p.to_dict())
         
         p.CreatePrescriptionMedicineList()
-        #addMedicalRecord(id, p.to_dict())
                 
     return redirect('doctorpage', id)       
 

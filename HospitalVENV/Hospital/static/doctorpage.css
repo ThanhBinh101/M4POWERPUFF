@@ -7,7 +7,6 @@
   text-decoration: none;
 }
 header {
-  position: flex;
   right: 0;
   top: 0;
   z-index: 1000;
@@ -89,7 +88,6 @@ section {
   margin-top: 2%;
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 1%;
 }
 .textbox {
   line-height: 0.75cm;
@@ -119,7 +117,7 @@ section {
 }
 .doctorimg {
   margin-top: 20%;
-  margin-left: 30%;
+  margin-left: 35%;
 }
 .doctorimg img{
   border: 2px solid black;
@@ -129,7 +127,7 @@ section {
 }
 .doctorbutton {
   padding-top: 5%;
-  padding-left: 15%;
+  padding-left: 29%;
   display: flex;
 }
 .doctorbutton a{
@@ -141,14 +139,26 @@ section {
 }
 .doctorbutton button{
   background-color: #ff66b2;
-  width: 40%;
+  width: 75%;
   border: white;
   margin: 0 10px;
   text-transform: uppercase;
   transition: all 0.55s ease;
 }
 .doctorbutton button:hover{
-  --bs-btn-hover-bg: whitesmoke transparent;
+  --bs-btn-hover-bg: rgb(205,102,168);
   --bs-btn-hover-border-color: 1px solid whitesmoke;
   transform: translateY(-8px);
+}
+.todobox {
+  height: 80%;
+  width: 80%;
+  min-height: 75vh;
+  position: relative;
+  background-color: rgba(4, 135, 217, 0.3);
+  box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+  border-radius: 47px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 1%;
 }
