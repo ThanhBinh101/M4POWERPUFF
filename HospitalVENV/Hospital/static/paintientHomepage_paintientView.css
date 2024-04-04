@@ -1,0 +1,262 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  list-style: none;
+  text-decoration: none;
+}
+
+header {
+  position: flex;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 33px 9%;
+  background: #F2CED8;
+}
+
+body {
+  background-color: white;
+}
+
+.logo-name {
+  float: left
+}
+
+.logo-name img {
+  max-width: 55px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+.logo-name a {
+  font-size: 30px;
+  font-weight: 700;
+  color: #0487d9;
+  text-decoration: none;
+}
+
+.navlist {
+  display: flex;
+  margin-top: 15px;
+}
+
+.navlist a {
+  color: #0487d9;
+  margin-left: 60px;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all .55s ease;
+  text-decoration: none;
+}
+
+.navlist a:hover {
+  border-bottom: 2px solid #0487d9;
+}
+
+header .btn-primary {
+  font-size: 20px;
+  margin-right: 25px;
+  background-color: #ff66b2;
+  border-color: #ff66b2;
+  color: white;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  --bs-btn-padding-x: 1rem;
+}
+
+header button:hover {
+  --bs-btn-hover-bg: whitesmoke transparent;
+  --bs-btn-hover-border-color: 1px solid whitesmoke;
+  transform: translateY(-8px);
+}
+
+header .btn-primary a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px
+}
+
+/*hrPP1*/
+section .container .btn-primary:hover {
+  --bs-btn-hover-bg: whitesmoke transparent;
+  --bs-btn-hover-border-color: 1px solid whitesmoke;
+}
+
+.scrollable-table1 {
+  margin-top: 4%;
+  width: 620px;
+  height: 500px;
+  overflow-y: auto;
+}
+
+
+.scrollable-table1 thead th {
+  position: sticky;
+  text-align: center;
+  top: 0;
+  z-index: 1;
+}
+
+/* Adjust column widths */
+.scrollable-table1 th:nth-child(1),
+.scrollable-table1 td:nth-child(1) {
+  text-align: center;
+  width: 124px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  vertical-align: middle;
+  /* Date */
+}
+
+.scrollable-table1 th:nth-child(2),
+.scrollable-table1 td:nth-child(2) {
+  text-align: center;
+  width: 496px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  vertical-align: middle;
+  /* Doctor */
+}
+
+section .custom-modal-content {
+  background-color: #F2CED8;
+  /* Change this value to the desired background color */
+}
+
+/*hrPP2*/
+
+.box {
+  position: absolute;
+  z-index: 3;
+  /* gray box will be above both green and black box */
+  left: 80px;
+  top: 20px;
+}
+
+.scrollable-table-container {
+  margin-top: 1%;
+  width: 1300px;
+  /* Full width */
+  height: 550px;
+  /* Adjust the height as needed */
+  background-color: rgba(4, 135, 217, 0.3);
+  /* Blue background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  /* Rounded corners */
+}
+
+.scrollable-table2 {
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 50px;
+  width: 1200px;
+  height: 480px;
+  overflow-y: auto;
+}
+
+
+.scrollable-table2 thead th {
+  position: sticky;
+  text-align: center;
+  top: 0;
+  z-index: 1;
+}
+
+.scrollable-table2 td:nth-child(3) {
+  text-align: left;
+}
+
+/* Adjust column widths */
+.scrollable-table2 th:nth-child(1),
+.scrollable-table2 td:nth-child(1) {
+  text-align: center;
+  max-width: 180px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  vertical-align: middle;
+  /* Date */
+}
+
+.scrollable-table2 th:nth-child(2),
+.scrollable-table2 td:nth-child(2) {
+  text-align: center;
+  max-width: 180px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  vertical-align: middle;
+  /* Doctor */
+}
+
+.scrollable-table2 th:nth-child(3),
+.scrollable-table2 td:nth-child(3) {
+  max-width: 720px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  /* Diagnose */
+}
+
+.scrollable-table2 th:nth-child(4),
+.scrollable-table2 td:nth-child(4) {
+  text-align: center;
+  width: 120px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  vertical-align: middle;
+  /* Prescription */
+}
+
+.custom-table2 {
+  background-color: rgba(4, 135, 217, 0.3);
+  text-align: center;
+  width: 740px;
+  max-width: 740px;
+}
+
+/* Adjust column widths */
+.custom-table2 th:nth-child(1),
+.custom-table2 td:nth-child(1) {
+  text-align: center;
+  max-width: 111px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  vertical-align: middle;
+  /* Date */
+}
+
+.custom-table2 th:nth-child(2),
+.custom-table2 td:nth-child(2) {
+  text-align: center;
+  max-width: 222px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  vertical-align: middle;
+  /* Doctor */
+}
+
+.custom-table2 th:nth-child(3),
+.custom-table2 td:nth-child(3) {
+  max-width: 100px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  /* Diagnose */
+}
+
+.custom-table2 th:nth-child(4),
+.custom-table2 td:nth-child(4) {
+  text-align: center;
+  width: 307px;
+  overflow-wrap: break-word;
+  /* Prevent overflow */
+  vertical-align: middle;
+  /* Prescription */
+}
