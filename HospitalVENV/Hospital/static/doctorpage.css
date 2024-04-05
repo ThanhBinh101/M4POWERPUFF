@@ -160,5 +160,40 @@ section {
   border-radius: 47px;
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 1%;
+}
+.todobox h2 {
+  padding-top: 3%;
+  margin-bottom: 2%;
+}
+.todobox a {
+  text-decoration: none;
+}
+.custom-table {
+  border-collapse: collapse;
+  width: 100%; /* Adjust the width of the table as needed */
+}
+.custom-table th,
+.custom-table td {
+  padding: 15px !important; /* Adjust the padding to make the cells bigger */
+  text-align: center; /* Center align content in cells */
+}
+.ri-check-fill {
+  margin-right: 20%;
+  font-size: 24px;
+  color: #73e635
+}
+.ri-close-fill {
+  font-size: 24px;
+  color: #B80000;
+}
+.ri-user-search-line {
+  font-size: 24px;
+  color: #ff66b2;
+}
+.table-danger i {
+  transition: all 0.55s ease;
+}
+.table-danger button {
+  border-width: 0;
+  background-color: #f8d7da;
 }
