@@ -16,6 +16,16 @@ class Information:
         self.password = password
         self.dob = dob
         self.gender = gender
+
+    def to_dict(self):
+        return {
+            "ID": self.id,
+            "Gmail": self.email,
+            "Name": self.name,
+            "Password": self.password,
+            "Gender": self.gender,
+            "Date of Birth": self.dob
+        }
         
     def kill(self):
         del self
@@ -65,10 +75,42 @@ class Medicine:
         self.name = name
         self.quantity = quantity
 
-class MedicineList:
-    def __init__(self, medicineID, number):
-        self.medicineID = medicineID
-        self.number = number
+    def to_dict(self):
+        return {
+            "ImportDate": self.importdate,
+            "Name": self.name,
+            "Quantity": self.quantity,
+            "ExpireDate": self.expiredate
+        }
+
+    @staticmethod
+    def ImportMedicine( expiredate, name, quantity):
+        medicine = Medicine(expiredate, name, quantity)
+        dbconn = connectDBMedicine()
+        dbconn.push(medicine.to_dict())
+
+    @staticmethod
+    def UseMedicine(medicineID, quanity, reason):
+        medicine = GetMedicine(medicineID)
+        history_update = {
+            "Date": datetime.date.today(),
+            "Reason": reason,
+            "Quanity": quanity
+        }
+        medicine.update({"History": history_update})
+        medicine.update({"Quanity": medicine.value["Quanity"] - quanity})
+
+    @staticmethod
+    def CancelMedicine(medicineID, reason):
+        medicine = GetMedicine(medicineID)
+        history_update = {
+            "Date": datetime.date.today(),
+            "Reason": reason,
+            "Quanity": medicine.value["Quanity"]
+        }
+        
+        medicine.update(firestore.ArrayUnion([history_update]))
+        medicine.update({"Quanity": 0})
 
 class UseMedicine(Medicine):
     def __init__(self, id, name, quantity, useQuantity):
@@ -90,12 +132,15 @@ class UseMedicine(Medicine):
                 dbconn.push({"Reason": "DoctorUse", "UseQuantity": self.useQuantity, "PrescriptionID": prescriptionid})
 
 class MedicalManager(Information):
-    def __init__(self, name, email, password, dob):
-        Information.__init__(self, name, email, password, dob)
-        self.medicinelist = []
-    
-    def import_medicine(self, expiredate, name, number):
-        self.medicinelist.append(Medicine(expiredate, name, number))
+    def __init__(self, name, email, password, dob, gender):
+        Information.__init__(self, name, email, password, dob, gender)
+
+    @staticmethod
+    def AddMedicalManager(name, email, password, dob, gender):
+        manager = MedicalManager(name, email, password, dob, gender)
+        dbconn = connectDBMedicalManager()
+        dbconn.push(manager.to_dict())
+       
 
 class MaintainHistory:
     def __init__(self, status, comment):
@@ -150,9 +195,6 @@ class MedicalRecord:
         self.diagnose = diagnose
         self.medicinelist = []
         
-        def add_medicine(self, medicineID, number):
-            self.medicinelist.append(MedicineList(medicineID, number))
-
 class Prescription:
     def __init__(self, doctorid, patientid, diagnose, medicines):
         self.id = uuid.uuid4().hex

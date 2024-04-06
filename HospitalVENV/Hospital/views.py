@@ -43,7 +43,7 @@ def loginpage(request):
                 userID = user_data.get("ID")
                 return redirect('doctorpage', userID)
             elif "Manager" == userRole:
-                dbconn = connectDBManager()
+                dbconn = connectDBMedicalManager()
                 user_data = dbconn.child(userKey).get()
                 userID = user_data.get("ID")
                 return redirect('managerpage', userID)
@@ -76,7 +76,7 @@ def checkValidate(gmail, password):
             userRole = "Doctor"
             return True
     
-    dbconn = connectDBManager()
+    dbconn = connectDBMedicalManager()
     tableUser = dbconn.get()
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
@@ -167,7 +167,7 @@ def get_doctor_appointments(doc_key):
 
 def get_manager_info(id):
     ManagerInfo = []
-    dbconn = connectDBManager()
+    dbconn = connectDBMedicalManager()
     tableUser = dbconn.get()
     for key, value in tableUser.items():
         if value.get("ID") == id:
@@ -260,4 +260,3 @@ def doctorhistory(request, id): #Later fix this function
     docInfo = get_doctor_info(id)
     
     return render(request, 'doctorhistory.html', {'patients': patients, 'doctor': docInfo})
-
