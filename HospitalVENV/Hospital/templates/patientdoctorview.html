@@ -7,7 +7,7 @@
     {% load static%}
     <link rel="icon" type="image/x-icon" href="{%static 'logo.png'%}">
 
-    <link rel="stylesheet" type ="text/css" href="{%static 'patientpage.css'%}">
+    <link rel="stylesheet" type ="text/css" href="{%static 'patientdoctorview.css'%}">
 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
@@ -35,8 +35,8 @@
             <li><a href="">Contact us</a></li>
         </ul>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-            <a href='{% url 'mainpage' %}'>Log out</a>
+        <button type="button" id="go-back" class="btn btn-primary" data-bs-toggle="modal">
+            Return
         </button>
 
     </header>
@@ -56,14 +56,53 @@
             <p id = "PatientDOB">{{patient.dateofbirth}}</p>
             <h6>Gmail</h6>
             <p id = "PatientGmail">{{patient.gmail}}</p>
+
         </div> 
 
-        <div class = "tablebox">
-
+        <div class = 'addprescription'>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal">
+                <a href='newprescription/{{patient.id}}'>Add new prescription</a>
+            </button>
         </div>
 
     </section>
   
-    
+    <section class = "MedicalRecord">
+        <div class = "textbox">
+            <h2>Medical Record</h2>
+        </div> 
+        <div class="table-wrapper">
+            <table class="table table-bordered custom-table">
+                <thead>
+                    <tr class="table-danger">
+                        <th scope="col">Date</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Diagnose</th>
+                        <th scope="col">Medicine List</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for record in patient.medicalrecord%}
+                        <tr class="table-danger">
+                            <th scope="row">{{record.date}}</th>
+                            <td>{{record.doctorinfo.name}}</td>
+                            <td>{{record.diagnose}}</td>
+                            <td>{% for medicine, quantity in record.medicinelist.items%}
+                                    <p>{{medicine}} : {{quantity}}</p>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
 </body>
+
+<script>
+    document.getElementById("go-back").addEventListener("click", () => {
+        history.back();
+      });
+</script>
 </html>

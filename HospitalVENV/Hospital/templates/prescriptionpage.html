@@ -45,27 +45,6 @@
         <div class = "searchbox">
             <h3>Prescription</h3>
             <div>
-                <button type="button" class="collapsible">Patients List</button>
-                <div class="content">
-                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-                        <div class="table-wrapper">
-                            <table id="myTable">
-                                <tr class="header">
-                                    <th style="width:60%;">Name</th>
-                                    <th style="width:40%;">ID</th>
-                                </tr>
-                                {%for patient in patients%}
-                                <tr>
-                                    <td>{{ patient.name }}</td>
-                                    <td>{{ patient.id }}</td>
-                                </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
-                </div>
-            </div>
-
-            <div>
                 <button type="button" class="collapsible">Medicine List</button>
                 <div class="content">
                     <input type="text" id="myInputMedicine" onkeyup="myFunctionMedicine()" placeholder="Search for names..">
@@ -92,14 +71,6 @@
         <div class = "prescriptionForm">
             <form method="POST" > {% csrf_token %}
                 <div class="mb-3">
-                    <label for="prescriptPatID" class="form-label">Patient ID</label>
-                    <input type="text" class="form-control" id="id" name="patientid" placeholder="" required>
-                </div>
-                <div class="mb-3">
-                    <label for="prescriptName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="patientname" placeholder="" required>
-                </div>
-                <div class="mb-3">
                     <label for="prescriptDiagnose" class="form-label">Diagnose</label>
                     <input type="text" class="form-control" name="patientdiagnose" placeholder="" required>
                 </div>
@@ -114,28 +85,6 @@
 
 </body>
 <script>
-    function myFunction() {
-      // Declare variables
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
-    
-      // Loop through all table rows, and hide those who don't match the search query
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
-      }
-    }
-
     function myFunctionMedicine() {
         // Declare variables
         var input, filter, table, tr, td, i, txtValue;
@@ -172,21 +121,6 @@
         }
     });
     }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var tableRows = document.querySelectorAll("#myTable tr:not(.header)");
-    
-        tableRows.forEach(function(row) {
-            row.addEventListener("click", function() {
-                var columns = row.querySelectorAll("td");
-                var name = columns[0].textContent;
-                var id = columns[1].textContent;
-    
-                document.getElementById("name").value = name;
-                document.getElementById("id").value = id
-            });
-        });
-    });
 
     function addToMedicineInput(button) {
         var row = button.parentNode.parentNode;

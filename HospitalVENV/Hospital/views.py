@@ -106,10 +106,27 @@ def get_patient_info(id):
                 'gender': value.get("Gender"),
                 'dateofbirth': value.get("Date of Birth"),
                 'gmail':value.get("Gmail"),
-                'nextappoint': value.get("Next appointment")
+                'medicalrecord':get_medicial_record(id)
             })
             return PatientInfo[0]
     return None
+
+def get_medicial_record(id):
+    dbconn = connectDBPrescription()
+    tablePrescription = dbconn.get()
+    if tablePrescription is not None:
+        medicalrecord = []
+        for key, value in tablePrescription.items():
+            if value.get("PatientID") == id:
+                medicalrecord.append({
+                    'date': value.get("Date"),
+                    'diagnose': value.get("Diagnose"),
+                    'doctorinfo': get_doctor_info(value.get("DoctorID")),
+                    'medicinelist': value.get("MedicineList"),
+                })
+        return medicalrecord
+    else:
+        return None
 
 def get_doctor_info(id):
     docInfo = []
@@ -123,10 +140,30 @@ def get_doctor_info(id):
                 'department': value.get("Department"),
                 'phone': value.get("Phone"),
                 'gmail':value.get("Gmail"),
-                'level': value.get("Level")
+                'level': value.get("Level"),
+                'appointments': get_doctor_appointments(key)
             })
             return docInfo[0]
     return None
+
+def get_doctor_appointments(doc_key):
+    dbconn = connectDBDoctorAppointment(doc_key)
+    appointment_table = dbconn.get()
+    if appointment_table is not None:
+        appointments = []
+        for key, value in appointment_table.items():
+            appointments.append({
+                'date': value.get("Date"),
+                'time': value.get("Time"),
+                'patientname': value.get("PatientName"),
+                'diagnose': value.get("Diagnose"),
+                'patientid': value.get("PatientID"),
+                'appointmentKey': key,
+                'doctorKey': doc_key
+            })
+        return appointments
+    else:
+        return None
 
 def get_manager_info(id):
     ManagerInfo = []
@@ -174,7 +211,7 @@ def adminpage(request, id):
     adInfo = get_admin_info(id)
     return render(request, 'adminpage.html', {'admin': adInfo})
 
-def prescriptionpage(request, id):
+def prescriptionpage(request, id, patid):
     if request.method == 'GET':
         patients = []
         dbconn = connectDBPatient()
@@ -191,31 +228,29 @@ def prescriptionpage(request, id):
         return render(request, 'prescriptionpage.html', {'patients': patients, 'medicines': medicines,})
     
     if request.method == 'POST':
-        patientID = request.POST.get("patientid")
         patientDiagnose = request.POST.get("patientdiagnose")
         patientMedicine = request.POST.get("patientmedicine")
         
-        p = Prescription(id, patientID, patientDiagnose, patientMedicine)
+        p = Prescription(id, patid, patientDiagnose, patientMedicine)
         
         dbconn = connectDBPrescription()
         dbconn.push(p.to_dict())
         
         p.CreatePrescriptionMedicineList()
                 
-    return redirect('doctorpage', id)       
+    return redirect('doctorpage', id)
 
-def addMedicalRecord(doctorID, prescriptionID):
-    dbconn = connectDBDoctor()
-    tblDoctors = dbconn.get()
-    
-    for key, value in tblDoctors.items():
-        if(value["ID"] == doctorID):
-            dbconn = connectDBDoctorHistory(key)
-            dbconn.push({"PrescriptionID": prescriptionID})
-            
-    return None
+def deleteAppoint(request, docid, docKey, appointKey):
+    dbconn = connectDBDoctorAppointment(docKey)
+    delAppoint = dbconn.child(appointKey)
+    delAppoint.delete()
+    return redirect('doctorpage', id=docid)
 
-def doctorhistory(request, id):
+def patientdoctorview(request, docid, patid):
+    patients = get_patient_info(patid)
+    return render(request, 'patientdoctorview.html', {'patient': patients, 'docid': docid})
+
+def doctorhistory(request, id): #Later fix this function
     patients = []
     dbconn = connectDBPatient()
     tblePatients = dbconn.get()
@@ -226,20 +261,3 @@ def doctorhistory(request, id):
     
     return render(request, 'doctorhistory.html', {'patients': patients, 'doctor': docInfo})
 
-def historypatient(request, doctor_id, patient_id):
-    medicalRecords = []
-    dbconn = connectDBPrescription()
-    tblMedicalRecord = dbconn.get()
-    
-    haveHistory = False
-    
-    for key, value in tblMedicalRecord.items():
-        if(value["PatientID"] == patient_id):
-            haveHistory = True
-            medicalRecords.append({"date" : value["PrescriptionDate"], "doctor": value["DoctorName"],
-                                   "patientmedicine": value["PatientMedicine"], "diagnose": value["PatientDiagnose"]})
-    
-    if haveHistory:
-        return render(request, 'historypatient.html', {'medicalRecords': medicalRecords})
-    else:
-        return redirect('prescriptionpage', doctor_id)
