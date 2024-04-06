@@ -1,6 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials
-from firebase_admin import db, firestore
+from firebase_admin import db
 
 def connectDBPatient():
     if not firebase_admin._apps:
@@ -54,18 +54,7 @@ def connectDBMedicine():
             "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
         })
     dbconn = db.reference("Medicine")
-    
     return dbconn
-
-def getMedicine(medicineID):
-    if not firebase_admin._apps:
-        cred = credentials.Certificate("hospital-admin-key.json")
-        firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
-        })
-    doc_ref = db.collection('Medicine').document(medicineID)
-    return doc_ref.get()
-
 
 def connectDBMedicineHistory(key):
     if not firebase_admin._apps:
