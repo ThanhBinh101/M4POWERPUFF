@@ -1,0 +1,128 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  list-style: none;
+  text-decoration: none;
+}
+header {
+  position: flex;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 33px 9%;
+  background: #F2CED8;
+  border-radius: 20px 20px 0 0;
+}
+body {
+  background-color: white;
+}
+.logo-name {
+  float: left
+}
+.logo-name img {
+  max-width: 55px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+.logo-name a {
+  font-size: 30px;
+  font-weight: 700;
+  color: #0487d9;
+  text-decoration: none;
+}
+.navlist {
+  display: flex;
+  margin-top: 15px;
+}
+.navlist a{
+  color: #0487d9;
+  margin-left: 60px;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all .55s ease;
+  text-decoration: none;
+}
+.navlist a:hover{
+  border-bottom: 2px solid #0487d9;
+}
+header .btn-primary {
+  font-size: 20px;
+  margin-right: 25px;
+  background-color: #ff66b2;
+  border-color: #ff66b2;
+  color: white;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  --bs-btn-padding-x: 1rem;
+}
+header button:hover {
+  --bs-btn-hover-bg: whitesmoke transparent;
+  --bs-btn-hover-border-color: 1px solid whitesmoke;
+  transform: translateY(-8px);
+}
+header .btn-primary a{
+  color: white;
+  text-decoration: none;
+  font-size: 20px
+}
+section {
+  padding: 0 2%;
+}
+.heading{
+  color: #0487d9; 
+  font-size: 24px; 
+  font-family: 'Poppins', sans-serif; 
+  text-align: center;
+  margin-top: 100px;
+}
+.timetable{
+background-color: #F2CED8;
+padding:20px;
+border-radius: 47px;
+margin: 20px;
+}
+.timetable table{
+width:100%;
+border-collapse: collapse;
+}
+.timetable th, .timetable td{
+border: 1px solid #0487d9;
+border-top:none;
+padding: 10px;
+text-align: center;
+}
+.timetable th{
+background-color: #F2CED8;
+color:#ff66b2;
+
+}
+.empty-cell{
+background-color:none;
+}
+.button--submit{
+float: right;
+margin-right: 150px;
+padding:8px 30px;
+background-color: #ff66b2;
+color: #fff;
+border-radius: 10px;
+
+}
+select {
+padding: 8px;
+border: 1px solid #ccc;
+border-radius: 30px;
+background-color: #fff;
+color: #333;
+font-size: 16px;
+width: 100%; 
+}
+
+
