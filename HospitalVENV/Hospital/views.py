@@ -47,6 +47,11 @@ def loginpage(request):
                 user_data = dbconn.child(userKey).get()
                 userID = user_data.get("ID")
                 return redirect('managerpage', userID)
+            elif "Operator" == userRole:
+                dbconn = connectDBOperator()
+                user_data = dbconn.child(userKey).get()
+                userID = user_data.get("ID")
+                return redirect('operatorpage', userID)
             elif "Admin" == userRole:
                 dbconn = connectDBAdmin()
                 user_data = dbconn.child(userKey).get()
@@ -82,6 +87,14 @@ def checkValidate(gmail, password):
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
             userRole = "Manager"
+            return True
+        
+    dbconn = connectDBOperator()
+    tableUser = dbconn.get()
+    for key, value in tableUser.items():
+        if value.get("Gmail") == gmail and value.get("Password") == password:
+            userKey = key
+            userRole = "Operator"
             return True
         
     dbconn = connectDBAdmin()
@@ -180,6 +193,21 @@ def get_manager_info(id):
             return ManagerInfo[0]
     return None
 
+def get_operator_info(id):
+    operatorInfo = []
+    dbconn = connectDBOperator()
+    tableUser = dbconn.get()
+    for key, value in tableUser.items():
+        if value.get("ID") == id:
+            operatorInfo.append({
+                'id': value.get("ID"),
+                'name': value.get("Name"),
+                'phone': value.get("Phone"),
+                'gmail':value.get("Gmail")
+            })
+            return operatorInfo[0]
+    return None
+
 def get_admin_info(id):
     AdminInfo = []
     dbconn = connectDBAdmin()
@@ -206,6 +234,10 @@ def doctorpage(request, id):
 def managerpage(request, id):
     managerInfo = get_manager_info(id)
     return render(request, 'managerpage.html', {'manager': managerInfo})
+
+def operatorpage(request, id):
+    operatorInfo = get_operator_info(id)
+    return render(request, 'operatorpage.html', {'operator': operatorInfo})
 
 def adminpage(request, id):
     adInfo = get_admin_info(id)
