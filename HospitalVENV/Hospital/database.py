@@ -2,69 +2,101 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-def connect():
+def connectDBPatient():
     if not firebase_admin._apps:
         cred = credentials.Certificate("hospital-admin-key.json")
         firebase_admin.initialize_app(cred, {
             "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
         })
-
-def connectDBPatient():
-    connect()
-    return db.reference("Patient")
-
-def connectDBMedicalRecord(key):
-    connect()
-    return db.reference("Patient/{}/MedicalRecord".format(key))
-
-def connectDBMedicalRecord(key1, key2):
-    connect()
-    return db.reference("Patient/{}/MedicalRecord/{}".format(key1, key2))
-
-def connectDBPrescription(key1, key2):
-    connect()
-    return db.reference("Patient/{}/MedicalRecord/{}/Precription".format(key1, key2))
+    dbconn = db.reference("Patient")
+    return dbconn
 
 def connectDBDoctor():
-    connect()
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
     dbconn = db.reference("Doctor")
     return dbconn
 
+def connectDBMedicineManager():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("MedicineManager")
+    return dbconn
+
+def connectDBEquipmentManager():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("EquipmentManager")
+    return dbconn
+
+def connectDBOperator():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("Operator")
+    return dbconn
+
 def connectDBAdmin():
-    connect()
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
     dbconn = db.reference("Admin")
     return dbconn
 
+def connectDBPrescription():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("Prescription")
+    return dbconn
 
 def connectDBMedicine():
-    connect()
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
     dbconn = db.reference("Medicine")
     return dbconn
 
-def connectDBMedicalManager():
-    connect()
-    dbconn = db.reference("MedicalManager")
-    return dbconn
-    
 def connectDBMedicineHistory(key):
-    connect()
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
     dbconn = db.reference("Medicine/{}/History".format(key))
     return dbconn
 
-def connectDBMedicineHistory(key1, key2):
-    connect()
-    return db.reference("Medicine/{}/History/{}".format(key1, key2))
-
-def connectDBMedicalRecord(key):
-    connect()
-    return db.reference("Patient/{}/MedicalRecord".format(key))
-
 def connectDBPrescriptionMedicineList(key):
-    connect()
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
     dbconn = db.reference("Prescription/{}/MedicineList".format(key))
     return dbconn
 
 def connectDBDoctorAppointment(doc_key):
-    connect()
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
     dbconn = db.reference("Doctor/{}/Appointment".format(doc_key))
     return dbconn

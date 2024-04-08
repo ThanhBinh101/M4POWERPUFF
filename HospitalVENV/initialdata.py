@@ -8,26 +8,29 @@ firebase_admin.initialize_app(cred, {
     "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
 })
 
+dbref = db.reference("Doctor")
+user_id = uuid.uuid4().hex
+dbref.push({"Name":"Le Vy", "Department": "Heart", "Phone": "0901812806", 
+            "Gmail": "doctor1@gmail.com", "Level":"Bachelor", "Password": "123456"})
 
-# dbref = db.reference("Doctor")
-# user_id = uuid.uuid4().hex
-# dbref.push({"ID": user_id, "Name":"Le Vy", "Department": "Heart", "Phone": "0901812806", 
-#             "Gmail": "doctor1@gmail.com", "Level":"Bachelor", "Password": "123456"})
+dbref = db.reference("MedicineManager")
+dbref.push({"Name":"Thanh Binh", "Phone": 9696, 
+            "Gmail": "medicinemanager@gmail.com", "Password": "123456"})
 
-# dbref = db.reference("Manager")
-# user_id = uuid.uuid4().hex
-# dbref.push({"ID": user_id, "Name":"Ngoc Nhon", "Phone": 9696, 
-#             "Gmail": "manager@gmail.com", "Password": "123456"})
+dbref = db.reference("EquipmentManager")
+user_id = uuid.uuid4().hex
+dbref.push({"Name":"Cao Ky", "Phone": 9696, 
+            "Gmail": "equipmentmanager@gmail.com", "Password": "123456"})
+
+dbref = db.reference("Admin")
+user_id = uuid.uuid4().hex
+dbref.push({"Name":"Song Khue", "Phone": 1123, 
+            "Gmail": "admin@gmail.com", "Password": "123456"})
 
 dbref = db.reference("Operator")
 user_id = uuid.uuid4().hex
-dbref.push({"ID": user_id, "Name":"Ngoc Nhon", "Phone": 9696, 
+dbref.push({"Name":"My Quyen", "Phone": 1123, 
             "Gmail": "operator@gmail.com", "Password": "123456"})
-
-# dbref = db.reference("Admin")
-# user_id = uuid.uuid4().hex
-# dbref.push({"ID": user_id, "Name":"Ngoc Nhon", "Phone": 1123, 
-#             "Gmail": "Admin@gmail.com", "Password": "123456"})
 
 # dbref = db.reference("Medicine")
 # user_id = uuid.uuid4().hex
