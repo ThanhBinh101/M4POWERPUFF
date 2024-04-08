@@ -49,6 +49,18 @@ def connectDBMedicineHistory(key):
     dbconn = db.reference("Medicine/{}/History".format(key))
     return dbconn
 
+def connectDBEquipment():
+    connect()
+    return db.reference("Equipment")
+
+def connectDBEquipmentHistory(key):
+    connect()
+    return db.reference("Equipment/{}/History".format(key))
+
+def connectDBEquipmentManager():
+    connect()
+    return db.reference("EquipmentManager")
+
 def connectDBPrescriptionMedicineList(key):
     connect()
     dbconn = db.reference("Prescription/{}/MedicineList".format(key))

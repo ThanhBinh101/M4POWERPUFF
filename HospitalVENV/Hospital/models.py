@@ -2,7 +2,7 @@ from django.db import models
 from django.shortcuts import render, redirect
 from django.apps import apps
 
-from database import *
+from .database import *
 
 from datetime import date
 import uuid
@@ -79,7 +79,7 @@ class Medicine:
             "Name": self.name,
             "Quantity": self.quantity,
             "ExpireDate": self.expiredate,
-            "History": self.history
+
         }
 
     @staticmethod
@@ -109,26 +109,6 @@ class Medicine:
         })
         dbconn.parent.update({"Quantity": 0})
 
-
-class UseMedicine(Medicine):
-    def __init__(self, id, name, quantity, useQuantity):
-        super().__init__(expiredate = datetime.date.today(),name = name, quantity= quantity)
-        self.id = id
-        self.useQuantity = useQuantity
-        
-    def RemoveMedicine(self, prescriptionid):
-        self.quantity = self.quantity - self.useQuantity
-        dbconn = connectDBMedicine()
-        tblMedicines = dbconn.get()
-    
-        for key, value in tblMedicines.items():
-            if(value["ID"] == self.id):
-                updateitem = dbconn.child(key)
-                updateitem.update({"Quantity": self.quantity})
-                
-                dbconn = connectDBMedicineHistory(key)
-                dbconn.push({"Reason": "DoctorUse", "UseQuantity": self.useQuantity, "PrescriptionID": prescriptionid})
-
 class MedicalManager(Information):
     def __init__(self, name, email, password, dob, gender):
         Information.__init__(self, name, email, password, dob, gender)
@@ -138,60 +118,70 @@ class MedicalManager(Information):
         manager = MedicalManager(name, email, password, dob, gender)
         dbconn = connectDBMedicalManager()
         dbconn.push(manager.to_dict())
-       
-class MaintainHistory:
-    def __init__(self, status, comment):
-        self.date = date.today()
-        self.status = status
-        self.comment = comment
 
 class Equipment:
-    def __init__(self, name, maintaindate, status, isuse):
+    def __init__(self, name, maintaindate, status, issue):
         self.name = name
-        self.importdate = datetime.date.today()
+        self.importdate = date.today()
         self.maintaindate = maintaindate
         self.status = status
-        self.isuse = isuse
-        self.history = []
-    
-    def add_maintain(self, status, comment, nextmaintaindate):
-        self.maintaindate = nextmaintaindate
-        self.history.append(MaintainHistory(status, comment))
+        self.isuse = issue
 
-class EuipmentManager(Information):
+    def to_dict(self):
+        return {
+            "Name": self.name,
+            "Import": self.importdate.strftime("%d-%m-%Y"),
+            "Maintain": self.maintaindate,
+            "Status": self.status,
+            "Issue": self.isuse
+        }
+        
+    @staticmethod
+    def ImportEquipment(name, maintaindate, status, issue):
+        equipment = Equipment(name, maintaindate, status, issue)
+        dbconn = connectDBEquipment()
+        dbconn.push(equipment.to_dict())
+    
+    @staticmethod
+    def MaintainEquipment(equipmentID, issue, maintaindate, status):
+        dbconn = connectDBEquipmentHistory(equipmentID)
+        dbconn.push().set({
+            "Date": date.today().strftime("%d-%m-%Y"),
+            "Issue": issue
+        })
+        dbconn.parent.update({"Maintain": maintaindate})
+        dbconn.parent.update({"Status": status})
+
+    @staticmethod
+    def DestroyEquipment(equipmentID, issue):
+        dbconn = connectDBEquipmentHistory(equipmentID)
+        dbconn.push().set({
+            "Date": date.today().strftime("%d-%m-%Y"),
+            "Issue": issue
+        })
+        dbconn.parent.update({"Maintain": None})
+        dbconn.parent.update({"Status": "Destroy"})
+
+class EquipmentManager(Information):
     
     def __init__(self, name, email, password, dob):
         Information.__init__(self, name, email, password, dob)
-        self.equipmentlist = []
-        self.canceledlist = []
-        self.add_schedule = []
 
-    def importEquipment(self, name, maintaindate, status, isuse):
-        self.equipmentlist.append(Equipment( name, maintaindate, status, isuse))
-    
-    def cancelEquipment(self, equipment):
-        equipment.add_maintain()
-        self.canceledlist.append(equipment)
-        self.equipmentlist.remove(equipment)
-
-    def add_schedule(self, day, shift):
-        self.schedule.append(Schedule(day, shift))
-
-    def kill(self):
-        for s in self.schedule:
-            del s
-        del self
+    def AddEquipmentManager(name, email, password, dob):
+        manager = EquipmentManager(name, email, password, dob)
+        dbconn = connectDBEquipmentManager()
+        dbconn.push(manager.to_dict())
 
 class MedicalRecord:
-    def __intit__(self, doctorid, patientid, presciptionid, diagnose):
-        self.id = uuid.uuid4()
-        self.date =  datetime.date.today()
+    def __intit__(self, name, doctorid, patientid, revisit):
+        self.name = name
         self.doctorid = doctorid
         self.patientid = patientid
-        self.presciptionid = presciptionid
-        self.diagnose = diagnose
-        self.medicinelist = []
+        self.revisit = revisit
+    
+    #def AddPreciption(recordID, medicines, numbers):
         
+    
 class Prescription:
     def __init__(self, doctorid, patientid, diagnose, medicines):
         self.id = uuid.uuid4().hex
@@ -256,3 +246,22 @@ class Nurse(Information):
         del self
 
 # Create your models here.
+
+class UseMedicine(Medicine):
+    def __init__(self, id, name, quantity, useQuantity):
+        super().__init__(expiredate = date.today(),name = name, quantity= quantity)
+        self.id = id
+        self.useQuantity = useQuantity
+        
+    def RemoveMedicine(self, prescriptionid):
+        self.quantity = self.quantity - self.useQuantity
+        dbconn = connectDBMedicine()
+        tblMedicines = dbconn.get()
+    
+        for key, value in tblMedicines.items():
+            if(value["ID"] == self.id):
+                updateitem = dbconn.child(key)
+                updateitem.update({"Quantity": self.quantity})
+                
+                dbconn = connectDBMedicineHistory(key)
+                dbconn.push({"Reason": "DoctorUse", "UseQuantity": self.useQuantity, "PrescriptionID": prescriptionid})
