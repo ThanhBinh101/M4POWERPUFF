@@ -2,14 +2,12 @@ from django.db import models
 from django.shortcuts import render, redirect
 from django.apps import apps
 
-from .database import *
+from database import *
 
 from datetime import date
-import uuid
 
 class Information:
     def __init__(self, name, email, password, dob, gender):
-        self.id = uuid.uuid4().hex
         self.name = name
         self.email = email
         self.password = password
@@ -18,7 +16,6 @@ class Information:
 
     def to_dict(self):
         return {
-            "ID": self.id,
             "Gmail": self.email,
             "Name": self.name,
             "Password": self.password,
@@ -38,7 +35,6 @@ class Patient(Information):
     
     def to_dict(self):
         return {
-            "ID": self.id,
             "Gmail": self.email,
             "Name": self.name,
             "Password": self.password,
@@ -79,7 +75,6 @@ class Medicine:
             "Name": self.name,
             "Quantity": self.quantity,
             "ExpireDate": self.expiredate,
-
         }
 
     @staticmethod
@@ -118,6 +113,72 @@ class MedicalManager(Information):
         manager = MedicalManager(name, email, password, dob, gender)
         dbconn = connectDBMedicalManager()
         dbconn.push(manager.to_dict())
+
+
+class MedicalRecord:
+    def __intit__(self, name, doctorid, patientid, revisit):
+        self.name = name
+        self.doctorid = doctorid
+        self.patientid = patientid
+        self.revisit = revisit
+    
+    def to_dict(self):
+        return {
+            "Name": self.name,
+            "Revisit": self.revisit, 
+            "DoctorID": self.doctorid,
+            "PatientID": self.patientid
+        }
+
+    def AddPreciption(recordID, diagnose, medicines):
+        preciption = Prescription(diagnose, medicines)
+
+
+
+class Prescription:
+    def __init__(self, diagnose, medicines):
+        self.date = date.today()
+        self.diagnose = diagnose
+        self.medicinelist = []
+        
+        medicinesList1 = medicines.split(', ')
+        for medicine in medicinesList1:
+            name, quantity = medicine.split(' (')
+            UseQuantity = int(quantity[:-1])
+            self.add_medicine_prescription(name, UseQuantity)
+            
+        for medicine in self.medicinelist:
+            medicine.RemoveMedicine(self.id)
+            
+    def add_medicine_prescription(self, name, UseQuantity):
+        dbconn = connectDBMedicine()
+        tblMedicines = dbconn.get()
+        for key, value in tblMedicines.items():
+            if(value["Name"] == name):
+                name = value["Name"]
+                quantity = value["Quantity"]
+                medicineid = value["ID"]
+                self.medicinelist.append(UseMedicine(medicineid, name, quantity, UseQuantity))
+                
+    def to_dict(self):
+        return {
+            "ID": self.id,
+            "DoctorID": self.doctorid,
+            "PatientID": self.patientid,
+            "Diagnose": self.diagnose,
+            "Date": self.date.strftime('%d/%m/%Y')
+        }
+
+    def CreatePrescriptionMedicineList(self):
+        dbconn = connectDBPrescription()
+        tblPrescription = dbconn.get()
+        for key, value in tblPrescription.items():
+            if value["ID"] == self.id:
+                dbconn_prescription = connectDBPrescriptionMedicineList(key)
+                medicine_data = {medicine.name: medicine.useQuantity for medicine in self.medicinelist}
+                dbconn_prescription.set(medicine_data)
+        return None
+
 
 class Equipment:
     def __init__(self, name, maintaindate, status, issue):
@@ -171,63 +232,8 @@ class EquipmentManager(Information):
         manager = EquipmentManager(name, email, password, dob)
         dbconn = connectDBEquipmentManager()
         dbconn.push(manager.to_dict())
-
-class MedicalRecord:
-    def __intit__(self, name, doctorid, patientid, revisit):
-        self.name = name
-        self.doctorid = doctorid
-        self.patientid = patientid
-        self.revisit = revisit
-    
-    #def AddPreciption(recordID, medicines, numbers):
         
     
-class Prescription:
-    def __init__(self, doctorid, patientid, diagnose, medicines):
-        self.id = uuid.uuid4().hex
-        self.date = datetime.date.today()
-        self.doctorid = doctorid
-        self.patientid = patientid
-        self.diagnose = diagnose
-        self.medicinelist = []
-        
-        medicinesList1 = medicines.split(', ')
-        for medicine in medicinesList1:
-            name, quantity = medicine.split(' (')
-            UseQuantity = int(quantity[:-1])
-            self.add_medicine_prescription(name, UseQuantity)
-            
-        for medicine in self.medicinelist:
-            medicine.RemoveMedicine(self.id)
-            
-    def add_medicine_prescription(self, name, UseQuantity):
-        dbconn = connectDBMedicine()
-        tblMedicines = dbconn.get()
-        for key, value in tblMedicines.items():
-            if(value["Name"] == name):
-                name = value["Name"]
-                quantity = value["Quantity"]
-                medicineid = value["ID"]
-                self.medicinelist.append(UseMedicine(medicineid, name, quantity, UseQuantity))
-                
-    def to_dict(self):
-        return {
-            "ID": self.id,
-            "DoctorID": self.doctorid,
-            "PatientID": self.patientid,
-            "Diagnose": self.diagnose,
-            "Date": self.date.strftime('%d/%m/%Y')
-        }
-
-    def CreatePrescriptionMedicineList(self):
-        dbconn = connectDBPrescription()
-        tblPrescription = dbconn.get()
-        for key, value in tblPrescription.items():
-            if value["ID"] == self.id:
-                dbconn_prescription = connectDBPrescriptionMedicineList(key)
-                medicine_data = {medicine.name: medicine.useQuantity for medicine in self.medicinelist}
-                dbconn_prescription.set(medicine_data)
-        return None
 
 class Nurse(Information):
     def __init__(self, name, email, password, dob, department, level, years):
