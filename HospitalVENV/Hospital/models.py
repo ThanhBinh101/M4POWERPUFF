@@ -5,11 +5,9 @@ from django.apps import apps
 from database import *
 
 from datetime import date
-import uuid
 
 class Information:
     def __init__(self, name, email, password, dob, gender):
-        self.id = uuid.uuid4().hex
         self.name = name
         self.email = email
         self.password = password
@@ -18,7 +16,6 @@ class Information:
 
     def to_dict(self):
         return {
-            "ID": self.id,
             "Gmail": self.email,
             "Name": self.name,
             "Password": self.password,
@@ -35,17 +32,124 @@ class Patient(Information):
 
     def kill(self):
         del self
+
+    @staticmethod
+    def AddPatient(name, email, password, dob, gender):
+        patient = Patient(name, email, password, dob, gender)
+        dbconn = connectDBPatient()
+        dbconn.push(patient.to_dict())
     
+    @staticmethod
+    def AddMedicalRecord(patientid, diagnose, status, revisit):
+        dbconn = connectDBMedicalRecord(patientid)
+        record = MedicalRecord(diagnose, status, revisit)
+        dbconn.push(record.to_dict())
+    
+    @staticmethod
+    def AddPrescription(patientid, recordid, doctorid, status, revisit, note, medicines):
+        prescription = Prescription(recordid, doctorid, status, revisit, note, medicines)
+        dbconn = connectDBMedicalRecord(patientid, recordid)
+        dbconn.push(prescription.to_dict())
+
+class MedicalRecord:
+    def __init__(self, diagnose, status, revisit):
+        self.diagnose = diagnose
+        self.revisit = revisit
+        self.status = status
+
     def to_dict(self):
         return {
-            "ID": self.id,
-            "Gmail": self.email,
-            "Name": self.name,
-            "Password": self.password,
-            "Gender": self.gender,
-            "Date of Birth": self.dob
+            "Diagnose": self.diagnose,
+            "Status": self.status,
+            "Revisit": self.revisit
         }
     
+    @staticmethod
+    def UpdateMedicalRecord(patientid, recordid, status, revisit):
+        dbconn = connectDBMedicalRecord(patientid, recordid)
+        dbconn.update({
+            "Status": status,
+            "Revisit": revisit
+        })
+
+class Medicine:
+    def __init__(self, expiredate, name, quantity):
+        self.importdate = date.today()
+        self.expiredate = expiredate
+        self.name = name
+        self.quantity = quantity
+
+    def to_dict(self):
+        return {
+            "Name": self.name,
+            "Quantity": self.quantity,
+            "ExpireDate": self.expiredate,
+            "ImportDate": self.importdate.strftime("%d-%m-%Y")
+        }
+
+    @staticmethod
+    def ImportMedicine( expiredate, name, quantity):
+        medicine = Medicine(expiredate, name, quantity)
+        dbconn = connectDBMedicine()
+        dbconn.push(medicine.to_dict())
+
+    @staticmethod
+    def UseMedicine(medicineID, quantity, reason):
+        dbconn = connectDBMedicineHistory(medicineID, "")
+        dbconn.push().set({
+            "Date": date.today().strftime("%d-%m-%Y"),
+            "Reason": reason,
+            "Quantity": quantity
+        })
+        dbconn.parent.update({"Quantity": dbconn.parent.child("Quantity").get() - quantity})
+    
+    @staticmethod
+    def CancelMedicine(medicineID, reason):
+        dbconn = connectDBMedicineHistory(medicineID)
+        quantity = dbconn.parent.child("Quantity").get()
+        dbconn.push().set({
+            "Date": date.today().strftime("%d-%m-%Y"),
+            "Reason": reason,
+            "Quantity": quantity
+        })
+        dbconn.parent.update({"Quantity": 0})
+
+
+class Prescription:
+    def __init__(self, recordid, doctorid, status, revisit, note, medicines):
+        self.date = date.today()
+        self.doctorid = doctorid
+        self.status = status
+        self.revisit = revisit
+        self.note = note
+        self.medicines = []
+
+        medicinelist = medicines.split(', ')
+        for medicine in medicinelist:
+            id, num = medicine.split('(')
+            self.medicines.append({'id': id, 'quantity': int(num.rstrip(')')), 'reason': recordid})
+
+    def to_dict(self):
+        return {
+            "Date": self.date.strftime('%d/%m/%Y'),
+            "DoctorID": self.doctorid,
+            "Status": self.status,
+            "Revisit": self.revisit,
+            "Note": self.note,
+            "Medicines": self.medicines
+        }
+
+    @staticmethod
+    def AddPrescription(patientid, recordid, doctorid, status, revisit, note, medicines):
+        dbconn = connectDBPrescription(patientid, recordid)
+        dbconn.parent.update({"Revisit":revisit})
+        dbconn.parent.update({"Status":status})
+        prescription = Prescription(recordid, doctorid, status, revisit, note, medicines)
+        dbconn.push(prescription.to_dict())
+        print(prescription.medicines)
+        for medi in prescription.medicines:
+            Medicine.UseMedicine(medi['id'], medi['quantity'], medi['reason'])
+
 class Schedule:
     def __intit__(self, day, shift):
         self.day = day
@@ -67,52 +171,10 @@ class Doctor(Information):
             del s
         del self
 
-class Medicine:
-    def __init__(self, expiredate, name, quantity):
-        self.importdate = date.today()
-        self.expiredate = expiredate
-        self.name = name
-        self.quantity = quantity
-
-    def to_dict(self):
-        return {
-            "Name": self.name,
-            "Quantity": self.quantity,
-            "ExpireDate": self.expiredate,
-            "History": self.history
-        }
-
-    @staticmethod
-    def ImportMedicine( expiredate, name, quantity):
-        medicine = Medicine(expiredate, name, quantity)
-        dbconn = connectDBMedicine()
-        dbconn.push(medicine.to_dict())
-
-    @staticmethod
-    def UseMedicine(medicineID, quantity, reason):
-        dbconn = connectDBMedicineHistory(medicineID)
-        dbconn.push().set({
-            "Date": date.today().strftime("%d-%m-%Y"),
-            "Reason": reason,
-            "Quantity": quantity
-        })
-        dbconn.parent.update({"Quantity": dbconn.parent.child("Quantity").get() - quantity})
-    
-    @staticmethod
-    def CancelMedicine(medicineID, reason):
-        dbconn = connectDBMedicineHistory(medicineID)
-        quantity = dbconn.parent.child("Quantity").get()
-        dbconn.push().set({
-            "Date": date.today().strftime("%d-%m-%Y"),
-            "Reason": reason,
-            "Quantity": quantity
-        })
-        dbconn.parent.update({"Quantity": 0})
-
 
 class UseMedicine(Medicine):
     def __init__(self, id, name, quantity, useQuantity):
-        super().__init__(expiredate = datetime.date.today(),name = name, quantity= quantity)
+        super().__init__(expiredate = date.today(),name = name, quantity= quantity)
         self.id = id
         self.useQuantity = useQuantity
         
@@ -129,13 +191,13 @@ class UseMedicine(Medicine):
                 dbconn = connectDBMedicineHistory(key)
                 dbconn.push({"Reason": "DoctorUse", "UseQuantity": self.useQuantity, "PrescriptionID": prescriptionid})
 
-class MedicalManager(Information):
+class MedicineManager(Information):
     def __init__(self, name, email, password, dob, gender):
         Information.__init__(self, name, email, password, dob, gender)
 
     @staticmethod
     def AddMedicalManager(name, email, password, dob, gender):
-        manager = MedicalManager(name, email, password, dob, gender)
+        manager = MedicineManager(name, email, password, dob, gender)
         dbconn = connectDBMedicalManager()
         dbconn.push(manager.to_dict())
        
@@ -148,7 +210,7 @@ class MaintainHistory:
 class Equipment:
     def __init__(self, name, maintaindate, status, isuse):
         self.name = name
-        self.importdate = datetime.date.today()
+        self.importdate = date.today()
         self.maintaindate = maintaindate
         self.status = status
         self.isuse = isuse
@@ -159,7 +221,6 @@ class Equipment:
         self.history.append(MaintainHistory(status, comment))
 
 class EuipmentManager(Information):
-    
     def __init__(self, name, email, password, dob):
         Information.__init__(self, name, email, password, dob)
         self.equipmentlist = []
@@ -181,64 +242,7 @@ class EuipmentManager(Information):
         for s in self.schedule:
             del s
         del self
-
-class MedicalRecord:
-    def __intit__(self, doctorid, patientid, presciptionid, diagnose):
-        self.id = uuid.uuid4()
-        self.date =  datetime.date.today()
-        self.doctorid = doctorid
-        self.patientid = patientid
-        self.presciptionid = presciptionid
-        self.diagnose = diagnose
-        self.medicinelist = []
         
-class Prescription:
-    def __init__(self, doctorid, patientid, diagnose, medicines):
-        self.id = uuid.uuid4().hex
-        self.date = datetime.date.today()
-        self.doctorid = doctorid
-        self.patientid = patientid
-        self.diagnose = diagnose
-        self.medicinelist = []
-        
-        medicinesList1 = medicines.split(', ')
-        for medicine in medicinesList1:
-            name, quantity = medicine.split(' (')
-            UseQuantity = int(quantity[:-1])
-            self.add_medicine_prescription(name, UseQuantity)
-            
-        for medicine in self.medicinelist:
-            medicine.RemoveMedicine(self.id)
-            
-    def add_medicine_prescription(self, name, UseQuantity):
-        dbconn = connectDBMedicine()
-        tblMedicines = dbconn.get()
-        for key, value in tblMedicines.items():
-            if(value["Name"] == name):
-                name = value["Name"]
-                quantity = value["Quantity"]
-                medicineid = value["ID"]
-                self.medicinelist.append(UseMedicine(medicineid, name, quantity, UseQuantity))
-                
-    def to_dict(self):
-        return {
-            "ID": self.id,
-            "DoctorID": self.doctorid,
-            "PatientID": self.patientid,
-            "Diagnose": self.diagnose,
-            "Date": self.date.strftime('%d/%m/%Y')
-        }
-
-    def CreatePrescriptionMedicineList(self):
-        dbconn = connectDBPrescription()
-        tblPrescription = dbconn.get()
-        for key, value in tblPrescription.items():
-            if value["ID"] == self.id:
-                dbconn_prescription = connectDBPrescriptionMedicineList(key)
-                medicine_data = {medicine.name: medicine.useQuantity for medicine in self.medicinelist}
-                dbconn_prescription.set(medicine_data)
-        return None
-
 class Nurse(Information):
     def __init__(self, name, email, password, dob, department, level, years):
         Information(self, name, email, password, dob)
@@ -254,5 +258,3 @@ class Nurse(Information):
         for s in self.schedule:
             del s
         del self
-
-# Create your models here.

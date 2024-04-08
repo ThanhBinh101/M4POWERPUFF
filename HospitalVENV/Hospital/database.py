@@ -11,8 +11,19 @@ def connect():
 
 def connectDBPatient():
     connect()
-    dbconn = db.reference("Patient")
-    return dbconn
+    return db.reference("Patient")
+
+def connectDBMedicalRecord(key):
+    connect()
+    return db.reference("Patient/{}/MedicalRecord".format(key))
+
+def connectDBMedicalRecord(key1, key2):
+    connect()
+    return db.reference("Patient/{}/MedicalRecord/{}".format(key1, key2))
+
+def connectDBPrescription(key1, key2):
+    connect()
+    return db.reference("Patient/{}/MedicalRecord/{}/Precription".format(key1, key2))
 
 def connectDBDoctor():
     connect()
@@ -24,10 +35,6 @@ def connectDBAdmin():
     dbconn = db.reference("Admin")
     return dbconn
 
-def connectDBPrescription():
-    connect()
-    dbconn = db.reference("Prescription")
-    return dbconn
 
 def connectDBMedicine():
     connect()
@@ -43,6 +50,14 @@ def connectDBMedicineHistory(key):
     connect()
     dbconn = db.reference("Medicine/{}/History".format(key))
     return dbconn
+
+def connectDBMedicineHistory(key1, key2):
+    connect()
+    return db.reference("Medicine/{}/History/{}".format(key1, key2))
+
+def connectDBMedicalRecord(key):
+    connect()
+    return db.reference("Patient/{}/MedicalRecord".format(key))
 
 def connectDBPrescriptionMedicineList(key):
     connect()
