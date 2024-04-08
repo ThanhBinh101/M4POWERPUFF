@@ -76,13 +76,13 @@
     padding: 0 2%;
   }
   .displaybox {
-    height: min-content;
+    height: 80%;
     width: 80%;
     min-height: 75vh;
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, 0.5fr);
-    gap: 5rem;
+    gap: 2rem;
     background-color: rgba(4, 135, 217, 0.3);
     box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
     border-radius: 47px;
@@ -102,7 +102,6 @@
     font-weight: 600;
     font-size: 24px;
     margin-top: 5%;
-    padding-bottom: 20px;
   }
   .textbox p {
     border-bottom: 2px solid black;
@@ -110,7 +109,6 @@
   }
   .textbox h6{
     font-size: 20px;
-    font-weight: bold;
   }
   .textboxIDDoc h6{
     color: #ff66b2;
@@ -119,53 +117,4 @@
   .textboxIDDoc p{
     border-bottom: 2px solid black;
     font-size: 16px;
-  }
-  .MedicalRecord {
-    height: 80%;
-    width: 80%;
-    min-height: 75vh;
-    position: relative;
-    background-color: rgba(4, 135, 217, 0.3);
-    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
-    border-radius: 47px;
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-  .MedicalRecord h2 {
-    padding-top: 3%;
-    margin-bottom: 2%;
-  }
-  .MedicalRecord a {
-    text-decoration: none;
-  }
-  .custom-table {
-    border-collapse: collapse;
-    width: 100%; /* Adjust the width of the table as needed */
-  }
-  .custom-table th,
-  .custom-table td {
-    padding: 10px !important; /* Adjust the padding to make the cells bigger */
-    text-align: center; /* Center align content in cells */
-  }
-  .table-wrapper {
-    max-height: 450px; /* Adjust the maximum height as needed */
-    overflow-y: auto;
-  }
-  .addprescription .btn-primary {
-    font-size: 20px;
-    background-color: #ff66b2;
-    border-color: #ff66b2;
-    text-transform: uppercase;
-    transition: all 0.55s ease;
-  }
-  .addprescription a {
-    text-decoration: none;
-    color: white;
-    font-family: 'Poppins';
-    font-style: normal;
-  }
-  .addprescription {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
