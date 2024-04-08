@@ -29,7 +29,6 @@ class Patient(Information):
     
     def to_dict(self):
         return {
-            "ID": self.id,
             "Gmail": self.email,
             "Name": self.name,
             "Password": self.password,

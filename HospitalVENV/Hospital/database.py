@@ -20,13 +20,22 @@ def connectDBDoctor():
     dbconn = db.reference("Doctor")
     return dbconn
 
-def connectDBManager():
+def connectDBMedicineManager():
     if not firebase_admin._apps:
         cred = credentials.Certificate("hospital-admin-key.json")
         firebase_admin.initialize_app(cred, {
             "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
         })
-    dbconn = db.reference("Manager")
+    dbconn = db.reference("MedicineManager")
+    return dbconn
+
+def connectDBEquipmentManager():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("EquipmentManager")
     return dbconn
 
 def connectDBOperator():
