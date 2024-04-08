@@ -2,11 +2,10 @@ from django.db import models
 from django.shortcuts import render, redirect
 from django.apps import apps
 
-from .database import *
+from database import *
 
 from datetime import date
 import uuid
-import datetime
 
 class Information:
     def __init__(self, name, email, password, dob, gender):
@@ -70,17 +69,17 @@ class Doctor(Information):
 
 class Medicine:
     def __init__(self, expiredate, name, quantity):
-        self.importdate = datetime.date.today()
+        self.importdate = date.today()
         self.expiredate = expiredate
         self.name = name
         self.quantity = quantity
 
     def to_dict(self):
         return {
-            "ImportDate": self.importdate,
             "Name": self.name,
             "Quantity": self.quantity,
-            "ExpireDate": self.expiredate
+            "ExpireDate": self.expiredate,
+            "History": self.history
         }
 
     @staticmethod
@@ -90,27 +89,26 @@ class Medicine:
         dbconn.push(medicine.to_dict())
 
     @staticmethod
-    def UseMedicine(medicineID, quanity, reason):
-        medicine = GetMedicine(medicineID)
-        history_update = {
-            "Date": datetime.date.today(),
+    def UseMedicine(medicineID, quantity, reason):
+        dbconn = connectDBMedicineHistory(medicineID)
+        dbconn.push().set({
+            "Date": date.today().strftime("%d-%m-%Y"),
             "Reason": reason,
-            "Quanity": quanity
-        }
-        medicine.update({"History": history_update})
-        medicine.update({"Quanity": medicine.value["Quanity"] - quanity})
-
+            "Quantity": quantity
+        })
+        dbconn.parent.update({"Quantity": dbconn.parent.child("Quantity").get() - quantity})
+    
     @staticmethod
     def CancelMedicine(medicineID, reason):
-        medicine = GetMedicine(medicineID)
-        history_update = {
-            "Date": datetime.date.today(),
+        dbconn = connectDBMedicineHistory(medicineID)
+        quantity = dbconn.parent.child("Quantity").get()
+        dbconn.push().set({
+            "Date": date.today().strftime("%d-%m-%Y"),
             "Reason": reason,
-            "Quanity": medicine.value["Quanity"]
-        }
-        
-        medicine.update(firestore.ArrayUnion([history_update]))
-        medicine.update({"Quanity": 0})
+            "Quantity": quantity
+        })
+        dbconn.parent.update({"Quantity": 0})
+
 
 class UseMedicine(Medicine):
     def __init__(self, id, name, quantity, useQuantity):
@@ -141,10 +139,9 @@ class MedicalManager(Information):
         dbconn = connectDBMedicalManager()
         dbconn.push(manager.to_dict())
        
-
 class MaintainHistory:
     def __init__(self, status, comment):
-        self.date = datetime.date.today()
+        self.date = date.today()
         self.status = status
         self.comment = comment
 

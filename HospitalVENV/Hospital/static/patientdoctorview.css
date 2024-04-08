@@ -76,13 +76,13 @@
     padding: 0 2%;
   }
   .displaybox {
-    height: 80%;
+    height: min-content;
     width: 80%;
     min-height: 75vh;
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, 0.5fr);
-    gap: 2rem;
+    gap: 5rem;
     background-color: rgba(4, 135, 217, 0.3);
     box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
     border-radius: 47px;
@@ -102,6 +102,7 @@
     font-weight: 600;
     font-size: 24px;
     margin-top: 5%;
+    padding-bottom: 20px;
   }
   .textbox p {
     border-bottom: 2px solid black;
@@ -109,6 +110,7 @@
   }
   .textbox h6{
     font-size: 20px;
+    font-weight: bold;
   }
   .textboxIDDoc h6{
     color: #ff66b2;
@@ -164,6 +166,6 @@
   }
   .addprescription {
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding-left: 30%;
   }

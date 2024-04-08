@@ -189,6 +189,16 @@ section {
 .ri-user-search-line {
   font-size: 24px;
   color: #ff66b2;
+  transition: all 0.55s ease;
+}
+.ri-user-search-line:hover {
+  font-size: 30px;
+}
+.ri-check-fill:hover{
+  font-size: 30px;
+}
+.ri-close-fill:hover{
+  font-size: 30px;
 }
 .table-danger i {
   transition: all 0.55s ease;
