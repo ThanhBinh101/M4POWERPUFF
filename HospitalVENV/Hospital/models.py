@@ -2,7 +2,7 @@ from django.db import models
 from django.shortcuts import render, redirect
 from django.apps import apps
 
-from database import *
+from .database import *
 
 from datetime import date
 
