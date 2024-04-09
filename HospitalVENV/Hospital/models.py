@@ -114,7 +114,6 @@ class Medicine:
         })
         dbconn.parent.update({"Quantity": 0})
 
-
 class Prescription:
     def __init__(self, recordid, doctorid, status, revisit, note, medicines):
         self.date = date.today()
@@ -171,26 +170,6 @@ class Doctor(Information):
             del s
         del self
 
-
-class UseMedicine(Medicine):
-    def __init__(self, id, name, quantity, useQuantity):
-        super().__init__(expiredate = date.today(),name = name, quantity= quantity)
-        self.id = id
-        self.useQuantity = useQuantity
-        
-    def RemoveMedicine(self, prescriptionid):
-        self.quantity = self.quantity - self.useQuantity
-        dbconn = connectDBMedicine()
-        tblMedicines = dbconn.get()
-    
-        for key, value in tblMedicines.items():
-            if(value["ID"] == self.id):
-                updateitem = dbconn.child(key)
-                updateitem.update({"Quantity": self.quantity})
-                
-                dbconn = connectDBMedicineHistory(key)
-                dbconn.push({"Reason": "DoctorUse", "UseQuantity": self.useQuantity, "PrescriptionID": prescriptionid})
-
 class MedicineManager(Information):
     def __init__(self, name, email, password, dob, gender):
         Information.__init__(self, name, email, password, dob, gender)
@@ -201,12 +180,6 @@ class MedicineManager(Information):
         dbconn = connectDBMedicineManager()
         dbconn.push(manager.to_dict())
        
-class MaintainHistory:
-    def __init__(self, status, comment):
-        self.date = date.today()
-        self.status = status
-        self.comment = comment
-
 class Equipment:
     def __init__(self, name, maintaindate, status, isuse):
         self.name = name
@@ -249,12 +222,33 @@ class Nurse(Information):
         self.department = department
         self.level = level
         self.years = years
-        self.schedule = []
     
-    def add_schedule(self, day, shift):
-        self.schedule.append(Schedule(day, shift))
+    def to_dict(self):
+        return super() + {
+            "Department": self.department,
+            "Level": self.level,
+            "Years": self.years
+        }
 
-    def kill(self):
-        for s in self.schedule:
-            del s
-        del self
+class Admin(Information):
+    def __init__(self, name, email, password, dob, gender):
+        Information.__init__(self, name, email, password, dob, gender)
+
+    def AddDoctor():
+        pass
+
+    def AddNurse():
+        pass
+
+    def AddMedicineManager():
+        pass
+
+    def AddEquipmentManager():
+        pass
+
+    def AddOperator():
+        pass
+
+    def MakeSchedule():
+        pass
+
