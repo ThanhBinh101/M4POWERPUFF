@@ -198,7 +198,7 @@ class MedicineManager(Information):
     @staticmethod
     def AddMedicalManager(name, email, password, dob, gender):
         manager = MedicineManager(name, email, password, dob, gender)
-        dbconn = connectDBMedicalManager()
+        dbconn = connectDBMedicineManager()
         dbconn.push(manager.to_dict())
        
 class MaintainHistory:
