@@ -45,6 +45,11 @@ def connectDBPrescription(key1, key2, key3 = ""):
     connect()
     return db.reference("Patient/{}/MedicalRecord/{}?Prescription/{}".format(key1, key2, key3))
 
-def connectDBAppointment(key = ""):
-    connect()
-    return db.reference("Appointment/{}".format(key))
+def connectDBDoctorAppointment(doc_key):
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("hospital-admin-key.json")
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
+        })
+    dbconn = db.reference("Doctor/{}/Appointment".format(doc_key))
+    return dbconn
