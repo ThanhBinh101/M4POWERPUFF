@@ -4,7 +4,7 @@ from django.apps import apps
 
 from .database import *
 
-from datetime import date
+from datetime import date, timedelta
 
 class Information:
     def __init__(self, name, email, password, dob, gender):
@@ -38,18 +38,6 @@ class Patient(Information):
         patient = Patient(name, email, password, dob, gender)
         dbconn = connectDBPatient()
         dbconn.push(patient.to_dict())
-    
-    @staticmethod
-    def AddMedicalRecord(patientid, diagnose, status, revisit):
-        dbconn = connectDBMedicalRecord(patientid)
-        record = MedicalRecord(diagnose, status, revisit)
-        dbconn.push(record.to_dict())
-    
-    @staticmethod
-    def AddPrescription(patientid, recordid, doctorid, status, revisit, note, medicines):
-        prescription = Prescription(recordid, doctorid, status, revisit, note, medicines)
-        dbconn = connectDBMedicalRecord(patientid, recordid)
-        dbconn.push(prescription.to_dict())
 
 class MedicalRecord:
     def __init__(self, diagnose, status, revisit):
@@ -138,17 +126,6 @@ class Prescription:
             "Medicines": self.medicines
         }
 
-    @staticmethod
-    def AddPrescription(patientid, recordid, doctorid, status, revisit, note, medicines):
-        dbconn = connectDBPrescription(patientid, recordid)
-        dbconn.parent.update({"Revisit":revisit})
-        dbconn.parent.update({"Status":status})
-        prescription = Prescription(recordid, doctorid, status, revisit, note, medicines)
-        dbconn.push(prescription.to_dict())
-        print(prescription.medicines)
-        for medi in prescription.medicines:
-            Medicine.UseMedicine(medi['id'], medi['quantity'], medi['reason'])
-
 class Schedule:
     def __intit__(self, day, shift):
         self.day = day
@@ -160,20 +137,30 @@ class Doctor(Information):
         self.department = department
         self.level = level
         self.years = years
-        self.schedule = []
     
-    def add_schedule(self, day, shift):
-        self.schedule.append(Schedule(day, shift))
-
-    def kill(self):
-        for s in self.schedule:
-            del s
-        del self
+    def to_dict(self):
+        return super().to_dict() + {
+            "Department": self.department,
+            "Level": self.level,
+            "Years": self.years
+        }
+    
+    @staticmethod
+    def AddMedicalRecord(patientid, diagnose, status, revisit):
+        dbconn = connectDBMedicalRecord(patientid)
+        record = MedicalRecord(diagnose, status, revisit)
+        dbconn.push(record.to_dict())
+    
+    @staticmethod
+    def AddPrescription(patientid, recordid, doctorid, status, revisit, note, medicines):
+        MedicalRecord.UpdateMedicalRecord(patientid, recordid, status, revisit)
+        prescription = Prescription(recordid, doctorid, status, revisit, note, medicines)
+        dbconn = connectDBPrescription(patientid, recordid)
+        dbconn.push(prescription.to_dict())
+        for medi in prescription.medicines:
+            Medicine.UseMedicine(medi['id'], medi['quantity'], medi['reason'])
 
 class MedicineManager(Information):
-    def __init__(self, name, email, password, dob, gender):
-        Information.__init__(self, name, email, password, dob, gender)
-
     @staticmethod
     def AddMedicalManager(name, email, password, dob, gender):
         manager = MedicineManager(name, email, password, dob, gender)
@@ -188,18 +175,8 @@ class Equipment:
         self.status = status
         self.isuse = isuse
         self.history = []
-    
-    def add_maintain(self, status, comment, nextmaintaindate):
-        self.maintaindate = nextmaintaindate
-        self.history.append(MaintainHistory(status, comment))
 
-class EuipmentManager(Information):
-    def __init__(self, name, email, password, dob):
-        Information.__init__(self, name, email, password, dob)
-        self.equipmentlist = []
-        self.canceledlist = []
-        self.add_schedule = []
-
+class EquipmentManager(Information):
     def importEquipment(self, name, maintaindate, status, isuse):
         self.equipmentlist.append(Equipment( name, maintaindate, status, isuse))
     
@@ -218,7 +195,7 @@ class EuipmentManager(Information):
         
 class Nurse(Information):
     def __init__(self, name, email, password, dob, department, level, years):
-        Information(self, name, email, password, dob)
+        super.__init__(self, name, email, password, dob)
         self.department = department
         self.level = level
         self.years = years
@@ -229,26 +206,89 @@ class Nurse(Information):
             "Level": self.level,
             "Years": self.years
         }
+    
+class Appointment():
+    def __init__(self, patientid, department, time):
+        self.patientid = patientid,
+        self.department = department,
+        self.time = time
+
+    def to_dict(self):
+        return {
+            "Patientid": self.patientid,
+            "Department": self.department,
+            "Time": self.time
+        }
+    
+
+class Operator(Information):
+    @staticmethod
+    def CheckTime(docid, time):
+        dbconn = connectDBAppointment()
+        for data in dbconn:
+            if(data.get("Time") == time and data.get("DoctorID").data() == docid):
+                return False
+        return True
+    
+    @staticmethod
+    def SetAPM(docid, apmid, time):
+        dbconn = connectDBAppointment(apmid)
+        dbconn.set({"DoctorID": docid})
+        dbconn.update({"Time": time})
+
+    @staticmethod
+    def DelAPM(apmid):
+        connectDBAppointment(apmid).delete()
+
+    
 
 class Admin(Information):
     def __init__(self, name, email, password, dob, gender):
         Information.__init__(self, name, email, password, dob, gender)
 
-    def AddDoctor():
-        pass
+    @staticmethod
+    def AddDoctor(name, email, password, dob, department, level, years):
+        doctor = Doctor(name, email, password, dob, department, level, years)
+        dbconn = connectDBDoctor()
+        dbconn.push(doctor.to_dict())
+    @staticmethod
+    def DeleteDoctor(id):
+        connectDBDoctor().child(id).delete()
 
-    def AddNurse():
-        pass
+    @staticmethod
+    def AddNurse(name, email, password, dob, department, level, years):
+        nurse = Nurse(name, email, password, dob, department, level, years)
+        dbconn = connectDBNurse()
+        dbconn.push(nurse.to_dict())
+    @staticmethod
+    def DeleteNurse(id):
+        connectDBNurse().child(id).delete()
 
-    def AddMedicineManager():
-        pass
+    @staticmethod
+    def AddMedicineManager(name, email, password, dob, gender):
+        manager = MedicineManager(name, email, password, dob, gender)
+        connectDBMedicineManager().push(manager.to_dict())
+    @staticmethod
+    def DeleteMedicalManager(id):
+        connectDBMedicineManager().child(id).delete()
 
-    def AddEquipmentManager():
-        pass
+    @staticmethod
+    def AddEquipmentManager(name, email, password, dob, gender):
+        manager = EquipmentManager(name, email, password, dob, gender)
+        connectDBEquipmentManager().push(manager.to_dict())
+    @staticmethod
+    def DeleteEquipmentManager(id):
+        connectDBEquipmentManager().child(id).delete()
 
-    def AddOperator():
-        pass
+    @staticmethod
+    def AddOperator(name, email, password, dob, gender):
+        operator = Operator(name, email, password, dob, gender)
+        connectDBOperator().push(operator.to_dict())
+    @staticmethod
+    def DeleteOperator(id):
+        connectDBOperator(id).delete()
 
+    @staticmethod
     def MakeSchedule():
         pass
 
