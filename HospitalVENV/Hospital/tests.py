@@ -1,3 +1,5 @@
 from django.test import TestCase
 
-# Create your tests here.
+from models import *
+
+Medicine.ImportMedicine("08-08-2008", "Baka", 808)

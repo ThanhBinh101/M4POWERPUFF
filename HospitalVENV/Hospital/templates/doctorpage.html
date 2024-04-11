@@ -67,14 +67,46 @@
 
             <div class = "doctorbutton">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-                    <a href=''>Add Prescription</a>
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-                    <a href=''>History</a>
+                    <a href='history/{{doctor.id}}'>History</a>
                 </button>
             </div>
         </div>
 
+    </section>
+
+    <section class = "todobox">
+        <div class = "textbox">
+            <h2>Meeting Appointment</h2>
+        </div> 
+        <div class="table">
+            <table class="table table-bordered custom-table">
+                <thead>
+                    <tr class="table-danger">
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">PatientName</th>
+                        <th scope="col">Diagnose</th>
+                        <th scope="col">Prescription</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in doctor.appointments%}
+                    <tr class="table-danger">
+                        <th scope="row">{{appointment.date}}</th>
+                        <td>{{appointment.time}}</td>
+                        <td>{{appointment.patientname}}</td>
+                        <td>{{appointment.diagnose}}</td>
+                        <td><a class="ri-user-search-line" href='patientinfo/{{doctor.id}}/{{appointment.patientid}}'></a></td>
+                        <td>
+                            <a class="ri-check-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.doctorKey}}/{{appointment.appointmentKey}}'></a>
+                            <a class="ri-close-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.doctorKey}}/{{appointment.appointmentKey}}'></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </section>
     
 </body>
