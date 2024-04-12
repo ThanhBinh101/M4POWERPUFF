@@ -7,7 +7,7 @@ urlpatterns = [
     path('loginpage', views.loginpage, name = "loginpage"),
     
     path('doctor/<str:ID>', views.doctorpage, name = "doctorpage"),
-    path('doctor/deleteAppoint/<str:docid>/<str:docKey>/<str:appointKey>', views.deleteAppoint, name = "deleteAppoint"),
+    path('doctor/deleteAppoint/<str:docid>/<str:docKey>/<str:appointKey>', views.deleteAppointment, name = "deleteAppoint"),
     path('doctor/patientinfo/<str:docid>/<str:patid>', views.patientdoctorview, name = "patientdoctorview"),
     path('doctor/patientinfo/<str:id>/newprescription/<str:patid>', views.prescriptionpage, name = "prescriptionpage"),
     
