@@ -4,7 +4,7 @@ from django.apps import apps
 
 from .database import *
 
-from datetime import date, timedelta
+from datetime import date
 
 class Information:
     def __init__(self, name, email, password, dob, gender):
@@ -166,7 +166,7 @@ class MedicineManager(Information):
         manager = MedicineManager(name, email, password, dob, gender)
         dbconn = connectDBMedicineManager()
         dbconn.push(manager.to_dict())
-       
+
 class Equipment:
     def __init__(self, name, maintaindate, status, isuse):
         self.name = name
@@ -192,7 +192,7 @@ class EquipmentManager(Information):
         for s in self.schedule:
             del s
         del self
-        
+
 class Nurse(Information):
     def __init__(self, name, email, password, dob, department, level, years):
         super.__init__(self, name, email, password, dob)
@@ -206,7 +206,7 @@ class Nurse(Information):
             "Level": self.level,
             "Years": self.years
         }
-    
+
 class Appointment():
     def __init__(self, patientid, department, time):
         self.patientid = patientid,
@@ -219,7 +219,6 @@ class Appointment():
             "Department": self.department,
             "Time": self.time
         }
-    
 
 class Operator(Information):
     @staticmethod
@@ -240,7 +239,55 @@ class Operator(Information):
     def DelAPM(apmid):
         connectDBAppointment(apmid).delete()
 
-    
+class Job():
+    def __init__(self, department, role, person, startTime, endTime, shift, position):
+        self.department = department
+        self.role = role
+        self.person = person
+        self.startTime = startTime
+        self.endTime = endTime
+        self.shift = shift
+        self.position = position
+
+    def to_dict(self):
+        return {
+            "Department": self.department,
+            "Role": self.role,
+            "Person": self.person,
+            "StartTime": self.startTime,
+            "EndTime": self.endTime,
+            "Shift": self.shift,
+            "Position": self.position
+        }
+
+    @staticmethod
+    def to_dict(department, role, person, startTime, endTime, shift, position):
+        return {
+            "Department": department,
+            "Role": role,
+            "Person": person,
+            "StartTime": startTime,
+            "EndTime": endTime,
+            "Shift": shift,
+            "Position": position
+        }
+
+    @staticmethod
+    def AddJob(department, role, person, startTime, endTime, shift, position):
+        job = Job(department, role, person, startTime, endTime, shift, position)
+        dbconn = connectDBJob()
+        dbconn.push(job.to_dict())
+
+    @staticmethod
+    def EditJob(jobid, department, role, person, startTime, endTime, shift, position):
+        dbconn = connectDBJob(jobid)
+        dbconn.update( {
+            Job.to_dict(department, role, person, startTime, endTime, shift, position)
+        })
+
+    @staticmethod
+    def DeleteJob(jobid):
+        connectDBJob(jobid).delete()
 
 class Admin(Information):
     def __init__(self, name, email, password, dob, gender):
@@ -288,7 +335,4 @@ class Admin(Information):
     def DeleteOperator(id):
         connectDBOperator(id).delete()
 
-    @staticmethod
-    def MakeSchedule():
-        pass
 
