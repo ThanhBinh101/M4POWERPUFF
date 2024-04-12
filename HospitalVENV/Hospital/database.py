@@ -2,7 +2,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-def connect() :
+def connect():
     if not firebase_admin._apps:
         cred = credentials.Certificate("hospital-admin-key.json")
         firebase_admin.initialize_app(cred, {
@@ -60,3 +60,7 @@ def connectDBOperator(key = ""):
 def connectDBAppointment(key = ""):
     connect()
     return db.reference("Appointment/{}".format(key))
+
+def connectDBJob(key = ""):
+    connect()
+    return db.reference("Job/{}".format(key))
