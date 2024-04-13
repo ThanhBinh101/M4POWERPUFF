@@ -43,12 +43,14 @@ class MedicalRecord:
         self.diagnose = diagnose
         self.revisit = revisit
         self.status = status
+        self.createday = date.today().strftime("%d/%m/%Y")
 
     def to_dict(self):
         return {
             "Diagnose": self.diagnose,
             "Status": self.status,
-            "Revisit": self.revisit
+            "Revisit": self.revisit,
+            "Date": self.createday
         }
     
     @staticmethod
@@ -71,7 +73,7 @@ class Medicine:
             "Name": self.name,
             "Quantity": self.quantity,
             "ExpireDate": self.expiredate,
-            "ImportDate": self.importdate.strftime("%d-%m-%Y")
+            "ImportDate": self.importdate.strftime("%d/%m/%Y")
         }
 
     @staticmethod
@@ -82,20 +84,22 @@ class Medicine:
 
     @staticmethod
     def UseMedicine(medicineID, quantity, reason):
-        dbconn = connectDBMedicineHistory(medicineID, "")
+        dbconn = connectDBMedicineHistory(medicineID)
+        current_quantity = dbconn.parent.child("Quantity").get()
+        new_quantity = current_quantity - quantity
         dbconn.push().set({
-            "Date": date.today().strftime("%d-%m-%Y"),
+            "Date": date.today().strftime("%d/%m/%Y"),
             "Reason": reason,
             "Quantity": quantity
         })
-        dbconn.parent.update({"Quantity": dbconn.parent.child("Quantity").get() - quantity})
+        dbconn.parent.update({"Quantity": new_quantity})
     
     @staticmethod
     def CancelMedicine(medicineID, reason):
         dbconn = connectDBMedicineHistory(medicineID)
         quantity = dbconn.parent.child("Quantity").get()
         dbconn.push().set({
-            "Date": date.today().strftime("%d-%m-%Y"),
+            "Date": date.today().strftime("%d/%m/%Y"),
             "Reason": reason,
             "Quantity": quantity
         })
@@ -159,7 +163,8 @@ class Doctor(Information):
         for medi in prescription.medicines:
             Medicine.UseMedicine(medi['id'], medi['quantity'], medi['reason'])
 
-Doctor.AddMedicalRecord("-NuxG3qk1T8KE5CkNzDO","Co Doc", "10%", "20/04/2024")
+# Doctor.AddMedicalRecord("-NvLBTEolVFoLoqiEE2_","Co Doc 3", "30%", "20/04/2024")
+# Doctor.AddPrescription("-NvLBTEolVFoLoqiEE2_", "-NvNOzjAb7u4WC0x1iVu", "-NvIWN7XPalb0cRUlhAB", "100%", "21/04/2024","Co Doc hon","-NuxBIac1aA8g5y38SCC(15), -NunUl_W-5PGuGc_fxrF(25)")
 
 class MedicineManager(Information):
     @staticmethod

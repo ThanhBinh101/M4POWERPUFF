@@ -55,7 +55,7 @@
             <h6>Date of Birth</h6>
             <p id = "PatientDOB">{{patient.dateofbirth}}</p>
             <h6>Gmail</h6>
-            <p id = "PatientGmail">{{patient.medicalrecord}}</p>
+            <p id = "PatientGmail">{{patient.gmail}}</p>
         </div> 
 
         <div class = 'addprescription'>
@@ -68,30 +68,77 @@
   
     <section class = "MedicalRecord">
         <div class = "textbox">
-            <h2>Medical Record</h2>
+            <h2>Medical History</h2>
         </div> 
         <div class="table-wrapper">
             <table class="table table-bordered custom-table">
                 <thead>
                     <tr class="table-danger">
-                        <th scope="col">Date</th>
-                        <th scope="col">Doctor</th>
-                        <th scope="col">Diagnose</th>
-                        <th scope="col">Medicine List</th>
+                        <th class = "align" style="width: 30%" scope="col">Date</th>
+                        <th class = "align" style="width: 40%" scope="col">Diagnose</th>
+                        <th class = "align" style="width: 30%" scope="col">Medical Record</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% comment %} {%for record in patient.medicalrecord%}
-                        <tr class="table-danger">
-                            <th scope="row">{{record.date}}</th>
-                            <td>{{record.doctorinfo.name}}</td>
-                            <td>{{record.diagnose}}</td>
-                            <td>{% for medicine, quantity in record.medicinelist.items%}
-                                    <p>{{medicine}} : {{quantity}}</p>
-                                {% endfor %}
-                            </td>
-                        </tr>
-                    {% endfor %} {% endcomment %}
+                    {% for record in patient.medicalrecord %}
+                    <tr class="table-danger">
+                        <td class = "align">{{ record.date }}</td>
+                        <td class = "align">{{ record.diagnose }}</td>
+                        <td class = "align">
+                            <button class="ri-eye-line" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ forloop.counter }}"></button>
+                            <div class="modal fade" id="exampleModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ forloop.counter }}" aria-hidden="true" style="width: 100%">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel{{ forloop.counter }}">Medical Record</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="basicinfo">
+                                                <h6>Status: {{ record.status }}</h6>
+                                                <h6>Revisit Day: {{ record.revisit }}</h6>
+                                                <h5>Prescription History</h5>
+                                                <div class="tablePrescription">
+                                                    <table class="table table-bordered prescription-table">
+                                                        <thead>
+                                                            <tr class="table-danger">
+                                                                <th scope="col">Date</th>
+                                                                <th scope="col">Revisit</th>
+                                                                <th scope="col">Doctor</th>
+                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Prescription</th>
+                                                                <th scope="col">Note</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for pre in record.prescription%}
+                                                            <tr class="table-danger">
+                                                                <td>{{pre.date}}</td>
+                                                                <td>{{pre.revisit}}</td>
+                                                                <td>{{pre.doctorname}}</td>
+                                                                <td>{{pre.status}}</td>
+                                                                <td>
+                                                                {% for med in pre.medicinelist  %}
+                                                                 {{med.name}} : {{med.quantity}} <br>
+                                                                {% endfor %}
+                                                                </td>
+                                                                <td>{{pre.note}}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

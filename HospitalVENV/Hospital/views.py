@@ -248,7 +248,10 @@ def get_medicial_record(ID):
         for key, value in tableMedical.items():
             medicalrecord.append({
                 'diagnose': value.get("Diagnose"),
+                'date': value.get("Date"),
                 'prescription': get_prescription_info(ID, key),
+                'revisit': value.get("Revisit"),
+                'status': value.get("Status")
             })
         return medicalrecord
     else:
@@ -264,7 +267,9 @@ def get_prescription_info(ID1, ID2):
                 'date': value.get("Date"),
                 'doctorname': get_doctor_name(value.get("DoctorID")),
                 'note': value.get("Note"),
-                'status': value.get("Status")
+                'status': value.get("Status"),
+                'revisit': value.get("Revisit"),
+                'medicinelist': get_medicine_list(value.get("Medicines"))
             })
         return prescriptionRecord
     else:
@@ -278,7 +283,16 @@ def get_doctor_name(ID):
             return value.get("Name")
     return None
 
-
+def get_medicine_list(medicinelist):
+    dbconn = connectDBMedicine()
+    tableMedicine = dbconn.get()
+    if tableMedicine is not None:
+        list = []
+        for medicine in medicinelist:
+            for key, value in tableMedicine.items():
+                if(medicine['id'] == key):
+                    list.append({'name': value.get("Name"), 'quantity': medicine['quantity']})
+        return list          
 
 
 
