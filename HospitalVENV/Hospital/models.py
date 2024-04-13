@@ -1,4 +1,3 @@
-from django.db import models
 from django.shortcuts import render, redirect
 from django.apps import apps
 
@@ -160,6 +159,8 @@ class Doctor(Information):
         for medi in prescription.medicines:
             Medicine.UseMedicine(medi['id'], medi['quantity'], medi['reason'])
 
+Doctor.AddMedicalRecord("-NuxG3qk1T8KE5CkNzDO","Co Doc", "10%", "20/04/2024")
+
 class MedicineManager(Information):
     @staticmethod
     def AddMedicalManager(name, email, password, dob, gender):
@@ -215,7 +216,7 @@ class Appointment():
 
     def to_dict(self):
         return {
-            "Patientid": self.patientid,
+            "PatientID": self.patientid,
             "Department": self.department,
             "Time": self.time
         }
