@@ -235,10 +235,43 @@ def get_doctor_appointments(doc_key):
         return appointments
     else:
         return None
-    
+
+def get_medicine_table():
+    dbconn = connectDBMedicine()
+    medicine_table = dbconn.get()
+    if medicine_table is not None:
+        medicineList = []
+        for key, value in medicine_table.items():
+            medicineList.append({
+                'id': key,
+                'name': value.get("Name")
+            })
+    return medicineList
+  
 def patientdoctorview(request, docid, patid):
-    patients = get_patient_info(patid)
-    return render(request, 'patientdoctorview.html', {'patient': patients, 'docid': docid})
+    if request.method == "GET":
+        patients = get_patient_info(patid)
+        
+        medicines = get_medicine_table()
+        
+        return render(request, 'patientdoctorview.html', {'patient': patients, 'docid': docid, 'medicines': medicines})
+    
+    if request.method == "POST":
+        form_check = request.POST.get('createnewrecord')
+        if form_check == 'form1':
+            diagnose = request.POST.get('patientdiagnose')
+            status = request.POST.get('patientstatus')
+            revisit = request.POST.get('revisitday')
+            Doctor.AddMedicalRecord(patid, diagnose, status, revisit)
+        else:
+            medicineList = request.POST.get('medicinelist')
+            note = request.POST.get('patientnote')
+            status = request.POST.get('patientstatus')
+            revisit = request.POST.get('revisitdaytext')
+            recordid = request.POST.get('recordid')
+            Doctor.AddPrescription(patid, recordid, docid, status, revisit, note, medicineList)
+
+    return redirect('patientdoctorview', docid, patid)
 
 def get_medicial_record(ID):
     dbconn = connectDBMedicalRecord(ID)
@@ -247,6 +280,7 @@ def get_medicial_record(ID):
         medicalrecord = []
         for key, value in tableMedical.items():
             medicalrecord.append({
+                'id': key,
                 'diagnose': value.get("Diagnose"),
                 'date': value.get("Date"),
                 'prescription': get_prescription_info(ID, key),
@@ -294,50 +328,48 @@ def get_medicine_list(medicinelist):
                     list.append({'name': value.get("Name"), 'quantity': medicine['quantity']})
         return list          
 
-
-
-
-
-
-
-
-
-
-
-def prescriptionpage(request, id, patid):
-    if request.method == 'GET':
-        patients = []
-        dbconn = connectDBPatient()
-        tblePatients = dbconn.get()
-        for key, value in tblePatients.items():
-            patients.append({"id": value["ID"], "name": value["Name"]})
-            
-        medicines = []
-        dbconn = connectDBMedicine()
-        tbleMedicines = dbconn.get()
-        for key, value in tbleMedicines.items():
-            medicines.append({"name": value["Name"], "ID": value["ID"]})
-                    
-        return render(request, 'prescriptionpage.html', {'patients': patients, 'medicines': medicines,})
-    
-    if request.method == 'POST':
-        patientDiagnose = request.POST.get("patientdiagnose")
-        patientMedicine = request.POST.get("patientmedicine")
-        
-        p = Prescription(id, patid, patientDiagnose, patientMedicine)
-        
-        dbconn = connectDBPrescription()
-        dbconn.push(p.to_dict())
-        
-        p.CreatePrescriptionMedicineList()
-                
-    return redirect('doctorpage', id)
-
 # def deleteAppoint(request, docid, docKey, appointKey):
 #     dbconn = connectDBDoctorAppointment(docKey)
 #     delAppoint = dbconn.child(appointKey)
 #     delAppoint.delete()
 #     return redirect('doctorpage', id=docid)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def prescriptionpage(request, docid, patid):
+#     if request.method == 'GET':            
+#         medicines = []
+#         dbconn = connectDBMedicine()
+#         tbleMedicines = dbconn.get()
+#         for key, value in tbleMedicines.items():
+#             medicines.append({"name": value["Name"], "id": key})
+                    
+#         return render(request, 'prescriptionpage.html', {'medicines': medicines})
+    
+#     if request.method == 'POST':
+#         patientDiagnose = request.POST.get("patientdiagnose")
+#         patientMedicine = request.POST.get("patientmedicine")
+        
+        # p = Prescription(id, patid, patientDiagnose, patientMedicine)
+        
+        # dbconn = connectDBPrescription()
+        # dbconn.push(p.to_dict())
+        
+        # p.CreatePrescriptionMedicineList()
+                
+    # return redirect('doctorpage', docid)
 
 def doctorhistory(request, id): #Later fix this function
     patients = []

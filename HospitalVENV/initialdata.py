@@ -66,4 +66,4 @@ firebase_admin.initialize_app(cred, {
 # dbref.push({"Date": "14/12/2024","Time": "12:00", "PatientName": "Lambo", "PatientID": "0350b4b1262c4a86a517ce02ddd5bdda", "Diagnose": "Lung infection"})
 
 dbref = db.reference("Appointment/")
-dbref.push({"Time": "9:00","DoctorID":"-NvIWN7XPalb0cRUlhAB", "Department":"Brain", "PatientID":"-NvLBTEolVFoLoqiEE2_"})
+dbref.push({"Time": "9:00","DoctorID":"-NvIWN7XPalb0cRUlhAB", "Department":"Brain", "PatientID":"-NvQsAIPYZvQhz7ep2sX"})
