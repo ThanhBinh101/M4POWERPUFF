@@ -137,12 +137,13 @@
                                                     <table class="table table-bordered prescription-table">
                                                         <thead>
                                                             <tr class="table-danger">
-                                                                <th scope="col">Date</th>
-                                                                <th scope="col">Revisit</th>
-                                                                <th scope="col">Doctor</th>
-                                                                <th scope="col">Status</th>
-                                                                <th scope="col">Prescription</th>
-                                                                <th scope="col">Note</th>
+                                                                <th scope="col" style="width:10%;">Date</th>
+                                                                <th scope="col" style="width:10%;">Revisit</th>
+                                                                <th scope="col" style="width:10%;">Doctor</th>
+                                                                <th scope="col" style="width:10%;">Status</th>
+                                                                <th scope="col" style="width:20%;">Prescription</th>
+                                                                <th scope="col" style="width:20%;">Note</th>
+                                                                <th scope="col" style="width:20%;">Advice</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -154,9 +155,14 @@
                                                                 <td>{{pre.status}}</td>
                                                                 <td>
                                                                 {% for med in pre.medicinelist  %}
-                                                                 {{med.name}} : {{med.quantity}} <br>
+                                                                 {{med.name}} : {{med.quantity}}<br>
                                                                 {% endfor %}
                                                                 </td>
+                                                                <td>
+                                                                    {% for med in pre.medicinelist  %}
+                                                                     {{med.note}} <br>
+                                                                    {% endfor %}
+                                                                    </td>
                                                                 <td>{{pre.note}}</td>
                                                             </tr>
                                                             {% endfor %}
@@ -197,15 +203,17 @@
                             <div class="table-wrapper">
                                 <table id="myTableMedicine">
                                     <tr class="header">
-                                        <th style="width:50%;">Name</th>
-                                        <th style="width:25%;">Quantity</th>
-                                        <th style="width:25%;">Action</th>
+                                        <th style="width:40%;">Medicine Name</th>
+                                        <th style="width:10%;">Quantity</th>
+                                        <th style="width:35%; padding-left: 8%">Note</th>
+                                        <th style="width:15%;">Action</th>
                                     </tr>
                                     {% for medicine in medicines%}
                                     <tr>
                                         <input type="hidden" class="medicine-id" value= {{ medicine.id }}>
                                         <td>{{ medicine.name }}</td>
-                                        <td><input type="number" class="quantity-input" min="0"></td>
+                                        <td style ="padding-left: 5%"><input type="number" class="quantity-input" min="0"></td>
+                                        <td><input type="text" class="note-input" placeholder=" Enter note"></td>
                                         <td><button onclick="addToMedicineInput(this)">Add</button></td>
                                     </tr>
                                     {% endfor %}
@@ -230,9 +238,10 @@
                                     <table id="selectedMedicineTable" name="patientmedicine" class="table table-bordered custom-table">
                                         <thead>
                                             <tr class="table-danger">
-                                                <th scope="col" style="width: 50%;">Medicine Name</th>
-                                                <th scope="col" style="width: 25%;">Quantity</th>
-                                                <th scope="col" style="width: 25%;">Action</th>
+                                                <th scope="col" style="width: 40%;">Medicine Name</th>
+                                                <th scope="col" style="width: 10%;">Quantity</th>
+                                                <th scope="col" style="width: 35%;">Note</th>
+                                                <th scope="col" style="width: 15%;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -240,7 +249,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <textarea id="medicineListInput" name="medicinelist" style="display: none;"></textarea>
+                                <textarea id="medicineListInput" name="medicinelist" style="display: none"></textarea>
                                 <input type="hidden" id="recordIdInput" name="recordid">
                             </form>
                         </div>
@@ -253,7 +262,6 @@
             </div>
         </div>
     </div>
-
 
 </body>
 
@@ -300,9 +308,10 @@
         var medicineList = [];
     
         for (var i = 0; i < rows.length; i++) {
-            var id = rows[i].cells[0].innerHTML; // Retrieve ID from the first cell
-            var quantity = parseInt(rows[i].cells[2].innerHTML); // Retrieve quantity from the third cell
-            medicineList.push(id + '(' + quantity + ')');
+            var id = rows[i].cells[0].innerHTML;
+            var quantity = parseInt(rows[i].cells[2].innerHTML);
+            var note = rows[i].cells[3].innerHTML; // Retrieve note from the fourth cell
+            medicineList.push(id + ' / ' + quantity + ' / ' + note); // Include note in the medicine list
         }
     
         document.getElementById('medicineListInput').value = medicineList.join(', ');
@@ -318,7 +327,10 @@
             return;
         }
     
-        var medicineId = row.querySelector('.medicine-id').value; // Retrieve value attribute of the hidden input
+        var noteInput = row.querySelector('.note-input'); // Retrieve note input
+        var note = noteInput.value; // Get the value of the note
+    
+        var medicineId = row.querySelector('.medicine-id').value;
     
         var selectedMedicineTable = document.getElementById('selectedMedicineTable').getElementsByTagName('tbody')[0];
         var rows = selectedMedicineTable.getElementsByTagName('tr');
@@ -347,7 +359,10 @@
             var quantityCell = newRow.insertCell(2);
             quantityCell.innerHTML = quantity;
     
-            var actionCell = newRow.insertCell(3);
+            var noteCell = newRow.insertCell(3); // Add cell for the note
+            noteCell.innerHTML = note; // Set the note value
+    
+            var actionCell = newRow.insertCell(4); // Adjust index for action cell
             var removeButton = document.createElement('button');
             removeButton.innerHTML = '<i class="ri-close-fill"></i>';
             removeButton.className = 'remove-button';
@@ -359,8 +374,9 @@
         }
     
         quantityInput.value = '';
+        noteInput.value = ''; // Clear note input after adding
         updateMedicineList(); // Update medicine list after adding a row
-    }
+    }    
 
     $(document).ready(function() {
         // When the PrescriptionModal is shown

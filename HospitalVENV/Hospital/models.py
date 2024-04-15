@@ -83,13 +83,14 @@ class Medicine:
         dbconn.push(medicine.to_dict())
 
     @staticmethod
-    def UseMedicine(medicineID, quantity, reason):
+    def UseMedicine(medicineID, quantity, note,reason):
         dbconn = connectDBMedicineHistory(medicineID)
         current_quantity = dbconn.parent.child("Quantity").get()
         new_quantity = current_quantity - quantity
         dbconn.push().set({
             "Date": date.today().strftime("%d/%m/%Y"),
             "Reason": reason,
+            "Note": note,
             "Quantity": quantity
         })
         dbconn.parent.update({"Quantity": new_quantity})
@@ -113,11 +114,15 @@ class Prescription:
         self.revisit = revisit
         self.note = note
         self.medicines = []
+        
+        medicine_strings = medicines.split(",")
 
-        medicinelist = medicines.split(', ')
-        for medicine in medicinelist:
-            id, num = medicine.split('(')
-            self.medicines.append({'id': id, 'quantity': int(num.rstrip(')')), 'reason': recordid})
+        for medicine_string in medicine_strings:
+            components = medicine_string.split("/")
+            id = components[0].strip()
+            quantity = int(components[1].strip())
+            note = components[2].strip()
+            self.medicines.append({'id': id, 'quantity': quantity, 'note': note, 'reason': recordid})
 
     def to_dict(self):
         return {
@@ -161,7 +166,7 @@ class Doctor(Information):
         dbconn = connectDBPrescription(patientid, recordid)
         dbconn.push(prescription.to_dict())
         for medi in prescription.medicines:
-            Medicine.UseMedicine(medi['id'], medi['quantity'], medi['reason'])
+            Medicine.UseMedicine(medi['id'], medi['quantity'], medi['note'], medi['reason'])
 
 # Doctor.AddMedicalRecord("-NvLBTEolVFoLoqiEE2_","Co Doc 3", "30%", "20/04/2024")
 # Doctor.AddPrescription("-NvLBTEolVFoLoqiEE2_", "-NvNOzjAb7u4WC0x1iVu", "-NvIWN7XPalb0cRUlhAB", "100%", "21/04/2024","Co Doc hon","-NuxBIac1aA8g5y38SCC(15), -NunUl_W-5PGuGc_fxrF(25)")

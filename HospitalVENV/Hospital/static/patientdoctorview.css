@@ -248,7 +248,7 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, 0.5fr);
-    gap: 5rem;
+    gap: 1.5rem;
   }
   .recordid {
     color: #ff66b2;
@@ -281,12 +281,10 @@
   }
   #myTableMedicine tr {
     border-bottom: 1px solid black;
-    transition: all 0.55s ease;
   }
   #myTableMedicine tr:hover{
     --bs-btn-hover-bg: whitesmoke transparent;
     --bs-btn-hover-border-color: 1px solid whitesmoke;
-    font-size: 20px;
   }
   #myTableMedicine tr.header, #myTableMedicine tr:hover {
     background-color: #f1f1f1;
@@ -296,7 +294,10 @@
     border-radius: 20px;
   }
   .quantity-input {
-    width: 70%;
+    width: 75%;
+  }
+  .note-input {
+    width: 90%;
   }
   .prescriptionRight .table-wrapper {
     max-height: 350px; /* Adjust the maximum height as needed */

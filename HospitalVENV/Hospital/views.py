@@ -325,7 +325,7 @@ def get_medicine_list(medicinelist):
         for medicine in medicinelist:
             for key, value in tableMedicine.items():
                 if(medicine['id'] == key):
-                    list.append({'name': value.get("Name"), 'quantity': medicine['quantity']})
+                    list.append({'name': value.get("Name"), 'quantity': medicine['quantity'], 'note' : medicine['note']})
         return list          
 
 # def deleteAppoint(request, docid, docKey, appointKey):
