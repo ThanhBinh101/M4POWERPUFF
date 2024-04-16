@@ -141,9 +141,9 @@
                                                                 <th scope="col" style="width:10%;">Revisit</th>
                                                                 <th scope="col" style="width:10%;">Doctor</th>
                                                                 <th scope="col" style="width:10%;">Status</th>
-                                                                <th scope="col" style="width:20%;">Prescription</th>
+                                                                <th scope="col" style="width:40%;">Prescription</th>
+                                                                {% comment %} <th scope="col" style="width:20%;">Note</th> {% endcomment %}
                                                                 <th scope="col" style="width:20%;">Note</th>
-                                                                <th scope="col" style="width:20%;">Advice</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -153,16 +153,16 @@
                                                                 <td>{{pre.revisit}}</td>
                                                                 <td>{{pre.doctorname}}</td>
                                                                 <td>{{pre.status}}</td>
-                                                                <td>
+                                                                <td style ="text-align: left">
                                                                 {% for med in pre.medicinelist  %}
-                                                                 {{med.name}} : {{med.quantity}}<br>
+                                                                <span style="color: #ff66b2;"> {{med.name}} </span> : {{med.quantity}}<br> Time: {{med.note}} <br> <br> 
                                                                 {% endfor %}
                                                                 </td>
-                                                                <td>
+                                                                {% comment %} <td>
                                                                     {% for med in pre.medicinelist  %}
                                                                      {{med.note}} <br>
                                                                     {% endfor %}
-                                                                    </td>
+                                                                </td> {% endcomment %}
                                                                 <td>{{pre.note}}</td>
                                                             </tr>
                                                             {% endfor %}
