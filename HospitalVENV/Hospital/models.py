@@ -168,9 +168,6 @@ class Doctor(Information):
         for medi in prescription.medicines:
             Medicine.UseMedicine(medi['id'], medi['quantity'], medi['note'], medi['reason'])
 
-# Doctor.AddMedicalRecord("-NvLBTEolVFoLoqiEE2_","Co Doc 3", "30%", "20/04/2024")
-# Doctor.AddPrescription("-NvLBTEolVFoLoqiEE2_", "-NvNOzjAb7u4WC0x1iVu", "-NvIWN7XPalb0cRUlhAB", "100%", "21/04/2024","Co Doc hon","-NuxBIac1aA8g5y38SCC(15), -NunUl_W-5PGuGc_fxrF(25)")
-
 class MedicineManager(Information):
     @staticmethod
     def AddMedicalManager(name, email, password, dob, gender):

@@ -6,6 +6,7 @@ def mainpage(request):
     
     return render(request, 'mainpage.html')
 
+
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -20,6 +21,7 @@ def signup(request):
         dbconn.push(p.to_dict())
         return redirect('mainpage')
     return render(request, 'signup.html')
+
 
 def loginpage(request):
     if request.method == 'GET':
@@ -48,6 +50,7 @@ def loginpage(request):
                 return render(request, 'loginpage.html')
         else:
             return render(request, 'loginpage.html')
+
 
 def checkValidate(gmail, password):
     global userKey
@@ -102,6 +105,7 @@ def checkValidate(gmail, password):
         
     return False
 
+
 def get_patient_info(ID):
     PatientInfo = []
     dbconn = connectDBPatient()
@@ -118,6 +122,7 @@ def get_patient_info(ID):
             })
             return PatientInfo[0]
     return None
+
 
 def get_doctor_info(ID):
     docInfo = []
@@ -137,6 +142,7 @@ def get_doctor_info(ID):
             return docInfo[0]
     return None
 
+
 def get_medicinemanager_info(ID):
     ManagerInfo = []
     dbconn = connectDBMedicineManager()
@@ -151,6 +157,7 @@ def get_medicinemanager_info(ID):
             })
             return ManagerInfo[0]
     return None
+
 
 def get_equipmentmanager_info(ID):
     ManagerInfo = []
@@ -167,6 +174,7 @@ def get_equipmentmanager_info(ID):
             return ManagerInfo[0]
     return None
 
+
 def get_operator_info(ID):
     operatorInfo = []
     dbconn = connectDBOperator()
@@ -181,6 +189,7 @@ def get_operator_info(ID):
             })
             return operatorInfo[0]
     return None
+
 
 def get_admin_info(ID):
     AdminInfo = []
@@ -197,29 +206,36 @@ def get_admin_info(ID):
             return AdminInfo[0]
     return None
 
+
 def patientpage(request, ID):
     paInfo = get_patient_info(ID)
     return render(request, 'patientpage.html', {'patient': paInfo})
+
 
 def doctorpage(request, ID):
     docInfo = get_doctor_info(ID)
     return render(request, 'doctorpage.html', {'doctor': docInfo})
 
+
 def medicinemanagerpage(request, ID):
     managerInfo = get_medicinemanager_info(ID)
     return render(request, 'medicinemanagerpage.html', {'manager': managerInfo})
+
 
 def equipmentmanagerpage(request, ID):
     managerInfo = get_equipmentmanager_info(ID)
     return render(request, 'equipmentmanagerpage.html', {'manager': managerInfo})
 
+
 def operatorpage(request, ID):
     operatorInfo = get_operator_info(ID)
     return render(request, 'operatorpage.html', {'operator': operatorInfo})
 
+
 def adminpage(request, ID):
     adInfo = get_admin_info(ID)
     return render(request, 'adminpage.html', {'admin': adInfo})
+
 
 def get_doctor_appointments(doc_key):
     dbconn = connectDBAppointment()
@@ -229,12 +245,14 @@ def get_doctor_appointments(doc_key):
         for key, value in appointment_table.items():
             if value.get("DoctorID") == doc_key:
                 appointments.append({
+                    'appointmentID': key,
                     'time': value.get("Time"),
                     'patientinfo': get_patient_info(value.get("PatientID"))
                 })
         return appointments
     else:
         return None
+
 
 def get_medicine_table():
     dbconn = connectDBMedicine()
@@ -247,6 +265,7 @@ def get_medicine_table():
                 'name': value.get("Name")
             })
     return medicineList
+
   
 def patientdoctorview(request, docid, patid):
     if request.method == "GET":
@@ -273,6 +292,7 @@ def patientdoctorview(request, docid, patid):
 
     return redirect('patientdoctorview', docid, patid)
 
+
 def get_medicial_record(ID):
     dbconn = connectDBMedicalRecord(ID)
     tableMedical = dbconn.get()
@@ -290,6 +310,7 @@ def get_medicial_record(ID):
         return medicalrecord
     else:
         return None
+
 
 def get_prescription_info(ID1, ID2):
     dbconn = connectDBPrescription(ID1, ID2)
@@ -309,6 +330,7 @@ def get_prescription_info(ID1, ID2):
     else:
         return None
 
+
 def get_doctor_name(ID):
     dbconn = connectDBDoctor()
     tableUser = dbconn.get()
@@ -316,6 +338,7 @@ def get_doctor_name(ID):
         if key == ID:
             return value.get("Name")
     return None
+
 
 def get_medicine_list(medicinelist):
     dbconn = connectDBMedicine()
@@ -328,14 +351,17 @@ def get_medicine_list(medicinelist):
                     list.append({'name': value.get("Name"), 'quantity': medicine['quantity'], 'note' : medicine['note']})
         return list          
 
-# def deleteAppoint(request, docid, docKey, appointKey):
-#     dbconn = connectDBDoctorAppointment(docKey)
-#     delAppoint = dbconn.child(appointKey)
-#     delAppoint.delete()
-#     return redirect('doctorpage', id=docid)
+
+def deleteAppoint(request, docid, appointKey):
+    dbconn = connectDBAppointment()
+    delAppoint = dbconn.child(appointKey)
+    delAppoint.delete()
+    return redirect('doctorpage', docid)
 
 
-
+def doctorhistory(request, id):
+    
+    return render(request, 'doctorhistory.html')
 
 
 
@@ -371,14 +397,5 @@ def get_medicine_list(medicinelist):
                 
     # return redirect('doctorpage', docid)
 
-def doctorhistory(request, id): #Later fix this function
-    patients = []
-    dbconn = connectDBPatient()
-    tblePatients = dbconn.get()
-    for key, value in tblePatients.items():
-        patients.append({"id": value["ID"], "name": value["Name"]})
-        
-    docInfo = get_doctor_info(id)
-    
-    return render(request, 'doctorhistory.html', {'patients': patients, 'doctor': docInfo})
+
 

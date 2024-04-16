@@ -95,8 +95,8 @@
                         <td>{{appointment.patientinfo.name}}</td>
                         <td><a class="ri-user-search-line" href='patientinfo/{{doctor.id}}/{{appointment.patientinfo.id}}'></a></td>
                         <td>
-                            <a class="ri-check-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.doctorKey}}/{{appointment.appointmentKey}}'></a>
-                            <a class="ri-close-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.doctorKey}}/{{appointment.appointmentKey}}'></a>
+                            <a class="ri-check-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.appointmentID}}'></a>
+                            <a class="ri-close-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.appointmentID}}'></a>
                         </td>
                     </tr>
                     {% endfor %}
