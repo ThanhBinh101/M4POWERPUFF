@@ -2,7 +2,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-def connect() :
+def connect():
     if not firebase_admin._apps:
         cred = credentials.Certificate("hospital-admin-key.json")
         firebase_admin.initialize_app(cred, {
@@ -16,6 +16,10 @@ def connectDBPatient(key = ""):
 def connectDBDoctor(key = ""):
     connect()
     return db.reference("Doctor/{}".format(key))
+
+def connectDBNurse(key = ""):
+    connect()
+    return db.reference("Nurse/{}".format(key))
 
 def connectDBMedicineManager(key = ""):
     connect()
@@ -33,9 +37,9 @@ def connectDBMedicine(key = ""):
     connect()
     return db.reference("Medicine/{}".format(key))
 
-def connectDBMedicineHistory(key):
+def connectDBMedicineHistory(key = ""):
     connect()
-    return db.reference("Medicine/{}/History".format(key))
+    return db.reference("Medicine/{}/History/".format(key))
 
 def connectDBMedicalRecord(key1, key2 = ""):
     connect()
@@ -43,8 +47,20 @@ def connectDBMedicalRecord(key1, key2 = ""):
 
 def connectDBPrescription(key1, key2, key3 = ""):
     connect()
-    return db.reference("Patient/{}/MedicalRecord/{}?Prescription/{}".format(key1, key2, key3))
+    return db.reference("Patient/{}/MedicalRecord/{}/Prescription/{}".format(key1, key2, key3))
+
+def connectDBNurse(key = ""):
+    connect()
+    return db.reference("Nurse/{}".format(key))
+
+def connectDBOperator(key = ""):
+    connect()
+    return db.reference("Operator/{}".format(key))
 
 def connectDBAppointment(key = ""):
     connect()
     return db.reference("Appointment/{}".format(key))
+
+def connectDBJob(key = ""):
+    connect()
+    return db.reference("Job/{}".format(key))

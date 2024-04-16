@@ -17,7 +17,6 @@ header {
     justify-content: space-between;
     padding: 33px 9%;
     background: #F2CED8;
-    border-radius: 20px 20px 0 0;
 }
 body {
     background-color: white;
@@ -58,7 +57,7 @@ body {
     min-height: 75vh;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 0.5fr);
     align-items: center;
     gap: 2rem;
 }
@@ -75,7 +74,6 @@ section {
     margin: 0 0 15px;
 }
 .titleimg {
-    margin-top: 15%;
     margin-left: 20%;
 }
 .powerpuffimg {
@@ -85,9 +83,6 @@ section {
     border-radius: 60%;
 }
 .icons {
-    position: absolute;
-    top: 55%;
-    padding: 0 90%;
     transform: translateY(-50%);
 }
 .icons i {

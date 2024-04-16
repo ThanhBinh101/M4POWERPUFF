@@ -180,11 +180,13 @@ section {
 .ri-check-fill {
   margin-right: 20%;
   font-size: 24px;
-  color: #73e635
+  color: #73e635;
+  transition: all 0.55s ease;
 }
 .ri-close-fill {
   font-size: 24px;
   color: #B80000;
+  transition: all 0.55s ease;
 }
 .ri-user-search-line {
   font-size: 24px;
@@ -199,9 +201,6 @@ section {
 }
 .ri-close-fill:hover{
   font-size: 30px;
-}
-.table-danger i {
-  transition: all 0.55s ease;
 }
 .table-danger button {
   border-width: 0;
