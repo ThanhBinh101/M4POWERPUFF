@@ -1,36 +1,34 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-import uuid
 
 cred = credentials.Certificate("hospital-admin-key.json")
 firebase_admin.initialize_app(cred, {
     "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
 })
 
-dbref = db.reference("Doctor")
-user_id = uuid.uuid4().hex
-dbref.push({"Name":"Le Vy", "Department": "Heart", "Phone": "0901812806", 
-            "Gmail": "doctor1@gmail.com", "Level":"Bachelor", "Password": "123456"})
+# dbref = db.reference("Doctor")
+# dbref.push({"Name":"Ngoc Nhon", "Department": "Heart", "Phone": "0901812806", 
+#             "Gmail": "doctor@gmail.com", "Level":"Bachelor", "Password": "123456"})
 
-dbref = db.reference("MedicineManager")
-dbref.push({"Name":"Thanh Binh", "Phone": 9696, 
-            "Gmail": "medicinemanager@gmail.com", "Password": "123456"})
+# dbref = db.reference("MedicineManager")
+# dbref.push({"Name":"Thanh Binh", "Phone": 9696, 
+#             "Gmail": "medicinemanager@gmail.com", "Password": "123456"})
 
-dbref = db.reference("EquipmentManager")
-user_id = uuid.uuid4().hex
-dbref.push({"Name":"Cao Ky", "Phone": 9696, 
-            "Gmail": "equipmentmanager@gmail.com", "Password": "123456"})
+# dbref = db.reference("EquipmentManager")
+# user_id = uuid.uuid4().hex
+# dbref.push({"Name":"Cao Ky", "Phone": 9696, 
+#             "Gmail": "equipmentmanager@gmail.com", "Password": "123456"})
 
-dbref = db.reference("Admin")
-user_id = uuid.uuid4().hex
-dbref.push({"Name":"Song Khue", "Phone": 1123, 
-            "Gmail": "admin@gmail.com", "Password": "123456"})
+# dbref = db.reference("Admin")
+# user_id = uuid.uuid4().hex
+# dbref.push({"Name":"Song Khue", "Phone": 1123, 
+#             "Gmail": "admin@gmail.com", "Password": "123456"})
 
-dbref = db.reference("Operator")
-user_id = uuid.uuid4().hex
-dbref.push({"Name":"My Quyen", "Phone": 1123, 
-            "Gmail": "operator@gmail.com", "Password": "123456"})
+# dbref = db.reference("Operator")
+# user_id = uuid.uuid4().hex
+# dbref.push({"Name":"My Quyen", "Phone": 1123, 
+#             "Gmail": "operator@gmail.com", "Password": "123456"})
 
 # dbref = db.reference("Medicine")
 # user_id = uuid.uuid4().hex
@@ -65,3 +63,6 @@ dbref.push({"Name":"My Quyen", "Phone": 1123,
 
 # dbref = db.reference("Doctor/-NuKLpR4m8rWbOH4HtV_/Appointment")
 # dbref.push({"Date": "14/12/2024","Time": "12:00", "PatientName": "Lambo", "PatientID": "0350b4b1262c4a86a517ce02ddd5bdda", "Diagnose": "Lung infection"})
+
+dbref = db.reference("Appointment/")
+dbref.push({"Time": "10:00","DoctorID":"-NvZIrn1l6Afm8gDjVR0", "Department":"Brain", "PatientID":"-NvQsAIPYZvQhz7ep2sX"})

@@ -37,9 +37,9 @@ def connectDBMedicine(key = ""):
     connect()
     return db.reference("Medicine/{}".format(key))
 
-def connectDBMedicineHistory(key):
+def connectDBMedicineHistory(key = ""):
     connect()
-    return db.reference("Medicine/{}/History".format(key))
+    return db.reference("Medicine/{}/History/".format(key))
 
 def connectDBMedicalRecord(key1, key2 = ""):
     connect()
@@ -47,7 +47,7 @@ def connectDBMedicalRecord(key1, key2 = ""):
 
 def connectDBPrescription(key1, key2, key3 = ""):
     connect()
-    return db.reference("Patient/{}/MedicalRecord/{}?Prescription/{}".format(key1, key2, key3))
+    return db.reference("Patient/{}/MedicalRecord/{}/Prescription/{}".format(key1, key2, key3))
 
 def connectDBNurse(key = ""):
     connect()
