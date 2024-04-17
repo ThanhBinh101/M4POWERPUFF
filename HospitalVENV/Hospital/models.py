@@ -121,7 +121,7 @@ class Prescription:
             components = medicine_string.split("/")
             id = components[0].strip()
             quantity = int(components[1].strip())
-            note = components[2].strip()
+            note = components[2].strip()                   
             self.medicines.append({'id': id, 'quantity': quantity, 'note': note, 'reason': recordid})
 
     def to_dict(self):

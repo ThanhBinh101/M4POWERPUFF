@@ -65,12 +65,12 @@
         </div> 
 
         <div class = 'createmedical'>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewRecordModal{{ forloop.counter }}">Add New Record</button>
-            <div class="modal fade" id="NewRecordModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="newrecordcreate{{ forloop.counter }}" aria-hidden="true">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewRecordModal">Add New Record</button>
+            <div class="modal fade" id="NewRecordModal" tabindex="-1" aria-labelledby="newrecordcreate" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                             <div class="modal-header newRecord">
-                                <h4 class="modal-title" id="newrecordcreate{{ forloop.counter }}">New Record</h4>
+                                <h4 class="modal-title" id="newrecordcreate">New Record</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                         <div class="modal-body newRecord">
@@ -132,7 +132,7 @@
                                             <div class="basicinfo">
                                                 <h6>Status: {{ record.status }}</h6>
                                                 <h6>Revisit Day: {{ record.revisit }}</h6>
-                                                <h5>Prescription History</h5>
+                                                <h4 style = "font-size: 30px">Prescription History</h4>
                                                 <div class="tablePrescription">
                                                     <table class="table table-bordered prescription-table">
                                                         <thead>
@@ -142,7 +142,6 @@
                                                                 <th scope="col" style="width:10%;">Doctor</th>
                                                                 <th scope="col" style="width:10%;">Status</th>
                                                                 <th scope="col" style="width:40%;">Prescription</th>
-                                                                {% comment %} <th scope="col" style="width:20%;">Note</th> {% endcomment %}
                                                                 <th scope="col" style="width:20%;">Note</th>
                                                             </tr>
                                                         </thead>
@@ -158,11 +157,6 @@
                                                                 <span style="color: #ff66b2;"> {{med.name}} </span> : {{med.quantity}}<br> Time: {{med.note}} <br> <br> 
                                                                 {% endfor %}
                                                                 </td>
-                                                                {% comment %} <td>
-                                                                    {% for med in pre.medicinelist  %}
-                                                                     {{med.note}} <br>
-                                                                    {% endfor %}
-                                                                </td> {% endcomment %}
                                                                 <td>{{pre.note}}</td>
                                                             </tr>
                                                             {% endfor %}
