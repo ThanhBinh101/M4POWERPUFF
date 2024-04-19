@@ -116,13 +116,12 @@ border-radius: 10px;
 
 }
 select {
-padding: 8px;
-border: 1px solid #ccc;
-border-radius: 30px;
-background-color: #fff;
-color: #333;
-font-size: 16px;
-width: 100%; 
-}
-
+  padding: 8px;
+  border: none;
+  border-radius: 30px;
+  background-color:#F2CED8;
+  color: #333;
+  font-size: 16px;
+  width: 100%; 
+ }
 

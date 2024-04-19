@@ -7,9 +7,9 @@ urlpatterns = [
     path('loginpage', views.loginpage, name = "loginpage"),
     
     path('doctor/<str:ID>', views.doctorpage, name = "doctorpage"),
-    path('doctor/deleteAppoint/<str:docid>/<str:docKey>/<str:appointKey>', views.deleteAppointment, name = "deleteAppoint"),
+    path('doctor/deleteAppoint/<str:docid>/<str:appointKey>', views.deleteAppoint, name = "deleteAppoint"),
     path('doctor/patientinfo/<str:docid>/<str:patid>', views.patientdoctorview, name = "patientdoctorview"),
-    path('doctor/patientinfo/<str:id>/newprescription/<str:patid>', views.prescriptionpage, name = "prescriptionpage"),
+    path('doctor/history/<str:id>', views.doctorhistory, name = "doctorhistory"),
     
     path('patient/<str:ID>', views.patientpage, name = "patientpage"),
     path('medicinemanager/<str:ID>', views.medicinemanagerpage, name = "medicinemanagerpage"),
@@ -17,5 +17,5 @@ urlpatterns = [
     path('administration/<str:ID>', views.adminpage, name = "adminpage"),
     path('operator/<str:ID>', views.operatorpage, name = "operatorpage"),
     
-    path('doctor/history/<str:id>', views.doctorhistory, name = "doctorhistory"),
+    
 ]
