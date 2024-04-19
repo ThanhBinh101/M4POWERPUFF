@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -58,12 +59,204 @@
             <p id = "PatientGmail">{{patient.gmail}}</p>
         </div> 
 
-        <div class = "tablebox">
+        <div class = "patientinfo">
+            <div class = "patientimg">
+                <img src="{%static 'patient.jpeg'%}">
+            </div>
 
+            <div style = "margin-top: 5%" class = 'newAppointment'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Appointment">New Appointment</button>
+            </div>
+            
+            <div style = "margin-top: 5%" class = 'newRegister'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Register">Register for testing</button>
+            </div>
+
+            <div style = "margin-top: 5%" class = 'testingResult'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Result">Testing Result</button>
+            </div>
+        
         </div>
 
     </section>
-  
+
+    <div class="modal fade" id="Appointment" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                    <div class="modal-header appointmentModalHeader" d-flex justify-content-center align-items-center>
+                        <h4 class="modal-title">Appointment Booking</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                <div class="modal-body appointmentModalBody">
+                    <form method="POST" > {% csrf_token %}
+                        <input type="hidden" name="createnewrecord" value="form1">
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                                <option selected>Choose department</option>
+                                <option value="1">Tai</option>
+                                <option value="2">Mũi</option>
+                                <option value="3">Họng</option>
+                              </select>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label class="form-label">Time</label>
+                           
+                            <select class="form-select" style = "color: #ff66b2"; aria-label="Time">
+                                <option selected>Choose time</option>
+                                <option value="1">12:00</option>
+                                <option value="2">12:30</option>
+                                <option value="3">13:00</option>
+                              </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer appointmentModalFooter" style = "background-color: rgba(4, 135, 217, 0.5);">
+                    <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+                </div>
+                
+    </div>
+    </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" d-flex justify-content-center align-items-center>
+                <div class="modal-header successHeader"> 
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body successBody">
+                    Successful
+                    <div class = "successimg">
+                        <img src="{%static 'successful.png'%}">
+                    </div>
+                </div>
+                <div class="modal-footer successFooter" style="background-color:rgba(242, 206, 216, 0.5); height: 40px;">
+                </div>
+               
+            </div>
+        </div>     
+    </div>
+           
+    
+    <div class="modal fade" id="Register" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                    <div class="modal-header registerModalHeader"d-flex justify-content-center align-items-center>
+                        <h4 class="modal-title">Testing Register</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                <div class="modal-body registerModalBody">
+                    <form method="POST" > {% csrf_token %}
+                        <input type="hidden" name="createnewrecord" value="form1">
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                                <option selected>Choose department</option>
+                                <option value="1">Tai</option>
+                                <option value="2">Mũi</option>
+                                <option value="3">Họng</option>
+                              </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Type of testing</label>
+                            <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                                <option selected>Choose type of testing</option>
+                                <option value="1">CT</option>
+                                <option value="2">MRI</option>
+                                <option value="3">Endoscopic</option>
+                              </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Time</label>
+                            <select class="form-select" style = "color: #ff66b2"; aria-label="Time"; max-height: 45px; overflow-y: auto;>
+                                <option selected>Choose time</option>
+                                <option value="1">07:00</option>
+                                <option value="2">07:30</option>
+                                <option value="3">08:00</option>
+                                <option value="3">08:30</option>
+                                <option value="3">09:00</option>
+                                <option value="3">09:30</option>
+                                <option value="3">10:00</option>
+                                <option value="3">10:30</option>
+                                <option value="3">11:00</option>
+                                <option value="3">11:30</option>
+                                <option value="3">14:00</option>
+                                <option value="3">14:30</option>
+                                <option value="3">15:00</option>
+                                <option value="3">15:30</option>
+                                <option value="3">16:00</option>
+                                <option value="3">16:30</option>
+                                <option value="3">17:00</option>
+                                <option value="3">17:30</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer registerModalFooter" style = "background-color: rgba(4, 135, 217, 0.5);">
+                    <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>  
+        </div>
+    </div>
+
+    </div>
+    </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" d-flex justify-content-center align-items-center>
+                <div class="modal-header successHeader"> 
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body successBody">
+                    Successful
+                    <div class = "successimg">
+                        <img src="{%static 'successful.png'%}">
+                    </div>
+                </div>
+                <div class="modal-footer successFooter" style="background-color:rgba(242, 206, 216, 0.5); height: 40px;">
+                </div>
+               
+            </div>
+        </div>     
+    </div>
+    <!-- <div class="modal fade" id="Result" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-header resultModalHeader">
+                        <h4 class="modal-title" id="newrecordcreate"></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                <div class="modal-body resultModalBody">
+                    <form method="POST" > {% csrf_token %}
+                        <input type="hidden" name="createnewrecord" value="form1">
+                        <div class="mb-3">
+                            <label class="form-label">Diagnose</label>
+                            <input class="form-control" name="patientdiagnose" placeholder="" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <input class="form-control" name="patientstatus" placeholder="" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Revisit Day</label>      
+                            <input class="form-control" name="revisitday" placeholder="DD/MM/YYY" type="text" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer resultModalFooter">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>  
+        </div>
+    </div> -->
     
 </body>
 </html>
