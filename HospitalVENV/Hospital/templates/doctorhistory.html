@@ -49,14 +49,14 @@
                     <div class="table-wrapper">
                         <table id="myTable">
                             <tr class="header">
-                                <th style="width:30%; text-align: left;">Date</th>
+                                <th style="width:30%; text-align: left;">Date - Time</th>
                                 <th style="width:50%;">Name</th>
                                 <th style="width:20%;">Preview</th>
                             </tr>
                             {%for record in historypatient%}
                             <tr>
-                                <td style="text-align: left;">{{record.historyrecord.Date}}</td>
-                                <td><a href="">{{ record.patientname }}</a></td>
+                                <td style="text-align: left;">{{record.historyrecord.Date}} - {{record.historyrecord.StartTime}}</td>
+                                <td><a href="{% url 'patientpage' record.patientid %}?from_history=true">{{ record.patientname }}</a></td>
                                 <td><button type="button" class="ri-eye-line" data-bs-toggle="modal" data-bs-target="#viewRecord{{ forloop.counter }}"></button>
                                   <div class="modal fade" id="viewRecord{{ forloop.counter }}" tabindex="-1" aria-labelledby="viewRecordLabel{{ forloop.counter }}" aria-hidden="true">
                                     <div class="modal-dialog modal-xl">

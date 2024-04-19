@@ -169,7 +169,7 @@ section {
   text-align: center; /* Center align content in cells */
 }
 .ri-check-fill {
-  margin-right: 20%;
+  margin-right: 10%;
   font-size: 24px;
   color: #73e635;
   transition: all 0.55s ease;
@@ -184,14 +184,23 @@ section {
   color: #ff66b2;
   transition: all 0.55s ease;
 }
+.bx-alarm-add {
+  margin-left: 10%;
+  font-size: 20px;
+  color: #ff66b2;
+  transition: all 0.55s ease;
+}
+.bx-alarm-add:hover {
+  font-size: 21px;
+}
 .ri-user-search-line:hover {
-  font-size: 30px;
+  font-size: 25px;
 }
 .ri-check-fill:hover{
-  font-size: 30px;
+  font-size: 25px;
 }
 .ri-close-fill:hover{
-  font-size: 30px;
+  font-size: 25px;
 }
 .table-danger button {
   border-width: 0;

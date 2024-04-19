@@ -196,8 +196,13 @@ def get_admin_info(ID):
 
 
 def patientpage(request, ID):
+    from_history = request.GET.get('from_history', False)
+    context = {}
+    if from_history:
+        context['from_history'] = True
     paInfo = get_patient_info(ID)
-    return render(request, 'patientpage.html', {'patient': paInfo})
+    context.update({'patient': paInfo})
+    return render(request, 'patientpage.html', context)
 
 
 def doctorpage(request, ID):
@@ -236,7 +241,8 @@ def get_doctor_appointments(doc_key):
                     'time': value.get("Time"),
                     'patientinfo': get_patient_info(value.get("PatientID"))
                 })
-        return appointments
+        appointments_sorted = sorted(appointments, key=lambda x: datetime.strptime(x['time'], '%H:%M'))
+        return appointments_sorted
     else:
         return None
 
@@ -253,7 +259,7 @@ def get_medicine_table():
     return medicineList
 
   
-def patientdoctorview(request, docid, patid):
+def patientdoctorview(request, docid, patid, appointKey):
     if request.method == "GET":
         patients = get_patient_info(patid)
         
@@ -267,16 +273,16 @@ def patientdoctorview(request, docid, patid):
             diagnose = request.POST.get('patientdiagnose')
             status = request.POST.get('patientstatus')
             revisit = request.POST.get('revisitday')
-            Doctor.AddMedicalRecord(patid, diagnose, status, revisit)
+            Doctor.AddMedicalRecord(patid, diagnose, status, revisit, appointKey)
         else:
             medicineList = request.POST.get('medicinelist')
             note = request.POST.get('patientnote')
             status = request.POST.get('patientstatus')
             revisit = request.POST.get('revisitdaytext')
             recordid = request.POST.get('recordid')
-            Doctor.AddPrescription(patid, recordid, docid, status, revisit, note, medicineList)
+            Doctor.AddPrescription(patid, recordid, docid, status, revisit, note, medicineList, appointKey)
 
-    return redirect('patientdoctorview', docid, patid)
+    return redirect('patientdoctorview', docid, patid, appointKey)
 
 
 def get_medicial_record(ID):
@@ -359,6 +365,9 @@ def deleteAppoint(request, docid, appointKey):
     delAppoint.delete()
     return redirect('doctorpage', docid)
 
+def appointAddTime(request, docid, appointKey):
+    Appointment.AddTime(appointKey)
+    return redirect('doctorpage', docid)
 
 def doctorhistory(request, id):
     HistoryPatient = []
@@ -375,6 +384,7 @@ def doctorhistory(request, id):
                                 dbconn = connectDBMedicalRecord(key1, key2)
                                 HistoryPatient.append({
                                     'patientname': dbconn.parent.parent.child("Name").get(),
+                                    'patientid': key1,
                                     'historyrecord': dbconn.get()
                                 })
                                 break

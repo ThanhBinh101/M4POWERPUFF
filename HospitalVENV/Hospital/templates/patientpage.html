@@ -35,9 +35,16 @@
             <li><a href="">Contact us</a></li>
         </ul>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-            <a href='{% url 'mainpage' %}'>Log out</a>
+        {% if from_history %}
+        <button type="button" id="go-back" class="btn btn-primary" data-bs-toggle="modal">
+            Return to History
         </button>
+        {% else %}
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal">
+                <a href='{% url 'mainpage' %}'>Log out</a>
+            </button>
+        {% endif %}
+
 
     </header>
 
@@ -66,4 +73,11 @@
   
     
 </body>
+
+<script>
+    document.getElementById("go-back").addEventListener("click", () => {
+        history.back();
+      });
+</script>
+
 </html>

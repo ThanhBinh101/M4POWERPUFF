@@ -78,7 +78,7 @@
             <table class="table table-bordered custom-table">
                 <thead>
                     <tr class="table-danger">
-                        <th scope="col">Time</th>
+                        <th scope="col" id="time">Time</th>
                         <th scope="col">PatientName</th>
                         <th scope="col">Prescription</th>
                         <th scope="col">Action</th>
@@ -89,10 +89,11 @@
                     <tr class="table-danger">
                         <td>{{appointment.time}}</td>
                         <td>{{appointment.patientinfo.name}}</td>
-                        <td><a class="ri-user-search-line" href='patientinfo/{{doctor.id}}/{{appointment.patientinfo.id}}'></a></td>
+                        <td><a class="ri-user-search-line" href='patientinfo/{{doctor.id}}/{{appointment.patientinfo.id}}/{{appointment.appointmentID}}'></a></td>
                         <td>
                             <a class="ri-check-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.appointmentID}}'></a>
                             <a class="ri-close-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.appointmentID}}'></a>
+                            <a class="bx bx-alarm-add" href = 'appointmentAddTime/{{doctor.id}}/{{appointment.appointmentID}}'></a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -102,4 +103,5 @@
     </section>
     
 </body>
+
 </html>
