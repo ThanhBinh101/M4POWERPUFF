@@ -13,7 +13,7 @@ urlpatterns = [
     
     path('patient/<str:ID>', views.patientpage, name = "patientpage"),
     path('medicinemanager/<str:ID>', views.medicinemanagerpage, name = "medicinemanagerpage"),
-    path('equipmentmanager/<str:ID>', views.equipmentmanagerpage, name = "equipmentmanagerpage"),
+    #path('equipmentmanager/<str:ID>', views.equimentmanagerpage, name = "equipmentmanagerpage"),
     path('administration/<str:ID>', views.adminpage, name = "adminpage"),
     path('operator/<str:ID>', views.operatorpage, name = "operatorpage"),
     

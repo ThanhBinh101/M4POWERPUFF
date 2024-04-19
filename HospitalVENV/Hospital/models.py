@@ -1,4 +1,3 @@
-from django.db import models
 from django.shortcuts import render, redirect
 from django.apps import apps
 
@@ -44,12 +43,14 @@ class MedicalRecord:
         self.diagnose = diagnose
         self.revisit = revisit
         self.status = status
+        self.createday = date.today().strftime("%d/%m/%Y")
 
     def to_dict(self):
         return {
             "Diagnose": self.diagnose,
             "Status": self.status,
-            "Revisit": self.revisit
+            "Revisit": self.revisit,
+            "Date": self.createday
         }
     
     @staticmethod
@@ -72,7 +73,7 @@ class Medicine:
             "Name": self.name,
             "Quantity": self.quantity,
             "ExpireDate": self.expiredate,
-            "ImportDate": self.importdate.strftime("%d-%m-%Y")
+            "ImportDate": self.importdate.strftime("%d/%m/%Y")
         }
 
     @staticmethod
@@ -82,21 +83,24 @@ class Medicine:
         dbconn.push(medicine.to_dict())
 
     @staticmethod
-    def UseMedicine(medicineID, quantity, reason):
-        dbconn = connectDBMedicineHistory(medicineID, "")
+    def UseMedicine(medicineID, quantity, note,reason):
+        dbconn = connectDBMedicineHistory(medicineID)
+        current_quantity = dbconn.parent.child("Quantity").get()
+        new_quantity = current_quantity - quantity
         dbconn.push().set({
-            "Date": date.today().strftime("%d-%m-%Y"),
+            "Date": date.today().strftime("%d/%m/%Y"),
             "Reason": reason,
+            "Note": note,
             "Quantity": quantity
         })
-        dbconn.parent.update({"Quantity": dbconn.parent.child("Quantity").get() - quantity})
+        dbconn.parent.update({"Quantity": new_quantity})
     
     @staticmethod
     def CancelMedicine(medicineID, reason):
         dbconn = connectDBMedicineHistory(medicineID)
         quantity = dbconn.parent.child("Quantity").get()
         dbconn.push().set({
-            "Date": date.today().strftime("%d-%m-%Y"),
+            "Date": date.today().strftime("%d/%m/%Y"),
             "Reason": reason,
             "Quantity": quantity
         })
@@ -110,11 +114,15 @@ class Prescription:
         self.revisit = revisit
         self.note = note
         self.medicines = []
+        
+        medicine_strings = medicines.split(",")
 
-        medicinelist = medicines.split(', ')
-        for medicine in medicinelist:
-            id, num = medicine.split('(')
-            self.medicines.append({'id': id, 'quantity': int(num.rstrip(')')), 'reason': recordid})
+        for medicine_string in medicine_strings:
+            components = medicine_string.split("/")
+            id = components[0].strip()
+            quantity = int(components[1].strip())
+            note = components[2].strip()
+            self.medicines.append({'id': id, 'quantity': quantity, 'note': note, 'reason': recordid})
 
     def to_dict(self):
         return {
@@ -158,7 +166,7 @@ class Doctor(Information):
         dbconn = connectDBPrescription(patientid, recordid)
         dbconn.push(prescription.to_dict())
         for medi in prescription.medicines:
-            Medicine.UseMedicine(medi['id'], medi['quantity'], medi['reason'])
+            Medicine.UseMedicine(medi['id'], medi['quantity'], medi['note'], medi['reason'])
 
 class MedicineManager(Information):
     @staticmethod
@@ -198,7 +206,7 @@ class Nurse(Information):
         super.__init__(self, name, email, password, dob)
         self.department = department
         self.level = level
-        self.years = years
+        self.yearưs = years
     
     def to_dict(self):
         return super() + {
@@ -215,7 +223,7 @@ class Appointment():
 
     def to_dict(self):
         return {
-            "Patientid": self.patientid,
+            "PatientID": self.patientid,
             "Department": self.department,
             "Time": self.time
         }
