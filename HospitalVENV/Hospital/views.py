@@ -49,13 +49,15 @@ def loginpage(request):
             else:
                 return render(request, 'loginpage.html')
         else:
-            return render(request, 'loginpage.html')
-
+            alert_message = 'Invalid email or password.'
+            return render(request, 'loginpage.html', {'alert_message': alert_message})
 
 def checkValidate(gmail, password):
     global userKey
     global userRole
     tableUser = connectDBPatient().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
@@ -63,6 +65,8 @@ def checkValidate(gmail, password):
             return True
         
     tableUser = connectDBDoctor().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
@@ -70,6 +74,8 @@ def checkValidate(gmail, password):
             return True
     
     tableUser = connectDBMedicineManager().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
@@ -77,6 +83,8 @@ def checkValidate(gmail, password):
             return True
         
     tableUser = connectDBEquipmentManager().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
@@ -84,6 +92,8 @@ def checkValidate(gmail, password):
             return True
         
     tableUser = connectDBOperator().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
@@ -91,6 +101,8 @@ def checkValidate(gmail, password):
             return True
         
     tableUser = connectDBAdmin().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
@@ -404,28 +416,7 @@ def doctorhistory(request, id):
 
 
 
-# def prescriptionpage(request, docid, patid):
-#     if request.method == 'GET':            
-#         medicines = []
-#         dbconn = connectDBMedicine()
-#         tbleMedicines = dbconn.get()
-#         for key, value in tbleMedicines.items():
-#             medicines.append({"name": value["Name"], "id": key})
-                    
-#         return render(request, 'prescriptionpage.html', {'medicines': medicines})
-    
-#     if request.method == 'POST':
-#         patientDiagnose = request.POST.get("patientdiagnose")
-#         patientMedicine = request.POST.get("patientmedicine")
-        
-        # p = Prescription(id, patid, patientDiagnose, patientMedicine)
-        
-        # dbconn = connectDBPrescription()
-        # dbconn.push(p.to_dict())
-        
-        # p.CreatePrescriptionMedicineList()
-                
-    # return redirect('doctorpage', docid)
+
 
 
 
