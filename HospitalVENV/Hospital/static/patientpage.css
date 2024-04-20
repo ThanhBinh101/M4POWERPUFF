@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
     list-style: none;
     text-decoration: none;
   }
@@ -15,9 +15,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 33px 9%;
+    padding: 20px 9%;
     background: #F2CED8;
-    border-radius: 20px 20px 0 0;
   }
   body {
     background-color: white;
@@ -31,6 +30,7 @@
     margin: 0 10px 0 0;
   }
   .logo-name a {
+    font-family: 'Baloo 2';
     font-size: 30px;
     font-weight: 700;
     color: #0487d9;
@@ -95,13 +95,13 @@
   .textbox {
     line-height: 0.75cm;
     display: block;
+    margin-left: 5%;
   }
   .textbox h2 {
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    margin-top: 5%;
+    margin-top: 10%;
   }
   .textbox p {
     border-bottom: 2px solid black;
@@ -118,3 +118,127 @@
     border-bottom: 2px solid black;
     font-size: 16px;
   }
+
+  .patientinfo {
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+    margin-left: 30%;
+}
+
+  .patientimg img {
+    border: 2px solid black;
+    border-radius: 47px;
+    width: 60%;
+    height: 60%;
+}
+
+.newAppointment .btn-primary,
+.newRegister .btn-primary,
+.testingResult .btn-primary {
+    font-size: 16px;
+    background-color: #0487D9;
+    border-color: #D8D2FC;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 200px;
+    margin-left: 3%;
+}
+
+.newAppointment .btn-primary {
+    background-color: #ff66b2;
+    border-color: #0487D9;
+}
+
+.newAppointment .btn-primary:hover {
+  background-color: #F2CED8;
+  border-color: #F2CED8;
+  font-size: 16px;
+}
+.newRegister .btn-primary:hover, .testingResult .btn-primary:hover {
+  background-color: #D8D2FC;
+  border-color: #D8D2FC;
+  font-size: 16px;
+}
+
+.modal-dialog .modal-content .modal-header,
+.modal-dialog .modal-content .modal-body,
+.modal-dialog .modal-content .modal-footer {
+border: none !important; 
+}
+
+.appointmentModalHeader.modal-content, .registerModalHeader .modal-content {
+  width: 240px; 
+  height: 360px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.appointmentModalHeader, .registerModalHeader, .successHeader {
+  background-color: rgba(242, 206, 216, 0.5);
+  text-align: center;
+}
+.appointmentModalHeader .modal-title, .registerModalHeader .modal-title{
+  font-family: 'Baloo 2';
+  font-size: 30px;
+  color: #0487d9;
+  width: 100%;
+  padding-left: 5%;
+}
+
+.appointmentModalBody, .registerModalBody {
+  background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+}
+
+.appointmentModalFooter .btn-primary, .registerModalFooter .btn-primary {
+  font-size: 12px;
+  background-color: #ff66b2;
+  border-color: #0487D9;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  text-decoration: none;
+  color: white;
+  font-style: normal;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.appointmentModalFooter .btn-primary:hover, .registerModalFooter .btn-primary:hover {
+  background-color: #F2CED8;
+  border-color: #F2CED8;
+  font-size: 16px;
+}
+
+.appointmentModalFooter .btn-secondary, .registerModalFooter .btn-secondary {
+    font-size: 12px;
+    background-color: rgba(242, 206, 216, 0.8);
+    border-color: white;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color:  black;
+    font-style: normal;
+    width: 100px;
+  }
+
+  .appointmentModalFooter .btn-secondary:hover, .registerModalFooter .btn-secondary:hover {
+    font-size: 20px;
+    background-color: rgba(4, 135, 217, 0.3);
+  }
+
+  .successBody {
+    color:#ff66b2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .successimg img {
+    width: 20%;
+    height: 20%;
+}
