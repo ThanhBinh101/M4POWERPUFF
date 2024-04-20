@@ -65,12 +65,23 @@
         </div> 
 
         <div class = 'createmedical'>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewRecordModal{{ forloop.counter }}">Add New Record</button>
-            <div class="modal fade" id="NewRecordModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="newrecordcreate{{ forloop.counter }}" aria-hidden="true">
+            <div class = 'addRecord'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewRecordModal">Add New Record</button>
+            </div>
+            
+            <div style = "margin-top: 5%" class = 'newRegister'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Register">Register for testing</button>
+            </div>
+
+            <div style = "margin-top: 5%" class = 'testingResult'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Result">Testing Result</button>
+            </div>
+
+            <div class="modal fade" id="NewRecordModal" tabindex="-1" aria-labelledby="newrecordcreate" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                             <div class="modal-header newRecord">
-                                <h4 class="modal-title" id="newrecordcreate{{ forloop.counter }}">New Record</h4>
+                                <h4 class="modal-title" id="newrecordcreate">New Record</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                         <div class="modal-body newRecord">
@@ -97,6 +108,72 @@
                     </div>  
                 </div>
             </div>
+
+            <div class="modal fade" id="Register" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                            <div class="modal-header registerModalHeader"d-flex justify-content-center align-items-center>
+                                <h4 class="modal-title">Testing Register</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body registerModalBody">
+                            <form method="POST" > {% csrf_token %}
+                                <input type="hidden" name="createnewrecord" value="form1">
+                                <div class="mb-3">
+                                    <label class="form-label">Department</label>
+                                    <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                                        <option selected>Choose department</option>
+                                        <option value="1">Tai</option>
+                                        <option value="2">Mũi</option>
+                                        <option value="3">Họng</option>
+                                      </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Type of testing</label>
+                                    <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                                        <option selected>Choose type of testing</option>
+                                        <option value="1">CT</option>
+                                        <option value="2">MRI</option>
+                                        <option value="3">Endoscopic</option>
+                                      </select>
+                                </div>
+        
+                                <div class="mb-3">
+                                    <label class="form-label">Time</label>
+                                    <select class="form-select" style = "color: #ff66b2"; aria-label="Time"; max-height: 45px; overflow-y: auto;>
+                                        <option selected>Choose time</option>
+                                        <option value="1">07:00</option>
+                                        <option value="2">07:30</option>
+                                        <option value="3">08:00</option>
+                                        <option value="3">08:30</option>
+                                        <option value="3">09:00</option>
+                                        <option value="3">09:30</option>
+                                        <option value="3">10:00</option>
+                                        <option value="3">10:30</option>
+                                        <option value="3">11:00</option>
+                                        <option value="3">11:30</option>
+                                        <option value="3">14:00</option>
+                                        <option value="3">14:30</option>
+                                        <option value="3">15:00</option>
+                                        <option value="3">15:30</option>
+                                        <option value="3">16:00</option>
+                                        <option value="3">16:30</option>
+                                        <option value="3">17:00</option>
+                                        <option value="3">17:30</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+        
+                        <div class="modal-footer registerModalFooter">
+                            <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            
         </div>
 
     </section>
@@ -142,7 +219,6 @@
                                                                 <th scope="col" style="width:10%;">Doctor</th>
                                                                 <th scope="col" style="width:10%;">Status</th>
                                                                 <th scope="col" style="width:40%;">Prescription</th>
-                                                                {% comment %} <th scope="col" style="width:20%;">Note</th> {% endcomment %}
                                                                 <th scope="col" style="width:20%;">Note</th>
                                                             </tr>
                                                         </thead>
@@ -158,11 +234,6 @@
                                                                 <span style="color: #ff66b2;"> {{med.name}} </span> : {{med.quantity}}<br> Time: {{med.note}} <br> <br> 
                                                                 {% endfor %}
                                                                 </td>
-                                                                {% comment %} <td>
-                                                                    {% for med in pre.medicinelist  %}
-                                                                     {{med.note}} <br>
-                                                                    {% endfor %}
-                                                                </td> {% endcomment %}
                                                                 <td>{{pre.note}}</td>
                                                             </tr>
                                                             {% endfor %}
