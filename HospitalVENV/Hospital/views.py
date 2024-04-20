@@ -49,54 +49,60 @@ def loginpage(request):
             else:
                 return render(request, 'loginpage.html')
         else:
-            return render(request, 'loginpage.html')
-
+            alert_message = 'Invalid email or password.'
+            return render(request, 'loginpage.html', {'alert_message': alert_message})
 
 def checkValidate(gmail, password):
     global userKey
     global userRole
-    dbconn = connectDBPatient()
-    tableUser = dbconn.get()
+    tableUser = connectDBPatient().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
             userRole = "Patient"
             return True
         
-    dbconn = connectDBDoctor()
-    tableUser = dbconn.get()
+    tableUser = connectDBDoctor().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
             userRole = "Doctor"
             return True
     
-    dbconn = connectDBMedicineManager()
-    tableUser = dbconn.get()
+    tableUser = connectDBMedicineManager().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
             userRole = "MedicineManager"
             return True
         
-    dbconn = connectDBEquipmentManager()
-    tableUser = dbconn.get()
+    tableUser = connectDBEquipmentManager().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
             userRole = "EquipmentManager"
             return True
         
-    dbconn = connectDBOperator()
-    tableUser = dbconn.get()
+    tableUser = connectDBOperator().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
             userRole = "Operator"
             return True
         
-    dbconn = connectDBAdmin()
-    tableUser = dbconn.get()
+    tableUser = connectDBAdmin().get()
+    if tableUser is None:
+        return False
     for key, value in tableUser.items():
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
@@ -108,8 +114,7 @@ def checkValidate(gmail, password):
 
 def get_patient_info(ID):
     PatientInfo = []
-    dbconn = connectDBPatient()
-    tableUser = dbconn.get()
+    tableUser = connectDBPatient().get()
     for key, value in tableUser.items():
         if key == ID:
             PatientInfo.append({
@@ -126,8 +131,7 @@ def get_patient_info(ID):
 
 def get_doctor_info(ID):
     docInfo = []
-    dbconn = connectDBDoctor()
-    tableUser = dbconn.get()
+    tableUser = connectDBDoctor().get()
     for key, value in tableUser.items():
         if key == ID:
             docInfo.append({
@@ -145,8 +149,7 @@ def get_doctor_info(ID):
 
 def get_medicinemanager_info(ID):
     ManagerInfo = []
-    dbconn = connectDBMedicineManager()
-    tableUser = dbconn.get()
+    tableUser = connectDBMedicineManager().get()
     for key, value in tableUser.items():
         if key == ID:
             ManagerInfo.append({
@@ -161,8 +164,7 @@ def get_medicinemanager_info(ID):
 
 def get_equipmentmanager_info(ID):
     ManagerInfo = []
-    dbconn = connectDBEquipmentManager()
-    tableUser = dbconn.get()
+    tableUser = connectDBEquipmentManager().get()
     for key, value in tableUser.items():
         if key == ID:
             ManagerInfo.append({
@@ -177,8 +179,7 @@ def get_equipmentmanager_info(ID):
 
 def get_operator_info(ID):
     operatorInfo = []
-    dbconn = connectDBOperator()
-    tableUser = dbconn.get()
+    tableUser = connectDBOperator().get()
     for key, value in tableUser.items():
         if key == ID:
             operatorInfo.append({
@@ -193,8 +194,7 @@ def get_operator_info(ID):
 
 def get_admin_info(ID):
     AdminInfo = []
-    dbconn = connectDBAdmin()
-    tableUser = dbconn.get()
+    tableUser = connectDBAdmin().get()
     for key, value in tableUser.items():
         if key == ID:
             AdminInfo.append({
@@ -208,8 +208,13 @@ def get_admin_info(ID):
 
 
 def patientpage(request, ID):
+    from_history = request.GET.get('from_history', False)
+    context = {}
+    if from_history:
+        context['from_history'] = True
     paInfo = get_patient_info(ID)
-    return render(request, 'patientpage.html', {'patient': paInfo})
+    context.update({'patient': paInfo})
+    return render(request, 'patientpage.html', context)
 
 
 def doctorpage(request, ID):
@@ -238,8 +243,7 @@ def adminpage(request, ID):
 
 
 def get_doctor_appointments(doc_key):
-    dbconn = connectDBAppointment()
-    appointment_table = dbconn.get()
+    appointment_table = connectDBAppointment().get()
     if appointment_table is not None:
         appointments = []
         for key, value in appointment_table.items():
@@ -249,14 +253,14 @@ def get_doctor_appointments(doc_key):
                     'time': value.get("Time"),
                     'patientinfo': get_patient_info(value.get("PatientID"))
                 })
-        return appointments
+        appointments_sorted = sorted(appointments, key=lambda x: datetime.strptime(x['time'], '%H:%M'))
+        return appointments_sorted
     else:
         return None
 
 
 def get_medicine_table():
-    dbconn = connectDBMedicine()
-    medicine_table = dbconn.get()
+    medicine_table = connectDBMedicine().get()
     if medicine_table is not None:
         medicineList = []
         for key, value in medicine_table.items():
@@ -267,7 +271,7 @@ def get_medicine_table():
     return medicineList
 
   
-def patientdoctorview(request, docid, patid):
+def patientdoctorview(request, docid, patid, appointKey):
     if request.method == "GET":
         patients = get_patient_info(patid)
         
@@ -281,21 +285,20 @@ def patientdoctorview(request, docid, patid):
             diagnose = request.POST.get('patientdiagnose')
             status = request.POST.get('patientstatus')
             revisit = request.POST.get('revisitday')
-            Doctor.AddMedicalRecord(patid, diagnose, status, revisit)
+            Doctor.AddMedicalRecord(patid, diagnose, status, revisit, appointKey)
         else:
             medicineList = request.POST.get('medicinelist')
             note = request.POST.get('patientnote')
             status = request.POST.get('patientstatus')
             revisit = request.POST.get('revisitdaytext')
             recordid = request.POST.get('recordid')
-            Doctor.AddPrescription(patid, recordid, docid, status, revisit, note, medicineList)
+            Doctor.AddPrescription(patid, recordid, docid, status, revisit, note, medicineList, appointKey)
 
-    return redirect('patientdoctorview', docid, patid)
+    return redirect('patientdoctorview', docid, patid, appointKey)
 
 
 def get_medicial_record(ID):
-    dbconn = connectDBMedicalRecord(ID)
-    tableMedical = dbconn.get()
+    tableMedical = connectDBMedicalRecord(ID).get()
     if tableMedical is not None:
         medicalrecord = []
         for key, value in tableMedical.items():
@@ -313,8 +316,7 @@ def get_medicial_record(ID):
 
 
 def get_prescription_info(ID1, ID2):
-    dbconn = connectDBPrescription(ID1, ID2)
-    tablePrescription = dbconn.get()
+    tablePrescription = connectDBPrescription(ID1, ID2).get()
     if tablePrescription is not None:
         prescriptionRecord = []
         for key, value in tablePrescription.items():
@@ -332,8 +334,15 @@ def get_prescription_info(ID1, ID2):
 
 
 def get_doctor_name(ID):
-    dbconn = connectDBDoctor()
-    tableUser = dbconn.get()
+    tableUser = connectDBDoctor().get()
+    for key, value in tableUser.items():
+        if key == ID:
+            return value.get("Name")
+    return None
+
+
+def get_patient_name(ID):
+    tableUser = connectDBPatient().get()
     for key, value in tableUser.items():
         if key == ID:
             return value.get("Name")
@@ -341,15 +350,25 @@ def get_doctor_name(ID):
 
 
 def get_medicine_list(medicinelist):
-    dbconn = connectDBMedicine()
-    tableMedicine = dbconn.get()
+    tableMedicine = connectDBMedicine().get()
     if tableMedicine is not None:
         list = []
         for medicine in medicinelist:
             for key, value in tableMedicine.items():
                 if(medicine['id'] == key):
                     list.append({'name': value.get("Name"), 'quantity': medicine['quantity'], 'note' : medicine['note']})
-        return list          
+        return list   
+
+def get_doctor_list():
+    tableDoctor = connectDBDoctor().get()
+    if tableDoctor is not None:
+        list = []
+        for key, value in tableDoctor.items():
+            list.append({
+                'id': key,
+                'name': value.get("Name"),
+            })
+        return list      
 
 
 def deleteAppoint(request, docid, appointKey):
@@ -358,10 +377,33 @@ def deleteAppoint(request, docid, appointKey):
     delAppoint.delete()
     return redirect('doctorpage', docid)
 
+def appointAddTime(request, docid, appointKey):
+    Appointment.AddTime(appointKey)
+    return redirect('doctorpage', docid)
 
 def doctorhistory(request, id):
+    HistoryPatient = []
+    dbconnPat = connectDBPatient().get()
+    if dbconnPat is not None:
+        for key1, value1 in dbconnPat.items():
+            dbconnRecord = connectDBMedicalRecord(key1).get()
+            if dbconnRecord is not None:
+                for key2, value2 in dbconnRecord.items():
+                    dbconnPrescription = connectDBPrescription(key1, key2).get()
+                    if dbconnPrescription is not None:
+                        for key3, value3 in dbconnPrescription.items():
+                            if value3.get("DoctorID") == id:
+                                dbconn = connectDBMedicalRecord(key1, key2)
+                                HistoryPatient.append({
+                                    'patientname': dbconn.parent.parent.child("Name").get(),
+                                    'patientid': key1,
+                                    'historyrecord': dbconn.get()
+                                })
+                                break
     
-    return render(request, 'doctorhistory.html')
+    medicines = get_medicine_table()
+    doctors = get_doctor_list()
+    return render(request,'doctorhistory.html', {'historypatient': HistoryPatient, 'medicines': medicines, 'doctors': doctors})
 
 
 
@@ -374,28 +416,7 @@ def doctorhistory(request, id):
 
 
 
-# def prescriptionpage(request, docid, patid):
-#     if request.method == 'GET':            
-#         medicines = []
-#         dbconn = connectDBMedicine()
-#         tbleMedicines = dbconn.get()
-#         for key, value in tbleMedicines.items():
-#             medicines.append({"name": value["Name"], "id": key})
-                    
-#         return render(request, 'prescriptionpage.html', {'medicines': medicines})
-    
-#     if request.method == 'POST':
-#         patientDiagnose = request.POST.get("patientdiagnose")
-#         patientMedicine = request.POST.get("patientmedicine")
-        
-        # p = Prescription(id, patid, patientDiagnose, patientMedicine)
-        
-        # dbconn = connectDBPrescription()
-        # dbconn.push(p.to_dict())
-        
-        # p.CreatePrescriptionMedicineList()
-                
-    # return redirect('doctorpage', docid)
+
 
 
 

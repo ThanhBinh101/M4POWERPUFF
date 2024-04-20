@@ -31,6 +31,11 @@
         </div>
 
         <div class = "loginform" >
+            {% if alert_message %}
+            <script>
+                alert("{{ alert_message }}");
+            </script>
+            {% endif %}
             <form method = "POST"> {% csrf_token %}
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Gmail</label>

@@ -4,6 +4,7 @@ from django.apps import apps
 from .database import *
 
 from datetime import date
+from datetime import datetime, timedelta
 
 class Information:
     def __init__(self, name, email, password, dob, gender):
@@ -39,18 +40,27 @@ class Patient(Information):
         dbconn.push(patient.to_dict())
 
 class MedicalRecord:
-    def __init__(self, diagnose, status, revisit):
+    def __init__(self, diagnose, status, revisit, apmid):
         self.diagnose = diagnose
         self.revisit = revisit
         self.status = status
         self.createday = date.today().strftime("%d/%m/%Y")
+        
+        dbconn = connectDBAppointment(apmid)
+        appointment_info = dbconn.get()
+        appointment_time_str = appointment_info.get("Time")
+        
+        appointment_time = datetime.strptime(appointment_time_str, '%H:%M')
+        
+        self.appointment_time = appointment_time.strftime('%H:%M')
 
     def to_dict(self):
         return {
             "Diagnose": self.diagnose,
             "Status": self.status,
             "Revisit": self.revisit,
-            "Date": self.createday
+            "Date": self.createday,
+            "StartTime": self.appointment_time,
         }
     
     @staticmethod
@@ -58,7 +68,7 @@ class MedicalRecord:
         dbconn = connectDBMedicalRecord(patientid, recordid)
         dbconn.update({
             "Status": status,
-            "Revisit": revisit
+            "Revisit": revisit,
         })
 
 class Medicine:
@@ -107,13 +117,14 @@ class Medicine:
         dbconn.parent.update({"Quantity": 0})
 
 class Prescription:
-    def __init__(self, recordid, doctorid, status, revisit, note, medicines):
+    def __init__(self, recordid, doctorid, status, revisit, note, medicines, endTime):
         self.date = date.today()
         self.doctorid = doctorid
         self.status = status
         self.revisit = revisit
         self.note = note
         self.medicines = []
+        self.completeTime = endTime
         
         medicine_strings = medicines.split(",")
 
@@ -121,7 +132,7 @@ class Prescription:
             components = medicine_string.split("/")
             id = components[0].strip()
             quantity = int(components[1].strip())
-            note = components[2].strip()
+            note = components[2].strip()                   
             self.medicines.append({'id': id, 'quantity': quantity, 'note': note, 'reason': recordid})
 
     def to_dict(self):
@@ -131,7 +142,8 @@ class Prescription:
             "Status": self.status,
             "Revisit": self.revisit,
             "Note": self.note,
-            "Medicines": self.medicines
+            "Medicines": self.medicines,
+            "CompleteTime": self.completeTime
         }
 
 class Schedule:
@@ -154,14 +166,14 @@ class Doctor(Information):
         }
     
     @staticmethod
-    def AddMedicalRecord(patientid, diagnose, status, revisit):
+    def AddMedicalRecord(patientid, diagnose, status, revisit, apmid):
         dbconn = connectDBMedicalRecord(patientid)
-        record = MedicalRecord(diagnose, status, revisit)
+        record = MedicalRecord(diagnose, status, revisit, apmid)
         dbconn.push(record.to_dict())
     
     @staticmethod
     def AddPrescription(patientid, recordid, doctorid, status, revisit, note, medicines):
-        MedicalRecord.UpdateMedicalRecord(patientid, recordid, status, revisit)
+        endTime = MedicalRecord.UpdateMedicalRecord(patientid, recordid, status, revisit)
         prescription = Prescription(recordid, doctorid, status, revisit, note, medicines)
         dbconn = connectDBPrescription(patientid, recordid)
         dbconn.push(prescription.to_dict())
@@ -219,13 +231,40 @@ class Appointment():
     def __init__(self, patientid, department, time):
         self.patientid = patientid,
         self.department = department,
-        self.time = time
+        self.time = datetime.strptime(time, '%H:%M')
+        self.completeTime = self.time + timedelta(hours=1)
 
+    @staticmethod
+    def AddTime(apmid):
+        appointment_info = connectDBAppointment().get()
+        apmid_info = appointment_info.get(apmid)
+        
+        # Get the current time for apmid
+        apmid_time_str = apmid_info.get("Time")
+        apmid_time = datetime.strptime(apmid_time_str, '%H:%M')
+        
+        # Calculate the new time and complete time for apmid
+        new_apmid_time = apmid_time + timedelta(minutes=5)
+        
+        # Update the time for apmid
+        dbconn_apmid = connectDBAppointment(apmid)
+        dbconn_apmid.update({"Time": new_apmid_time.strftime('%H:%M')})
+        
+        # Update the time for other appointments
+        for key, value in appointment_info.items():
+            if key != apmid:
+                appointment_time_str = value.get("Time")
+                appointment_time = datetime.strptime(appointment_time_str, '%H:%M')
+                if appointment_time >= new_apmid_time:
+                    new_time = appointment_time + timedelta(minutes=5)
+                    dbconn = connectDBAppointment(key)
+                    dbconn.update({"Time": new_time.strftime('%H:%M')})
+        
     def to_dict(self):
         return {
             "PatientID": self.patientid,
             "Department": self.department,
-            "Time": self.time
+            "Time": self.time,
         }
 
 class Operator(Information):
@@ -241,7 +280,8 @@ class Operator(Information):
     def SetAPM(docid, apmid, time):
         dbconn = connectDBAppointment(apmid)
         dbconn.set({"DoctorID": docid})
-        dbconn.update({"Time": time})
+        completeTime = time + timedelta(hours=1)
+        dbconn.update({"Time": time, "CompleteTime": completeTime})
 
     @staticmethod
     def DelAPM(apmid):
