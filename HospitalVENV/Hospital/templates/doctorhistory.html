@@ -43,20 +43,85 @@
 
     <section class = "displaybox">
         <div class = "searchbox">
-            <h3>History</h3>
+            <h3>HISTORY</h3>
             <div>
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
                     <div class="table-wrapper">
                         <table id="myTable">
                             <tr class="header">
-                                <th style="width:40%;">Name</th>
-                                <th style="width:60%;">ID</th>
+                                <th style="width:30%; text-align: left;">Date - Time</th>
+                                <th style="width:50%;">Name</th>
+                                <th style="width:20%;">Preview</th>
                             </tr>
-                            {%for patient in patients%}
+                            {%for record in historypatient%}
                             <tr>
-                                <td>{{ patient.name }}</td>
-                                <td><a href='patient/{{ doctor.id }}/{{ patient.id }}'>{{ patient.id }}</a></td>
+                                <td style="text-align: left;">{{record.historyrecord.Date}} - {{record.historyrecord.StartTime}}</td>
+                                <td><a href="{% url 'patientpage' record.patientid %}?from_history=true">{{ record.patientname }}</a></td>
+                                <td><button type="button" class="ri-eye-line" data-bs-toggle="modal" data-bs-target="#viewRecord{{ forloop.counter }}"></button>
+                                  <div class="modal fade" id="viewRecord{{ forloop.counter }}" tabindex="-1" aria-labelledby="viewRecordLabel{{ forloop.counter }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h4 class="modal-title" id="viewRecordLabel{{ forloop.counter }}">Medical Record</h4>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body viewRecord">
+                                          <div class="basicinfo">
+                                            <h6 style = "text-align: left">Status: {{ record.historyrecord.Status}}</h6>
+                                            <h6 style = "text-align: left">Revisit Day: {{ record.historyrecord.Revisit }}</h6>
+                                            <h4 style = "font-size: 30px">Prescription History</h4>
+  
+                                            <div class = "tablePrescription">
+                                              <table class="table table-bordered prescription-table">
+                                                <thead>
+                                                    <tr class="table-danger">
+                                                        <th scope="col" style="width:10%;">Date</th>
+                                                        <th scope="col" style="width:10%;">Revisit</th>
+                                                        <th scope="col" style="width:10%;">Doctor</th>
+                                                        <th scope="col" style="width:10%;">Status</th>
+                                                        <th scope="col" style="width:40%;">Prescription</th>
+                                                        <th scope="col" style="width:20%;">Note</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                  {% for key, pre in record.historyrecord.Prescription.items%}
+                                                    <tr class="table-danger">
+                                                      <td>{{pre.Date}}</td>
+                                                      <td>{{pre.Revisit}}</td>
+                                                      <td>
+                                                      {% for doc in doctors%}
+                                                        {% if doc.id == pre.DoctorID%}
+                                                          {{doc.name}}
+                                                        {% endif %}
+                                                      {% endfor %}
+                                                      </td>
+                                                      <td>{{pre.Status}}</td>
+                                                      <td style ="text-align: left">
+                                                      {% for med in pre.Medicines %}
+                                                        {% for medicine in medicines%}
+                                                          {% if med.id == medicine.id%}
+                                                            <span style="color: #ff66b2;"> {{medicine.name}} </span> : {{med.quantity}}<br> Time: {{med.note}} <br> <br>
+                                                          {% endif %}
+                                                        {% endfor %}
+                                                      {% endfor %}
+                                                      </td>
+                                                      <td>{{pre.Note}}</td>
+                                                    </tr>
+                                                  {% endfor %}
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer viewRecord">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
                             </tr>
+                            
                             {% endfor %}
                         </table>
                     </div>
@@ -76,7 +141,7 @@
     
       // Loop through all table rows, and hide those who don't match the search query
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
+        td = tr[i].getElementsByTagName("td")[1];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {

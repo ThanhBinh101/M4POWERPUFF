@@ -36,9 +36,16 @@
             <li><a href="">Contact us</a></li>
         </ul>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-            <a href='{% url 'mainpage' %}'>Log out</a>
+        {% if from_history %}
+        <button type="button" id="go-back" class="btn btn-primary" data-bs-toggle="modal">
+            Return to History
         </button>
+        {% else %}
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal">
+                <a href='{% url 'mainpage' %}'>Log out</a>
+            </button>
+        {% endif %}
+
 
     </header>
 
@@ -199,11 +206,11 @@
                 <div class="modal-footer appointmentModalFooter" style = "background-color: rgba(4, 135, 217, 0.5);">
                     <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
-                </div>
-                
+                </div>  
+            </div>
+        </div>
     </div>
-    </div>
-    </div>
+    
     <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" d-flex justify-content-center align-items-center>
@@ -312,4 +319,11 @@
     </div>
     
 </body>
+
+<script>
+    document.getElementById("go-back").addEventListener("click", () => {
+        history.back();
+      });
+</script>
+
 </html>
