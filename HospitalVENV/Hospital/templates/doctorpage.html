@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M3PowerPuff</title>
-    {% load static%}
+    {%load static%}
     <link rel="icon" type="image/x-icon" href="{%static 'logo.png'%}">
 
     <link rel="stylesheet" type ="text/css" href="{%static 'doctorpage.css'%}">
@@ -60,12 +60,50 @@
             <p id = "DoctorLevel">{{doctor.level}}</p>
         </div> 
 
-        <div class = "tablebox">
+        <div class = "doctorinfo">
+            <div class = "doctorimg">
+                <img src="{%static 'doctor1.jpg'%}">
+            </div>
 
+            <div class = "doctorbutton">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal">
+                    <a href='history/{{doctor.id}}'>History</a>
+                </button>
+            </div>
         </div>
 
     </section>
-  
+
+    <section class = "todobox">
+        <div class = "textbox">
+            <h2>Meeting Appointment</h2>
+        </div> 
+        <div class="table">
+            <table class="table table-bordered custom-table">
+                <thead>
+                    <tr class="table-danger">
+                        <th scope="col">Time</th>
+                        <th scope="col">PatientName</th>
+                        <th scope="col">Prescription</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in doctor.appointments%}
+                    <tr class="table-danger">
+                        <td>{{appointment.time}}</td>
+                        <td>{{appointment.patientinfo.name}}</td>
+                        <td><a class="ri-user-search-line" href='patientinfo/{{doctor.id}}/{{appointment.patientinfo.id}}'></a></td>
+                        <td>
+                            <a class="ri-check-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.appointmentID}}'></a>
+                            <a class="ri-close-fill" href = 'deleteAppoint/{{doctor.id}}/{{appointment.appointmentID}}'></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
     
 </body>
 </html>

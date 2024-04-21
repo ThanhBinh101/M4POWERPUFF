@@ -1,0 +1,332 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+    text-decoration: none;
+  }
+  header {
+    position: flex;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 33px 9%;
+    background: #F2CED8;
+    border-radius: 20px 20px 0 0;
+  }
+  body {
+    background-color: white;
+  }
+  .logo-name {
+    float: left
+  }
+  .logo-name img {
+    max-width: 55px;
+    float: left;
+    margin: 0 10px 0 0;
+  }
+  .logo-name a {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0487d9;
+    text-decoration: none;
+  }
+  .navlist {
+    display: flex;
+    margin-top: 15px;
+  }
+  .navlist a{
+    color: #0487d9;
+    margin-left: 60px;
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all .55s ease;
+    text-decoration: none;
+  }
+  .navlist a:hover{
+    border-bottom: 2px solid #0487d9;
+  }
+  header .btn-primary {
+    font-size: 20px;
+    margin-right: 25px;
+    background-color: #ff66b2;
+    border-color: #ff66b2;
+    color: white;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    --bs-btn-padding-x: 1rem;
+  }
+  header button:hover {
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
+  }
+  header .btn-primary a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px
+  }
+  section {
+    padding: 0 2%;
+  }
+  .displaybox {
+    height: min-content;
+    width: 80%;
+    min-height: 75vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    gap: 5rem;
+    background-color: rgba(4, 135, 217, 0.3);
+    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+    border-radius: 47px;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 1%;
+  
+  }
+  .textbox {
+    line-height: 0.75cm;
+    display: block;
+  }
+  .textbox h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 5%;
+    padding-bottom: 20px;
+  }
+  .textbox p {
+    border-bottom: 2px solid black;
+    font-size: 16px;
+  }
+  .textbox h6{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .textboxIDDoc h6{
+    color: #ff66b2;
+    font-size: 20px;
+  }
+  .textboxIDDoc p{
+    border-bottom: 2px solid black;
+    font-size: 16px;
+  }
+  .MedicalRecord {
+    height: 80%;
+    width: 80%;
+    min-height: 75vh;
+    position: relative;
+    background-color: rgba(4, 135, 217, 0.3);
+    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+    border-radius: 47px;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .MedicalRecord h2 {
+    padding-top: 3%;
+  }
+  .MedicalRecord a {
+    text-decoration: none;
+  }
+  .custom-table {
+    border-collapse: collapse;
+    width: 100%; /* Adjust the width of the table as needed */
+  }
+  .custom-table th,
+  .custom-table td {
+    padding: 10px !important; /* Adjust the padding to make the cells bigger */
+  }
+  .align {
+    text-align: center;
+    justify-content: center;
+  }
+  .table-wrapper {
+    max-height: 450px; /* Adjust the maximum height as needed */
+    overflow-y: auto;
+  }
+  .createmedical .btn-primary {
+    font-size: 20px;
+    background-color: #ff66b2;
+    border-color: #ff66b2;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-family: 'Poppins';
+    font-style: normal;
+  }
+  .createmedical .btn-primary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+    font-size: 24px;
+  }
+  .createmedical {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ri-eye-line {
+    font-size: 24px;
+    transition: all 0.55s ease;
+  }
+  .ri-eye-line:hover {
+    font-size: 30px; 
+  }
+  .table-wrapper button {
+    color: #ff66b2;
+    background-color: transparent;
+    border-width: 0;
+  }
+  .prescriptionHistory h5{
+    text-align: center;
+  }
+  .prescriptionHistory h6 {
+    text-align: left;
+  }
+  .prescriptionHistory button {
+    color: white;
+    font-size: 18px;
+    transition: all 0.55s ease;
+    background-color: #ff66b2;
+    border-width: 0;
+  }
+  .prescriptionHistory button:hover {
+    font-size: 22px;
+    background-color: rgba(4, 135, 217, 0.3);
+  }
+  .modal {
+    background-color:rgba(4, 135, 217, 0.1) ;
+  }
+
+  .newRecord .btn-primary {
+    color: white;
+    font-size: 18px;
+    transition: all 0.55s ease;
+    background-color: #ff66b2;
+    border-width: 0;
+  }
+  .newRecord .btn-primary:hover {
+    font-size: 20px;
+    background-color: rgba(4, 135, 217, 0.3);
+  }
+
+  .newRecord .btn-secondary {
+    font-size: 18px;
+    background-color: #ff66b2;
+    border-width: 0;
+    color: white;
+    transition: all 0.55s ease;
+  }
+  .newRecord .btn-secondary:hover {
+    font-size: 20px;
+    background-color: rgba(4, 135, 217, 0.3);
+  }
+
+  .prescriptionLeft button{
+    color: white;
+    font-size: 18px;
+    transition: all 0.55s ease;
+    background-color: #ff66b2;
+    border-width: 0;
+  }
+  .prescriptionLeft button:hover {
+    font-size: 20px;
+    background-color: rgba(4, 135, 217, 0.3);
+  }
+  .prescriptionInfo {
+    height: min-content;
+    min-height: 70vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    gap: 1.5rem;
+  }
+  .recordid {
+    color: #ff66b2;
+    padding-left: 3%;
+  }
+  #myInputMedicine {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50' fill='currentColor'%3E%3Cpath d='M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z'%3E%3C/path%3E%3C/svg%3E"); /* Add a search icon to input */
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 95%;
+    font-size: 16px; 
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd; 
+    margin-bottom: 12px; 
+    margin-left: 3%;
+    margin-top: 2%;
+  }
+  #myTableMedicine {
+    border-collapse: collapse;
+    width: 95%; 
+    border: 1px solid black; 
+    font-size: 18px; 
+    background-color: #F2CED8;
+    margin-left: 3%;
+  }
+  #myTableMedicine th, #myTableMedicine td {
+    text-align: left;
+    padding: 12px;
+    background-color: #F2CED8;
+  }
+  #myTableMedicine tr {
+    border-bottom: 1px solid black;
+  }
+  #myTableMedicine tr:hover{
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+  }
+  #myTableMedicine tr.header, #myTableMedicine tr:hover {
+    background-color: #f1f1f1;
+  }
+  #myTableMedicine button {
+    width: 80%;
+    border-radius: 20px;
+  }
+  .quantity-input {
+    width: 75%;
+  }
+  .note-input {
+    width: 90%;
+  }
+  .prescriptionRight .table-wrapper {
+    max-height: 350px; /* Adjust the maximum height as needed */
+    overflow-y: auto;
+  }
+  .table-danger {
+    text-align: center;
+    font-family: 'Poppins';
+    font-style: normal;
+  }
+  .remove-button {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: red;
+    transition: all 0.5s ease;
+  }
+  .remove-button:hover {
+    font-size: 24px;
+    color: green;
+  }
+  .PrescriptionCreateFooter button{
+    color: white;
+    font-size: 18px;
+    transition: all 0.55s ease;
+    background-color: #ff66b2;
+    border-width: 0;
+  }
+  .PrescriptionCreateFooter button:hover {
+    font-size: 20px;
+    background-color: rgba(4, 135, 217, 0.3);
+  }
