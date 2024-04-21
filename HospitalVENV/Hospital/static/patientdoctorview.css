@@ -90,7 +90,6 @@
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 1%;
-  
   }
   .textbox {
     line-height: 0.75cm;
@@ -102,7 +101,6 @@
     font-weight: 600;
     font-size: 24px;
     margin-top: 5%;
-    padding-bottom: 20px;
   }
   .textbox p {
     border-bottom: 2px solid black;
@@ -110,7 +108,6 @@
   }
   .textbox h6{
     font-size: 20px;
-    font-weight: bold;
   }
   .textboxIDDoc h6{
     color: #ff66b2;
@@ -153,32 +150,47 @@
     max-height: 450px; /* Adjust the maximum height as needed */
     overflow-y: auto;
   }
-  .addRecord .btn-primary, 
-  .newRegister .btn-primary, 
-  .testingResult .btn-primary {
-    font-size: 20px;
+
+  .createmedical {
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+    margin-left: 27%;
+  }
+  .addRecord .btn-primary {
+    font-size: 16px;
     background-color: #ff66b2;
     border-color: #ff66b2;
     text-transform: uppercase;
     transition: all 0.55s ease;
     text-decoration: none;
     color: white;
-    width: 400px;
+    width: 200px;
     font-family: 'Poppins';
     font-style: normal;
+  }
+  .newRegister .btn-primary, 
+  .testingResult .btn-primary {
+    background-color: #0487D9;
+    width: 200px;
+    transition: all 0.55s ease;
+    text-transform: uppercase;
   }
   .addRecord .btn-primary:hover,
   .newRegister .btn-primary:hover, 
   .testingResult .btn-primary:hover {
     background-color: #F2CED8;
     border-color: #F2CED8;
-    font-size: 21px;
   }
-  .createmedical {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  .patientimg img {
+    border: 2px solid black;
+    border-radius: 47px;
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+  }
+  .patientimg {
+    padding-left: 2%;
   }
   .ri-eye-line {
     font-size: 24px;
