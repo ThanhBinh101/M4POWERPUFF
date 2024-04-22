@@ -52,12 +52,9 @@
     <section class = "displaybox">
         <div class = "textbox">
             <h2>Patient Information</h2>
-            <div class = "textboxIDDoc">
-                <h6>Patient ID*</h6>
-                <p id = "PatientID">{{patient.id}}</p>
-            </div>
+
             <h6>Name</h6>
-            <p id = "PatientName">{{patient.name}}</p>
+            <p style="color:#ff66b2" id = "PatientName">{{patient.name}}</p>
             <h6>Gender</h6>
             <p id = "PatientGender">{{patient.gender}}</p>
             <h6>Date of Birth</h6>
@@ -74,10 +71,6 @@
             <div style = "margin-top: 5%" class = 'newAppointment'>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Appointment">New Appointment</button>
             </div>
-            
-            <div style = "margin-top: 5%" class = 'newRegister'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Register">Register for testing</button>
-            </div>
 
             <div style = "margin-top: 5%" class = 'testingResult'>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Result">Testing Result</button>
@@ -91,7 +84,7 @@
         <div class = "textbox1">
             <h2>Medical History</h2>
         </div> 
-        <div class="table-wrapper">
+        <div class="table-wrapper" style="border-radius:28px;">
             <table class="table table-bordered custom-table">
                 <thead>
                     <tr class="table-danger">
@@ -110,15 +103,15 @@
                             <div class="modal fade" id="exampleModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ forloop.counter }}" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content" style="z-index: 1000;">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="exampleModalLabel{{ forloop.counter }}" style = "padding-top: 2%; text-align: center; ">Medical Record</h4>
+                                        <div class="modal-header" style="display: flex; justify-content: center; align-items: center;">
+                                            <h4 class="modal-title" id="exampleModalLabel{{ forloop.counter }}" style="color:#ff66b2; width: 100%; text-align: center; padding: 0 3rem; margin-left:2%;">Medical Record</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body prescriptionHistory">
-                                            <div class="basicinfo">
-                                                <h6 style = "text-align: left;">Status: {{ record.status }}</h6>
-                                                <h6 style = "text-align: left;">Revisit Day: {{ record.revisit }}</h6>
-                                                <h5 style = "text-align: center;"> Prescription History</h5>
+                                        <div class="modal-body prescriptionHistory" style="margin-top: -10px !important;">
+                                            <div class="basicinfo" style="margin-top: -10px;">
+                                                <h6 style = "text-align: left; margin-left:3%;">Status: {{ record.status }}</h6>
+                                                <h6 style = "text-align: left; margin-left:3%;">Revisit Day: {{ record.revisit }}</h6>
+                                                <h5 style = "text-align: center; color:#0487D9; margin-bottom:2%"> Prescription History</h5>
                                                 <div class="tablePrescription">
                                                     <table class="table table-bordered prescription-table">
                                                         <thead>
@@ -156,9 +149,6 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer prescriptionHistory">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
@@ -230,71 +220,6 @@
         </div>     
     </div>
            
-    
-    <div class="modal fade" id="Register" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                    <div class="modal-header registerModalHeader"d-flex justify-content-center align-items-center>
-                        <h4 class="modal-title">Testing Register</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                <div class="modal-body registerModalBody">
-                    <form method="POST" > {% csrf_token %}
-                        <input type="hidden" name="createnewrecord" value="form1">
-                        <div class="mb-3">
-                            <label class="form-label">Department</label>
-                            <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
-                                <option selected>Choose department</option>
-                                <option value="1">Tai</option>
-                                <option value="2">Mũi</option>
-                                <option value="3">Họng</option>
-                              </select>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Type of testing</label>
-                            <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
-                                <option selected>Choose type of testing</option>
-                                <option value="1">CT</option>
-                                <option value="2">MRI</option>
-                                <option value="3">Endoscopic</option>
-                              </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Time</label>
-                            <select class="form-select" style = "color: #ff66b2"; aria-label="Time"; max-height: 45px; overflow-y: auto;>
-                                <option selected>Choose time</option>
-                                <option value="1">07:00</option>
-                                <option value="2">07:30</option>
-                                <option value="3">08:00</option>
-                                <option value="3">08:30</option>
-                                <option value="3">09:00</option>
-                                <option value="3">09:30</option>
-                                <option value="3">10:00</option>
-                                <option value="3">10:30</option>
-                                <option value="3">11:00</option>
-                                <option value="3">11:30</option>
-                                <option value="3">14:00</option>
-                                <option value="3">14:30</option>
-                                <option value="3">15:00</option>
-                                <option value="3">15:30</option>
-                                <option value="3">16:00</option>
-                                <option value="3">16:30</option>
-                                <option value="3">17:00</option>
-                                <option value="3">17:30</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="modal-footer registerModalFooter" style = "background-color: rgba(4, 135, 217, 0.5);">
-                    <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>  
-        </div>
-    </div>
 
     </div>
     </div>
