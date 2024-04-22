@@ -38,6 +38,12 @@ class Patient(Information):
         dbconn = connectDBPatient()
         dbconn.push(patient.to_dict())
 
+    @staticmethod
+    def AddAPM(patientid, department, time):
+        apm = Appointment(patientid, department, time)
+        dbconn = connectDBAppointment()
+        dbconn.push(apm)
+
 class MedicalRecord:
     def __init__(self, diagnose, status, revisit):
         self.diagnose = diagnose
@@ -201,6 +207,9 @@ class EquipmentManager(Information):
             del s
         del self
 
+class Testing():
+    def __init__(Department)
+
 class Nurse(Information):
     def __init__(self, name, email, password, dob, department, level, years):
         super.__init__(self, name, email, password, dob)
@@ -248,12 +257,11 @@ class Operator(Information):
         connectDBAppointment(apmid).delete()
 
 class Job():
-    def __init__(self, department, role, person, startTime, endTime, shift, position):
+    def __init__(self, department, role, person, weekday, startTime, endTime, shift, position):
         self.department = department
         self.role = role
         self.person = person
-        self.startTime = startTime
-        self.endTime = endTime
+        self.weekday = weekday
         self.shift = shift
         self.position = position
 
@@ -262,36 +270,16 @@ class Job():
             "Department": self.department,
             "Role": self.role,
             "Person": self.person,
-            "StartTime": self.startTime,
-            "EndTime": self.endTime,
+            "Weekday": self.weekday,
             "Shift": self.shift,
             "Position": self.position
         }
 
     @staticmethod
-    def to_dict(department, role, person, startTime, endTime, shift, position):
-        return {
-            "Department": department,
-            "Role": role,
-            "Person": person,
-            "StartTime": startTime,
-            "EndTime": endTime,
-            "Shift": shift,
-            "Position": position
-        }
-
-    @staticmethod
-    def AddJob(department, role, person, startTime, endTime, shift, position):
-        job = Job(department, role, person, startTime, endTime, shift, position)
+    def AddJob(department, role, person, weekday, shift, position):
+        job = Job(department, role, person, weekday, shift, position)
         dbconn = connectDBJob()
         dbconn.push(job.to_dict())
-
-    @staticmethod
-    def EditJob(jobid, department, role, person, startTime, endTime, shift, position):
-        dbconn = connectDBJob(jobid)
-        dbconn.update( {
-            Job.to_dict(department, role, person, startTime, endTime, shift, position)
-        })
 
     @staticmethod
     def DeleteJob(jobid):
@@ -342,5 +330,5 @@ class Admin(Information):
     @staticmethod
     def DeleteOperator(id):
         connectDBOperator(id).delete()
-
+    
 
