@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.apps import apps
 
-from .database import *
+from database import *
 
 from datetime import date
 from datetime import datetime, timedelta
@@ -38,6 +38,12 @@ class Patient(Information):
         patient = Patient(name, email, password, dob, gender)
         dbconn = connectDBPatient()
         dbconn.push(patient.to_dict())
+
+    @staticmethod
+    def AddAPM(patientid, department, time):
+        apm = Appointment(patientid, department, time)
+        dbconn = connectDBAppointment()
+        dbconn.push(apm)
 
 class MedicalRecord:
     def __init__(self, diagnose, status, revisit, apmid):
@@ -213,12 +219,72 @@ class EquipmentManager(Information):
             del s
         del self
 
+class Test():
+    def __init__(self, patientid, doctorid, department, kind):
+        self.patientid = patientid
+        self.doctorid = doctorid
+        self.department = department
+        self.kind = kind
+        self.status = "notstarted"
+
+    def to_dict(self):
+        return {
+            "patientid": self.patientid,
+            "doctorid": self.doctorid,
+            "department": self.department,
+            "kind": self.kind
+        }
+
+    @staticmethod
+    def AddTest(patientid, doctorid, department, kind):
+        conn = connectDBTest()
+        test = Test(patientid, doctorid, department, kind)
+        conn.push(test.to_dict())
+
+    @staticmethod
+    def InProcess(testid, nurseid):
+        conn1 = connectDBTest("notstarted", testid)
+        conn2 = connectDBTest("inprocess")
+        conn1.update({
+            "status": "inprocess",         
+            "nurseid": nurseid
+        })
+        conn2.push(conn1.get())
+        conn1.delete()
+
+    @staticmethod
+    def AddResult(testid, result):
+        conn1 = connectDBTest("inprocess", testid)
+        conn2 = connectDBTest("done", testid)
+        conn1.update({
+            "status": "done",
+            "result": result
+        })
+        conn2.push(conn1.get())
+        conn1.delete()
+
+    @staticmethod
+    def CancelProcess(testid):
+        conn1 = connectDBTest("inprocess", testid)
+        conn2 = connectDBTest("notstarted")
+        conn1.update({
+            "status": "notstarted"
+        })
+        conn2.push(conn1.get())
+        conn1.delete()
+
+    @staticmethod
+    def EraseProcess(testid):
+        conn1 = connectDBTest("notstarted", testid)
+        conn1.delete()
+
+
 class Nurse(Information):
     def __init__(self, name, email, password, dob, department, level, years):
         super().__init__(self, name, email, password, dob)
         self.department = department
         self.level = level
-        self.years = years
+        self.yearưs = years
     
     def to_dict(self):
         return super() + {
@@ -288,12 +354,11 @@ class Operator(Information):
         connectDBAppointment(apmid).delete()
 
 class Job():
-    def __init__(self, department, role, person, startTime, endTime, shift, position):
+    def __init__(self, department, role, person, weekday, startTime, endTime, shift, position):
         self.department = department
         self.role = role
         self.person = person
-        self.startTime = startTime
-        self.endTime = endTime
+        self.weekday = weekday
         self.shift = shift
         self.position = position
 
@@ -302,36 +367,16 @@ class Job():
             "Department": self.department,
             "Role": self.role,
             "Person": self.person,
-            "StartTime": self.startTime,
-            "EndTime": self.endTime,
+            "Weekday": self.weekday,
             "Shift": self.shift,
             "Position": self.position
         }
 
     @staticmethod
-    def to_dict(department, role, person, startTime, endTime, shift, position):
-        return {
-            "Department": department,
-            "Role": role,
-            "Person": person,
-            "StartTime": startTime,
-            "EndTime": endTime,
-            "Shift": shift,
-            "Position": position
-        }
-
-    @staticmethod
-    def AddJob(department, role, person, startTime, endTime, shift, position):
-        job = Job(department, role, person, startTime, endTime, shift, position)
+    def AddJob(department, role, person, weekday, shift, position):
+        job = Job(department, role, person, weekday, shift, position)
         dbconn = connectDBJob()
         dbconn.push(job.to_dict())
-
-    @staticmethod
-    def EditJob(jobid, department, role, person, startTime, endTime, shift, position):
-        dbconn = connectDBJob(jobid)
-        dbconn.update( {
-            Job.to_dict(department, role, person, startTime, endTime, shift, position)
-        })
 
     @staticmethod
     def DeleteJob(jobid):
@@ -382,5 +427,5 @@ class Admin(Information):
     @staticmethod
     def DeleteOperator(id):
         connectDBOperator(id).delete()
-
+    
 
