@@ -1,0 +1,227 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+    text-decoration: none;
+  }
+  header {
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 33px 9%;
+    background: #F2CED8;
+    border-radius: 20px 20px 0 0;
+  }
+  body {
+    background-color: white;
+  }
+  .logo-name {
+    float: left
+  }
+  .logo-name img {
+    max-width: 55px;
+    float: left;
+    margin: 0 10px 0 0;
+  }
+  .logo-name a {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0487d9;
+    text-decoration: none;
+  }
+  .navlist {
+    display: flex;
+    margin-top: 15px;
+  }
+  .navlist a{
+    color: #0487d9;
+    margin-left: 60px;
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all .55s ease;
+    text-decoration: none;
+  }
+  .navlist a:hover{
+    border-bottom: 2px solid #0487d9;
+  }
+  header .btn-primary {
+    font-size: 20px;
+    margin-right: 25px;
+    background-color: #ff66b2;
+    border-color: #ff66b2;
+    color: white;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    --bs-btn-padding-x: 1rem;
+  }
+  header button:hover {
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
+  }
+  header .btn-primary a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px
+  }
+  section {
+    padding: 0 2%;
+  }
+  .displaybox {
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    background-color: rgba(4, 135, 217, 0.3);
+    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+    border-radius: 47px;
+    padding: 20px;
+    margin: 20px;
+  }
+  .textbox {
+    line-height: 0.75cm;
+    display: block;
+  }
+  .textbox h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 5%;
+  }
+  .textbox p {
+    border-bottom: 2px solid black;
+    font-size: 16px;
+  }
+  .textbox h6{
+    font-size: 20px;
+  }
+  .textboxIDDoc h6{
+    color: #ff66b2;
+    font-size: 20px;
+  }
+  .textboxIDDoc p{
+    border-bottom: 2px solid black;
+    font-size: 16px;
+  }
+  .doctorimg {
+    margin-top: 20%;
+    margin-left: 35%;
+  }
+  .doctorimg {
+    margin-top: 20%; 
+    margin-left: auto; 
+    margin-right: auto; 
+  }
+  
+  .doctorbutton {
+    padding-top: 5%;
+    padding-left: 29%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .doctorbutton a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 20px;
+  }
+  
+  .doctorbutton button {
+    background-color: #ff66b2;
+    width: 75%;
+    border: white;
+    margin: 20px 0;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+  }
+  
+  .doctorbutton button:hover {
+    --bs-btn-hover-bg: rgb(205,102,168);
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
+  }
+  .heading{
+    color: #0487d9; 
+    font-size: 24px; 
+    font-family: 'Poppins', sans-serif; 
+    text-align: center;
+    margin-top: 200px;
+  }
+  .timetable{
+    background-color: #F2CED8;
+    padding:20px;
+    border-radius: 47px;
+    margin: 20px;
+    
+   }
+   .timetable table{
+    width:100%;
+    border-collapse: collapse;
+   }
+   .timetable th, .timetable td{
+    border: 1px solid #0487d9;
+    border-top:none;
+    padding: 10px;
+    position: relative;
+    max-width: 100px;
+   }
+   .timetable th{
+    background-color: #F2CED8;
+    color:#ff66b2;
+  
+   }
+   .empty-cell{
+    background-color:none;
+   }
+   .button--submit{
+    float: right;
+    margin-right: 150px;
+    padding:8px 30px;
+    background-color: #ff66b2;
+    color: #fff;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+  
+   }
+   .name {
+    padding: 8px;
+    border-color: #333;
+    border-style: solid;
+    background-color:#F2CED8;
+    color: #333;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    border-radius: 40px;
+    font-family: 'Poppins', sans-serif;
+  
+   }
+   .Doctor{
+    color: #ff66b2; 
+    font-size: 18px; 
+    font-family: 'Poppins', sans-serif; 
+    text-align: left;
+   
+   }
+  .room{
+    background-color:#F2CED8;
+    width:40%;
+    border: none;
+    border-bottom: 1px solid;
+    font-family: 'Poppins', sans-serif;
+    
+    
+  }
+  .title{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+  }
