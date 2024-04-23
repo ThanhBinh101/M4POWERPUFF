@@ -1,0 +1,309 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+    list-style: none;
+    text-decoration: none;
+  }
+  header {
+    position: flex;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 9%;
+    background: #F2CED8;
+  }
+  body {
+    background-color: white;
+  }
+  .logo-name {
+    float: left
+  }
+  .logo-name img {
+    max-width: 55px;
+    float: left;
+    margin: 0 10px 0 0;
+  }
+  .logo-name a {
+    font-family: 'Baloo 2';
+    font-size: 30px;
+    font-weight: 700;
+    color: #0487d9;
+    text-decoration: none;
+  }
+  .navlist {
+    display: flex;
+    margin-top: 15px;
+  }
+  .navlist a{
+    color: #0487d9;
+    margin-left: 60px;
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all .55s ease;
+    text-decoration: none;
+  }
+  .navlist a:hover{
+    border-bottom: 2px solid #0487d9;
+  }
+  header .btn-primary {
+    font-size: 20px;
+    margin-right: 25px;
+    background-color: #ff66b2;
+    border-color: #ff66b2;
+    color: white;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    --bs-btn-padding-x: 1rem;
+  }
+  header button:hover {
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
+  }
+  header .btn-primary a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px
+  }
+  section {
+    padding: 0 2%;
+  }
+  .displaybox {
+    height: 80%;
+    width: 80%;
+    min-height: 75vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    gap: 2rem;
+    background-color: rgba(4, 135, 217, 0.3);
+    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+    border-radius: 47px;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: -5%;
+  }
+  .textbox {
+    line-height: 0.75cm;
+    display: block;
+    margin-left: 8%;
+    margin-top: 5%;
+  }
+  .textbox h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 10%;
+    margin-bottom: 5%;
+  }
+  .textbox p {
+    border-bottom: 2px solid black;
+    font-size: 16px;
+  }
+  .textbox h6{
+    font-size: 20px;
+  }
+
+  .patientinfo {
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+    margin-left: 30%;
+}
+
+  .patientimg img {
+    border: 2px solid black;
+    border-radius: 47px;
+    width: 60%;
+    height: 60%;
+}
+
+.newAppointment .btn-primary,
+.newRegister .btn-primary,
+.testingResult .btn-primary {
+    font-size: 16px;
+    background-color: #0487D9;
+    border-color: #D8D2FC;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 200px;
+    margin-left: 3%;
+}
+
+.newAppointment .btn-primary {
+    background-color: #ff66b2;
+    border-color: #0487D9;
+}
+
+.newAppointment .btn-primary:hover {
+  background-color: #F2CED8;
+  border-color: #F2CED8;
+  font-size: 16px;
+}
+.testingResult .btn-primary:hover {
+  background-color: #D8D2FC;
+  border-color: #D8D2FC;
+  font-size: 16px;
+}
+
+.modal-dialog .modal-content .modal-header,
+.modal-dialog .modal-content .modal-body,
+.modal-dialog .modal-content .modal-footer {
+border: none; 
+}
+
+.appointmentModalHeader.modal-content, .registerModalHeader .modal-content {
+  width: 240px; 
+  height: 360px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.appointmentModalHeader, .registerModalHeader, .successHeader {
+  background-color: rgba(242, 206, 216, 0.5);
+  text-align: center;
+}
+.appointmentModalHeader .modal-title, .registerModalHeader .modal-title{
+  font-family: 'Baloo 2';
+  font-size: 30px;
+  color: #0487d9;
+  width: 100%;
+  padding-left: 5%;
+}
+
+.appointmentModalBody, .registerModalBody {
+  background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+}
+
+.appointmentModalFooter .btn-primary, .registerModalFooter .btn-primary {
+  font-size: 12px;
+  background-color: #ff66b2;
+  border-color: #0487D9;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  text-decoration: none;
+  color: white;
+  font-style: normal;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.appointmentModalFooter .btn-primary:hover, .registerModalFooter .btn-primary:hover {
+  background-color: #F2CED8;
+  border-color: #F2CED8;
+}
+
+.appointmentModalFooter .btn-secondary, .registerModalFooter .btn-secondary {
+    font-size: 12px;
+    background-color: rgba(242, 206, 216, 0.8);
+    border-color: white;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color:  black;
+    font-style: normal;
+    width: 100px;
+  }
+
+  .appointmentModalFooter .btn-secondary:hover, .registerModalFooter .btn-secondary:hover {
+    font-size: 13px;
+    background-color: rgba(4, 135, 217, 0.3);
+  }
+
+  .successBody {
+    color:#ff66b2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .successimg img {
+    width: 20%;
+    height: 20%;
+}
+
+
+.MedicalRecord {
+  height: 80%;
+  width: 80%;
+  min-height: 75vh;
+  position: relative;
+  background-color: rgba(4, 135, 217, 0.3);
+  border-radius: 47px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 2%;
+}
+
+.textbox1 {
+  line-height: 0.75cm;
+  display: block;
+  margin-left: 3%;
+  margin-bottom: 3%;
+}
+
+.MedicalRecord h2 {
+  padding-top: 5%;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: 10%;
+}
+
+.MedicalRecord a {
+  text-decoration: none;
+}
+
+
+.custom-table {
+  border-collapse: collapse;
+  width: 100%; 
+}
+.custom-table th,
+.custom-table td {
+  padding: 10px !important; 
+}
+
+.align {
+  text-align: center;
+  justify-content: center;
+}
+.table-wrapper {
+  margin-left: 3%;
+  max-height: 450px; 
+  overflow-y: auto;
+  width: 93%;
+}
+
+.ri-eye-line {
+  font-size: 24px;
+  transition: all 0.55s ease;
+}
+.ri-eye-line:hover {
+  font-size: 26px; 
+}
+
+.table-wrapper button {
+  color: #ff66b2;
+  background-color: transparent;
+  border-width: 0;
+}
+
+.tablePrescription {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+

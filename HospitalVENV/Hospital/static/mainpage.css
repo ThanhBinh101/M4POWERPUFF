@@ -15,7 +15,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 33px 9%;
+    padding: 20px 9%;
     background: #F2CED8;
 }
 body {
@@ -32,6 +32,7 @@ body {
 .logo-name a {
     font-size: 30px;
     font-weight: 700;
+    font-family: 'Baloo 2';
     color: #0487d9;
     text-decoration: none;
 }
@@ -60,12 +61,12 @@ body {
     grid-template-columns: repeat(2, 0.5fr);
     align-items: center;
     gap: 2rem;
+    color: rgba(0,0,0,0.5);
 }
 section {
     padding: 0 10%;
 }
 .title-text h1 {
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 56px;
