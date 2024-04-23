@@ -38,6 +38,8 @@ def loginpage(request):
                 return redirect('patientpage', userKey)
             elif "Doctor" == userRole:
                 return redirect('doctorpage', userKey)
+            elif "Nurse" == userRole:
+                return redirect('nursepage', userKey)
             elif "MedicineManager" == userRole:
                 return redirect('medicinemanagerpage', userKey)
             elif "EquipmentManager" == userRole:
@@ -71,6 +73,15 @@ def checkValidate(gmail, password):
         if value.get("Gmail") == gmail and value.get("Password") == password:
             userKey = key
             userRole = "Doctor"
+            return True
+        
+    tableUser = connectDBNurse().get()
+    if tableUser is None:
+        return False
+    for key, value in tableUser.items():
+        if value.get("Gmail") == gmail and value.get("Password") == password:
+            userKey = key
+            userRole = "Nurse"
             return True
     
     tableUser = connectDBMedicineManager().get()
@@ -144,6 +155,23 @@ def get_doctor_info(ID):
                 'appointments': get_doctor_appointments(key)
             })
             return docInfo[0]
+    return None
+
+def get_nurse_info(ID):
+    nurseInfo = []
+    tableUser = connectDBNurse().get()
+    for key, value in tableUser.items():
+        if key == ID:
+            nurseInfo.append({
+                'id': key,
+                'name': value.get("Name"),
+                'department': value.get("Department"),
+                'gmail':value.get("Gmail"),
+                'level': value.get("Level"),
+                'year': value.get("Years"),
+                'dateofbirth': value.get("Date of Birth")
+            })
+            return nurseInfo[0]
     return None
 
 
@@ -221,6 +249,10 @@ def doctorpage(request, ID):
     docInfo = get_doctor_info(ID)
     return render(request, 'doctorpage.html', {'doctor': docInfo})
 
+def nursepage(request, ID):
+    nurseInfo = get_nurse_info(ID)
+    return render(request, 'nursepage.html', {'nurse': nurseInfo})
+
 
 def medicinemanagerpage(request, ID):
     managerInfo = get_medicinemanager_info(ID)
@@ -280,12 +312,16 @@ def patientdoctorview(request, docid, patid, appointKey):
         return render(request, 'patientdoctorview.html', {'patient': patients, 'docid': docid, 'medicines': medicines})
     
     if request.method == "POST":
-        form_check = request.POST.get('createnewrecord')
+        form_check = request.POST.get('createnewrecord-testing')
         if form_check == 'form1':
             diagnose = request.POST.get('patientdiagnose')
             status = request.POST.get('patientstatus')
             revisit = request.POST.get('revisitday')
             Doctor.AddMedicalRecord(patid, diagnose, status, revisit, appointKey)
+        elif form_check == 'form2':
+            department = request.POST.get('department')
+            typetesting = request.POST.get('typetesting')
+            time = request.POST.get('testingtime')
         else:
             medicineList = request.POST.get('medicinelist')
             note = request.POST.get('patientnote')

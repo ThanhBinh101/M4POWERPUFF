@@ -215,7 +215,7 @@ class EquipmentManager(Information):
 
 class Nurse(Information):
     def __init__(self, name, email, password, dob, department, level, years):
-        super.__init__(self, name, email, password, dob)
+        super().__init__(self, name, email, password, dob)
         self.department = department
         self.level = level
         self.years = years

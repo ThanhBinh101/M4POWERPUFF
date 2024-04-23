@@ -89,7 +89,7 @@
                             </div>
                         <div class="modal-body newRecord">
                             <form method="POST" > {% csrf_token %}
-                                <input type="hidden" name="createnewrecord" value="form1">
+                                <input type="hidden" name="createnewrecord-testing" value="form1">
                                 <div class="mb-3">
                                     <label class="form-label">Diagnose</label>
                                     <input class="form-control" name="patientdiagnose" placeholder="" required>
@@ -120,21 +120,21 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                         <div class="modal-body registerModalBody">
-                            <form method="POST" > {% csrf_token %}
-                                <input type="hidden" name="createnewrecord" value="form1">
+                            <form id="testingRegister" method="POST" > {% csrf_token %}
+                                <input type="hidden" name="createnewrecord-testing" value="form2">
                                 <div class="mb-3">
                                     <label class="form-label">Department</label>
-                                    <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                                    <select class="form-select" name="department" style = "color: #ff66b2"; aria-label="Department" required>
                                         <option selected>Choose department</option>
                                         <option value="1">Tai</option>
                                         <option value="2">Mũi</option>
                                         <option value="3">Họng</option>
-                                      </select>
+                                    </select>
                                 </div>
                                 
                                 <div class="mb-3">
                                     <label class="form-label">Type of testing</label>
-                                    <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                                    <select class="form-select" name="typetesting" style = "color: #ff66b2"; aria-label="Department" required>
                                         <option selected>Choose type of testing</option>
                                         <option value="1">CT</option>
                                         <option value="2">MRI</option>
@@ -144,7 +144,7 @@
         
                                 <div class="mb-3">
                                     <label class="form-label">Time</label>
-                                    <select class="form-select" style = "color: #ff66b2"; aria-label="Time"; max-height: 45px; overflow-y: auto;>
+                                    <select class="form-select" name="testingtime" style = "color: #ff66b2"; aria-label="Time" required>
                                         <option selected>Choose time</option>
                                         <option value="1">07:00</option>
                                         <option value="2">07:30</option>
@@ -170,7 +170,7 @@
                         </div>
         
                         <div class="modal-footer registerModalFooter">
-                            <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
+                            <button id="sumbitRegister" type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>  
@@ -468,5 +468,11 @@
     document.getElementById("submitButton").addEventListener("click", function() {
         document.getElementById("prescriptionForm").submit();
     });
+
+    document.getElementById("sumbitRegister").addEventListener("click", function() {
+        document.getElementById("testingRegister").submit();
+    });
+
+
 </script>
 </html>

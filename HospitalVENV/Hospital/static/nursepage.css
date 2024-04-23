@@ -95,14 +95,13 @@
     line-height: 0.75cm;
     display: block;
     margin-left: 8%;
-    margin-top: 5%;
   }
   .textbox h2 {
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    margin-top: 10%;
-    margin-bottom: 5%;
+    margin-top: 5%;
+    margin-bottom: 3%;
   }
   .textbox p {
     border-bottom: 2px solid black;
@@ -112,131 +111,51 @@
     font-size: 20px;
   }
 
-  .patientinfo {
+  .nurseinfo {
     align-items: center;
     justify-content: center;
     margin-top: 15%;
     margin-left: 30%;
 }
 
-  .patientimg img {
+  .nurseimg img {
     border: 2px solid black;
     border-radius: 47px;
     width: 60%;
     height: 60%;
 }
 
-.newAppointment .btn-primary,
-.newRegister .btn-primary,
-.testingResult .btn-primary {
-    font-size: 16px;
-    background-color: #0487D9;
-    border-color: #D8D2FC;
-    text-transform: uppercase;
-    transition: all 0.55s ease;
-    text-decoration: none;
-    color: white;
-    font-style: normal;
-    width: 200px;
-    margin-left: 3%;
-}
-
-.newAppointment .btn-primary {
-    background-color: #ff66b2;
-    border-color: #0487D9;
-}
-
-.newAppointment .btn-primary:hover {
-  background-color: #F2CED8;
-  border-color: #F2CED8;
+.testingHistory button {
   font-size: 16px;
-}
-.testingResult .btn-primary:hover {
-  background-color: #D8D2FC;
-  border-color: #D8D2FC;
-  font-size: 16px;
-}
-
-.modal-dialog .modal-content .modal-header,
-.modal-dialog .modal-content .modal-body,
-.modal-dialog .modal-content .modal-footer {
-border: none; 
-}
-
-.appointmentModalHeader.modal-content, .registerModalHeader .modal-content {
-  width: 240px; 
-  height: 360px; 
-  display: flex;
-  flex-direction: column;
-}
-
-.appointmentModalHeader, .registerModalHeader, .successHeader {
-  background-color: rgba(242, 206, 216, 0.5);
-  text-align: center;
-}
-.appointmentModalHeader .modal-title, .registerModalHeader .modal-title{
-  font-family: 'Baloo 2';
-  font-size: 30px;
-  color: #0487d9;
-  width: 100%;
-  padding-left: 5%;
-}
-
-.appointmentModalBody, .registerModalBody {
-  background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
-}
-
-.appointmentModalFooter .btn-primary, .registerModalFooter .btn-primary {
-  font-size: 12px;
   background-color: #ff66b2;
-  border-color: #0487D9;
+  border-color: #D8D2FC;
   text-transform: uppercase;
   transition: all 0.55s ease;
   text-decoration: none;
   color: white;
   font-style: normal;
-  width: 100px;
-  justify-content: center;
-  align-items: center;
+  width: 200px;
+  margin-left: 5%;
+}
+.Schedule button {
+  font-size: 16px;
+  background-color: #0487D9;
+  border-color: #D8D2FC;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  text-decoration: none;
+  color: white;
+  font-style: normal;
+  width: 200px;
+  margin-left: 5%;
 }
 
-.appointmentModalFooter .btn-primary:hover, .registerModalFooter .btn-primary:hover {
+.testingHistory button:hover, .Schedule button:hover {
   background-color: #F2CED8;
   border-color: #F2CED8;
 }
 
-.appointmentModalFooter .btn-secondary, .registerModalFooter .btn-secondary {
-    font-size: 12px;
-    background-color: rgba(242, 206, 216, 0.8);
-    border-color: white;
-    text-transform: uppercase;
-    transition: all 0.55s ease;
-    text-decoration: none;
-    color:  black;
-    font-style: normal;
-    width: 100px;
-  }
-
-  .appointmentModalFooter .btn-secondary:hover, .registerModalFooter .btn-secondary:hover {
-    font-size: 13px;
-    background-color: rgba(4, 135, 217, 0.3);
-  }
-
-  .successBody {
-    color:#ff66b2;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-  }
-
-  .successimg img {
-    width: 20%;
-    height: 20%;
-}
-
-
-.MedicalRecord {
+.TestingAppoint {
   height: 80%;
   width: 80%;
   min-height: 75vh;
@@ -255,7 +174,7 @@ border: none;
   margin-bottom: 3%;
 }
 
-.MedicalRecord h2 {
+.TestingAppoint h2 {
   padding-top: 5%;
   font-style: normal;
   font-weight: 600;
@@ -263,47 +182,55 @@ border: none;
   margin-top: 10%;
 }
 
-.MedicalRecord a {
+.table-wrapper {
+  overflow-y: auto;
+  max-height: 400px;
+  width: 97%;
+  padding-left: 3%;
+}
+.table-wrapper a {
   text-decoration: none;
 }
 
-
-.custom-table {
-  border-collapse: collapse;
-  width: 100%; 
-}
 .custom-table th,
 .custom-table td {
-  padding: 10px !important; 
+  padding: 15px !important; /* Adjust the padding to make the cells bigger */
+  text-align: center; /* Center align content in cells */
 }
 
-.align {
-  text-align: center;
-  justify-content: center;
-}
-.table-wrapper {
-  margin-left: 3%;
-  max-height: 450px; 
-  overflow-y: auto;
-  width: 93%;
-}
-
-.ri-eye-line {
+.ri-check-fill {
+  margin-right: 10%;
   font-size: 24px;
+  color: #73e635;
   transition: all 0.55s ease;
 }
-.ri-eye-line:hover {
-  font-size: 26px; 
+.ri-close-fill {
+  font-size: 24px;
+  color: #B80000;
+  transition: all 0.55s ease;
 }
-
-.table-wrapper button {
+.ri-user-search-line {
+  font-size: 24px;
   color: #ff66b2;
-  background-color: transparent;
-  border-width: 0;
+  transition: all 0.55s ease;
+}
+.bx-alarm-add {
+  margin-left: 10%;
+  font-size: 20px;
+  color: #ff66b2;
+  transition: all 0.55s ease;
+}
+.bx-alarm-add:hover {
+  font-size: 21px;
+}
+.ri-user-search-line:hover {
+  font-size: 25px;
+}
+.ri-check-fill:hover{
+  font-size: 25px;
+}
+.ri-close-fill:hover{
+  font-size: 25px;
 }
 
-.tablePrescription {
-  padding-left: 2%;
-  padding-right: 2%;
-}
 

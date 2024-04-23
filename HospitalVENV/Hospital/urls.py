@@ -12,6 +12,8 @@ urlpatterns = [
     path('doctor/patientinfo/<str:docid>/<str:patid>/<str:appointKey>', views.patientdoctorview, name = "patientdoctorview"),
     path('doctor/history/<str:id>', views.doctorhistory, name = "doctorhistory"),
     
+    path('nurse/<str:ID>', views.nursepage, name = "nursepage"),
+    
     path('patient/<str:ID>', views.patientpage, name = "patientpage"),
     path('medicinemanager/<str:ID>', views.medicinemanagerpage, name = "medicinemanagerpage"),
     path('equipmentmanager/<str:ID>', views.equipmentmanagerpage, name = "equipmentmanagerpage"),
