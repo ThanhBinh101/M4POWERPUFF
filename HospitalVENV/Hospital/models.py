@@ -220,11 +220,11 @@ class EquipmentManager(Information):
         del self
 
 class Test():
-    def __init__(self, patientid, doctorid, department, kind):
+    def __init__(self, patientid, doctorid, department, type):
         self.patientid = patientid
         self.doctorid = doctorid
         self.department = department
-        self.kind = kind
+        self.type = type
         self.status = "notstarted"
 
     def to_dict(self):
@@ -232,13 +232,13 @@ class Test():
             "patientid": self.patientid,
             "doctorid": self.doctorid,
             "department": self.department,
-            "kind": self.kind
+            "type": self.type
         }
 
     @staticmethod
-    def AddTest(patientid, doctorid, department, kind):
+    def AddTest(patientid, doctorid, department, type):
         conn = connectDBTest()
-        test = Test(patientid, doctorid, department, kind)
+        test = Test(patientid, doctorid, department, type)
         conn.push(test.to_dict())
 
     @staticmethod
