@@ -321,7 +321,7 @@ def patientdoctorview(request, docid, patid, appointKey):
         elif form_check == 'form2':
             department = request.POST.get('department')
             typetesting = request.POST.get('typetesting')
-            time = request.POST.get('testingtime')
+            Test.AddTest(patid, docid, department, typetesting)
         else:
             medicineList = request.POST.get('medicinelist')
             note = request.POST.get('patientnote')
