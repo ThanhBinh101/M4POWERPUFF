@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.apps import apps
 
-from database import *
+from .database import *
 
 from datetime import date
 from datetime import datetime, timedelta
@@ -255,11 +255,13 @@ class Test():
     @staticmethod
     def AddResult(testid, result):
         conn1 = connectDBTest("inprocess", testid)
-        conn2 = connectDBTest("done", testid)
+        conn2 = connectDBPatientTestResult(conn1.child("patientid").get())
         conn1.update({
-            "status": "done",
+            "date": date.today().strftime('%d/%m/%Y'),
             "result": result
         })
+        conn1.child("status").delete()
+        conn1.child("patientid").delete()
         conn2.push(conn1.get())
         conn1.delete()
 
@@ -270,6 +272,7 @@ class Test():
         conn1.update({
             "status": "notstarted"
         })
+        conn1.child("nurseid").delete()
         conn2.push(conn1.get())
         conn1.delete()
 
