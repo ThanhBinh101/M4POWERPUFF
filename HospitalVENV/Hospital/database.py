@@ -21,6 +21,10 @@ def connectDBNurse(key = ""):
     connect()
     return db.reference("Nurse/{}".format(key))
 
+def connectDBTest(key1 = "notstarted", key2 = ""):
+    connect()
+    return db.reference("Test/{}/{}".format(key1, key2))
+
 def connectDBMedicineManager(key = ""):
     connect()
     return db.reference("MedicineManager/{}".format(key))

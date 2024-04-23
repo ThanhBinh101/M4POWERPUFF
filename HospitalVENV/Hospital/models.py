@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.apps import apps
 
-from .database import *
+from database import *
 
 from datetime import date
 
@@ -207,8 +207,65 @@ class EquipmentManager(Information):
             del s
         del self
 
-class Testing():
-    def __init__(Department)
+class Test():
+    def __init__(self, patientid, doctorid, department, kind):
+        self.patientid = patientid
+        self.doctorid = doctorid
+        self.department = department
+        self.kind = kind
+        self.status = "notstarted"
+
+    def to_dict(self):
+        return {
+            "patientid": self.patientid,
+            "doctorid": self.doctorid,
+            "department": self.department,
+            "kind": self.kind
+        }
+
+    @staticmethod
+    def AddTest(patientid, doctorid, department, kind):
+        conn = connectDBTest()
+        test = Test(patientid, doctorid, department, kind)
+        conn.push(test.to_dict())
+
+    @staticmethod
+    def InProcess(testid, nurseid):
+        conn1 = connectDBTest("notstarted", testid)
+        conn2 = connectDBTest("inprocess")
+        conn1.update({
+            "status": "inprocess",         
+            "nurseid": nurseid
+        })
+        conn2.push(conn1.get())
+        conn1.delete()
+
+    @staticmethod
+    def AddResult(testid, result):
+        conn1 = connectDBTest("inprocess", testid)
+        conn2 = connectDBTest("done", testid)
+        conn1.update({
+            "status": "done",
+            "result": result
+        })
+        conn2.push(conn1.get())
+        conn1.delete()
+
+    @staticmethod
+    def CancelProcess(testid):
+        conn1 = connectDBTest("inprocess", testid)
+        conn2 = connectDBTest("notstarted")
+        conn1.update({
+            "status": "notstarted"
+        })
+        conn2.push(conn1.get())
+        conn1.delete()
+
+    @staticmethod
+    def EraseProcess(testid):
+        conn1 = connectDBTest("notstarted", testid)
+        conn1.delete()
+
 
 class Nurse(Information):
     def __init__(self, name, email, password, dob, department, level, years):
