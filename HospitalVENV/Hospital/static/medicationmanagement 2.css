@@ -1,131 +1,343 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    list-style: none;
-    text-decoration: none;
-  }
-  header {
-    position: flex;
-    right: 0;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 33px 9%;
-    background: #F2CED8;
-    border-radius: 20px 20px 0 0;
-  }
-  body {
-    background-color: white;
-  }
-  .logo-name {
-    float: left
-  }
-  .logo-name img {
-    max-width: 55px;
-    float: left;
-    margin: 0 10px 0 0;
-  }
-  .logo-name a {
-    font-size: 30px;
-    font-weight: 700;
-    color: #0487d9;
-    text-decoration: none;
-  }
-  .navlist {
-    display: flex;
-    margin-top: 15px;
-  }
-  .navlist a{
-    color: #0487d9;
-    margin-left: 60px;
-    font-size: 15px;
-    font-weight: 600;
-    border-bottom: 2px solid transparent;
-    transition: all .55s ease;
-    text-decoration: none;
-  }
-  .navlist a:hover{
-    border-bottom: 2px solid #0487d9;
-  }
-  header .btn-primary {
-    font-size: 20px;
-    margin-right: 25px;
-    background-color: #ff66b2;
-    border-color: #ff66b2;
-    color: white;
-    text-transform: uppercase;
-    transition: all 0.55s ease;
-    --bs-btn-padding-x: 1rem;
-  }
-  header button:hover {
-    --bs-btn-hover-bg: whitesmoke transparent;
-    --bs-btn-hover-border-color: 1px solid whitesmoke;
-    transform: translateY(-8px);
-  }
-  header .btn-primary a{
-    color: white;
-    text-decoration: none;
-    font-size: 20px
-  }
-  section {
-    padding: 0 2%;
-  }
-  
-  .blue-background{
-    height: 90%;
-    width: 95%;
-    min-height: 75vh;
-    position: relative;
-    grid-template-columns: repeat(2, 0.5fr);
-    gap: 2rem;
-    background-color: rgba(4, 135, 217, 0.3);
-    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
-    border-radius: 47px;
-    margin: 2% auto 1%; /* Căn giữa theo chiều ngang và căn dưới */
-    justify-content: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins';
+  list-style: none;
+  text-decoration: none;
+}
+
+header {
+  position: flex;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 9%;
+  background: #F2CED8;
+}
+
+body {
+  background-color: white;
+}
+
+.logo-name {
+  float: left
+}
+
+.logo-name img {
+  max-width: 55px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+.logo-name a {
+  font-family: 'Baloo 2';
+  font-size: 30px;
+  font-weight: 700;
+  color: #0487d9;
+  text-decoration: none;
+}
+
+.navlist {
+  display: flex;
+  margin-top: 15px;
+}
+
+.navlist a {
+  color: #0487d9;
+  margin-left: 60px;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all .55s ease;
+  text-decoration: none;
+}
+
+.navlist a:hover {
+  border-bottom: 2px solid #0487d9;
+}
+
+header .btn-primary {
+  font-size: 20px;
+  margin-right: 25px;
+  background-color: #ff66b2;
+  border-color: #ff66b2;
+  color: white;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  --bs-btn-padding-x: 1rem;
+}
+
+header button:hover {
+  --bs-btn-hover-bg: whitesmoke transparent;
+  --bs-btn-hover-border-color: 1px solid whitesmoke;
+  transform: translateY(-8px);
+}
+
+header .btn-primary a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px
+}
+
+/*button*/
+.historyButton {
+  background-color: transparent;
+  border: none;
+}
+
+.addButton {
+  background-color: transparent;
+  border: none;
+  padding-left: 15px;
+}
+
+.removeButton {
+  background-color: transparent;
+  border: none;
+  padding-left: 15px;
+}
+
+/*medication-table*/
+.box {
+  position: relative;
+  z-index: 1;
+  padding-top: 1%;
+  height: 60px;
+  width: 1000px;
+}
+
+.boxTitle {
+  color: #F25EA3;
+  font-size: 26px;
+  font-weight: 500;
+  margin-left: 520px;
+}
+
+.scrollable-table-container {
+  width: 1300px;
+  background-color: #F2CED8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  z-index: 2;
+}
+
+.scrollable-table2 {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 1%;
+  margin-right: 1%;
+  width: 1200px;
+}
+
+.blue-background-container {
+  position: relative;
+  z-index: 0;
+  background-color: rgba(4, 135, 217, 0.3);
+  width: 1400px;
+  margin: auto;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border-radius: 15px;
+  padding-bottom: 1%;
+}
+
+.container {
+  position: relative;
+}
+
+.medication-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mthead {
+  border-bottom: 2px solid #1278B9;
+}
+
+.mtbody {
+  border-bottom: 2px solid rgba(4, 135, 217, 0.3);
+}
 
 
-  }
-  .heading{
-    color: #ff66b2; /* Màu chữ */
-    font-size: 24px; /* Kích thước chữ */
-    font-family: 'Poppins', sans-serif; /* Font chữ */
-    text-align:center;
-    padding-top: 40px;
-  }
-  .pink-background{
-    width: 95%; /* Chiều rộng của khung nhỏ */
-    height: 420px; /* Chiều cao của khung nhỏ */
-    background-color: #F2CED8; /* Màu nền hồng */
-    margin: 2% auto 1%;
-    border-radius: 47px;
-  }
-  .timetable{
-    background-color: #F2CED8;
-    padding:20px;
-    border-radius: 47px;
-    margin: 20px;
-   }
-   .timetable table{
-    width:100%;
-    border-collapse: collapse;
-   }
-   .timetable th, .timetable td{
-    border: 1px solid #0487d9;
-    border-top:none;
-    padding: 10px;
-    text-align: center;
-   }
-   .timetable th{
-    background-color: #F2CED8;
-    color:#ff66b2;
-  
-   }
-   .empty-cell{
-    background-color:none;
-   }
+.medication-table th,
+.medication-table td {
+  font-size: 18px;
+  padding: 8px;
+  text-align: center;
+}
+
+.medication-id-column {
+  width: 15%;
+  border-right: 2px solid #1278B9;
+  color: #F25EA3;
+  font-size: 20px !important;
+  font-weight: 500
+}
+
+.name-column {
+  width: 30%;
+  border-right: 2px solid #1278B9;
+  color: #F25EA3;
+  font-size: 20px !important;
+  font-weight: 500;
+}
+
+.import-date-column {
+  width: 15%;
+  border-right: 2px solid #1278B9;
+  color: #F25EA3;
+  font-size: 20px !important;
+  font-weight: 500;
+}
+
+.expire-date-column {
+  width: 15%;
+  border-right: 2px solid #1278B9;
+  color: #F25EA3;
+  font-size: 20px !important;
+  font-weight: 500;
+}
+
+.total-column {
+  width: 13%;
+  border-right: 2px solid #1278B9;
+  color: #F25EA3;
+  font-size: 20px !important;
+  font-weight: 500;
+}
+
+.pu-column {
+  width: 12%;
+}
+
+.mt-td {
+  border-right: 2px solid #1278B9;
+}
+
+/*history-table*/
+.table-responsive {
+  max-height: 500px;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hthead {
+  border-bottom: 2px solid #1278B9;
+}
+
+.htbody {
+  border-bottom: 2px solid rgba(4, 135, 217, 0.3);
+}
+
+.history-table th,
+.history-table td {
+  font-size: 18px;
+  padding: 8px;
+  text-align: center;
+}
+
+.time-col {
+  width: 20%;
+  border-right: 2px solid #1278B9;
+  color: #0487d9;
+  font-size: 20px !important;
+  font-weight: 500;
+}
+
+.number-col {
+  width: 15%;
+  border-right: 2px solid #1278B9;
+  color: #0487d9;
+  font-size: 20px !important;
+  font-weight: 500;
+}
+
+.reason-col {
+  width: 65%;
+  color: #0487d9;
+  font-size: 20px !important;
+  font-weight: 500;
+}
+
+.ht-td {
+  border-right: 2px solid #1278B9;
+}
+
+/*modal*/
+.modal-dialog .modal-content .modal-header,
+.modal-dialog .modal-content .modal-body,
+.modal-dialog .modal-content .modal-footer {
+  border: none !important;
+}
+
+.historyModalHeader.modal-content,
+.removeModalHeader.modal-content {
+  width: 240px;
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.historyModalHeader,
+.removeModalHeader,
+.successHeader {
+  background-color: rgba(242, 206, 216, 0.5);
+  text-align: center;
+}
+
+.historyModalHeader .modal-title,
+.removeModalHeader .modal-title {
+  font-family: 'Baloo 2';
+  font-size: 30px;
+  color: #0487d9;
+  width: 100%;
+}
+
+.historyModalBody,
+.removeModalBody {
+  background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+}
+
+#htmf {
+  background-color: rgba(4, 135, 217, 0.5);
+}
+
+#rtmf {
+  background-color: rgba(4, 135, 217, 0.5);
+}
+
+#successmc {
+  background-color: pink;
+}
+
+#successh {
+  background-color: pink;
+}
+
+#successb {
+  color: #ff66b2;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+
+#successf {
+  background-color: pink;
+  height: 40px;
+}
+
+.successimg img {
+  width: 20%;
+  height: 20%;
+}
