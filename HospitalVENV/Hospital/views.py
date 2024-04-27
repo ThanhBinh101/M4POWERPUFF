@@ -242,6 +242,10 @@ def patientpage(request, ID):
         context['from_history'] = True
     paInfo = get_patient_info(ID)
     context.update({'patient': paInfo})
+    
+    testResult = nurseHistory()
+    context['testResult'] = testResult
+    
     return render(request, 'patientpage.html', context)
 
 
@@ -250,8 +254,57 @@ def doctorpage(request, ID):
     return render(request, 'doctorpage.html', {'doctor': docInfo})
 
 def nursepage(request, ID):
-    nurseInfo = get_nurse_info(ID)
-    return render(request, 'nursepage.html', {'nurse': nurseInfo})
+    if request.method == "GET":
+        nurseInfo = get_nurse_info(ID)
+        
+        testResult = nurseHistory()
+        
+        if nurseInfo.get('department') == "Otology":
+            testList = get_testing_otology()
+            processList = get_testing_otology_inprocess()
+        elif nurseInfo.get('department') == "Rhinology":
+            testList = get_testing_rhinology()
+            processList = get_testing_rhinology_inprocess()
+        else:
+            testList = get_testing_laryngology()
+            processList = get_testing_laryngology_inprocess()
+            
+        return render(request, 'nursepage.html', {'nurse': nurseInfo, 'testList': testList, 'processList': processList, 'testResult': testResult})
+
+    if request.method == "POST":
+        result = request.POST.get('resultNote')
+        testID = request.POST.get('testID')
+        
+        Test.AddResult(testID, result)        
+
+    return redirect("nursepage", ID)
+
+def nurseStartTesting(request, testid, nurseid):
+    Test.InProcess(testid, nurseid)
+
+    return redirect('nursepage', nurseid)
+
+def nurseHistory():
+    listTestResult = []
+    dbconnPat = connectDBPatient().get()
+    if dbconnPat is not None:
+        for key1, value1 in dbconnPat.items():
+            dbconnTestResult = connectDBPatientTestResult(key1).get()
+            if dbconnTestResult is not None:
+                for key2, value2 in dbconnTestResult.items():
+                    listTestResult.append({
+                        'date': value2.get('date'),
+                        'department': value2.get('department'),
+                        'doctorname' : get_doctor_name(value2.get('doctorid')),
+                        'nurseid': value2.get('nurseid'),
+                        'nursename': get_nurse_name(value2.get('nurseid')),
+                        'patientid': key1,
+                        'patientname': get_patient_name(key1),
+                        'result' : value2.get('result'),
+                        'type': value2.get('type')
+                    })
+    
+    return listTestResult
 
 
 def medicinemanagerpage(request, ID):
@@ -272,6 +325,112 @@ def operatorpage(request, ID):
 def adminpage(request, ID):
     adInfo = get_admin_info(ID)
     return render(request, 'adminpage.html', {'admin': adInfo})
+
+
+def get_testing_otology():
+    testList = []
+    test_table_notstarted = connectDBTest("notstarted").get()
+    if test_table_notstarted is not None:
+        for key, value in test_table_notstarted.items():
+            if value.get("department") == "Otology":
+                testList.append({
+                    "id": key,
+                    "date": value.get("date"),
+                    "department": value.get("department"),
+                    "patientname": get_patient_name(value.get("patientid")),
+                    "doctorname": get_doctor_name(value.get("doctorid")),
+                    "type": value.get("type")
+                })
+    
+    return testList
+
+def get_testing_otology_inprocess():
+    processList = []
+    test_table_inprocess = connectDBTest("inprocess").get()
+    if test_table_inprocess is not None:
+        for key, value in test_table_inprocess.items():
+            if value.get("department") == "Otology":
+                processList.append({
+                    "id": key,
+                    "date": value.get("date"),
+                    "department": value.get("department"),
+                    "patientname": get_patient_name(value.get("patientid")),
+                    "doctorname": get_doctor_name(value.get("doctorid")),
+                    "type": value.get("type"),
+                    "nurseid": value.get("nurseid")
+                })
+    return processList
+
+
+def get_testing_rhinology():
+    testList = []
+    test_table_notstarted = connectDBTest("notstarted").get()
+    if test_table_notstarted is not None:
+        for key, value in test_table_notstarted.items():
+            if value.get("department") == "Rhinology":
+                testList.append({
+                    "id": key,
+                    "date": value.get("date"),
+                    "department": value.get("department"),
+                    "patientname": get_patient_name(value.get("patientid")),
+                    "doctorname": get_doctor_name(value.get("doctorid")),
+                    "type": value.get("type")
+                })
+    
+    return testList
+
+def get_testing_rhinology_inprocess():
+    processList = []
+    test_table_inprocess = connectDBTest("inprocess").get()
+    if test_table_inprocess is not None:
+        for key, value in test_table_inprocess.items():
+            if value.get("department") == "Rhinology":
+                processList.append({
+                    "id": key,
+                    "date": value.get("date"),
+                    "department": value.get("department"),
+                    "patientname": get_patient_name(value.get("patientid")),
+                    "doctorname": get_doctor_name(value.get("doctorid")),
+                    "type": value.get("type"),
+                    "nurseid": value.get("nurseid")
+                })
+    return processList
+
+
+def get_testing_laryngology():
+    testList = []
+    test_table_notstarted = connectDBTest("notstarted").get()
+    if test_table_notstarted is not None:
+        for key, value in test_table_notstarted.items():
+            if value.get("department") == "Laryngology":
+                testList.append({
+                    "id": key,
+                    "date": value.get("date"),
+                    "department": value.get("department"),
+                    "patientname": get_patient_name(value.get("patientid")),
+                    "doctorname": get_doctor_name(value.get("doctorid")),
+                    "type": value.get("type")
+                })
+    
+    return testList
+
+def get_testing_laryngology_inprocess():
+    processList = []
+    test_table_inprocess = connectDBTest("inprocess").get()
+    if test_table_inprocess is not None:
+        for key, value in test_table_inprocess.items():
+            if value.get("department") == "Laryngology":
+                processList.append({
+                    "id": key,
+                    "date": value.get("date"),
+                    "department": value.get("department"),
+                    "patientname": get_patient_name(value.get("patientid")),
+                    "doctorname": get_doctor_name(value.get("doctorid")),
+                    "type": value.get("type"),
+                    "nurseid": value.get("nurseid")
+                })
+    return processList
+
 
 
 def get_doctor_appointments(doc_key):
@@ -309,7 +468,9 @@ def patientdoctorview(request, docid, patid, appointKey):
         
         medicines = get_medicine_table()
         
-        return render(request, 'patientdoctorview.html', {'patient': patients, 'docid': docid, 'medicines': medicines})
+        testResult = nurseHistory()
+        
+        return render(request, 'patientdoctorview.html', {'patient': patients, 'docid': docid, 'medicines': medicines, 'testResult': testResult})
     
     if request.method == "POST":
         form_check = request.POST.get('createnewrecord-testing')
@@ -328,7 +489,7 @@ def patientdoctorview(request, docid, patid, appointKey):
             status = request.POST.get('patientstatus')
             revisit = request.POST.get('revisitdaytext')
             recordid = request.POST.get('recordid')
-            Doctor.AddPrescription(patid, recordid, docid, status, revisit, note, medicineList, appointKey)
+            Doctor.AddPrescription(patid, recordid, docid, status, revisit, note, medicineList)
 
     return redirect('patientdoctorview', docid, patid, appointKey)
 
@@ -376,7 +537,6 @@ def get_doctor_name(ID):
             return value.get("Name")
     return None
 
-
 def get_patient_name(ID):
     tableUser = connectDBPatient().get()
     for key, value in tableUser.items():
@@ -384,6 +544,12 @@ def get_patient_name(ID):
             return value.get("Name")
     return None
 
+def get_nurse_name(ID):
+    tableUser = connectDBNurse().get()
+    for key, value in tableUser.items():
+        if key == ID:
+            return value.get("Name")
+    return None
 
 def get_medicine_list(medicinelist):
     tableMedicine = connectDBMedicine().get()

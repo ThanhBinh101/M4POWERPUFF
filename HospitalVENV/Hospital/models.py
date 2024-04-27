@@ -123,14 +123,13 @@ class Medicine:
         dbconn.parent.update({"Quantity": 0})
 
 class Prescription:
-    def __init__(self, recordid, doctorid, status, revisit, note, medicines, endTime):
+    def __init__(self, recordid, doctorid, status, revisit, note, medicines):
         self.date = date.today()
         self.doctorid = doctorid
         self.status = status
         self.revisit = revisit
         self.note = note
         self.medicines = []
-        self.completeTime = endTime
         
         medicine_strings = medicines.split(",")
 
@@ -149,7 +148,6 @@ class Prescription:
             "Revisit": self.revisit,
             "Note": self.note,
             "Medicines": self.medicines,
-            "CompleteTime": self.completeTime
         }
 
 class Schedule:
@@ -179,7 +177,7 @@ class Doctor(Information):
     
     @staticmethod
     def AddPrescription(patientid, recordid, doctorid, status, revisit, note, medicines):
-        endTime = MedicalRecord.UpdateMedicalRecord(patientid, recordid, status, revisit)
+        MedicalRecord.UpdateMedicalRecord(patientid, recordid, status, revisit)
         prescription = Prescription(recordid, doctorid, status, revisit, note, medicines)
         dbconn = connectDBPrescription(patientid, recordid)
         dbconn.push(prescription.to_dict())
@@ -226,9 +224,11 @@ class Test():
         self.department = department
         self.type = type
         self.status = "notstarted"
+        self.date = date.today().strftime("%d/%m/%Y")
 
     def to_dict(self):
         return {
+            "date": self.date,
             "patientid": self.patientid,
             "doctorid": self.doctorid,
             "department": self.department,
@@ -237,7 +237,7 @@ class Test():
 
     @staticmethod
     def AddTest(patientid, doctorid, department, type):
-        conn = connectDBTest()
+        conn = connectDBTest("notstarted")
         test = Test(patientid, doctorid, department, type)
         conn.push(test.to_dict())
 
@@ -246,8 +246,7 @@ class Test():
         conn1 = connectDBTest("notstarted", testid)
         conn2 = connectDBTest("inprocess")
         conn1.update({
-            "status": "inprocess",         
-            "nurseid": nurseid
+           "nurseid": nurseid
         })
         conn2.push(conn1.get())
         conn1.delete()
