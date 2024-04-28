@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 33px 9%;
+    padding: 20px 9%;
     background: #F2CED8;
     border-radius: 20px 20px 0 0;
   }
@@ -72,33 +72,43 @@
     text-decoration: none;
     font-size: 20px
   }
- 
-  .scrollable-table {
-    margin-top:  100px;
-    margin-left: 100px;
-    max-width: 1120px;
-    height: 408px;
-    overflow-y: auto;
+  section {
+    padding: 0 2%;
   }
-  .scrollable-table thead th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
+  .displaybox {
+    height: 80%;
+    width: 80%;
+    min-height: 75vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    gap: 2rem;
+    background-color: rgba(4, 135, 217, 0.3);
+    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+    border-radius: 47px;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: -5%;
+  
   }
-  /* Adjust column widths */
-  .scrollable-table th:nth-child(1),
-  .scrollable-table td:nth-child(1) {
-    width: 25%; /* Date */
+  .textbox {
+    line-height: 0.75cm;
+    display: block;
+    margin-left: 8%;
+    margin-top: 5%;
   }
-  .scrollable-table th:nth-child(2),
-  .scrollable-table td:nth-child(2) {
-    width: 25%; /* Doctor */
+  .textbox h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 10%;
+    margin-top: 5%;
   }
-  .scrollable-table th:nth-child(3),
-  .scrollable-table td:nth-child(3) {
-    width: 25%; /* Diagnose */
+  .textbox p {
+    border-bottom: 2px solid black;
+    font-size: 16px;
   }
-  .scrollable-table th:nth-child(4),
-  .scrollable-table td:nth-child(4) {
-    width: 25%; /* Prescription */
+  .textbox h6{
+    font-size: 20px;
   }
