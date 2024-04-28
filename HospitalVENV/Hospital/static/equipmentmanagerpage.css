@@ -89,7 +89,7 @@
     margin-top: 2%;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: -5%;
+    margin-bottom: 5%;
   
   }
   .textbox {
@@ -111,4 +111,126 @@
   }
   .textbox h6{
     font-size: 20px;
+  }
+  .equipmentmanagerinfo {
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+    margin-left: 30%;
+  }
+  .equipmentmanagerimg img {
+    border: 2px solid black;
+    border-radius: 47px;
+    width: 60%;
+    height: 60%;
+  }
+  .schedule .btn-primary {
+    font-size: 16px;
+    background-color: #0487D9;
+    border-color: #D8D2FC;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 200px;
+    margin-left: 4%;
+  }
+  .newEquipment .btn-primary {
+    font-size: 16px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 200px;
+    margin-left: 5%;
+  }
+
+  .schedule .btn-primary:hover {
+    background-color: #D8D2FC;
+    border-color: #D8D2FC;
+    font-size: 16px;
+  }
+  .newEquipment .btn-primary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+    font-size: 16px;
+  }
+
+  .equipmentmanagement {
+    height: 80%;
+    width: 80%;
+    min-height: 75vh;
+    position: relative;
+    background-color: rgba(4, 135, 217, 0.3);
+    border-radius: 47px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 4%;
+  }
+
+  .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .boxTitle {
+    padding-top: 3%;
+    color: #F25EA3;
+    font-size: 26px;
+    font-weight: 500;
+  }
+
+  .scrollable-table-container {
+    background-color: #F2CED8;
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    overflow-y: auto;
+    max-height: 450px;
+  }
+
+  .equipment-table {
+    border-collapse: collapse;
+    width:1000em
+  }
+
+  .ethead {
+    border-bottom: 2px solid #1278B9;
+  }
+
+  .etbody {
+    border-bottom: 2px solid rgba(4, 135, 217, 0.3);
+  }
+
+  .equipment-table th,
+  .equipment-table td {
+    font-size: 18px;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .equipment-table td button:hover {
+    color: #0487D9;
+  }
+
+  .headColumn {
+    border-right: 2px solid #1278B9;
+    color: #F25EA3;
+    font-size: 20px !important;
+    font-weight: 500;
+  }
+
+  .action-column {
+    color: #F25EA3;
+    font-size: 20px !important;
+    font-weight: 500;
+  }
+
+  .et-td {
+    border-right: 2px solid #1278B9;
   }

@@ -52,8 +52,173 @@
             <p id = "ManagerGmail">{{manager.gmail}}</p>
         </div> 
 
-        <div class = "tablebox">
+        <div class = "equipmentmanagerinfo">
+            <div class = "equipmentmanagerimg">
+                <img src="{%static 'equipmentmanager.jpg'%}">
+            </div>
 
+            <div style = "margin-top: 5%" class = 'newEquipment'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">New Equipment</button>
+            </div>
+
+            <div style = "margin-top: 5%" class = 'schedule'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">schedule</button>
+            </div>
+        
+        </div>
+
+    </section>
+
+    <section class="equipmentmanagement">
+        <div class="col">
+            <div class="box">
+              <p class="boxTitle">EQUIPMENT MANAGEMENT</p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="scrollable-table-container">
+                        <table class="equipment-table">
+                            <thead>
+                                <tr class="ethead">
+                                    <th class="headColumn" style="width: 20%">Equipment's ID</th>
+                                    <th class="headColumn" style="width: 20%">Name</th>
+                                    <th class="headColumn" style="width: 15%">Import Date</th>
+                                    <th class="headColumn" style="width: 15%">Maintain Date</th>
+                                    <th class="headColumn" style="width: 10%">Status</th>
+                                    <th class="action-column" style="width: 20%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="etbody">
+                                    <td class="et-td">1</td>
+                                    <td class="et-td">Equipment A</td>
+                                    <td class="et-td">2024-04-20</td>
+                                    <td class="et-td">2024-04-20</td>
+                                    <td class="et-td">
+                                        <i class='bx bxs-bulb' style='color:green; font-size: 26px'></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="bx bx-search-alt bx-flip-horizontal" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
+                                            data-bs-toggle="modal" data-bs-target="#historyUsage">
+                                        </button>
+
+                                        <button type="button" class="bx bx-wrench" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;">
+                                        </button>
+
+                                        <button type="button" class="bx bx-x" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
+                                            data-bs-toggle="modal" data-bs-target="#removeModal">
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="etbody">
+                                    <td class="et-td">2</td>
+                                    <td class="et-td">Equipment A</td>
+                                    <td class="et-td">2024-04-20</td>
+                                    <td class="et-td">2024-04-20</td>
+                                    <td class="et-td">
+                                        <i class='bx bx-loader-alt bx-rotate-90 bx-spin' style="color:#052DEA; font-size: 26px"></i>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="bx bx-search-alt bx-flip-horizontal" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
+                                            data-bs-toggle="modal" data-bs-target="#historyUsage">
+                                        </button>
+
+                                        <button type="button" class="bx bx-wrench" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;">
+                                        </button>
+
+                                        <button type="button" class="bx bx-x" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
+                                            data-bs-toggle="modal" data-bs-target="#removeModal">
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="etbody">
+                                    <td class="et-td">3</td>
+                                    <td class="et-td">Equipment A</td>
+                                    <td class="et-td">2024-04-20</td>
+                                    <td class="et-td">2024-04-20</td>
+                                    <td class="et-td">
+                                        <i class='bx bxs-bulb' style='color:red; font-size: 26px'></i>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="bx bx-search-alt bx-flip-horizontal" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
+                                            data-bs-toggle="modal" data-bs-target="#historyUsage">
+                                        </button>
+
+                                        <button type="button" class="bx bx-wrench" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;">
+                                        </button>
+
+                                        <button type="button" class="bx bx-x" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
+                                            data-bs-toggle="modal" data-bs-target="#removeModal">
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="historyUsage" tabindex="-1" aria-labelledby="historyUsageLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="historyUsageLabel">History Table</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="table-danger">
+                                    <th style="width: 70%">Maintain Date</th>
+                                    <th style="width: 30%">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-danger">
+                                    <td>2024-04-20</td>
+                                    <td>Active</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="removeModalLabel">Remove Equipment</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" > {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="reasonRemove" class="form-label">Reason</label>
+                                <textarea class="form-control" id="reasonRemove" rows="3" placeholder="Enter reason to remove equipment" required></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </section>
