@@ -18,6 +18,11 @@ urlpatterns = [
     path('patient/<str:ID>', views.patientpage, name = "patientpage"),
     path('medicinemanager/<str:ID>', views.medicinemanagerpage, name = "medicinemanagerpage"),
     path('equipmentmanager/<str:ID>', views.equipmentmanagerpage, name = "equipmentmanagerpage"),
+    path('equipmentmanager/ActiveToInactive/<str:managerID>/<str:equipID>', views.ActiveToInactive, name = "ActiveToInactive"),
+    path('equipmentmanager/InActiveToMaintain/<str:managerID>/<str:equipID>', views.InActiveToMaintain, name = "InActiveToMaintain"),
+    path('equipmentmanager/MaintainToActive/<str:managerID>/<str:equipID>', views.MaintainToActive, name = "MaintainToActive"),
+    
+    
     path('administration/<str:ID>', views.adminpage, name = "adminpage"),
     path('operator/<str:ID>', views.operatorpage, name = "operatorpage"),
     

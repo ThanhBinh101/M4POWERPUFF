@@ -124,7 +124,7 @@
     width: 60%;
     height: 60%;
   }
-  .schedule .btn-primary {
+  .schedule .btn-primary, .equipHistory .btn-primary {
     font-size: 16px;
     background-color: #0487D9;
     border-color: #D8D2FC;
@@ -149,7 +149,7 @@
     margin-left: 5%;
   }
 
-  .schedule .btn-primary:hover {
+  .schedule .btn-primary:hover .equipHistory .btn-primary:hover{
     background-color: #D8D2FC;
     border-color: #D8D2FC;
     font-size: 16px;

@@ -192,30 +192,80 @@ class MedicineManager(Information):
         dbconn.push(manager.to_dict())
 
 class Equipment:
-    def __init__(self, name, maintaindate, status, isuse):
+    def __init__(self, name, maintaindate, status, type):
         self.name = name
-        self.importdate = date.today()
+        self.importdate = date.today().strftime("%d/%m/%Y")
         self.maintaindate = maintaindate
         self.status = status
-        self.isuse = isuse
-        self.history = []
+        self.type = type
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'importdate': self.importdate,
+            'maintaindate': self.maintaindate,
+            'status': self.status,
+            'type': self.type
+        }
 
 class EquipmentManager(Information):
-    def importEquipment(self, name, maintaindate, status, isuse):
-        self.equipmentlist.append(Equipment( name, maintaindate, status, isuse))
+    @staticmethod
+    def importEquipment(name, maintaindate, status, type):
+        equip = Equipment( name, maintaindate, status, type)
+        dbconn = connectDBEquipment()
+        dbconn.push(equip.to_dict())
     
-    def cancelEquipment(self, equipment):
-        equipment.add_maintain()
-        self.canceledlist.append(equipment)
-        self.equipmentlist.remove(equipment)
+    @staticmethod
+    def StartMaintainEquipment(equipmentid):
+        updateItem = connectDBEquipment().child(equipmentid)
+        updateItem.update({'status': 'maintain'})
+    
+    @staticmethod
+    def NeedMaintainEquipment(equipmentid):
+        updateItem = connectDBEquipment().child(equipmentid)
+        updateItem.update({'status': 'inactive'})
+    
+    @staticmethod
+    def DoneMaintainEquipment(managerid, equipmentid):
+        newMaintainDate = (date.today() + timedelta(days=3 * 30)).strftime("%d/%m/%Y")
+        updateItem = connectDBEquipment().child(equipmentid)
+        updateItem.update({'status': 'active', 'maintaindate': newMaintainDate})
+        
+        managerName = connectDBEquipmentManager(managerid).child("Name").get()
+        maintaindate = date.today().strftime("%d/%m/%Y")
+        dbconn = connectDBEquipmentHistory(equipmentid)
+        dbconn.push({
+            'managerid': managerid,
+            'managername': managerName,
+            'maintaindate': maintaindate
+        })
+        
+    @staticmethod
+    def cancelEquipment(equipmentid, reason, managerid):
+        managerName = connectDBEquipmentManager(managerid).child("Name").get()
+        
+        equipmentname = connectDBEquipment(equipmentid).child("name").get()
+        maintaindate = connectDBEquipment(equipmentid).child("maintaindate").get()
+        importdate = connectDBEquipment(equipmentid).child("importdate").get()
+        removedate = date.today().strftime("%d/%m/%Y")
+        
+        dbconn = connectDBEquipmentManagerHistory(managerid)
+        dbconn.push({
+            'equipmentid': equipmentid,
+            'equipmentname':equipmentname,
+            'reason': reason,
+            'managerid': managerid,
+            'managername': managerName,
+            'maintaindate': maintaindate,
+            'removedate': removedate,
+            'importdate': importdate
+        })
+        deleteItem = connectDBEquipment().child(equipmentid)
+        deleteItem.delete()
+        
 
     def add_schedule(self, day, shift):
         self.schedule.append(Schedule(day, shift))
-
-    def kill(self):
-        for s in self.schedule:
-            del s
-        del self
 
 class Test():
     def __init__(self, patientid, doctorid, department, type):

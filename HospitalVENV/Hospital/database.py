@@ -37,6 +37,18 @@ def connectDBEquipmentManager(key = ""):
     connect()
     return db.reference("EquipmentManager/{}".format(key))
 
+def connectDBEquipment(key = ""):
+    connect()
+    return db.reference("Equipment/{}".format(key))
+
+def connectDBEquipmentHistory(key1="", key2=""):
+    connect()
+    return db.reference("Equipment/{}/History/{}".format(key1, key2))
+
+def connectDBEquipmentManagerHistory(key1="", key2=""):
+    connect()
+    return db.reference("EquipmentManager/{}/History/{}".format(key1, key2))
+
 def connectDBAdmin(key = ""):
     connect()
     return db.reference("Admin/{}".format(key))
