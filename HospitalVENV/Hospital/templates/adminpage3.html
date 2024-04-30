@@ -41,7 +41,7 @@
 
 <section class = "displaybox">
     <div class = "textbox">
-        <h2>Doctor Information</h2>
+        <h2>Admin</h2>
         <div class = "textboxIDDoc">
             <h6>ID*</h6>
             <p id = "DoctorID">{{doctor.id}}</p>
@@ -64,20 +64,40 @@
         </div>
 
         <div class = "doctorbutton">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-                <a href=''>Add People</a>
-            </button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-                <a href='ADD JOB.html'>Add Job</a>
-            </button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal">
-                <a href=''>Human List</a>
-            </button>
+            <button type="button" class="btn btn-primary" onclick="loadPage('Add People.html', 'contentContainer')">Add People</button>
+            <button type="button" class="btn btn-primary" onclick="loadPage('ADD JOB.html', 'contentContainer')">Add Job</button>
+            <button type="button" class="btn btn-primary" onclick="loadPage('Human List.html', 'contentContainer')">Medical Staff</button>
         </div>
+        <div id="contentContainer"></div>
+        
     </div>
-    <div>{{sizeshift.Morning}}</div>
-    <div>{{sizedepart.Morning.Throat}}</div>
+    <script>
+        function loadPage(pageUrl, containerId) {
+            var container = document.getElementById(containerId);
+            if (container.style.display === "block") {
+                container.style.display = "none";
+            } else {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        container.innerHTML = this.responseText;
+                        container.style.display = "block";
+                        container.innerHTML += '<span class="closeButton" onclick="closePage()">X</span>';
+                    }
+                };
+                xhttp.open("GET", pageUrl, true);
+                xhttp.send();
+            }
+        }
+        
+        function closePage() {
+            var container = document.getElementById('contentContainer');
+            container.style.display = "none";
+        }
+        </script>
+
 </section>
+
 <body>
     <h3 class="heading">SCHEDULE MANAGEMENT</h3>
     <div class="timetable">
