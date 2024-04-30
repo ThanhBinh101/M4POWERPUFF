@@ -63,40 +63,254 @@
             <img src="">
         </div>
 
+       
         <div class = "doctorbutton">
-            <button type="button" class="btn btn-primary" onclick="loadPage('Add People.html', 'contentContainer')">Add People</button>
-            <button type="button" class="btn btn-primary" onclick="loadPage('ADD JOB.html', 'contentContainer')">Add Job</button>
-            <button type="button" class="btn btn-primary" onclick="loadPage('Human List.html', 'contentContainer')">Medical Staff</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddPeople">Add People</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddJob">Add Job</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MedicalStaff">Medical Staff</button>
         </div>
         <div id="contentContainer"></div>
         
     </div>
-    <script>
-        function loadPage(pageUrl, containerId) {
-            var container = document.getElementById(containerId);
-            if (container.style.display === "block") {
-                container.style.display = "none";
-            } else {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        container.innerHTML = this.responseText;
-                        container.style.display = "block";
-                        container.innerHTML += '<span class="closeButton" onclick="closePage()">X</span>';
-                    }
-                };
-                xhttp.open("GET", pageUrl, true);
-                xhttp.send();
-            }
-        }
-        
-        function closePage() {
-            var container = document.getElementById('contentContainer');
-            container.style.display = "none";
-        }
-        </script>
-
+    <div class="modal fade" id="AddJob" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="heading">ADD JOB</h1>
+                        <div class="col">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon" viewBox="0 0 16 16">
+                                <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5z"/>
+                                <path d="M3.5 1h.585A1.5 1.5 0 0 0 4 1.5V2a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 12 2v-.5q-.001-.264-.085-.5h.585A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-12A1.5 1.5 0 0 1 3.5 1"/>
+                              </svg>
+                            <select id="Departure" class="input">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                            <span class="spacer"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon" viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5M9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8m1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5m-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96q.04-.245.04-.5M7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0"/>
+                              </svg>
+                            <select id="type" class="input">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                              </svg>
+                            <select id="name" class="input">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon" viewBox="0 0 16 16">
+                                <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708"/>
+                              </svg>
+                            <select id="shift" class="input">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                              </svg>
+                            <input type="text" id="room" class="input">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="button-container">
+                            <button class="btn-cancel">Cancel</button>
+                            <button class="btn-submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          
 </section>
+<div class="modal fade" id="AddPeople" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+    
+        <div class = "signupform">
+            <h3>ADD PEOPLE</h3>
+            <form id="signupForm" method = "POST"> 
+                <div class="mb-3">
+                    <label class="form-label">Department</label>
+                    <select class="form-select">
+                        <option>Ears</option>
+                        <option>Nose</option>
+                        <option>Throat</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Role</label>
+                    <select class="form-select">
+                        <option>Doctor</option>
+                        <option>Nurse</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="signupGmail" class="form-label">Gmail</label>
+                    <input type="email" class="form-control" name= "gmail" placeholder="name@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="signupName" class="form-label">Name</label>
+                    <input type="text" class="form-control" name= "name" placeholder="James Smith" required>
+                </div>
+                <div class="mb-3">
+                    <label for="signupPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" name = "password" placeholder="123456" required>
+                </div>
+                <div class="mb-3">
+                    <label for="signupGender" class="form-label">Gender</label>           
+                    <select class="form-select" name="gender" required>
+                        <option selected>M/F</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="signupDOB" class="form-label">Date of Birth</label>      
+                    <input class="form-control" id="signupDOB" name="date" placeholder="DD/MM/YYY" type="text" required>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-primary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="MedicalStaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="pink-background">
+                <h3 class="heading">MEDICAL STAFF</h3>
+                <div class ="timetable">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Role</th>
+                            <th>Phone</th>
+                            <th>Gmail</th>
+                            <th></th>
+                
+                        </tr>
+                        <tr>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="note-cell">
+                                <button class="delete-button">X</button>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="note-cell">
+                                <button class="delete-button">X</button>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="note-cell">
+                                <button class="delete-button">X</button>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="note-cell">
+                                <button class="delete-button">X</button>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="note-cell">
+                                <button class="delete-button">X</button>
+                            </td>
+                           
+                        </tr>
+                        <tr>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="note-cell">
+                                <button class="delete-button">X</button>
+                            </td>
+                           
+                        </tr>
+                        <tr>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="empty-cell" contenteditable="true"></td>
+                            <td class="note-cell">
+                                <button class="delete-button">X</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <body>
     <h3 class="heading">SCHEDULE MANAGEMENT</h3>
