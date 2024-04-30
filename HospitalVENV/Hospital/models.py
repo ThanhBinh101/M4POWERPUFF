@@ -357,33 +357,25 @@ class Operator(Information):
         connectDBAppointment(apmid).delete()
 
 class Job():
-    def __init__(self, department, role, person, weekday, startTime, endTime, shift, position):
-        self.department = department
-        self.role = role
-        self.person = person
-        self.weekday = weekday
-        self.shift = shift
+    def __init__(self, personid, position):
+        self.personid = personid
         self.position = position
 
     def to_dict(self):
         return {
-            "Department": self.department,
-            "Role": self.role,
-            "Person": self.person,
-            "Weekday": self.weekday,
-            "Shift": self.shift,
+            "PersonID": self.personid,
             "Position": self.position
         }
 
     @staticmethod
-    def AddJob(department, role, person, weekday, shift, position):
-        job = Job(department, role, person, weekday, shift, position)
-        dbconn = connectDBJob()
+    def AddJob(shift, department, day, personid, position):
+        job = Job(personid, position)
+        dbconn = connectDBJob(shift, department, day)
         dbconn.push(job.to_dict())
 
     @staticmethod
-    def DeleteJob(jobid):
-        connectDBJob(jobid).delete()
+    def DeleteJob(shift, department, day, jobid):
+        connectDBJob(shift, department, day, jobid).delete()
 
 class Admin(Information):
     def __init__(self, name, email, password, dob, gender):

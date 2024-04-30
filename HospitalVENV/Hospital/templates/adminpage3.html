@@ -75,14 +75,15 @@
             </button>
         </div>
     </div>
-
+    <div>{{sizeshift.Morning}}</div>
+    <div>{{sizedepart.Morning.Throat}}</div>
 </section>
 <body>
     <h3 class="heading">SCHEDULE MANAGEMENT</h3>
     <div class="timetable">
         <table>
             <tr>
-                <th rowspan="7" class="title">Morning</th>
+                <th class="title">Shift</th>
                 <th class="title">Department</th>
                 <th class="title">Monday</th>
                 <th class="title">Tuesday</th>
@@ -90,621 +91,292 @@
                 <th class="title">Thursday</th>
                 <th class="title">Friday</th>
                 <th class="title">Saturday</th>
+                <th class="title">Sunday</th>
             </tr>
             <tr>
-                <th rowspan="2" class="title">Ears</th>
+                <th rowspan="3" class="title">Morning</th>
+                <th rowspan="1" class="title">Throat</th>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Throat.Mon %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Throat.Tue %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Throat.Wed %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Throat.Thu %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Throat.Fri %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-                
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Throat.Sat %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Throat.Sun %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
             </tr>
             <tr>
-                <th rowspan="2" class="title">Nose</th>
+                <th rowspan="1" class="title">Nose</th>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Nose.Mon %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Nose.Tue %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Nose.Wed %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Nose.Thu %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Nose.Fri %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-            </tr>
-            <tr>
-                
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Nose.Sat %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Nose.Sun %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
             </tr>
             <tr>
-                <th rowspan="2" class="title">Throat</th>
+                <th rowspan="1" class="title">Ears</th>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Ear.Mon %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Ear.Tue %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Ear.Wed %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Ear.Thu %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Ear.Fri %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-               
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Ear.Sat %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Morning.Ear.Sun %}
+                    <div>
+                        <h1 class="Doctor">{{ job.Name }}</h1>
+                        <div>{{job.Position}}</div>
+                    </div>
+                    {% endfor %}
                 </td>
             </tr>
             <tr>
-                <th rowspan="6" class="title">Afternoon</th>
-                <th rowspan="2" class="title">Ears</th>
+                <th rowspan="3" class="title">Afternoon</th>
+                <th rowspan="1" class="title">Throat</th>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Throat.Mon %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Throat.Tue %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Throat.Wed %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Throat.Thu %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Throat.Fri %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Throat.Sat %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Throat.Sun %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
             </tr>
             <tr>
-                <th rowspan="2" class="title">Nose</th>
-                
+                <th rowspan="1" class="title">Nose</th>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-                
-                 
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Nose.Mon %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Nose.Tue %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Nose.Wed %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Nose.Thu %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Nose.Fri %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Nose.Sat %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for job in joblist.Afternoon.Nose.Sun %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
             </tr>
             <tr>
-                <th rowspan="2" class="title">Throat</th>
-                
+                <th rowspan="1" class="title">Ears</th>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Ear.Mon %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Ear.Tue %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Ear.Wed %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Ear.Thu %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Ear.Fri %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-                
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Ear.Sat %}
+                    <h1 class="Doctor">{{ job.Name }}</h1>
+                    <div>{{job.Position}}</div>
+                    {% endfor %}
                 </td>
                 <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
+                    {% for job in joblist.Afternoon.Ear.Sun %}
+                        <div>
+                            <h1 class="Doctor">{{ job.Name }}</h1>
+                            <div>{{job.Position}}</div>
+                        </div>
+                    {% endfor %}
                 </td>
             </tr>
-            <tr>
-                <th rowspan="6" class="title">Evening</th>
-                <th rowspan="2" class="title">Ears</th>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-                <th rowspan="2" class="title">Nose</th>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-                
-                 
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-                <th rowspan="2" class="title">Throat</th>
-                
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Doctor:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            <tr>
-                
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-                <td>
-                    <h1 class="Doctor">Nurse:</h1>
-                    <input type="text" class="name">
-                    <input type="text" class="room">
-                </td>
-            </tr>
-            
+
         </table>
     </div>
-
+    <script>
+        function eraseRow(day, depart, shift, id) {
+            console.log(day, depart, shift, id);
+        }
+    </script>
 </body>
+
 </html>

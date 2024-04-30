@@ -69,6 +69,6 @@ def connectDBAppointment(key = ""):
     connect()
     return db.reference("Appointment/{}".format(key))
 
-def connectDBJob(key = ""):
+def connectDBJob(shift = "", depart = "", day = "", key = ""):
     connect()
-    return db.reference("Job/{}".format(key))
+    return db.reference("Job/{}/{}/{}/{}".format(shift, depart, day, key))

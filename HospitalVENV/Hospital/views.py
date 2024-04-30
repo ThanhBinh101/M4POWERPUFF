@@ -441,18 +441,30 @@ def doctorhistory(request, id):
     doctors = get_doctor_list()
     return render(request,'doctorhistory.html', {'historypatient': HistoryPatient, 'medicines': medicines, 'doctors': doctors})
 
+def Adminpage(request):
+    job_list = {}  # Initialize job_list as a dictionary
+    sizedepart = {}
+    sizeshift = {}
+    for shift in {"Morning", "Afternoon", "Evening"}:
+        job_list[shift] = {}
+        sizedepart[shift] = {}
+        sizeshift[shift] = 0
+        for depart in {"Ear", "Nose", "Throat"}:
+            job_list[shift][depart] = {} 
+            sizedepart[shift][depart] = 1
+            for day in {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}:
+                job_data = connectDBJob(shift, depart, day).get()
+                data = []
+                for job in job_data:
+                    personID = connectDBJob(shift, depart, day, job).child("PersonID").get()
+                    position = connectDBJob(shift, depart, day, job).child("Position").get()
+                    name = connectDBDoctor(personID).child("Name").get()
+                    data.append({"Position": position, "Name": name, "ID": job})
+                job_list[shift][depart][day] = data
+                sizedepart[shift][depart] = max(sizedepart[shift][depart], len(job_data))
 
-
-
-
-
-
-
-
-
-
-
-
+            sizeshift[shift] = sizeshift[shift] + sizedepart[shift][depart] 
+    return render(request, 'adminpage3.html', {'joblist': job_list, 'sizedepart': sizedepart, 'sizeshift': sizeshift})
 
 
 
