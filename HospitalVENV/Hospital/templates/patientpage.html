@@ -163,32 +163,30 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 <div class="modal-body appointmentModalBody">
-                    <form method="POST" > {% csrf_token %}
-                        <input type="hidden" name="createnewrecord" value="form1">
+                    <form id="appointForm" method="POST" > {% csrf_token %}
                         <div class="mb-3">
                             <label class="form-label">Department</label>
-                            <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                            <select class="form-select" name="department" style = "color: #ff66b2"; aria-label="Department" required>
                                 <option selected>Choose department</option>
-                                <option value="1">Tai</option>
-                                <option value="2">Mũi</option>
-                                <option value="3">Họng</option>
-                              </select>
+                                <option value="Otology">Otology</option>
+                                <option value="Rhinology">Rhinology</option>
+                                <option value="Laryngology">Laryngology</option>
+                            </select>
                         </div>
                     
                         <div class="mb-3">
                             <label class="form-label">Time</label>
-                           
-                            <select class="form-select" style = "color: #ff66b2"; aria-label="Time">
+                            <select class="form-select" name="wantedTime" style = "color: #ff66b2"; aria-label="Time" required>
                                 <option selected>Choose time</option>
-                                <option value="1">12:00</option>
-                                <option value="2">12:30</option>
-                                <option value="3">13:00</option>
-                              </select>
+                                {% for time in timeintervals%}
+                                <option value={{time}}>{{time}}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer appointmentModalFooter" style = "background-color: rgba(4, 135, 217, 0.5);">
-                    <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
+                    <button type="submit" class="btn btn-primary" form="appointForm" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
                 </div>  
             </div>

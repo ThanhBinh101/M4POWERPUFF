@@ -126,17 +126,31 @@ def checkValidate(gmail, password):
 
 
 def patientpage(request, ID):
-    from_history = request.GET.get('from_history', False)
     context = {}
-    if from_history:
-        context['from_history'] = True
-    paInfo = get_patient_info(ID)
-    context.update({'patient': paInfo})
     
-    testResult = nurseHistory()
-    context['testResult'] = testResult
+    if request.method == "GET":
+        from_history = request.GET.get('from_history', False)
+        if from_history:
+            context['from_history'] = True
+        paInfo = get_patient_info(ID)
+        context.update({'patient': paInfo})
+        
+        testResult = nurseHistory()
+        context['testResult'] = testResult
+        
+        timeGenerate = generate_time_intervals()
+        context['timeintervals'] = timeGenerate
+        
+        return render(request, 'patientpage.html', context)
     
-    return render(request, 'patientpage.html', context)
+    if request.method == "POST":
+        department = request.POST.get('department')
+        wantedTime = request.POST.get('wantedTime')
+        appoint = Appointment(ID, department, wantedTime)
+        dbconn = connectDBAppointment()
+        dbconn.push(appoint.to_dict())
+        
+    return redirect('patientpage', ID)
 
 
 def doctorpage(request, ID):

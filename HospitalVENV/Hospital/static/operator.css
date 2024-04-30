@@ -15,8 +15,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 9%;
+    padding: 33px 9%;
     background: #F2CED8;
+    border-radius: 20px 20px 0 0;
   }
   body {
     background-color: white;
@@ -74,61 +75,13 @@
   section {
     padding: 0 2%;
   }
-  .displaybox {
-    height: 80%;
-    width: 80%;
-    min-height: 75vh;
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(2, 0.5fr);
-    gap: 2rem;
-    background-color: rgba(4, 135, 217, 0.3);
-    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
-    border-radius: 47px;
-    margin-top: 2%;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 4%;
   
-  }
-  .textbox {
-    line-height: 0.75cm;
-    display: block;
-    margin-left: 8%;
-    margin-top: 5%;
-  }
-  .textbox h2 {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    margin-top: 5%;
-  }
-  .textbox p {
-    border-bottom: 2px solid black;
-    font-size: 16px;
-  }
-  .textbox h6{
-    font-size: 20px;
-  }
-
-  .operatormanagement{
-    height: 80%;
-    width: 80%;
-    min-height: 75vh;
-    position: relative;
-    background-color: rgba(4, 135, 217, 0.3);
-    border-radius: 47px;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 4%;
-  }
-
+  
   .heading{
     color: #0487d9; 
     font-size: 24px; 
     font-family: 'Poppins', sans-serif; 
-    text-align: center;
+    text-align:center;
     padding-top: 40px;
   }
   
@@ -137,8 +90,6 @@
     padding:20px;
     border-radius: 47px;
     margin: 20px;
-    overflow-y: auto;
-    max-height: 450px;
    }
    .timetable table{
     width:100%;
@@ -153,32 +104,53 @@
    .timetable th{
     background-color: #F2CED8;
     color:#ff66b2;
+  
    }
    .empty-cell{
     background-color:none;
    }
+   .select-time{
+    background-color: #F2CED8;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+   }
+   .clock {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+  }
+  .space{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
   .doctor-select{
     font-family: 'Poppins', sans-serif;
     background-color: #F2CED8;
   }
-  .ri-heart-add-line {
-    border-width: 0; 
-    background-color: transparent; 
-    color: #ff66b2;
-    font-size: 26px;
-    transition: all 0.55s ease;
-    margin-right: 30px;
+  .btn-tick{
+    background-color: #F2CED8;
+    margin-right: 5px;
   }
-  .ri-dislike-line {
-    border-width: 0; 
-    background-color: transparent; 
-    color: #ff66b2;
-    font-size: 26px;
-    transition: all 0.55s ease;
+  .btn-delete{
+    background-color: #F2CED8;
   }
-  .ri-heart-add-line:hover {
-    color: #0487d9;
+  .btn-tick:hover{
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
   }
-  .ri-dislike-line:hover {
-    color: #0487d9;
+  .btn-delete:hover{
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
   }
+  .button--submit{
+    float: right;
+    margin-right: 150px;
+    padding:8px 30px;
+    background-color: #ff66b2;
+    color: #fff;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+  
+   }

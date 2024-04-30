@@ -376,11 +376,10 @@ class Nurse(Information):
         }
 
 class Appointment():
-    def __init__(self, patientid, department, time):
-        self.patientid = patientid,
-        self.department = department,
-        self.time = datetime.strptime(time, '%H:%M')
-        self.completeTime = self.time + timedelta(hours=1)
+    def __init__(self, patientid, department, wantedtime):
+        self.patientid = patientid
+        self.department = department
+        self.time = wantedtime
 
     @staticmethod
     def AddTime(apmid):

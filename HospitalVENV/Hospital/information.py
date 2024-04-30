@@ -404,3 +404,31 @@ def get_medicinemanager_history(ID):
                 'reason': value.get('reason')
             })
     return list
+
+def generate_time_intervals():
+    current_time = datetime.now()
+    current_hour = current_time.hour
+    current_minute = current_time.minute
+
+    time_intervals = []
+    
+    current_hour = 18
+
+    if current_hour < 12:
+        for hour in range(7, 12):
+            for minute in ['00', '30']:
+                time_intervals.append(f'{hour:02}:{minute}')
+    elif current_hour < 17:
+        for hour in range(13, 17):
+            for minute in ['00', '30']:
+                time_intervals.append(f'{hour:02}:{minute}')
+    else: 
+        for hour in range(7, 12):
+            for minute in ['00', '30']:
+                time_intervals.append(f'{hour:02}:{minute}')
+
+        for hour in range(13, 17):
+            for minute in ['00', '30']:
+                time_intervals.append(f'{hour:02}:{minute}')
+
+    return time_intervals
