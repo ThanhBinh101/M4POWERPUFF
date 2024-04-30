@@ -78,8 +78,8 @@ class MedicalRecord:
         })
 
 class Medicine:
-    def __init__(self, expiredate, name, quantity):
-        self.importdate = date.today()
+    def __init__(self, name, quantity, expiredate):
+        self.importdate = date.today().strftime("%d/%m/%Y")
         self.expiredate = expiredate
         self.name = name
         self.quantity = quantity
@@ -89,14 +89,8 @@ class Medicine:
             "Name": self.name,
             "Quantity": self.quantity,
             "ExpireDate": self.expiredate,
-            "ImportDate": self.importdate.strftime("%d/%m/%Y")
+            "ImportDate": self.importdate
         }
-
-    @staticmethod
-    def ImportMedicine( expiredate, name, quantity):
-        medicine = Medicine(expiredate, name, quantity)
-        dbconn = connectDBMedicine()
-        dbconn.push(medicine.to_dict())
 
     @staticmethod
     def UseMedicine(medicineID, quantity, note,reason):
@@ -186,6 +180,45 @@ class Doctor(Information):
 
 class MedicineManager(Information):
     @staticmethod
+    def ImportMedicine(name, quantity, expiredate):
+        medicine = Medicine(name, quantity, expiredate)
+        dbconn = connectDBMedicine()
+        dbconn.push(medicine.to_dict())
+        
+    @staticmethod
+    def RemoveApartMedicine(medicineID, RemoveQuantity, reason):
+        currQuantity = connectDBMedicine(medicineID).child("Quantity").get()
+        newQuantity = currQuantity - RemoveQuantity
+        
+        dbconn = connectDBMedicineHistory(medicineID)
+        dbconn.push().set({
+            "Date": date.today().strftime("%d/%m/%Y"),
+            "Reason": reason,
+            "Quantity": RemoveQuantity
+        })
+        dbconn.parent.update({"Quantity": newQuantity})
+        
+    @staticmethod
+    def RemoveMedicine(mangerID, medicineID, reason):
+        medicinename = connectDBMedicine(medicineID).child("Name").get()
+        importdate = connectDBMedicine(medicineID).child("ImportDate").get()
+        expiredate = connectDBMedicine(medicineID).child("ExpireDate").get()
+        removedate = date.today().strftime("%d/%m/%Y")
+        
+        dbconn = connectDBMedicineManagerHistory(mangerID)
+        dbconn.push({
+            'medicineid': medicineID,
+            'reason': reason,
+            'name': medicinename,
+            'importdate': importdate,
+            'expiredate': expiredate,
+            'removedate': removedate
+        })
+        
+        deleteMedicine = connectDBMedicine().child(medicineID)
+        deleteMedicine.delete()
+        
+    @staticmethod
     def AddMedicalManager(name, email, password, dob, gender):
         manager = MedicineManager(name, email, password, dob, gender)
         dbconn = connectDBMedicineManager()
@@ -243,7 +276,6 @@ class EquipmentManager(Information):
     @staticmethod
     def cancelEquipment(equipmentid, reason, managerid):
         managerName = connectDBEquipmentManager(managerid).child("Name").get()
-        
         equipmentname = connectDBEquipment(equipmentid).child("name").get()
         maintaindate = connectDBEquipment(equipmentid).child("maintaindate").get()
         importdate = connectDBEquipment(equipmentid).child("importdate").get()
@@ -318,9 +350,7 @@ class Test():
     def CancelProcess(testid):
         conn1 = connectDBTest("inprocess", testid)
         conn2 = connectDBTest("notstarted")
-        conn1.update({
-            "status": "notstarted"
-        })
+        
         conn1.child("nurseid").delete()
         conn2.push(conn1.get())
         conn1.delete()

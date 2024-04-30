@@ -245,7 +245,10 @@ def get_medicine_table():
         for key, value in medicine_table.items():
             medicineList.append({
                 'id': key,
-                'name': value.get("Name")
+                'name': value.get("Name"),
+                'importdate': value.get("ImportDate"),
+                'expiredate': value.get("ExpireDate"),
+                'quantity': value.get("Quantity")
             })
     return medicineList
 
@@ -356,6 +359,47 @@ def get_manager_history(ID):
                 'importdate': value.get('importdate'),
                 'maintaindate': value.get('maintaindate'),
                 'managername': value.get('managername'),
+                'removedate': value.get('removedate'),
+                'reason': value.get('reason')
+            })
+    return list
+
+def get_medicine_useHistory():
+    list = []
+    tableMedicine = connectDBMedicine().get()
+    if tableMedicine is not None:
+        for key1, value1 in tableMedicine.items():
+            list.append({
+                'medicineid' : key1,
+                'history': get_medicine_history(key1)
+            })
+    return list
+
+def get_medicine_history(ID):
+    tableHistory = connectDBMedicineHistory(ID).get()
+    if tableHistory is not None:
+        list = []
+        for key2, value2 in tableHistory.items():
+            list.append({
+                'id':key2,
+                'date': value2.get("Date"),
+                'quantity': value2.get("Quantity"),
+                'note': value2.get("Note"),
+                'reason': value2.get("Reason")
+            })
+        return list
+    
+def get_medicinemanager_history(ID):
+    dbconn = connectDBMedicineManagerHistory(ID).get()
+    if dbconn is not None:
+        list=[]
+        for key, value in dbconn.items():
+            list.append({
+                'id': key,
+                'medicineid': value.get('medicineid'),
+                'medicinename': value.get('name'),
+                'importdate': value.get('importdate'),
+                'expiredate': value.get('expiredate'),
                 'removedate': value.get('removedate'),
                 'reason': value.get('reason')
             })

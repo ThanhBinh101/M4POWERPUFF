@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 9%;
+    padding: 33px 9%;
     background: #F2CED8;
     border-radius: 20px 20px 0 0;
   }
@@ -99,6 +99,7 @@
     margin-top: 5%;
   }
   .textbox h2 {
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
@@ -111,19 +112,19 @@
   .textbox h6{
     font-size: 20px;
   }
-  .equipmentmanagerinfo {
+  .MedicineManagerinfo {
     align-items: center;
     justify-content: center;
     margin-top: 15%;
     margin-left: 30%;
   }
-  .equipmentmanagerimg img {
+  .MedicineManagerimg img {
     border: 2px solid black;
     border-radius: 47px;
     width: 60%;
     height: 60%;
   }
-  .schedule .btn-primary, .equipHistory .btn-primary {
+  .schedule .btn-primary, .MediHistory .btn-primary {
     font-size: 16px;
     background-color: #0487D9;
     border-color: #D8D2FC;
@@ -135,7 +136,7 @@
     width: 200px;
     margin-left: 4%;
   }
-  .newEquipment .btn-primary {
+  .newMedicine .btn-primary {
     font-size: 16px;
     background-color: #ff66b2;
     border-color: #0487D9;
@@ -148,18 +149,18 @@
     margin-left: 5%;
   }
 
-  .schedule .btn-primary:hover .equipHistory .btn-primary:hover{
+  .schedule .btn-primary:hover .MediHistory .btn-primary:hover{
     background-color: #D8D2FC;
     border-color: #D8D2FC;
     font-size: 16px;
   }
-  .newEquipment .btn-primary:hover {
+  .newMedicine .btn-primary:hover {
     background-color: #F2CED8;
     border-color: #F2CED8;
     font-size: 16px;
   }
 
-  .equipmentmanagement {
+  .medicinemanagement {
     height: 80%;
     width: 80%;
     min-height: 75vh;
@@ -193,7 +194,7 @@
     max-height: 450px;
   }
 
-  .equipment-table {
+  .medicine-table {
     border-collapse: collapse;
     width:1000em
   }
@@ -206,14 +207,14 @@
     border-bottom: 2px solid rgba(4, 135, 217, 0.3);
   }
 
-  .equipment-table th,
-  .equipment-table td {
+  .medicine-table th,
+  .medicine-table td {
     font-size: 18px;
     padding: 8px;
     text-align: center;
   }
 
-  .equipment-table td button:hover {
+  .medicine-table td button:hover {
     color: #0487D9;
   }
 
@@ -232,4 +233,16 @@
 
   .et-td {
     border-right: 2px solid #1278B9;
+  }
+
+  #myInputMedicine {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50' fill='currentColor'%3E%3Cpath d='M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z'%3E%3C/path%3E%3C/svg%3E"); /* Add a search icon to input */
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 50%;
+    font-size: 16px; 
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd; 
+    margin-bottom: 1%; 
+    margin-left: 24.5%;
   }

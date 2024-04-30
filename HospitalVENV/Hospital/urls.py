@@ -14,6 +14,8 @@ urlpatterns = [
     
     path('nurse/<str:ID>', views.nursepage, name = "nursepage"),
     path('nurse/nurseStartTesting/<str:testid>/<str:nurseid>', views.nurseStartTesting, name = "nurseStartTesting"),
+    path('nurse/deleteTesting/<str:testid>/<str:nurseid>', views.deleteTesting, name = "deleteTesting"),
+    path('nurse/cancelProcess/<str:testid>/<str:nurseid>', views.cancelProcess, name = "cancelProcess"),
     
     path('patient/<str:ID>', views.patientpage, name = "patientpage"),
     path('medicinemanager/<str:ID>', views.medicinemanagerpage, name = "medicinemanagerpage"),

@@ -177,7 +177,7 @@
                                 </div>
                             </div>
 
-                            <a class="ri-close-fill" href = ''></a>
+                            <a class="ri-close-fill" href='cancelProcess/{{process.id}}/{{nurse.id}}'></a>
 
                             {% else %}
 
@@ -197,6 +197,9 @@
                         <td>{{test.type}}</td>
                         <td>
                             <a class="ri-check-fill" href='nurseStartTesting/{{test.id}}/{{nurse.id}}'></a>
+
+                            <a class="ri-close-fill" href ='deleteTesting/{{test.id}}/{{nurse.id}}'></a>
+
                         </td>
                     </tr>
                     {% endfor %}

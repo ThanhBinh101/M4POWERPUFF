@@ -174,6 +174,14 @@ def nurseStartTesting(request, testid, nurseid):
 
     return redirect('nursepage', nurseid)
 
+def deleteTesting(request, testid, nurseid):
+    Test.EraseProcess(testid)
+    return redirect('nursepage', nurseid)
+
+def cancelProcess(request, testid, nurseid):
+    Test.CancelProcess(testid)
+    return redirect('nursepage', nurseid)
+
 def nurseHistory():
     listTestResult = []
     dbconnPat = connectDBPatient().get()
@@ -198,8 +206,35 @@ def nurseHistory():
 
 
 def medicinemanagerpage(request, ID):
-    managerInfo = get_medicinemanager_info(ID)
-    return render(request, 'medicinemanagerpage.html', {'manager': managerInfo})
+    if request.method == "GET":
+        managerInfo = get_medicinemanager_info(ID)
+        
+        medicineTable = get_medicine_table()
+        
+        medicineHistoryUsage = get_medicine_useHistory()
+        
+        medicinemanagerhistory = get_medicinemanager_history(ID)
+        
+        return render(request, 'medicinemanagerpage.html', {'manager': managerInfo, 'medicineTable': medicineTable , 'medicineHistory': medicineHistoryUsage, 'managerHistory': medicinemanagerhistory})
+    
+    if request.method == "POST":
+        form_check = request.POST.get('newMedicine-deleteMedicine')
+        if form_check == "form1":
+            medicinename = request.POST.get('medicinename')
+            quantity = int(request.POST.get('quantity'))
+            expiredate = request.POST.get('date')
+            MedicineManager.ImportMedicine(medicinename, quantity, expiredate)
+        elif form_check == "form2":
+            quantity = int(request.POST.get('quantity'))
+            reason = request.POST.get('reasonRemove')
+            medicineID = request.POST.get('medicineID')
+            MedicineManager.RemoveApartMedicine(medicineID, quantity, reason)
+        else:
+            reason = request.POST.get('reasonRemove')
+            medicineID = request.POST.get('medicineID')
+            MedicineManager.RemoveMedicine(ID, medicineID, reason)
+    
+    return redirect('medicinemanagerpage', ID)
 
 
 def equipmentmanagerpage(request, ID):

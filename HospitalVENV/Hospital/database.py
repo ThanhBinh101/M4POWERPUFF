@@ -57,9 +57,13 @@ def connectDBMedicine(key = ""):
     connect()
     return db.reference("Medicine/{}".format(key))
 
-def connectDBMedicineHistory(key = ""):
+def connectDBMedicineHistory(key1 = "", key2 = ""):
     connect()
-    return db.reference("Medicine/{}/History/".format(key))
+    return db.reference("Medicine/{}/History/".format(key1, key2))
+
+def connectDBMedicineManagerHistory(key1, key2 = ""):
+    connect()
+    return db.reference("MedicineManager/{}/History/{}".format(key1, key2))
 
 def connectDBMedicalRecord(key1, key2 = ""):
     connect()
