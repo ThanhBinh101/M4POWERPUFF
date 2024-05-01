@@ -1,6 +1,7 @@
 from .models import *
 from .database import *
 from .forms import UserForm
+from .information import *
 
 def mainpage(request):
     
@@ -53,6 +54,7 @@ def loginpage(request):
         else:
             alert_message = 'Invalid email or password.'
             return render(request, 'loginpage.html', {'alert_message': alert_message})
+
 
 def checkValidate(gmail, password):
     global userKey
@@ -123,126 +125,32 @@ def checkValidate(gmail, password):
     return False
 
 
-def get_patient_info(ID):
-    PatientInfo = []
-    tableUser = connectDBPatient().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            PatientInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'gender': value.get("Gender"),
-                'dateofbirth': value.get("Date of Birth"),
-                'gmail':value.get("Gmail"),
-                'medicalrecord': get_medicial_record(ID)
-            })
-            return PatientInfo[0]
-    return None
-
-
-def get_doctor_info(ID):
-    docInfo = []
-    tableUser = connectDBDoctor().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            docInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'department': value.get("Department"),
-                'phone': value.get("Phone"),
-                'gmail':value.get("Gmail"),
-                'level': value.get("Level"),
-                'appointments': get_doctor_appointments(key)
-            })
-            return docInfo[0]
-    return None
-
-def get_nurse_info(ID):
-    nurseInfo = []
-    tableUser = connectDBNurse().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            nurseInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'department': value.get("Department"),
-                'gmail':value.get("Gmail"),
-                'level': value.get("Level"),
-                'year': value.get("Years"),
-                'dateofbirth': value.get("Date of Birth")
-            })
-            return nurseInfo[0]
-    return None
-
-
-def get_medicinemanager_info(ID):
-    ManagerInfo = []
-    tableUser = connectDBMedicineManager().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            ManagerInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'phone': value.get("Phone"),
-                'gmail':value.get("Gmail")
-            })
-            return ManagerInfo[0]
-    return None
-
-
-def get_equipmentmanager_info(ID):
-    ManagerInfo = []
-    tableUser = connectDBEquipmentManager().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            ManagerInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'phone': value.get("Phone"),
-                'gmail':value.get("Gmail")
-            })
-            return ManagerInfo[0]
-    return None
-
-
-def get_operator_info(ID):
-    operatorInfo = []
-    tableUser = connectDBOperator().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            operatorInfo.append({
-                'id':key,
-                'name': value.get("Name"),
-                'phone': value.get("Phone"),
-                'gmail':value.get("Gmail")
-            })
-            return operatorInfo[0]
-    return None
-
-
-def get_admin_info(ID):
-    AdminInfo = []
-    tableUser = connectDBAdmin().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            AdminInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'phone': value.get("Phone"),
-                'gmail':value.get("Gmail")
-            })
-            return AdminInfo[0]
-    return None
-
-
 def patientpage(request, ID):
-    from_history = request.GET.get('from_history', False)
     context = {}
-    if from_history:
-        context['from_history'] = True
-    paInfo = get_patient_info(ID)
-    context.update({'patient': paInfo})
-    return render(request, 'patientpage.html', context)
+    
+    if request.method == "GET":
+        from_history = request.GET.get('from_history', False)
+        if from_history:
+            context['from_history'] = True
+        paInfo = get_patient_info(ID)
+        context.update({'patient': paInfo})
+        
+        testResult = nurseHistory()
+        context['testResult'] = testResult
+        
+        timeGenerate = generate_time_intervals()
+        context['timeintervals'] = timeGenerate
+        
+        return render(request, 'patientpage.html', context)
+    
+    if request.method == "POST":
+        department = request.POST.get('department')
+        wantedTime = request.POST.get('wantedTime')
+        appoint = Appointment(ID, department, wantedTime)
+        dbconn = connectDBAppointment()
+        dbconn.push(appoint.to_dict())
+        
+    return redirect('patientpage', ID)
 
 
 def doctorpage(request, ID):
@@ -250,18 +158,135 @@ def doctorpage(request, ID):
     return render(request, 'doctorpage.html', {'doctor': docInfo})
 
 def nursepage(request, ID):
-    nurseInfo = get_nurse_info(ID)
-    return render(request, 'nursepage.html', {'nurse': nurseInfo})
+    if request.method == "GET":
+        nurseInfo = get_nurse_info(ID)
+        
+        testResult = nurseHistory()
+        
+        if nurseInfo.get('department') == "Otology":
+            testList = get_testing_otology()
+            processList = get_testing_otology_inprocess()
+        elif nurseInfo.get('department') == "Rhinology":
+            testList = get_testing_rhinology()
+            processList = get_testing_rhinology_inprocess()
+        else:
+            testList = get_testing_laryngology()
+            processList = get_testing_laryngology_inprocess()
+            
+        return render(request, 'nursepage.html', {'nurse': nurseInfo, 'testList': testList, 'processList': processList, 'testResult': testResult})
+
+    if request.method == "POST":
+        result = request.POST.get('resultNote')
+        testID = request.POST.get('testID')
+        
+        Test.AddResult(testID, result)        
+
+    return redirect("nursepage", ID)
+
+def nurseStartTesting(request, testid, nurseid):
+    Test.InProcess(testid, nurseid)
+
+    return redirect('nursepage', nurseid)
+
+def deleteTesting(request, testid, nurseid):
+    Test.EraseProcess(testid)
+    return redirect('nursepage', nurseid)
+
+def cancelProcess(request, testid, nurseid):
+    Test.CancelProcess(testid)
+    return redirect('nursepage', nurseid)
+
+def nurseHistory():
+    listTestResult = []
+    dbconnPat = connectDBPatient().get()
+    if dbconnPat is not None:
+        for key1, value1 in dbconnPat.items():
+            dbconnTestResult = connectDBPatientTestResult(key1).get()
+            if dbconnTestResult is not None:
+                for key2, value2 in dbconnTestResult.items():
+                    listTestResult.append({
+                        'date': value2.get('date'),
+                        'department': value2.get('department'),
+                        'doctorname' : get_doctor_name(value2.get('doctorid')),
+                        'nurseid': value2.get('nurseid'),
+                        'nursename': get_nurse_name(value2.get('nurseid')),
+                        'patientid': key1,
+                        'patientname': get_patient_name(key1),
+                        'result' : value2.get('result'),
+                        'type': value2.get('type')
+                    })
+    
+    return listTestResult
 
 
 def medicinemanagerpage(request, ID):
-    managerInfo = get_medicinemanager_info(ID)
-    return render(request, 'medicinemanagerpage.html', {'manager': managerInfo})
+    if request.method == "GET":
+        managerInfo = get_medicinemanager_info(ID)
+        
+        medicineTable = get_medicine_table()
+        
+        medicineHistoryUsage = get_medicine_useHistory()
+        
+        medicinemanagerhistory = get_medicinemanager_history(ID)
+        
+        return render(request, 'medicinemanagerpage.html', {'manager': managerInfo, 'medicineTable': medicineTable , 'medicineHistory': medicineHistoryUsage, 'managerHistory': medicinemanagerhistory})
+    
+    if request.method == "POST":
+        form_check = request.POST.get('newMedicine-deleteMedicine')
+        if form_check == "form1":
+            medicinename = request.POST.get('medicinename')
+            quantity = int(request.POST.get('quantity'))
+            expiredate = request.POST.get('date')
+            MedicineManager.ImportMedicine(medicinename, quantity, expiredate)
+        elif form_check == "form2":
+            quantity = int(request.POST.get('quantity'))
+            reason = request.POST.get('reasonRemove')
+            medicineID = request.POST.get('medicineID')
+            MedicineManager.RemoveApartMedicine(medicineID, quantity, reason)
+        else:
+            reason = request.POST.get('reasonRemove')
+            medicineID = request.POST.get('medicineID')
+            MedicineManager.RemoveMedicine(ID, medicineID, reason)
+    
+    return redirect('medicinemanagerpage', ID)
 
 
 def equipmentmanagerpage(request, ID):
-    managerInfo = get_equipmentmanager_info(ID)
-    return render(request, 'equipmentmanagerpage.html', {'manager': managerInfo})
+    if request.method == "GET":
+        managerInfo = get_equipmentmanager_info(ID)
+        
+        tableEquipment = get_equipment_list()
+        
+        ManagerHistory = get_manager_history(ID)
+        
+        return render(request, 'equipmentmanagerpage.html', {'manager': managerInfo, 'tableEquipment': tableEquipment, 'tableHistory': ManagerHistory})
+    
+    if request.method == "POST":
+        form_check = request.POST.get('newEquipment-deleteEquipment')
+        if form_check == 'form1':
+            equipName = request.POST.get('equipmentName')
+            maintainDay = request.POST.get('date')
+            status = request.POST.get('status')
+            type = request.POST.get('type')
+            EquipmentManager.importEquipment(equipName, maintainDay, status, type)
+        else:
+            reason = request.POST.get('reasonRemove')
+            equipID = request.POST.get('equipmentID')
+            EquipmentManager.cancelEquipment(equipID, reason, ID)
+    
+    return redirect('equipmentmanagerpage', ID)
+
+def ActiveToInactive(request, managerID, equipID):
+    EquipmentManager.NeedMaintainEquipment(equipID)
+    return redirect('equipmentmanagerpage', managerID)
+    
+def InActiveToMaintain(request, managerID, equipID):
+    EquipmentManager.StartMaintainEquipment(equipID)
+    return redirect('equipmentmanagerpage', managerID)
+
+def MaintainToActive(request, managerID, equipID):
+    EquipmentManager.DoneMaintainEquipment(managerID, equipID)
+    return redirect('equipmentmanagerpage', managerID)
 
 
 def operatorpage(request, ID):
@@ -273,35 +298,6 @@ def adminpage(request, ID):
     adInfo = get_admin_info(ID)
     return render(request, 'adminpage.html', {'admin': adInfo})
 
-
-def get_doctor_appointments(doc_key):
-    appointment_table = connectDBAppointment().get()
-    if appointment_table is not None:
-        appointments = []
-        for key, value in appointment_table.items():
-            if value.get("DoctorID") == doc_key:
-                appointments.append({
-                    'appointmentID': key,
-                    'time': value.get("Time"),
-                    'patientinfo': get_patient_info(value.get("PatientID"))
-                })
-        appointments_sorted = sorted(appointments, key=lambda x: datetime.strptime(x['time'], '%H:%M'))
-        return appointments_sorted
-    else:
-        return None
-
-
-def get_medicine_table():
-    medicine_table = connectDBMedicine().get()
-    if medicine_table is not None:
-        medicineList = []
-        for key, value in medicine_table.items():
-            medicineList.append({
-                'id': key,
-                'name': value.get("Name")
-            })
-    return medicineList
-
   
 def patientdoctorview(request, docid, patid, appointKey):
     if request.method == "GET":
@@ -309,7 +305,9 @@ def patientdoctorview(request, docid, patid, appointKey):
         
         medicines = get_medicine_table()
         
-        return render(request, 'patientdoctorview.html', {'patient': patients, 'docid': docid, 'medicines': medicines})
+        testResult = nurseHistory()
+        
+        return render(request, 'patientdoctorview.html', {'patient': patients, 'docid': docid, 'medicines': medicines, 'testResult': testResult})
     
     if request.method == "POST":
         form_check = request.POST.get('createnewrecord-testing')
@@ -328,83 +326,9 @@ def patientdoctorview(request, docid, patid, appointKey):
             status = request.POST.get('patientstatus')
             revisit = request.POST.get('revisitdaytext')
             recordid = request.POST.get('recordid')
-            Doctor.AddPrescription(patid, recordid, docid, status, revisit, note, medicineList, appointKey)
+            Doctor.AddPrescription(patid, recordid, docid, status, revisit, note, medicineList)
 
     return redirect('patientdoctorview', docid, patid, appointKey)
-
-
-def get_medicial_record(ID):
-    tableMedical = connectDBMedicalRecord(ID).get()
-    if tableMedical is not None:
-        medicalrecord = []
-        for key, value in tableMedical.items():
-            medicalrecord.append({
-                'id': key,
-                'diagnose': value.get("Diagnose"),
-                'date': value.get("Date"),
-                'prescription': get_prescription_info(ID, key),
-                'revisit': value.get("Revisit"),
-                'status': value.get("Status")
-            })
-        return medicalrecord
-    else:
-        return None
-
-
-def get_prescription_info(ID1, ID2):
-    tablePrescription = connectDBPrescription(ID1, ID2).get()
-    if tablePrescription is not None:
-        prescriptionRecord = []
-        for key, value in tablePrescription.items():
-            prescriptionRecord.append({
-                'date': value.get("Date"),
-                'doctorname': get_doctor_name(value.get("DoctorID")),
-                'note': value.get("Note"),
-                'status': value.get("Status"),
-                'revisit': value.get("Revisit"),
-                'medicinelist': get_medicine_list(value.get("Medicines"))
-            })
-        return prescriptionRecord
-    else:
-        return None
-
-
-def get_doctor_name(ID):
-    tableUser = connectDBDoctor().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            return value.get("Name")
-    return None
-
-
-def get_patient_name(ID):
-    tableUser = connectDBPatient().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            return value.get("Name")
-    return None
-
-
-def get_medicine_list(medicinelist):
-    tableMedicine = connectDBMedicine().get()
-    if tableMedicine is not None:
-        list = []
-        for medicine in medicinelist:
-            for key, value in tableMedicine.items():
-                if(medicine['id'] == key):
-                    list.append({'name': value.get("Name"), 'quantity': medicine['quantity'], 'note' : medicine['note']})
-        return list   
-
-def get_doctor_list():
-    tableDoctor = connectDBDoctor().get()
-    if tableDoctor is not None:
-        list = []
-        for key, value in tableDoctor.items():
-            list.append({
-                'id': key,
-                'name': value.get("Name"),
-            })
-        return list      
 
 
 def deleteAppoint(request, docid, appointKey):
@@ -442,23 +366,3 @@ def doctorhistory(request, id):
     return render(request,'doctorhistory.html', {'historypatient': HistoryPatient, 'medicines': medicines, 'doctors': doctors})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def managerpage(request, id):
-    adInfo = get_admin_info(id)
-    return render(request, 'managerpage.html', {'admin': adInfo})
-
-def equimentmanagement(request,id):
-    return render(request, 'equimentmanagement.html')

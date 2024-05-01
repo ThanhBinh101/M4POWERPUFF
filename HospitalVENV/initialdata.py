@@ -71,5 +71,13 @@ firebase_admin.initialize_app(cred, {
 # dbref.push({"Time": "9:00","DoctorID":"-NvIWN7XPalb0cRUlhAB", "Department":"Brain", "PatientID":"-NvlHrAJBOsEaqonaHuU"})
 
 dbref = db.reference("Nurse/")
-dbref.push({"Name": "ConSoiCoDoc","Gmail":"nurse@gmail.com","Password": "123456", "Date of Birth": "12/11/2000", "Department":"Ear", "Level":"Bachelor", "Years": "4"})
+dbref.push({"Name": "ConCuuNgayTho2","Gmail":"nurse2@gmail.com","Password": "123456", "Date of Birth": "05/11/2000", "Department":"Rhinology", "Level":"Bachelor", "Years": "8"})
 
+dbref = db.reference("Nurse/")
+dbref.push({"Name": "ConCuuNgayTho3","Gmail":"nurse3@gmail.com","Password": "123456", "Date of Birth": "30/11/2000", "Department":"Otology", "Level":"Bachelor", "Years": "10"})
+
+dbref = db.reference("Nurse/")
+dbref.push({"Name": "ConCuuNgayTho4","Gmail":"nurse4@gmail.com","Password": "123456", "Date of Birth": "05/12/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "3"})
+
+dbref = db.reference("Nurse/")
+dbref.push({"Name": "ConCuuNgayTho5","Gmail":"nurse5@gmail.com","Password": "123456", "Date of Birth": "30/10/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "9"})

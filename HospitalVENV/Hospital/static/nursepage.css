@@ -125,7 +125,7 @@
     height: 60%;
 }
 
-.testingHistory button {
+.testingHistory .btn-primary {
   font-size: 16px;
   background-color: #ff66b2;
   border-color: #D8D2FC;
@@ -137,7 +137,7 @@
   width: 200px;
   margin-left: 5%;
 }
-.Schedule button {
+.Schedule .btn-primary {
   font-size: 16px;
   background-color: #0487D9;
   border-color: #D8D2FC;
@@ -150,7 +150,7 @@
   margin-left: 5%;
 }
 
-.testingHistory button:hover, .Schedule button:hover {
+.testingHistory .btn-primary:hover, .Schedule .btn-primary:hover {
   background-color: #F2CED8;
   border-color: #F2CED8;
 }
@@ -215,22 +215,29 @@
   transition: all 0.55s ease;
 }
 .bx-alarm-add {
-  margin-left: 10%;
-  font-size: 20px;
+  margin-right: 10%;
+  font-size: 22px;
   color: #ff66b2;
-  transition: all 0.55s ease;
 }
 .bx-alarm-add:hover {
-  font-size: 21px;
-}
-.ri-user-search-line:hover {
-  font-size: 25px;
+  color:green;
 }
 .ri-check-fill:hover{
-  font-size: 25px;
+  color:green;
 }
 .ri-close-fill:hover{
-  font-size: 25px;
+  color:green;
 }
-
-
+.newResult .btn-primary {
+  font-size: 16px;
+  background-color: #ff66b2;
+  border-color: #D8D2FC;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  text-decoration: none;
+  color: white;
+  font-style: normal;
+}
+.newResult .btn-primary:hover {
+  background-color: rgba(4, 135, 217, 0.3);
+}

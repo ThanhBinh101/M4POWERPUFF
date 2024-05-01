@@ -171,32 +171,30 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 <div class="modal-body appointmentModalBody">
-                    <form method="POST" > {% csrf_token %}
-                        <input type="hidden" name="createnewrecord" value="form1">
+                    <form id="appointForm" method="POST" > {% csrf_token %}
                         <div class="mb-3">
                             <label class="form-label">Department</label>
-                            <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                            <select class="form-select" name="department" style = "color: #ff66b2"; aria-label="Department" required>
                                 <option selected>Choose department</option>
-                                <option value="1">Tai</option>
-                                <option value="2">Mũi</option>
-                                <option value="3">Họng</option>
-                              </select>
+                                <option value="Otology">Otology</option>
+                                <option value="Rhinology">Rhinology</option>
+                                <option value="Laryngology">Laryngology</option>
+                            </select>
                         </div>
                     
                         <div class="mb-3">
                             <label class="form-label">Time</label>
-                           
-                            <select class="form-select" style = "color: #ff66b2"; aria-label="Time">
+                            <select class="form-select" name="wantedTime" style = "color: #ff66b2"; aria-label="Time" required>
                                 <option selected>Choose time</option>
-                                <option value="1">12:00</option>
-                                <option value="2">12:30</option>
-                                <option value="3">13:00</option>
-                              </select>
+                                {% for time in timeintervals%}
+                                <option value={{time}}>{{time}}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer appointmentModalFooter" style = "background-color: rgba(4, 135, 217, 0.5);">
-                    <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
+                    <button type="submit" class="btn btn-primary" form="appointForm" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
                 </div>  
             </div>
@@ -220,6 +218,50 @@
                
             </div>
         </div>     
+    </div>
+
+    <div class="modal fade" id="Result" tabindex="-1" aria-labelledby="testingResultLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="testingResultLabel">Testing Result</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body testingResult">
+                <div class="table-wrapper">
+                    <table class="table table-bordered" id="myTable">
+                        <thead>
+                            <tr class="table-danger">
+                                <th style="width:10%;">Date</th>
+                                <th style="width:15%;">DoctorName</th>
+                                <th style="width:15%;">NurseName</th>
+                                <th style="width:15%">Department</th>
+                                <th style="width:15%;">Type</th>
+                                <th style="width:30%;">Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for res in testResult%}
+                                {% if res.patientid == patient.id%}
+                                <tr class="table-danger">
+                                    <td>{{res.date}}</td>
+                                    <td>{{res.doctorname}}</td>
+                                    <td>{{res.nursename}}</td>
+                                    <td>{{res.department}}</td>
+                                    <td>{{res.type}}</td>
+                                    <td>{{res.result}}</td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
     </div>
     
 </body>

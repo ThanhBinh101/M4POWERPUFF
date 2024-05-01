@@ -44,10 +44,6 @@
     <section class = "displaybox">
         <div class = "textbox">
             <h2>Operator Information</h2>
-            <div class = "textboxIDDoc">
-                <h6>ID*</h6>
-                <p id = "OperatorID">{{operator.id}}</p>
-            </div>
             <h6>Name</h6>
             <p id = "OperatorName">{{operator.name}}</p>
             <h6>Phone</h6>
@@ -58,6 +54,57 @@
 
         <div class = "tablebox">
 
+        </div>
+
+    </section>
+
+    <section class="operatormanagement">
+        <h3 class="heading">OPERATOR</h3>
+        <div class ="timetable">
+            <table>
+                <tr>
+                    <th style="width: 20%">Patient</th>
+                    <th style="width: 15%">Department</th>
+                    <th style="width: 15%">Wanted Time</th>
+                    <th style="width: 15%">Available Time</th>
+                    <th style="width: 20%">Doctor</th>
+                    <th style="width: 15%">Action</th>
+                </tr>
+                <tr>
+                    <td class="empty-cell" contenteditable="true"></td>
+                    <td class="empty-cell" contenteditable="true"></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <select class="doctor-select">
+                            <option value="doctor1">Doctor 1</option>
+                            <option value="doctor2">Doctor 2</option>
+                            <option value="doctor3">Doctor 3</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="ri-heart-add-line"></button> 
+                        <button class="ri-dislike-line"></button> 
+                    </td>      
+                </tr>
+                <tr>
+                    <td class="empty-cell" contenteditable="true"></td>
+                    <td class="empty-cell" contenteditable="true"></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <select class="doctor-select">
+                            <option value="doctor1">Doctor 1</option>
+                            <option value="doctor2">Doctor 2</option>
+                            <option value="doctor3">Doctor 3</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="ri-heart-add-line"></button> 
+                        <button class="ri-dislike-line"></button> 
+                    </td>      
+                </tr>
+            </table>
         </div>
 
     </section>

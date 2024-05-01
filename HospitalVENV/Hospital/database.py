@@ -37,6 +37,18 @@ def connectDBEquipmentManager(key = ""):
     connect()
     return db.reference("EquipmentManager/{}".format(key))
 
+def connectDBEquipment(key = ""):
+    connect()
+    return db.reference("Equipment/{}".format(key))
+
+def connectDBEquipmentHistory(key1="", key2=""):
+    connect()
+    return db.reference("Equipment/{}/History/{}".format(key1, key2))
+
+def connectDBEquipmentManagerHistory(key1="", key2=""):
+    connect()
+    return db.reference("EquipmentManager/{}/History/{}".format(key1, key2))
+
 def connectDBAdmin(key = ""):
     connect()
     return db.reference("Admin/{}".format(key))
@@ -45,9 +57,13 @@ def connectDBMedicine(key = ""):
     connect()
     return db.reference("Medicine/{}".format(key))
 
-def connectDBMedicineHistory(key = ""):
+def connectDBMedicineHistory(key1 = "", key2 = ""):
     connect()
-    return db.reference("Medicine/{}/History/".format(key))
+    return db.reference("Medicine/{}/History/".format(key1, key2))
+
+def connectDBMedicineManagerHistory(key1, key2 = ""):
+    connect()
+    return db.reference("MedicineManager/{}/History/{}".format(key1, key2))
 
 def connectDBMedicalRecord(key1, key2 = ""):
     connect()
