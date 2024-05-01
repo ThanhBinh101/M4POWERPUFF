@@ -1,0 +1,491 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+    list-style: none;
+    text-decoration: none;
+  }
+  header {
+    position: flex;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 9%;
+    background: #F2CED8;
+  }
+  body {
+    background-color: white;
+  }
+  .logo-name {
+    float: left
+  }
+  .logo-name img {
+    max-width: 55px;
+    float: left;
+    margin: 0 10px 0 0;
+  }
+  .logo-name a {
+    font-family: 'Baloo 2';
+    font-size: 30px;
+    font-weight: 700;
+    color: #0487d9;
+    text-decoration: none;
+  }
+  .navlist {
+    display: flex;
+    margin-top: 15px;
+  }
+  .navlist a{
+    color: #0487d9;
+    margin-left: 60px;
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all .55s ease;
+    text-decoration: none;
+  }
+  .navlist a:hover{
+    border-bottom: 2px solid #0487d9;
+  }
+  header .btn-primary {
+    font-size: 20px;
+    margin-right: 25px;
+    background-color: #ff66b2;
+    border-color: #ff66b2;
+    color: white;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    --bs-btn-padding-x: 1rem;
+  }
+  header button:hover {
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
+  }
+  header .btn-primary a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px
+  }
+  section {
+    padding: 0 2%;
+  }
+  .displaybox {
+    height: 80%;
+    width: 80%;
+    min-height: 75vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    gap: 2rem;
+    background-color: rgba(4, 135, 217, 0.3);
+    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+    border-radius: 47px;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: -5%;
+  }
+  .textbox {
+    line-height: 0.75cm;
+    display: block;
+    margin-left: 8%;
+    margin-top: 5%;
+  }
+  .textbox h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 10%;
+    margin-bottom: 5%;
+  }
+  .textbox p {
+    border-bottom: 2px solid black;
+    font-size: 16px;
+  }
+  .textbox h6{
+    font-size: 20px;
+  }
+  
+  .patientinfo {
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+    margin-left: 30%;
+  }
+  
+  .patientimg img {
+    border: 2px solid black;
+    border-radius: 47px;
+    width: 60%;
+    height: 60%;
+  }
+  
+  .newButton .btn-primary
+   {
+    font-size: 16px;
+    background-color: #0487D9;
+    border-color: #D8D2FC;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 200px;
+    margin-left: 3%;
+  }
+  
+  .newButton .btn-primary {
+    background-color: #ff66b2;
+    border-color: #0487D9;
+  }
+  
+  .newButton .btn-primary:hover {
+  background-color: #F2CED8;
+  border-color: #F2CED8;
+  font-size: 16px;
+  }
+  .newButton .btn-primary:hover {
+  background-color: #D8D2FC;
+  border-color: #D8D2FC;
+  font-size: 16px;
+  }
+  
+  .modal-dialog .modal-content .modal-header,
+  .modal-dialog .modal-content .modal-body,
+  .modal-dialog .modal-content .modal-footer {
+  border: none; 
+  
+  
+  }
+  
+  .appointmentModalHeader.modal-content, .registerModalHeader .modal-content {
+    width: 800px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .appointmentModalHeader, .registerModalHeader, .successHeader {
+  background-color: rgba(242, 206, 216, 0.5);
+  text-align: center;
+  }
+  .appointmentModalHeader .modal-title, .registerModalHeader .modal-title{
+  font-family: 'Baloo 2';
+  font-size: 30px;
+  color: #0487d9;
+  width: 100%;
+  padding-left: 5%;
+  
+  
+  }
+  
+  .appointmentModalBody, .registerModalBody {
+  background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+  overflow-x: auto;
+  overflow-y: auto;
+  
+  }
+  
+  .appointmentModalFooter .btn-primary, .registerModalFooter .btn-primary {
+  font-size: 12px;
+  background-color: #ff66b2;
+  border-color: #0487D9;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  text-decoration: none;
+  color: white;
+  font-style: normal;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  }
+  
+  .appointmentModalFooter .btn-primary:hover, .registerModalFooter .btn-primary:hover {
+  background-color: #F2CED8;
+  border-color: #F2CED8;
+  }
+  
+  .appointmentModalFooter .btn-secondary, .registerModalFooter .btn-secondary {
+    font-size: 12px;
+    background-color: rgba(242, 206, 216, 0.8);
+    border-color: white;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color:  black;
+    font-style: normal;
+    width: 100px;
+  }
+  
+  .appointmentModalFooter .btn-secondary:hover, .registerModalFooter .btn-secondary:hover {
+    font-size: 13px;
+    background-color: rgba(4, 135, 217, 0.3);
+  }
+  
+  .successBody {
+    color:#ff66b2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .successimg img {
+    width: 20%;
+    height: 20%;
+  }
+  
+  
+  .MedicalRecord {
+  height: 80%;
+  width: 80%;
+  min-height: 75vh;
+  position: relative;
+  background-color: rgba(4, 135, 217, 0.3);
+  border-radius: 47px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 2%;
+  margin-top: 200px;
+  }
+  
+  .textbox1 {
+  line-height: 0.75cm;
+  display: block;
+  margin-left: 3%;
+  margin-bottom: 3%;
+  }
+  
+  .custom-table {
+  border-collapse: collapse;
+  width: 100%; 
+  }
+  .custom-table th,
+  .custom-table td {
+  padding: 10px !important; 
+  }
+  
+  .align {
+  text-align: center;
+  justify-content: center;
+  }
+  .table-wrapper {
+  margin-left: 3%;
+  max-height: 450px; 
+  overflow-y: auto;
+  width: 93%;
+  }
+  
+  .ri-eye-line {
+  font-size: 24px;
+  transition: all 0.55s ease;
+  }
+  .ri-eye-line:hover {
+  font-size: 26px; 
+  }
+  
+  .table-wrapper button {
+  color: #ff66b2;
+  background-color: transparent;
+  border-width: 0;
+  }
+  
+  .tablePrescription {
+  padding-left: 2%;
+  padding-right: 2%;
+  }
+  
+  .row {
+    margin-bottom: 10px;
+  }
+  
+  .col {
+    display: flex;
+    align-items: center;
+  }
+  .label {
+    display: inline-block;
+    width: 100px; 
+  }
+  
+  .input {
+    flex: 1;
+    margin-right: 10px;
+    border-radius: 40px;
+    height: 40px;
+    size:20px;
+    font-family: 'Baloo 2';
+    border-style: solid;
+  }
+  
+  .spacer {
+    margin-right: 20px; 
+  }
+  .col select {
+    margin-right: 10px; 
+    height:40px ;
+    font-family: 'Baloo 2';
+  }
+  .time-select {
+    width: 150px; 
+    border-radius: 40px;
+    border-style: solid;
+    font-family: 'Baloo 2';
+  }
+  .icon{
+    width:20px;
+    height: 20px;
+    padding-right: 5px;
+    color: #ff66b2;
+  }
+  .signupform h3{
+    color: #1278B9;
+    font-family: 'Baloo 2';
+    font-size: 28px;
+    text-align: center;
+    padding-top: 20px;
+  
+  }
+  .signupform form{
+    padding-left: 10%;
+    padding-bottom: 3%;
+    width: 90%;
+    height: 100%;
+    font-family: 'Baloo 2';
+  }
+  .form-control {
+    --bs-body-bg: white;
+  }
+  .form-select {
+    --bs-body-bg: white;
+  }
+  .pink-background{
+    width: 100%; 
+    background-color: #F2CED8; 
+    margin: 2% auto 1%;
+    border-radius: 47px;
+  }
+  .timetable{
+    background-color: #F2CED8;
+    padding:20px;
+    border-radius: 47px;
+    margin: 20px;
+    font-family: 'Baloo 2';
+   }
+   .timetable table{
+    width:100%;
+    border-collapse: collapse;
+    font-family: 'Baloo 2';
+   }
+   .timetable th, .timetable td{
+    border: 1px solid #0487d9;
+    border-top:none;
+    padding: 10px;
+    text-align: center;
+   }
+   .timetable th{
+    background-color: #F2CED8;
+    color:#ff66b2;
+  
+   }
+   .empty-cell{
+    background-color:none;
+   }
+   .delete-button{
+    background-color:#F2CED8;
+   }
+   .delete-button:hover {
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
+  }
+  .HeadingSchedule{
+    color: #0487d9; 
+    font-size: 24px; 
+    font-family: 'Poppins', sans-serif; 
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+  .Schedule{
+    background-color: #F2CED8;
+    padding:20px;
+    border-radius: 47px;
+    margin: 20px;
+    margin-bottom: 20px;
+  
+   }
+   .Schedule table{
+    width:100%;
+    border-collapse: collapse;
+   }
+   .Schedule th, .Schedule td{
+    border: 1px solid #0487d9;
+    border-top:none;
+    padding: 10px;
+    position: relative;
+    max-width: 100px;
+   }
+   .Schedule th{
+    background-color: #F2CED8;
+    color:#ff66b2;
+  
+   }
+   .empty-cell{
+    background-color:none;
+   }
+   .button--submit{
+    padding:8px 30px;
+    background-color: #ff66b2;
+    color: #fff;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 900px;
+    margin-bottom: 20px;
+   }
+   .button--submit:hover{
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
+   }
+   .name {
+    padding: 8px;
+    border-color: #333;
+    border-style: solid;
+    background-color:#F2CED8;
+    color: #333;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    border-radius: 40px;
+    font-family: 'Poppins', sans-serif;
+  
+   }
+   .Doctor{
+    color: #ff66b2; 
+    font-size: 18px; 
+    font-family: 'Poppins', sans-serif; 
+    text-align: left;
+   
+   }
+  .room{
+    background-color:#F2CED8;
+    width:40%;
+    border: none;
+    border-bottom: 1px solid;
+    font-family: 'Poppins', sans-serif;
+    
+  }
+  .title{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+  }
+   
+    
