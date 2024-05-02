@@ -3,7 +3,7 @@ from django.apps import apps
 
 from .database import *
 
-from datetime import date
+from datetime import date, time
 from datetime import datetime, timedelta
 
 class Information:
@@ -380,6 +380,10 @@ class Appointment():
         self.patientid = patientid
         self.department = department
         self.time = wantedtime
+    
+    def parse_time(self, time_str):
+        hour, minute = map(int, time_str.split(':'))
+        return time(hour, minute)
 
     @staticmethod
     def AddTime(apmid):
@@ -412,23 +416,14 @@ class Appointment():
             "PatientID": self.patientid,
             "Department": self.department,
             "Time": self.time,
+            "DoctorID": "None",
         }
 
 class Operator(Information):
     @staticmethod
-    def CheckTime(docid, time):
-        dbconn = connectDBAppointment()
-        for data in dbconn:
-            if(data.get("Time") == time and data.get("DoctorID").data() == docid):
-                return False
-        return True
-    
-    @staticmethod
     def SetAPM(docid, apmid, time):
-        dbconn = connectDBAppointment(apmid)
-        dbconn.set({"DoctorID": docid})
-        completeTime = time + timedelta(hours=1)
-        dbconn.update({"Time": time, "CompleteTime": completeTime})
+        dbconn = connectDBAppointment().child(apmid)
+        dbconn.update({"Time": time, "DoctorID": docid})
 
     @staticmethod
     def DelAPM(apmid):

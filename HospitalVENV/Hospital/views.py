@@ -290,10 +290,25 @@ def MaintainToActive(request, managerID, equipID):
 
 
 def operatorpage(request, ID):
-    operatorInfo = get_operator_info(ID)
-    return render(request, 'operatorpage.html', {'operator': operatorInfo})
+    if request.method == "GET":
+        operatorInfo = get_operator_info(ID)
+        appointTable = get_appoint_table()
+        
+        otologyDoc = get_otology_doctor()
+        rhinologyDoc = get_rhinology_doctor()
+        laryngologyDoc = get_laryngology_doctor()
+        
+        return render(request, 'operatorpage.html', {'operator': operatorInfo, 'appointmentTable': appointTable, 'otologyDoc' : otologyDoc, 'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc})
 
-
+    if request.method == "POST":
+        doctorid = request.POST.get('doctor')
+        time = request.POST.get('time')
+        appointid = request.POST.get('appointID')
+        if( time != "Choose time" and doctorid != "Choose doctor"):
+            Operator.SetAPM(doctorid, appointid, time)
+    
+    return redirect('operatorpage', ID)
+    
 def adminpage(request, ID):
     adInfo = get_admin_info(ID)
     return render(request, 'adminpage.html', {'admin': adInfo})

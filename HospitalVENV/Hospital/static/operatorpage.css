@@ -154,13 +154,16 @@
     background-color: #F2CED8;
     color:#ff66b2;
    }
-   .empty-cell{
-    background-color:none;
-   }
-  .doctor-select{
-    font-family: 'Poppins', sans-serif;
+
+   .modal-body {
     background-color: #F2CED8;
-  }
+    color:#ff66b2;
+    border: 1px solid #0487d9;
+    border-top:none;
+    padding: 10px;
+    text-align: center;
+   }
+
   .ri-heart-add-line {
     border-width: 0; 
     background-color: transparent; 
@@ -180,5 +183,15 @@
     color: #0487d9;
   }
   .ri-dislike-line:hover {
+    color: #0487d9;
+  }
+  .ri-nurse-line {
+    border-width: 0; 
+    background-color: transparent; 
+    color: #ff66b2;
+    font-size: 26px;
+    transition: all 0.55s ease;
+  }
+  .ri-nurse-line:hover {
     color: #0487d9;
   }

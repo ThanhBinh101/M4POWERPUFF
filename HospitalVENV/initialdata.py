@@ -7,9 +7,9 @@ firebase_admin.initialize_app(cred, {
     "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
 })
 
-# dbref = db.reference("Doctor")
-# dbref.push({"Name":"Ngoc Nhon", "Department": "Heart", "Phone": "0901812806", 
-#             "Gmail": "doctor@gmail.com", "Level":"Bachelor", "Password": "123456"})
+dbref = db.reference("Doctor")
+dbref.push({"Name":"Ngoc Nhon 2", "Department": "Laryngology", "Phone": "0901812806", 
+            "Gmail": "doctor2@gmail.com", "Level":"Bachelor", "Password": "123456"})
 
 # dbref = db.reference("MedicineManager")
 # dbref.push({"Name":"Thanh Binh", "Phone": 9696, 
@@ -70,14 +70,14 @@ firebase_admin.initialize_app(cred, {
 # dbref = db.reference("Appointment/")
 # dbref.push({"Time": "9:00","DoctorID":"-NvIWN7XPalb0cRUlhAB", "Department":"Brain", "PatientID":"-NvlHrAJBOsEaqonaHuU"})
 
-dbref = db.reference("Nurse/")
-dbref.push({"Name": "ConCuuNgayTho2","Gmail":"nurse2@gmail.com","Password": "123456", "Date of Birth": "05/11/2000", "Department":"Rhinology", "Level":"Bachelor", "Years": "8"})
+# dbref = db.reference("Nurse/")
+# dbref.push({"Name": "ConCuuNgayTho2","Gmail":"nurse2@gmail.com","Password": "123456", "Date of Birth": "05/11/2000", "Department":"Rhinology", "Level":"Bachelor", "Years": "8"})
 
-dbref = db.reference("Nurse/")
-dbref.push({"Name": "ConCuuNgayTho3","Gmail":"nurse3@gmail.com","Password": "123456", "Date of Birth": "30/11/2000", "Department":"Otology", "Level":"Bachelor", "Years": "10"})
+# dbref = db.reference("Nurse/")
+# dbref.push({"Name": "ConCuuNgayTho3","Gmail":"nurse3@gmail.com","Password": "123456", "Date of Birth": "30/11/2000", "Department":"Otology", "Level":"Bachelor", "Years": "10"})
 
-dbref = db.reference("Nurse/")
-dbref.push({"Name": "ConCuuNgayTho4","Gmail":"nurse4@gmail.com","Password": "123456", "Date of Birth": "05/12/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "3"})
+# dbref = db.reference("Nurse/")
+# dbref.push({"Name": "ConCuuNgayTho4","Gmail":"nurse4@gmail.com","Password": "123456", "Date of Birth": "05/12/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "3"})
 
-dbref = db.reference("Nurse/")
-dbref.push({"Name": "ConCuuNgayTho5","Gmail":"nurse5@gmail.com","Password": "123456", "Date of Birth": "30/10/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "9"})
+# dbref = db.reference("Nurse/")
+# dbref.push({"Name": "ConCuuNgayTho5","Gmail":"nurse5@gmail.com","Password": "123456", "Date of Birth": "30/10/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "9"})

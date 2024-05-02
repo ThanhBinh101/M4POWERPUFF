@@ -411,8 +411,6 @@ def generate_time_intervals():
     current_minute = current_time.minute
 
     time_intervals = []
-    
-    current_hour = 18
 
     if current_hour < 12:
         for hour in range(7, 12):
@@ -430,5 +428,107 @@ def generate_time_intervals():
         for hour in range(13, 17):
             for minute in ['00', '30']:
                 time_intervals.append(f'{hour:02}:{minute}')
+
+    return time_intervals
+
+def get_appoint_table():
+    list = []
+    tableAppoint = connectDBAppointment().get()
+    if tableAppoint is not None:
+        for key, value in tableAppoint.items():
+            if value.get("DoctorID") == "None":
+                list.append({
+                    'AppointmentID': key,
+                    'Department': value.get('Department'),
+                    'PatientName': get_patient_name(value.get('PatientID')),
+                    'Time': value.get('Time'),
+                    'DoctorID': value.get('DoctorID'),
+                    'Period': value.get("Period")
+                })
+    return list
+
+def get_otology_doctor():
+    list = []
+    tableDoctor = connectDBDoctor().get()
+    if tableDoctor is not None:
+        for key, value in tableDoctor.items():
+            if value.get("Department") == "Otology":
+                list.append({
+                    'doctorID': key,
+                    'doctorName': value.get("Name"),
+                    'doctorFreeTime': get_freetime_doctor(key)
+                })
+    return list
+
+def get_rhinology_doctor():
+    list = []
+    tableDoctor = connectDBDoctor().get()
+    if tableDoctor is not None:
+        for key, value in tableDoctor.items():
+            if value.get("Department") == "Rhinology":
+                list.append({
+                    'doctorID': key,
+                    'doctorName': value.get("Name"),
+                    'doctorFreeTime': get_freetime_doctor(key)
+                })
+    return list
+
+def get_laryngology_doctor():
+    list = []
+    tableDoctor = connectDBDoctor().get()
+    if tableDoctor is not None:
+        for key, value in tableDoctor.items():
+            if value.get("Department") == "Laryngology":
+                list.append({
+                    'doctorID': key,
+                    'doctorName': value.get("Name"),
+                    'doctorFreeTime': get_freetime_doctor(key)
+                })
+    return list
+
+def get_freetime_doctor(docID):
+    current_time = datetime.now()
+    current_hour = current_time.hour
+    current_minute = current_time.minute
+    
+    
+    if docID == "-NvIWN7XPalb0cRUlhAB":
+        shift = "Morning"
+    else:
+        shift= "Afternoon"
+        
+    time_intervals = []
+    
+    current_hour = 6
+    
+    if shift == "Morning":
+        if current_hour < 7:
+            for hour in range(7, 12):
+                for minute in ['00', '30']:
+                    time_intervals.append(f'{hour:02}:{minute}')
+        else:
+            for hour in range(current_hour + 1, 12):
+                for minute in ['00', '30']:
+                    time_intervals.append(f'{hour:02}:{minute}')
+    elif shift == "Afternoon":
+        if current_hour < 13:
+            for hour in range(13, 17):
+                for minute in ['00', '30']:
+                    time_intervals.append(f'{hour:02}:{minute}')
+        else:
+            for hour in range(current_hour + 1, 17):
+                for minute in ['00', '30']:
+                    time_intervals.append(f'{hour:02}:{minute}')
+    else:
+        None
+
+    tableAppoint = connectDBAppointment().get()
+    if tableAppoint is not None:
+        for key1, value1 in tableAppoint.items():
+            if(value1.get("DoctorID") == docID):
+                removeTime = value1.get("Time")
+                for time in time_intervals:
+                    if time == removeTime:
+                        time_intervals.remove(removeTime)
 
     return time_intervals
