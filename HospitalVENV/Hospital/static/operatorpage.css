@@ -111,6 +111,48 @@
   .textbox h6{
     font-size: 20px;
   }
+  .Operatorinfo {
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+    margin-left: 30%;
+  }
+  .Operatorimg img {
+    border: 2px solid black;
+    border-radius: 47px;
+    width: 60%;
+    height: 60%;
+  }
+  .schedule .btn-primary {
+    font-size: 16px;
+    background-color: #0487D9;
+    border-color: #D8D2FC;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 200px;
+    margin-left: 4%;
+  }
+  .OperatorHistory .btn-primary {
+    font-size: 16px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 200px;
+    margin-left: 5%;
+  }
+
+  .schedule .btn-primary:hover, .OperatorHistory .btn-primary:hover{
+    background-color: #D8D2FC;
+    border-color: #D8D2FC;
+    font-size: 16px;
+  }
 
   .operatormanagement{
     height: 80%;
@@ -155,7 +197,7 @@
     color:#ff66b2;
    }
 
-   .modal-body {
+   .freetimetable {
     background-color: #F2CED8;
     color:#ff66b2;
     border: 1px solid #0487d9;

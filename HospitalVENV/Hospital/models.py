@@ -426,9 +426,26 @@ class Operator(Information):
         dbconn.update({"Time": time, "DoctorID": docid})
 
     @staticmethod
-    def DelAPM(apmid):
-        connectDBAppointment(apmid).delete()
-
+    def DelAPM(apmid, operatorid, patientname, reason):
+        patientid = connectDBAppointment(apmid).child("PatientID").get()
+        wantedtime = connectDBAppointment(apmid).child("Time").get()
+        department = connectDBAppointment(apmid).child("Department").get()
+        removedate = date.today().strftime("%d/%m/%Y")
+        
+        dbconn = connectDBOperatorHistory(operatorid)
+        dbconn.push({
+            'appointmentID': apmid,
+            'patientID': patientid,
+            'patientName': patientname,
+            'wantedTime': wantedtime,
+            'reason': reason,
+            'removedate': removedate,
+            'department':department
+        })
+        
+        deleteAppoint = connectDBAppointment().child(apmid)
+        deleteAppoint.delete()
+        
 class Job():
     def __init__(self, department, role, person, weekday, startTime, endTime, shift, position):
         self.department = department

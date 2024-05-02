@@ -52,7 +52,62 @@
             <p id = "OperatorGmail">{{operator.gmail}}</p>
         </div> 
 
-        <div class = "tablebox">
+        <div class = "Operatorinfo">
+            <div class = "Operatorimg">
+                <img src="{%static 'Operator.jpg'%}">
+            </div>
+
+            <div style = "margin-top: 5%" class = 'OperatorHistory'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#OperatorHistory">Medicine History</button>
+            </div>
+
+            <div style = "margin-top: 5%" class = 'schedule'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">Schedule</button>
+            </div>
+
+            <div class="modal fade" id="OperatorHistory" tabindex="-1" aria-labelledby="viewOperatorHistoryLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width: 1300px;">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="viewOperatorHistoryLabel">Medicine History</h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body viewOperatorHistory">
+                        <div class="table-wrapper">
+                            <table class="table table-bordered" id="myTable">
+                                <thead>
+                                    <tr class="table-danger">
+                                        <th style="width:20%;">Appointment ID</th>
+                                        <th style="width:20%;">Patient ID</th>
+                                        <th style="width:15%;">Patient Name</th>
+                                        <th style="width:10%;">Department</th>
+                                        <th style="width:10%;">Wanted Time</th>
+                                        <th style="width:10%;">Remove Date</th>
+                                        <th style="width:15%;">Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for his in operatorhistory%}
+                                        <tr class="table-danger">
+                                            <td>{{his.appointmentID}}</td>
+                                            <td>{{his.patientID}}</td>
+                                            <td>{{his.patientName}}</td>
+                                            <td>{{his.department}}</td>
+                                            <td>{{his.wantedTime}}</td>
+                                            <td>{{his.removedate}}</td>
+                                            <td>{{his.reason}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer viewEquipmentManagerHistory">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
 
         </div>
 
@@ -85,7 +140,7 @@
                                   <h1 class="modal-title fs-5" id="otologyModalLabel">Otology Doctor</h1>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body freetimetable ">
                                     <table>
                                         <tr>
                                             <th style="width: 19%">Doctor - Time</th>
@@ -257,7 +312,7 @@
                                   <h1 class="modal-title fs-5" id="rhinologyModalLabel">Rhinology Doctor</h1>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body freetimetable">
                                     <table>
                                         <tr>
                                             <th style="width: 19%">Doctor - Time</th>
@@ -429,7 +484,7 @@
                                   <h1 class="modal-title fs-5" id="laryngologyModalLabel">Laryngology Doctor</h1>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body freetimetable">
                                     <table>
                                         <tr>
                                             <th style="width: 19%">Doctor - Time</th>
@@ -606,6 +661,7 @@
                                 <div class="modal-body">
                                     <form id="asigndoctorandtime{{ appoint.AppointmentID }}" method="POST" > {% csrf_token %}
                                         <input type="hidden" name="appointID" value={{ appoint.AppointmentID }}>
+                                        <input type="hidden" name="adding-removingAppoint" value="form1">
                                         <div class="mb-3" style="text-align: left">
                                             <label class="form-label">Choose Doctor</label>
                                             <select class="form-select" name="doctor" style = "color: #ff66b2"; aria-label="doctor" required>
@@ -658,7 +714,32 @@
                             </div>
                         </div>
 
-                        <button class="ri-dislike-line"></button> 
+                        <button class="ri-dislike-line" data-bs-toggle="modal" data-bs-target="#removingAppointment{{ appoint.AppointmentID }}"></button>
+
+                        <div class="modal fade" id="removingAppointment{{ appoint.AppointmentID }}" tabindex="-1" aria-labelledby="removingAppointmentLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="removingAppointmentLabel">Remove Appointment</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="removeAppoint{{ appoint.AppointmentID }}" method="POST" > {% csrf_token %}
+                                        <input type="hidden" name="appointID" value={{ appoint.AppointmentID }}>
+                                        <input type="hidden" name="patientID" value={{ appoint.PatientID }}>
+                                        <input type="hidden" name="adding-removingAppoint" value="form2">
+                                        <div class="mb-3" style="text-align: left">
+                                            <label for="reasonRemove" class="form-label">Reason</label>
+                                            <textarea class="form-control" name="reasonRemove" id="reasonRemove" rows="3" placeholder="Enter reason to remove appointment" required></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" form="removeAppoint{{ appoint.AppointmentID }}" class="btn btn-primary">Submit</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                     </td>      
                 </tr>
                 {% endfor %}

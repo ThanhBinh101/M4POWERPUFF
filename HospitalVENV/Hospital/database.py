@@ -81,6 +81,10 @@ def connectDBOperator(key = ""):
     connect()
     return db.reference("Operator/{}".format(key))
 
+def connectDBOperatorHistory(key1, key2 = ""):
+    connect()
+    return db.reference("Operator/{}/History/{}".format(key1, key2))
+
 def connectDBAppointment(key = ""):
     connect()
     return db.reference("Appointment/{}".format(key))

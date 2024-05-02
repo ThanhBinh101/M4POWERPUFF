@@ -387,7 +387,7 @@ def get_medicine_history(ID):
                 'note': value2.get("Note"),
                 'reason': value2.get("Reason")
             })
-        return list
+    return list
     
 def get_medicinemanager_history(ID):
     dbconn = connectDBMedicineManagerHistory(ID).get()
@@ -441,6 +441,7 @@ def get_appoint_table():
                     'AppointmentID': key,
                     'Department': value.get('Department'),
                     'PatientName': get_patient_name(value.get('PatientID')),
+                    'PatientID': value.get('PatientID'),
                     'Time': value.get('Time'),
                     'DoctorID': value.get('DoctorID'),
                     'Period': value.get("Period")
@@ -532,3 +533,20 @@ def get_freetime_doctor(docID):
                         time_intervals.remove(removeTime)
 
     return time_intervals
+
+def get_operator_history(ID):
+    dbconn = connectDBOperatorHistory(ID).get()
+    if dbconn is not None:
+        list=[]
+        for key, value in dbconn.items():
+            list.append({
+                'id': key,
+                'appointmentID': value.get('appointmentID'),
+                'patientID': value.get('patientID'),
+                'patientName': value.get('patientName'),
+                'wantedTime': value.get('wantedTime'),
+                'removedate': value.get('removedate'),
+                'reason': value.get('reason'),
+                'department': value.get('department')
+            })
+        return list

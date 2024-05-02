@@ -293,19 +293,29 @@ def operatorpage(request, ID):
     if request.method == "GET":
         operatorInfo = get_operator_info(ID)
         appointTable = get_appoint_table()
+        operatorHistory = get_operator_history(ID)
         
         otologyDoc = get_otology_doctor()
         rhinologyDoc = get_rhinology_doctor()
         laryngologyDoc = get_laryngology_doctor()
         
-        return render(request, 'operatorpage.html', {'operator': operatorInfo, 'appointmentTable': appointTable, 'otologyDoc' : otologyDoc, 'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc})
+        return render(request, 'operatorpage.html', {'operator': operatorInfo, 'appointmentTable': appointTable, 
+                                                     'otologyDoc' : otologyDoc, 'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc, 'operatorhistory': operatorHistory})
 
     if request.method == "POST":
-        doctorid = request.POST.get('doctor')
-        time = request.POST.get('time')
-        appointid = request.POST.get('appointID')
-        if( time != "Choose time" and doctorid != "Choose doctor"):
-            Operator.SetAPM(doctorid, appointid, time)
+        form_check = request.POST.get('adding-removingAppoint')
+        if form_check == "form1":
+            doctorid = request.POST.get('doctor')
+            time = request.POST.get('time')
+            appointid = request.POST.get('appointID')
+            if( time != "Choose time" and doctorid != "Choose doctor"):
+                Operator.SetAPM(doctorid, appointid, time)
+        else:
+            appointid = request.POST.get('appointID')
+            reason = request.POST.get('reasonRemove')
+            patientid = request.POST.get('patientID')
+            patientname = get_patient_name(patientid)
+            Operator.DelAPM(appointid, ID, patientname, reason)
     
     return redirect('operatorpage', ID)
     
