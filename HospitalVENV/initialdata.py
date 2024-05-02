@@ -7,9 +7,9 @@ firebase_admin.initialize_app(cred, {
     "databaseURL": "https://m3powerpuff-34707-default-rtdb.asia-southeast1.firebasedatabase.app/" #Your database URL
 })
 
-dbref = db.reference("Doctor")
-dbref.push({"Name":"Ngoc Nhon 2", "Department": "Laryngology", "Phone": "0901812806", 
-            "Gmail": "doctor2@gmail.com", "Level":"Bachelor", "Password": "123456"})
+# dbref = db.reference("Doctor")
+# dbref.push({"Name":"Ngoc Nhon 2", "Department": "Laryngology", "Phone": "0901812806", 
+#             "Gmail": "doctor2@gmail.com", "Level":"Bachelor", "Password": "123456"})
 
 # dbref = db.reference("MedicineManager")
 # dbref.push({"Name":"Thanh Binh", "Phone": 9696, 
@@ -81,3 +81,6 @@ dbref.push({"Name":"Ngoc Nhon 2", "Department": "Laryngology", "Phone": "0901812
 
 # dbref = db.reference("Nurse/")
 # dbref.push({"Name": "ConCuuNgayTho5","Gmail":"nurse5@gmail.com","Password": "123456", "Date of Birth": "30/10/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "9"})
+
+dbref = db.reference("Job/Morning/Ear/Thu/")
+dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})

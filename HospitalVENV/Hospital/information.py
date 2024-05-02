@@ -457,7 +457,7 @@ def get_otology_doctor():
                 list.append({
                     'doctorID': key,
                     'doctorName': value.get("Name"),
-                    'doctorFreeTime': get_freetime_doctor(key)
+                    'doctorFreeTime': get_freetime_doctor(key, "Otology")
                 })
     return list
 
@@ -470,7 +470,7 @@ def get_rhinology_doctor():
                 list.append({
                     'doctorID': key,
                     'doctorName': value.get("Name"),
-                    'doctorFreeTime': get_freetime_doctor(key)
+                    'doctorFreeTime': get_freetime_doctor(key, "Rhinology")
                 })
     return list
 
@@ -483,20 +483,23 @@ def get_laryngology_doctor():
                 list.append({
                     'doctorID': key,
                     'doctorName': value.get("Name"),
-                    'doctorFreeTime': get_freetime_doctor(key)
+                    'doctorFreeTime': get_freetime_doctor(key, "Laryngology")
                 })
     return list
 
-def get_freetime_doctor(docID):
+def get_freetime_doctor(docID, department):
     current_time = datetime.now()
     current_hour = current_time.hour
     current_minute = current_time.minute
     
-    
-    if docID == "-NvIWN7XPalb0cRUlhAB":
-        shift = "Morning"
+    if department == "Otology":
+        department = "Ear"
+    elif department == "Rhinology":
+        department = "Nose"
     else:
-        shift= "Afternoon"
+        department = "Throat"
+    
+    shift = get_doctor_shift(docID, department)
         
     time_intervals = []
     
@@ -520,8 +523,18 @@ def get_freetime_doctor(docID):
             for hour in range(current_hour + 1, 17):
                 for minute in ['00', '30']:
                     time_intervals.append(f'{hour:02}:{minute}')
+    elif shift == "BothShift":
+        for hour in range(7, 12):
+            for minute in ['00', '30']:
+                time_intervals.append(f'{hour:02}:{minute}')
+
+        for hour in range(13, 17):
+                for minute in ['00', '30']:
+                    time_intervals.append(f'{hour:02}:{minute}')
+    
     else:
         None
+        
 
     tableAppoint = connectDBAppointment().get()
     if tableAppoint is not None:
@@ -533,6 +546,28 @@ def get_freetime_doctor(docID):
                         time_intervals.remove(removeTime)
 
     return time_intervals
+
+
+def get_doctor_shift(docID, department):
+    today = timezone.now()
+    day_of_week = today.weekday()
+    days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    day_name = days[day_of_week]
+    
+    get_shift = ""
+    
+    for shift in ['Morning', 'Afternoon']:
+        tableShift = connectDBJob(shift, department, day_name).get()
+        if tableShift is not None:
+            for key, value in tableShift.items():
+                if value.get('PersonID') == docID:
+                    if get_shift == "Morning" or get_shift == "Afternoon":
+                        get_shift = "BothShift"
+                    else:
+                        get_shift = shift
+                    
+    return get_shift
+
 
 def get_operator_history(ID):
     dbconn = connectDBOperatorHistory(ID).get()

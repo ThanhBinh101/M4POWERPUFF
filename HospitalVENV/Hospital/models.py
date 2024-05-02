@@ -5,6 +5,7 @@ from .database import *
 
 from datetime import date, time
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 class Information:
     def __init__(self, name, email, password, dob, gender):
