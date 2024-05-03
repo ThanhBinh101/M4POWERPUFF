@@ -504,7 +504,31 @@
             </div>
             <div>
                 <button class="button--submit">SUBMIT</button>
-            </div>    
+            </div> 
+            <div class="modal fade" id="Remove" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                            <div class="modal-header appointmentModalHeader" d-flex justify-content-center align-items-center>
+                                <h4 class="modal-title">Reason</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body appointmentModalBody">
+                            <div class="input-group">
+                                <label for="nameInput">Name:</label>
+                                <input type="text" id="nameInput">
+                            </div>
+                            <div class="input-group">
+                                <label for="roleInput">Role:</label>
+                                <input type="text" id="roleInput">
+                            </div>
+                            <input type="text" class="reason-input">
+                        <div class="modal-footer appointmentModalFooter">
+                            <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+                        </div>  
+                    </div>
+                </div>
+            </div>   
     </section>
 
     <div class="modal fade" id="AddJob" tabindex="-1" aria-hidden="true">
@@ -597,7 +621,7 @@
             </div>
         </div>     
     </div>
-
+    
     <div class="modal fade" id="MedicalStaff" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -625,7 +649,7 @@
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="note-cell">
-                                        <button class="delete-button">X</button>
+                                        <button class="delete-button" data-bs-toggle="modal" data-bs-target="#Remove">X</button>
                                     </td>
                                     
                                 </tr>
@@ -636,7 +660,7 @@
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="note-cell">
-                                        <button class="delete-button">X</button>
+                                        <button class="delete-button" data-bs-toggle="modal" data-bs-target="#Remove">X</button>
                                     </td>
                                     
                                 </tr>
@@ -647,7 +671,7 @@
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="note-cell">
-                                        <button class="delete-button">X</button>
+                                        <button class="delete-button" data-bs-toggle="modal" data-bs-target="#Remove">X</button>
                                     </td>
                                     
                                 </tr>
@@ -658,7 +682,7 @@
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="note-cell">
-                                        <button class="delete-button">X</button>
+                                        <button class="delete-button" data-bs-toggle="modal" data-bs-target="#Remove">X</button>
                                     </td>
                                     
                                 </tr>
@@ -669,7 +693,7 @@
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="note-cell">
-                                        <button class="delete-button">X</button>
+                                        <button class="delete-button" data-bs-toggle="modal" data-bs-target="#Remove">X</button>
                                     </td>
                                    
                                 </tr>
@@ -680,7 +704,7 @@
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="note-cell">
-                                        <button class="delete-button">X</button>
+                                        <button class="delete-button" data-bs-toggle="modal" data-bs-target="#Remove">X</button>
                                     </td>
                                    
                                 </tr>
@@ -691,7 +715,7 @@
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="empty-cell" contenteditable="true"></td>
                                     <td class="note-cell">
-                                        <button class="delete-button">X</button>
+                                        <button class="delete-button" data-bs-toggle="modal" data-bs-target="#Remove">X</button>
                                     </td>
                                    
                                 </tr>
@@ -705,25 +729,6 @@
         </div>
     </div>
     
-    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" d-flex justify-content-center align-items-center>
-                <div class="modal-header successHeader"> 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body successBody">
-                    Successful
-                    <div class = "successimg">
-                        <img src="{%static 'successful.png'%}">
-                    </div>
-                </div>
-                <div class="modal-footer successFooter" style="background-color:rgba(242, 206, 216, 0.5); height: 40px;">
-                </div>
-               
-            </div>
-        </div>     
-    </div>
-
     <div class="modal fade" id="AddPeople" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -802,6 +807,28 @@
             </div>
         </div> 
     </div>
+   
+    
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" d-flex justify-content-center align-items-center>
+                <div class="modal-header successHeader"> 
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body successBody">
+                    Successful
+                    <div class = "successimg">
+                        <img src="{%static 'successful.png'%}">
+                    </div>
+                </div>
+                <div class="modal-footer successFooter" style="background-color:rgba(242, 206, 216, 0.5); height: 40px;">
+                </div>
+               
+            </div>
+        </div>     
+    </div>
+
+   
     
 </body>
 
