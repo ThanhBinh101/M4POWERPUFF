@@ -56,7 +56,7 @@
             <h6>Level</h6>
             <p id = "DoctorLevel">{{doctor.level}}</p>
             <h6>Years</h6>
-            <p id = "DoctorYear">{{doctor.years}} {{doctorScheduel}}</p>
+            <p id = "DoctorYear">{{doctor.years}}</p>
         </div> 
 
         <div class = "doctorinfo">
@@ -71,7 +71,256 @@
             </div>
 
             <div style = "margin-top: 5%" class = 'Schedule'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Result">Schedule</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Schedule">Schedule</button>
+            </div>
+
+            <div class="modal fade" id="Schedule" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                            <div class="modal-header appointmentModalHeader" d-flex justify-content-center align-items-center>
+                                <h4 class="modal-title">SCHEDULE</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body appointmentModalBody">
+                            <div class="pink-background">
+                                <div class ="timetable">
+                                    <table>
+                                        <tr>
+                                            <th>Shift</th>
+                                            <th>Monday</th>
+                                            <th>Tuesday</th>
+                                            <th>Wednesday</th>
+                                            <th>Thursday</th>
+                                            <th>Friday</th>
+                                            <th>Sarturday</th>
+                                            <th>Sunday</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Morning</td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Mon" and value.Shift == "Morning"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Tue" and value.Shift == "Morning"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Wed" and value.Shift == "Morning"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Thu" and value.Shift == "Morning"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Fri" and value.Shift == "Morning"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Sat" and value.Shift == "Morning"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Sun" and value.Shift == "Morning"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Afternoon</td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Mon" and value.Shift == "Afternoon"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Tue" and value.Shift == "Afternoon"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Wed" and value.Shift == "Afternoon"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Thu" and value.Shift == "Afternoon"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Fri" and value.Shift == "Afternoon"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Sat" and value.Shift == "Afternoon"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Sun" and value.Shift == "Afternoon"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Evening</td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Mon" and value.Shift == "Evening"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Tue" and value.Shift == "Evening"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Wed" and value.Shift == "Evening"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Thu" and value.Shift == "Evening"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Fri" and value.Shift == "Evening"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Sat" and value.Shift == "Evening"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for value in doctorSchedule %}
+                                                    {% if value.Department == doctor.department and value.Day == "Sun" and value.Shift == "Evening"%}
+                                                        <div style="font-size: 20px; color:#0487D9">
+                                                            <i class="ri-home-heart-line"></i> 
+                                                            <p>{{ value.Position}}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -585,7 +585,7 @@ def get_operator_history(ID):
             })
         return list
     
-def get_doctor_scheduel(docID):
+def get_doctor_schedule(docID):
     list = []
     tableJob = connectDBJob().get()
     if tableJob is not None:

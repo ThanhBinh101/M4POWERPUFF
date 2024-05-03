@@ -155,8 +155,8 @@ def patientpage(request, ID):
 
 def doctorpage(request, ID):
     docInfo = get_doctor_info(ID)
-    docScheduel = get_doctor_scheduel(ID)
-    return render(request, 'doctorpage.html', {'doctor': docInfo, 'doctorScheduel': docScheduel})
+    docSchedule = get_doctor_schedule(ID)
+    return render(request, 'doctorpage.html', {'doctor': docInfo, 'doctorSchedule': docSchedule})
 
 def nursepage(request, ID):
     if request.method == "GET":
