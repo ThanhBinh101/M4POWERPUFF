@@ -86,45 +86,178 @@
                                         <th>Monday</th>
                                         <th>Tuesday</th>
                                         <th>Wednesday</th>
+                                        <th>Thursday</th>
                                         <th>Friday</th>
                                         <th>Sarturday</th>
                                         <th>Sunday</th>
                             
                                     </tr>
                                     <tr>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="have-schedule" contenteditable="true">
-                                            <input type="text" class="room">
-                                        </td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
+                                        <td class="empty-cell" contenteditable="true">Morning</td>
+
+                                        {% if doctor.schedule.Morning.Mon is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Morning.Mon }}
+                                            </td>
+                                        {% endif %}
+
+                                        {% if doctor.schedule.Morning.Tue is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Morning.Tue }}
+                                            </td>
+                                        {% endif %}
+
+                                        {% if doctor.schedule.Morning.Wed is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Morning.Wed }}
+                                            </td>
+                                        {% endif %}
+                                        {% if doctor.schedule.Morning.Thu is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Morning.Thu }}
+                                            </td>
+                                        {% endif %}
                                         
+                                        {% if doctor.schedule.Morning.Fri is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Morning.Fri }}
+                                            </td>
+                                        {% endif %}
+                                        {% if doctor.schedule.Morning.Sat is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Morning.Sat }}
+                                            </td>
+                                        {% endif %}
+                                        {% if doctor.schedule.Morning.Sun is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Morning.Sun }}
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+
+                                    <tr>
+                                        <td class="empty-cell" contenteditable="true">Afternoon</td>
+                                        {% if doctor.schedule.Afternoon.Mon is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Afternoon.Mon }}
+                                            </td>
+                                        {% endif %}
+
+                                        {% if doctor.schedule.Afternoon.Tue is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Afternoong.Tue }}
+                                            </td>
+                                        {% endif %}
+
+                                        {% if doctor.schedule.Afternoon.Wed is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Afternoon.Wed }}
+                                            </td>
+                                        {% endif %}
+                                        {% if doctor.schedule.Afternoon.Thu is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Afternoon.Thu }}
+                                            </td>
+                                        {% endif %}
+                                        
+                                        {% if doctor.schedule.Afternoon.Fri is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Afternoong.Fri }}
+                                            </td>
+                                        {% endif %}
+                                        {% if doctor.schedule.Afternoon.Sat is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Afternoon.Sat }}
+                                            </td>
+                                        {% endif %}
+                                        {% if doctor.schedule.Afternoon.Sun is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Afternoon.Sun }}
+                                            </td>
+                                        {% endif %}
                                     </tr>
                                     <tr>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="have-schedule" contenteditable="true">
-                                            <input type="text" class="room">
-                                        </td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                            
-                                    </tr>
-                                    <tr>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="empty-cell" contenteditable="true"></td>
-                                        <td class="have-schedule" contenteditable="true">
-                                            <input type="text" class="room">
-                                        </td>
+                                        <td class="empty-cell" contenteditable="true">Evening</td>
+                                        {% if doctor.schedule.Evening.Mon is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Evening.Mon }}
+                                            </td>
+                                        {% endif %}
+
+                                        {% if doctor.schedule.Evening.Tue is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Evening.Tue }}
+                                            </td>
+                                        {% endif %}
+
+                                        {% if doctor.schedule.Evening.Wed is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Evening.Wed }}
+                                            </td>
+                                        {% endif %}
+                                        {% if doctor.schedule.Evening.Thu is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Evening.Thu }}
+                                            </td>
+                                        {% endif %}
+                                        
+                                        {% if doctor.schedule.Evening.Fri is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Evening.Fri }}
+                                            </td>
+                                        {% endif %}
+                                        {% if doctor.schedule.Evening.Sat is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Evening.Sat }}
+                                            </td>
+                                        {% endif %}
+                                        {% if doctor.schedule.Evening.Sun is None %}
+                                            <td class="empty-cell" contenteditable="true"></td>
+                                        {% else %}
+                                            <td class="have-schedule" contenteditable="true">
+                                                {{ doctor.schedule.Evening.Sun }}
+                                            </td>
+                                        {% endif %}
                                     </tr>
                                 </table>
                             </div>

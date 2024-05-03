@@ -373,17 +373,19 @@ class Job():
     def AddJob(shift, department, day, role, personid, position):
         job = Job(role, personid, position)
         dbconn = connectDBJob(shift, department, day)
-        dbconn.push(job.to_dict())
+        ki = dbconn.push(job.to_dict()).key
         conn = connectDBStaff(role, personid)
         conn.child("Schedule").push({
             "Shift": shift,
             "Day": day,
-            "Position": position
+            "Position": position,
+            "ID": ki
         })
 
     @staticmethod
     def DeleteJob(shift, department, day, jobid):
         connectDBJob(shift, department, day, jobid).delete()
+
 
 class Admin(Information):
     def __init__(self, name, email, password, dob, gender):

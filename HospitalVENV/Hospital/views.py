@@ -141,21 +141,34 @@ def get_patient_info(ID):
 
 
 def get_doctor_info(ID):
-    docInfo = []
-    tableUser = connectDBDoctor().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            docInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'department': value.get("Department"),
-                'phone': value.get("Phone"),
-                'gmail':value.get("Gmail"),
-                'level': value.get("Level"),
-                'appointments': get_doctor_appointments(key)
-            })
-            return docInfo[0]
-    return None
+    conn = connectDBDoctor(ID)
+    doctor = conn.get()
+    joblist = conn.child("Schedule").get()
+    schedule = {}
+    for shift in {"Morning", "Afternoon", "Evening"}:
+        schedule[shift] = {}
+        for day in {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}:
+            schedule[shift][day] = None 
+        
+    if joblist is not None:
+        for key, job in joblist.items():
+            shift = job.get("Shift")
+            day = job.get("Day")
+            position = job.get("Position")
+            if shift is not None and day is not None and position is not None:
+                schedule[shift][day] = position
+
+        doctorInfo = {
+            'id': ID,
+            'name': doctor.get("Name"),
+            'department': doctor.get("Department"),
+            'phone': doctor.get("Phone"),
+            'gmail':doctor.get("Gmail"),
+            'level': doctor.get("Level"),
+            'appointments': get_doctor_appointments(ID),
+            'schedule': schedule
+        }
+    return doctorInfo
 
 def get_nurse_info(ID):
     nurseInfo = []
