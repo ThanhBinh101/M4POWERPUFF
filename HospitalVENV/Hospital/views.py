@@ -1,6 +1,8 @@
+
 from .models import *
 from .database import *
 from .forms import UserForm
+from .information import *
 
 def mainpage(request):
     
@@ -47,7 +49,7 @@ def loginpage(request):
             elif "Operator" == userRole:
                 return redirect('operatorpage', userKey)
             elif "Admin" == userRole:
-                return redirect('adminpage', userKey)
+                return redirect('Adminpage', userKey)
             else:
                 return render(request, 'loginpage.html')
         else:
@@ -260,7 +262,7 @@ def patientpage(request, ID):
 
 def doctorpage(request, ID):
     docInfo = get_doctor_info(ID)
-    docScheduel = get_doctor_scheduel(ID)
+    docScheduel = get_doctor_schedule(ID)
     return render(request, 'doctorpage.html', {'doctor': docInfo, 'doctorScheduel': docScheduel})
 
 def nursepage(request, ID):
@@ -470,7 +472,8 @@ def Adminpage(request, ID):
         equiment_list = connectDBEquipmentManager().get()
         operator_list = connectDBOperator().get()
         adInfo = get_admin_info(ID)
-        return render(request, 'adminpage.html', {'joblist': job_list, 'operatorlist':operator_list, 'otologyDoc': otologyDoc,
+        days = ["Mon", "Tue", "Wed", "Tue", "Fri", "Sat", "Sun"]
+        return render(request, 'adminpage.html', {'joblist': job_list, 'operatorlist':operator_list, 'otologyDoc': otologyDoc, 'days': days,
                                                 'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc, 'doctorlist': doctor_list,
                                                 'nurselist': nurse_list, 'equipmentlist': equiment_list, 'medicinelist': medicine_list, 'admin': adInfo})
     

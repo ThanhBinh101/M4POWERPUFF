@@ -3,6 +3,7 @@ from .database import *
 from .forms import UserForm
 from .views import *
 
+
 def get_patient_info(ID):
     PatientInfo = []
     tableUser = connectDBPatient().get()
@@ -585,7 +586,7 @@ def get_operator_history(ID):
             })
         return list
     
-def get_doctor_scheduel(docID):
+def get_doctor_schedule(docID):
     list = []
     tableJob = connectDBJob().get()
     if tableJob is not None:
