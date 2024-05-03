@@ -73,11 +73,11 @@
                 <div class="modal fade" id="nurseHistory" tabindex="-1" aria-labelledby="viewNurseHistoryLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl modal-dialog-centered">
                       <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header TestingHeader">
                           <h4 class="modal-title" id="viewNurseHistoryLabel">Testing History</h4>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body viewNurseHistory">
+                        <div class="modal-body viewNurseHistoryBody">
                             <div class="table-wrapper">
                                 <table class="table table-bordered" id="myTable">
                                     <thead>
@@ -107,7 +107,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="modal-footer viewNurseHistory">
+                        <div class="modal-footer viewNurseHistoryFooter" style="background-color: rgba(4, 135, 217, 0.5);">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                       </div>
@@ -154,24 +154,23 @@
                             <div class="modal fade" id="addResultTesting" tabindex="-1" aria-labelledby="addResult" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
-                                            <div class="modal-header newResult">
+                                            <div class="modal-header newResultHeader">
                                                 <h4 class="modal-title" id="addResult">Adding Test Result</h4>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                        <div class="modal-body newResult">
+                                        <div class="modal-body newResultBody">
                                             <form method="POST"> {% csrf_token %}
                                                 <input type="hidden" name="testID" value={{process.id}}>
                                                 <div class="mb-3" style="text-align: left">
-                                                    <label class="form-label">Result</label>
+                                                    <label class="form-label" style="color: #ff66b2;">Result</label>
                                                     <textarea class="form-control" name="resultNote" placeholder="" required></textarea>
                                                 </div>
-                                                <div style="text-align: left">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                <div style="text-align: right">
+                                                    <button type="submit" class="btn btn-primary" style="background-color: #ff66b2;">Submit</button>
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="modal-footer newResult">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <div class="modal-footer newResultFooter" style="background-color: rgba(4, 135, 217, 0.5);">
                                         </div>
                                     </div>  
                                 </div>

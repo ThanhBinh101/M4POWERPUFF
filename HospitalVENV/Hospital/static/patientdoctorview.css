@@ -205,11 +205,13 @@ body {
   }
   .prescriptionHistory h5{
     text-align: center;
+    color:#0487D9;
   }
   .prescriptionHistory h6 {
     text-align: left;
+    color: #ff66b2;
   }
-  .prescriptionHistory button {
+  .prescriptionHistoryFooter button {
     color: white;
     font-size: 18px;
     transition: all 0.55s ease;
@@ -259,6 +261,55 @@ body {
     font-size: 20px;
     background-color: rgba(4, 135, 217, 0.3);
   }
+
+  .modal-dialog .modal-content .modal-header,
+  .modal-dialog .modal-content .modal-body,
+  .modal-dialog .modal-content .modal-footer {
+  border: none; 
+}
+  .registerModalHeader .modal-content, .newRecordHeader .modal-content, .TestingResultHeader .modal-content, .MedicalRecordHeader .modal-content, .NewPrescriptionHeader .modal-content {
+    width: 240px; 
+    height: 360px; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .registerModalHeader, .newRecordHeader, .TestingResultHeader, .MedicalRecordHeader, .NewPrescriptionHeader {
+    background-color: rgba(242, 206, 216, 0.5);
+    text-align: center;
+  }
+
+  .registerModalHeader .modal-title, .newRecordHeader .modal-title, .TestingResultHeader .modal-title, .MedicalRecordHeader .modal-title, .NewPrescriptionHeader .modal-title {
+    font-family: 'Baloo 2';
+    font-size: 30px;
+    color: #0487d9;
+    width: 100%;
+    padding-left: 5%;
+  }
+
+  .registerModalBody, .newRecordBody, .testingResultBody, .MedicalRecordBody, .prescriptionHistory {
+    background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+  }
+
+  .registerModalFooter .btn-primary, .testingResultFooter .btn-secondary {
+    font-size: 12px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .registerModalFooter .btn-primary:hover, .testingResultFooter .btn-secondary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+  }
+
   .prescriptionInfo {
     height: min-content;
     min-height: 70vh;

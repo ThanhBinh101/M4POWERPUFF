@@ -156,6 +156,54 @@
   border-color: #F2CED8;
 }
 
+.modal-dialog .modal-content .modal-header,
+  .modal-dialog .modal-content .modal-body,
+  .modal-dialog .modal-content .modal-footer {
+  border: none; 
+}
+  .TestingHeader .modal-content, .newResultHeader .modal-content{
+    width: 240px; 
+    height: 360px; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .TestingHeader, .newResultHeader { 
+    background-color: rgba(242, 206, 216, 0.5);
+    text-align: center;
+  }
+
+  .TestingHeader .modal-title, .newResultHeader .modal-title {
+    font-family: 'Baloo 2';
+    font-size: 30px;
+    color: #0487d9;
+    width: 100%;
+    padding-left: 5%;
+  }
+
+  .viewNurseHistoryBody, .newResultBody {
+    background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+  }
+
+  .viewNurseHistoryFooter .btn-secondary, .newResultFooter .btn-secondary, .newResultFooter .btn-primary {
+    font-size: 12px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .viewNurseHistoryFooter .btn-secondary:hover, .newResultFooter .btn-secondary:hover, .newResultFooter .btn-primary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+  }
+
 .TestingAppoint {
   height: 80%;
   width: 80%;
@@ -222,13 +270,13 @@
   color: #ff66b2;
 }
 .bx-alarm-add:hover {
-  color:green;
+  color:#F2CED8;
 }
 .ri-check-fill:hover{
-  color:green;
+  color:#F2CED8;
 }
 .ri-close-fill:hover{
-  color:green;
+  color:#F2CED8;
 }
 .newResult .btn-primary {
   font-size: 16px;
