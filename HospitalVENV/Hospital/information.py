@@ -64,8 +64,9 @@ def get_medicinemanager_info(ID):
                 ManagerInfo.append({
                     'id': key,
                     'name': value.get("Name"),
-                    'phone': value.get("Phone"),
-                    'gmail':value.get("Gmail")
+                    'dob': value.get("DateOfBirth"),
+                    'gmail':value.get("Gmail"),
+                    'years':value.get("Years")
                 })
                 return ManagerInfo[0]
     return None
@@ -80,8 +81,9 @@ def get_equipmentmanager_info(ID):
                 ManagerInfo.append({
                     'id': key,
                     'name': value.get("Name"),
-                    'phone': value.get("Phone"),
-                    'gmail':value.get("Gmail")
+                    'dob': value.get("DateOfBirth"),
+                    'gmail':value.get("Gmail"),
+                    'years':value.get("Years")
                 })
                 return ManagerInfo[0]
     return None
@@ -583,7 +585,7 @@ def get_operator_history(ID):
             })
         return list
     
-def get_doctor_scheduel(docID):
+def get_doctor_schedule(docID):
     list = []
     tableJob = connectDBJob().get()
     if tableJob is not None:
@@ -602,5 +604,6 @@ def get_doctor_scheduel(docID):
                                             'Shift': key1,
                                             'Department': key2,
                                             'Day': key3,
+                                            'Position': value4.get('Position')
                                         })
     return list
