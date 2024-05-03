@@ -442,16 +442,11 @@ def doctorhistory(request, id):
     return render(request,'doctorhistory.html', {'historypatient': HistoryPatient, 'medicines': medicines, 'doctors': doctors})
 
 def Adminpage(request):
-    job_list = {}  # Initialize job_list as a dictionary
-    sizedepart = {}
-    sizeshift = {}
+    job_list = {}
     for shift in {"Morning", "Afternoon", "Evening"}:
         job_list[shift] = {}
-        sizedepart[shift] = {}
-        sizeshift[shift] = 0
         for depart in {"Ear", "Nose", "Throat"}:
             job_list[shift][depart] = {} 
-            sizedepart[shift][depart] = 1
             for day in {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}:
                 job_data = connectDBJob(shift, depart, day).get()
                 data = []
@@ -461,10 +456,15 @@ def Adminpage(request):
                     name = connectDBDoctor(personID).child("Name").get()
                     data.append({"Position": position, "Name": name, "ID": job})
                 job_list[shift][depart][day] = data
-                sizedepart[shift][depart] = max(sizedepart[shift][depart], len(job_data))
 
-            sizeshift[shift] = sizeshift[shift] + sizedepart[shift][depart] 
-    return render(request, 'adminpage3.html', {'joblist': job_list, 'sizedepart': sizedepart, 'sizeshift': sizeshift})
+    doctor_list = connectDBDoctor().get()
+    nurse_list = connectDBNurse().get()
+    medicine_list = connectDBMedicineManager().get()
+    equiment_list = connectDBEquipmentManager().get()
+    operator_list = connectDBOperator().get()
+    return render(request, 'adminpage4.html', {'joblist': job_list, 'operatorlist':operator_list,
+                                            'doctorlist': doctor_list, 'nurselist': nurse_list,
+                                            'equipmentlist': equiment_list, 'medicinelist': medicine_list})
 
 
 
