@@ -28,7 +28,8 @@ def get_doctor_info(ID):
                 'id': key,
                 'name': value.get("Name"),
                 'department': value.get("Department"),
-                'phone': value.get("Phone"),
+                'years': value.get("Years"),
+                'dob': value.get('DateOfBirth'),
                 'gmail':value.get("Gmail"),
                 'level': value.get("Level"),
                 'appointments': get_doctor_appointments(key)
