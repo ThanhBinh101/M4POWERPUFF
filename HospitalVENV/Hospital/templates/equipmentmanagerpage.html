@@ -82,11 +82,11 @@
         <div class="modal fade" id="newEquipmentModal" tabindex="-1" aria-labelledby="newEquipmentModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header newEquipmentHeader" d-flex justify-content-center align-items-center>
                         <h1 class="modal-title fs-5" id="newEquipmentModalLabel">Add New Equipment</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body newEquipmentBody">
                         <form id="formNewEquipment" method="POST"> {% csrf_token %}
                             <input type="hidden" name="newEquipment-deleteEquipment" value="form1">
                             <div class="mb-3">
@@ -117,8 +117,8 @@
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button id="sumbitNewEquipment" type="submit" form="formNewEquipment" class="btn btn-primary">Submit</button>
+                    <div class="modal-footer newEquipmentFooter" style = "background-color: rgba(4, 135, 217, 0.5)">
+                        <button id="sumbitNewEquipment" type="submit" form="formNewEquipment" class="btn btn-primary" >Submit</button>
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@
         <div class="modal fade" id="EquipmentManagerHistory" tabindex="-1" aria-labelledby="viewEquipmentManagerHistoryLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
               <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header HistoryHeader">
                   <h4 class="modal-title" id="viewEquipmentManagerHistoryLabel">Equipment History</h4>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -159,8 +159,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="modal-footer viewEquipmentManagerHistory">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-footer viewEquipmentManagerHistoryFooter" style = "background-color: rgba(4, 135, 217, 0.5)">
+                  <button type="button" class="btn btn-secondary" style = "background-color: #ff66b2;" data-bs-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
@@ -171,7 +171,7 @@
     <section class="equipmentmanagement">
         <div class="col">
             <div class="box">
-              <p class="boxTitle">EQUIPMENT MANAGEMENT</p>
+              <p class="boxTitle">Equipment Management</p>
             </div>
             <div class="container">
                 <div class="row">
