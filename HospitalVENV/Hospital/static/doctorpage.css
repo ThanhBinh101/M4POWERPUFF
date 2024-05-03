@@ -167,6 +167,73 @@ section {
   font-size: 20px;
 }
 
+.modal-dialog .modal-content .modal-header,
+.modal-dialog .modal-content .modal-body,
+.modal-dialog .modal-content .modal-footer {
+border: none; 
+}
+
+.appointmentModalHeader.modal-content {
+  width: 240px; 
+  height: 360px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.appointmentModalHeader {
+  background-color: rgba(242, 206, 216, 0.5);
+  text-align: center;
+}
+.appointmentModalHeader .modal-title {
+  font-family: 'Baloo 2';
+  font-size: 30px;
+  color: #0487d9;
+  width: 100%;
+  padding-left: 5%;
+}
+
+.appointmentModalBody {
+  background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+}
+
+.appointmentModalFooter .btn-primary {
+  font-size: 12px;
+  background-color: #ff66b2;
+  border-color: #0487D9;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  text-decoration: none;
+  color: white;
+  font-style: normal;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.appointmentModalFooter .btn-primary:hover {
+  background-color: #F2CED8;
+  border-color: #F2CED8;
+}
+
+.appointmentModalFooter .btn-secondary {
+    font-size: 12px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .appointmentModalFooter .btn-secondary:hover {
+    font-size: 13px;
+    background-color: rgba(4, 135, 217, 0.3);
+  }
+
 .todobox {
   height: 80%;
   width: 80%;
