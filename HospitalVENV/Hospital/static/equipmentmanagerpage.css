@@ -121,8 +121,9 @@
   .equipmentmanagerimg img {
     border: 2px solid black;
     border-radius: 47px;
-    width: 60%;
-    height: 60%;
+    width: 50%;
+    height: 50%;
+    margin-left: 6%;
   }
   .schedule .btn-primary, .equipHistory .btn-primary {
     font-size: 16px;
@@ -172,6 +173,54 @@
     margin-bottom: 4%;
   }
 
+  .modal-dialog .modal-content .modal-header,
+  .modal-dialog .modal-content .modal-body,
+  .modal-dialog .modal-content .modal-footer {
+  border: none; 
+}
+  .newEquipmentHeader .modal-content, .HistoryHeader .modal-content {
+    width: 240px; 
+    height: 360px; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .newEquipmentHeader, .HistoryHeader {
+    background-color: rgba(242, 206, 216, 0.5);
+    text-align: center;
+  }
+
+  .newEquipmentHeader .modal-title, .HistoryHeader .modal-title{
+    font-family: 'Baloo 2';
+    font-size: 30px;
+    color: #0487d9;
+    width: 100%;
+    padding-left: 5%;
+  }
+
+  .newEquipmentBody, .viewEquipmentManagerHistory {
+    background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+  }
+
+  .newEquipmentFooter .btn-primary {
+    font-size: 12px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .newEquipmentFooter .btn-primary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+  }
+
   .box {
     display: flex;
     justify-content: center;
@@ -179,9 +228,9 @@
   }
 
   .boxTitle {
-    padding-top: 3%;
+    padding-top: 5%;
     color: #F25EA3;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 500;
   }
 
