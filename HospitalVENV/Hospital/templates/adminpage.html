@@ -164,7 +164,7 @@
                             <th class="title">Sunday</th>
                         </tr>
                             <tr>
-                                <th rowspan="3" class="title">Morning</th>
+                                <th rowspan="4" class="title">Morning</th>
                                 <th rowspan="1" class="title">Laryngology</th>
                                 <td>
                                     {% for job_id, job in joblist.Morning.Laryngology.Mon.items %}
@@ -426,7 +426,94 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th rowspan="3" class="title">Afternoon</th>
+                                <th rowspan="1" class="title">Manager</th>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Mon.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Tue.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Wed.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Thu.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Fri.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Sat.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Sun.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th rowspan="4" class="title">Afternoon</th>
                                 <th rowspan="1" class="title">Laryngology</th>
                                 <td>
                                     {% for job_id, job in joblist.Afternoon.Laryngology.Mon.items %}
@@ -688,7 +775,94 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th rowspan="3" class="title">Evening</th>
+                                <th rowspan="1" class="title">Manager</th>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Mon.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Tue.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Wed.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Thu.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Fri.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Sat.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Sun.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th rowspan="4" class="title">Evening</th>
                                 <th rowspan="1" class="title">Laryngology</th>
                                 <td>
                                     {% for job_id, job in joblist.Evening.Laryngology.Mon.items %}
@@ -938,6 +1112,93 @@
                                 </td>
                                 <td>
                                     {% for job_id, job in joblist.Evening.Otology.Sun.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th rowspan="1" class="title">Manager</th>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Mon.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Tue.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Wed.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Thu.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Fri.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Sat.items %}
+                                    <h1 class="Doctor">
+                                        {% for doc_id, doc in doctorlist.items %}
+                                            {% if job.PersonID == doc_id%}
+                                                {{doc.Name}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h1>
+                                    <div>{{job.Position}}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for job_id, job in joblist.Morning.Manager.Sun.items %}
                                     <h1 class="Doctor">
                                         {% for doc_id, doc in doctorlist.items %}
                                             {% if job.PersonID == doc_id%}
