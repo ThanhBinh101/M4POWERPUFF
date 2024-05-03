@@ -20,10 +20,9 @@ firebase_admin.initialize_app(cred, {
 # dbref.push({"Name":"Cao Ky", "Phone": 9696, 
 #             "Gmail": "equipmentmanager@gmail.com", "Password": "123456"})
 
-# dbref = db.reference("Admin")
-# user_id = uuid.uuid4().hex
-# dbref.push({"Name":"Song Khue", "Phone": 1123, 
-#             "Gmail": "admin@gmail.com", "Password": "123456"})
+dbref = db.reference("Admin")
+dbref.push({"Name":"Song Khue", "Phone": "1123", 
+            "Gmail": "admin@gmail.com", "Password": "123456"})
 
 # dbref = db.reference("Operator")
 # user_id = uuid.uuid4().hex
@@ -82,5 +81,5 @@ firebase_admin.initialize_app(cred, {
 # dbref = db.reference("Nurse/")
 # dbref.push({"Name": "ConCuuNgayTho5","Gmail":"nurse5@gmail.com","Password": "123456", "Date of Birth": "30/10/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "9"})
 
-dbref = db.reference("Job/Morning/Ear/Thu/")
-dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+# dbref = db.reference("Job/Morning/Ear/Thu/")
+# dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})

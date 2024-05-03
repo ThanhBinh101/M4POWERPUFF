@@ -48,7 +48,7 @@ def loginpage(request):
             elif "Operator" == userRole:
                 return redirect('operatorpage', userKey)
             elif "Admin" == userRole:
-                return redirect('adminpage', userKey)
+                return redirect('Adminpage', userKey)
             else:
                 return render(request, 'loginpage.html')
         else:
@@ -318,11 +318,6 @@ def operatorpage(request, ID):
             Operator.DelAPM(appointid, ID, patientname, reason)
     
     return redirect('operatorpage', ID)
-    
-def adminpage(request, ID):
-    adInfo = get_admin_info(ID)
-    return render(request, 'adminpage.html', {'admin': adInfo})
-
   
 def patientdoctorview(request, docid, patid, appointKey):
     if request.method == "GET":
@@ -390,4 +385,15 @@ def doctorhistory(request, id):
     doctors = get_doctor_list()
     return render(request,'doctorhistory.html', {'historypatient': HistoryPatient, 'medicines': medicines, 'doctors': doctors})
 
+def Adminpage(request, ID):
+    job_list = connectDBJob().get()
 
+    doctor_list = connectDBDoctor().get()
+    nurse_list = connectDBNurse().get()
+    medicine_list = connectDBMedicineManager().get()
+    equiment_list = connectDBEquipmentManager().get()
+    operator_list = connectDBOperator().get()
+    adInfo = get_admin_info(ID)
+    return render(request, 'adminpage.html', {'joblist': job_list, 'operatorlist':operator_list,
+                                            'doctorlist': doctor_list, 'nurselist': nurse_list,
+                                            'equipmentlist': equiment_list, 'medicinelist': medicine_list, 'admin': adInfo})
