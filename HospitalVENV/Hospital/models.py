@@ -396,7 +396,7 @@ class Appointment():
         apmid_time = datetime.strptime(apmid_time_str, '%H:%M')
         
         # Calculate the new time and complete time for apmid
-        new_apmid_time = apmid_time + timedelta(minutes=5)
+        new_apmid_time = apmid_time + timedelta(minutes=10)
         
         # Update the time for apmid
         dbconn_apmid = connectDBAppointment(apmid)
@@ -408,7 +408,7 @@ class Appointment():
                 appointment_time_str = value.get("Time")
                 appointment_time = datetime.strptime(appointment_time_str, '%H:%M')
                 if appointment_time >= new_apmid_time:
-                    new_time = appointment_time + timedelta(minutes=5)
+                    new_time = appointment_time + timedelta(minutes=10)
                     dbconn = connectDBAppointment(key)
                     dbconn.update({"Time": new_time.strftime('%H:%M')})
         
