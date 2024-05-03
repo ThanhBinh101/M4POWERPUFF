@@ -20,9 +20,9 @@ firebase_admin.initialize_app(cred, {
 # dbref.push({"Name":"Cao Ky", "Phone": 9696, 
 #             "Gmail": "equipmentmanager@gmail.com", "Password": "123456"})
 
-dbref = db.reference("Admin")
-dbref.push({"Name":"Song Khue", "Phone": "1123", 
-            "Gmail": "admin@gmail.com", "Password": "123456"})
+# dbref = db.reference("Admin")
+# dbref.push({"Name":"Song Khue", "Phone": "1123", 
+#             "Gmail": "admin@gmail.com", "Password": "123456"})
 
 # dbref = db.reference("Operator")
 # user_id = uuid.uuid4().hex
@@ -81,5 +81,17 @@ dbref.push({"Name":"Song Khue", "Phone": "1123",
 # dbref = db.reference("Nurse/")
 # dbref.push({"Name": "ConCuuNgayTho5","Gmail":"nurse5@gmail.com","Password": "123456", "Date of Birth": "30/10/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "9"})
 
-# dbref = db.reference("Job/Morning/Ear/Thu/")
-# dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+dbref = db.reference("Job/Evening/Laryngology/Mon/")
+dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+dbref = db.reference("Job/Evening/Laryngology/Tue/")
+dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+dbref = db.reference("Job/Evening/Laryngology/Wed/")
+dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+dbref = db.reference("Job/Evening/Laryngology/Thu/")
+dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+dbref = db.reference("Job/Evening/Laryngology/Fri/")
+dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+dbref = db.reference("Job/Evening/Laryngology/Sat/")
+dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+dbref = db.reference("Job/Evening/Laryngology/Sun/")
+dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})

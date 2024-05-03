@@ -167,130 +167,166 @@
                                         <tr>
                                             <td>{{ doc.doctorName}}</td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "07:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "07:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift%}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "07:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "07:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "08:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "08:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "08:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "08:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "09:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "09:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "09:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "09:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "10:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "10:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "10:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "10:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "11:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "11:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "11:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "11:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "13:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "13:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "13:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "13:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "14:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "14:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+                                                
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "14:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "14:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift%}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "15:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "15:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift%}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "15:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "15:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "16:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "16:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "16:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                               {% if "16:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                         </tr>
                                         {% endfor %}
@@ -339,130 +375,166 @@
                                         <tr>
                                             <td>{{ doc.doctorName}}</td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "07:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "07:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift%}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "07:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "07:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "08:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "08:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "08:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "08:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "09:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "09:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "09:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "09:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "10:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "10:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "10:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "10:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "11:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "11:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "11:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "11:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "13:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "13:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "13:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "13:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "14:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "14:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+                                                
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "14:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "14:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift%}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "15:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "15:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift%}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "15:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "15:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "16:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "16:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "16:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                               {% if "16:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                         </tr>
                                         {% endfor %}
@@ -511,130 +583,166 @@
                                         <tr>
                                             <td>{{ doc.doctorName}}</td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "07:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "07:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift%}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "07:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "07:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "08:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "08:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "08:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "08:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "09:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "09:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "09:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "09:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "10:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "10:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "10:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "10:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "11:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "11:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "11:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "11:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Morning" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "13:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "13:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "13:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "13:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "14:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "14:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+                                                
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "14:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "14:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift%}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "15:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "15:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift%}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "15:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "15:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "16:00" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if "16:00" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                             <td>
-                                                {% for time in doc.doctorFreeTime %}
-                                                    {% if time == "16:30" %}
-                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
-                                                    {% endif %}
-                                                {% endfor %}
+                                               {% if "16:30" in doc.doctorFreeTime %}
+                                                    <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                {% elif "Afternoon" == doc.doctorShift or "BothShift" == doc.doctorShift %}
+                                                    <i class='bx bx-x' style="color: red; font-size:20px"></i>
+                                                {% else %}
+
+                                                {% endif %}
                                             </td>
                                         </tr>
                                         {% endfor %}
