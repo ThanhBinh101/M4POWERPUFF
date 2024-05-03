@@ -460,6 +460,8 @@ def get_staff():
             list.append({
                 'ID': key,
                 'Name': value.get("Name"),
+                'Role': "Doctor",
+                'Department': value.get("Department")
             })
     tableNurse = connectDBNurse().get()
     if tableNurse is not None:
@@ -467,6 +469,8 @@ def get_staff():
             list.append({
                 'ID': key,
                 'Name': value.get("Name"),
+                'Role': "Nurse",
+                'Department': value.get("Department")
             })
     
     tableEquipment = connectDBEquipmentManager().get()
@@ -475,6 +479,8 @@ def get_staff():
             list.append({
                 'ID': key,
                 'Name': value.get("Name"),
+                'Role': "Equipment",
+                'Department': "Manager"
             })
 
     tableMedicine = connectDBMedicineManager().get()
@@ -483,6 +489,18 @@ def get_staff():
             list.append({
                 'ID': key,
                 'Name': value.get("Name"),
+                'Role': "Medicine",
+                'Department': "Manager"
+            })
+
+    tableAppoinment = connectDBOperator().get()
+    if tableAppoinment is not None:
+        for key, value in tableAppoinment.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+                'Role': "Appointment",
+                'Department': "Manager"
             })
     return list
 
