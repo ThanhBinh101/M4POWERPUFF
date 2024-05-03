@@ -56,13 +56,93 @@
             <div style = "margin-top: 5%" class = 'newButton'>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddJob">Add Job</button>
             </div>
+
             <div style = "margin-top: 5%" class = 'newButton'>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddPeople">Add People</button>
             </div>
+
             <div style = "margin-top: 5%" class = 'newButton'>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MedicalStaff">Medical Staff</button>
             </div>
-        
+            
+
+            <div class="modal fade" id="AddJob" tabindex="-1" aria-labelledby="AddJobLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="AddJobLabel">Add New Job</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addJob" method="POST" > {% csrf_token %}
+                            <input type="hidden" name="addingJob" value="form1">
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Otology Doctor</label>
+                                <select class="form-select" name="doctor1" style = "color: #ff66b2"; aria-label="doctor" required>
+                                    <option selected>Choose doctor</option>
+                                    {% for doc in otologyDoc %}
+                                    <option value={{doc.doctorID}}>{{doc.doctorName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Rhinology Doctor</label>
+                                <select class="form-select" name="doctor2" style = "color: #ff66b2"; aria-label="doctor" required>
+                                    <option selected>Choose doctor</option>
+                                    {% for doc in rhinologyDoc %}
+                                    <option value={{doc.doctorID}}>{{doc.doctorName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Laryngology Doctor</label>
+                                <select class="form-select" name="doctor3" style = "color: #ff66b2"; aria-label="doctor" required>
+                                    <option selected>Choose doctor</option>
+                                    {% for doc in laryngologyDoc %}
+                                    <option value={{doc.doctorID}}>{{doc.doctorName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose day of the week</label>
+                                <select class="form-select" name="day" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose day</option>
+                                    <option value="Mon">Monday</option>
+                                    <option value="Tue">Tueday</option>
+                                    <option value="Wed">Wednesday</option>
+                                    <option value="Thu">Thursday</option>
+                                    <option value="Fri">Friday</option>
+                                    <option value="Sat">Saturday</option>
+                                    <option value="Sun">Sunday</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose shift</label>
+                                <select class="form-select" name="shift" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose shift</option>
+                                    <option value="Morning">Morning</option>
+                                    <option value="Afternoon">Afternoon</option>
+                                    <option value="Evening">Evening</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose room</label>
+                                <select class="form-select" name="room" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose room</option>
+                                    <option value="A4-101">A4-101</option>
+                                    <option value="A4-102">A4-102</option>
+                                    <option value="A4-103">A4-103</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" form="addJob" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
         </div>
 
     </section>

@@ -582,3 +582,25 @@ def get_operator_history(ID):
                 'department': value.get('department')
             })
         return list
+    
+def get_doctor_scheduel(docID):
+    list = []
+    tableJob = connectDBJob().get()
+    if tableJob is not None:
+        for key1, value1 in tableJob.items():
+            tableDay = connectDBJob(key1).get()
+            if tableDay is not None:
+                for key2, value2 in tableDay.items():
+                    tableDepart = connectDBJob(key1, key2).get()
+                    if tableDepart is not None:
+                        for key3, value3 in tableDepart.items():
+                            tableDay = connectDBJob(key1, key2, key3).get()
+                            if tableDay is not None:
+                                for key4, value4 in tableDay.items():
+                                    if value4.get('PersonID') == docID:
+                                        list.append({
+                                            'Shift': key1,
+                                            'Department': key2,
+                                            'Day': key3,
+                                        })
+    return list
