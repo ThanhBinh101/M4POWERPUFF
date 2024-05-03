@@ -464,7 +464,7 @@ def Adminpage(request, ID):
         otologyDoc = get_otology_doctor()
         rhinologyDoc = get_rhinology_doctor()
         laryngologyDoc = get_laryngology_doctor()
-        
+        stafflist = get_staff()
         
         nurse_list = connectDBNurse().get()
         doctor_list = connectDBDoctor().get()
@@ -473,33 +473,37 @@ def Adminpage(request, ID):
         operator_list = connectDBOperator().get()
         adInfo = get_admin_info(ID)
         days = ["Mon", "Tue", "Wed", "Tue", "Fri", "Sat", "Sun"]
-        return render(request, 'adminpage.html', {'joblist': job_list, 'operatorlist':operator_list, 'otologyDoc': otologyDoc, 'days': days,
+        return render(request, 'adminpage.html', {'joblist': job_list, 'operatorlist':operator_list, 'otologyDoc': otologyDoc, 'days': days, 'stafflist': stafflist,
                                                 'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc, 'doctorlist': doctor_list,
                                                 'nurselist': nurse_list, 'equipmentlist': equiment_list, 'medicinelist': medicine_list, 'admin': adInfo})
     
     if request.method == "POST":
         form_check = request.POST.get('addingJob')
+        jobs = connectDBJob()
         if form_check == "form1":
-            doctor1 = request.POST.get('doctor1')
-            doctor2 = request.POST.get('doctor2')
-            doctor3 = request.POST.get('doctor3')
-            
-            if doctor1=="Choose doctor" and doctor2=="Choose doctor" and doctor3!="Choose doctor":
-                final_doctor = doctor3
-                department = "Laryngology"
-            elif doctor1=="Choose doctor" and doctor2!="Choose doctor" and doctor3=="Choose doctor":
-                final_doctor = doctor2
-                department = "Rhinology"
-            elif doctor1!="Choose doctor" and doctor2=="Choose doctor" and doctor3=="Choose doctor":
-                final_doctor = doctor1
-                department = "Otology"
-            else:
-                return redirect('Adminpage', ID)
-        
+            department = request.POST.get('department')
+            role = request.POST.get('role')
+            person = request.POST.get('person')
             day = request.POST.get('day')
             shift = request.POST.get('shift')
             room = request.POST.get('room')
-            
-            Admin.AddJob(shift, department, day, room, final_doctor)
+
+            p = None
+            if department == "Manager":
+                if role == "Medicine":
+                    p = connectDBStaff("MedicineManager", person).get()
+                elif role == "Equipment":
+                    p = connectDBStaff("EquipmentManager", person).get()
+            else:
+                p = connectDBStaff(role, person).get()
+
+            if p is not None:
+                if p.get("Department") == None or p.get("Department") == department:
+                    lst = jobs.child(shift).child(day).get()
+                    for l, value in lst:
+                        if(value.get("PersonID") == person):
+                            return redirect('Adminpage', ID)
+
+    Admin.AddJob(shift, department, day, room, person)
     
     return redirect('Adminpage', ID)

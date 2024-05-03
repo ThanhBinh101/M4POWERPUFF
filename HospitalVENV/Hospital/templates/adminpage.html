@@ -82,30 +82,24 @@
                         <form id="addJob" method="POST" > {% csrf_token %}
                             <input type="hidden" name="addingJob" value="form1">
                             <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Otology Doctor</label>
-                                <select class="form-select" name="doctor1" style = "color: #ff66b2"; aria-label="doctor" required>
-                                    <option selected>Choose doctor</option>
-                                    {% for doc in otologyDoc %}
-                                    <option value={{doc.doctorID}}>{{doc.doctorName}}</option>
-                                    {% endfor %}
+                                <label class="form-label">Choose Department</label>
+                                <select class="form-select" name="department" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Department</option>
+                                    <option value="Laryngology">Laryngology</option>
+                                    <option value="Rhinology">Rhinology</option>
+                                    <option value="Otology">Otology</option>
+                                    <option value="Manager">Manager</option>
                                 </select>
                             </div>
                             <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Rhinology Doctor</label>
-                                <select class="form-select" name="doctor2" style = "color: #ff66b2"; aria-label="doctor" required>
-                                    <option selected>Choose doctor</option>
-                                    {% for doc in rhinologyDoc %}
-                                    <option value={{doc.doctorID}}>{{doc.doctorName}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Laryngology Doctor</label>
-                                <select class="form-select" name="doctor3" style = "color: #ff66b2"; aria-label="doctor" required>
-                                    <option selected>Choose doctor</option>
-                                    {% for doc in laryngologyDoc %}
-                                    <option value={{doc.doctorID}}>{{doc.doctorName}}</option>
-                                    {% endfor %}
+                                <label class="form-label">Choose Role</label>
+                                <select class="form-select" name="role" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Role</option>
+                                        <option value="Medicine">Medicine</option>
+                                        <option value="Equipment">Equipment</option>
+                                        <option value="Appointment">Appointment</option>
+                                        <option value="Doctor">Doctor</option>
+                                        <option value="Nurse">Nurse</option>
                                 </select>
                             </div>
                             <div class="mb-3" style="text-align: left">
@@ -128,6 +122,15 @@
                                     <option value="Morning">Morning</option>
                                     <option value="Afternoon">Afternoon</option>
                                     <option value="Evening">Evening</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Person</label>
+                                <select class="form-select" name="person" style = "color: #ff66b2"; aria-label="doctor" required>
+                                    <option selected>Choose Person</option>
+                                    {% for p in stafflist %}
+                                    <option value={{p.ID}}>{{p.Name}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="mb-3" style="text-align: left">

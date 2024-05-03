@@ -452,6 +452,40 @@ def get_appoint_table():
                 })
     return list
 
+def get_staff():
+    list = []
+    tableDoctor = connectDBDoctor().get()
+    if tableDoctor is not None:
+        for key, value in tableDoctor.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+            })
+    tableNurse = connectDBNurse().get()
+    if tableNurse is not None:
+        for key, value in tableNurse.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+            })
+    
+    tableEquipment = connectDBEquipmentManager().get()
+    if tableEquipment is not None:
+        for key, value in tableEquipment.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+            })
+
+    tableMedicine = connectDBMedicineManager().get()
+    if tableMedicine is not None:
+        for key, value in tableMedicine.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+            })
+    return list
+
 def get_otology_doctor():
     list = []
     tableDoctor = connectDBDoctor().get()
