@@ -13,18 +13,12 @@ urlpatterns = [
     path('doctor/history/<str:id>', views.doctorhistory, name = "doctorhistory"),
     
     path('nurse/<str:ID>', views.nursepage, name = "nursepage"),
-    path('nurse/nurseStartTesting/<str:testid>/<str:nurseid>', views.nurseStartTesting, name = "nurseStartTesting"),
-    path('nurse/deleteTesting/<str:testid>/<str:nurseid>', views.deleteTesting, name = "deleteTesting"),
-    path('nurse/cancelProcess/<str:testid>/<str:nurseid>', views.cancelProcess, name = "cancelProcess"),
     
     path('patient/<str:ID>', views.patientpage, name = "patientpage"),
     path('medicinemanager/<str:ID>', views.medicinemanagerpage, name = "medicinemanagerpage"),
-    path('equipmentmanager/<str:ID>', views.equipmentmanagerpage, name = "equipmentmanagerpage"),
-    path('equipmentmanager/ActiveToInactive/<str:managerID>/<str:equipID>', views.ActiveToInactive, name = "ActiveToInactive"),
-    path('equipmentmanager/InActiveToMaintain/<str:managerID>/<str:equipID>', views.InActiveToMaintain, name = "InActiveToMaintain"),
-    path('equipmentmanager/MaintainToActive/<str:managerID>/<str:equipID>', views.MaintainToActive, name = "MaintainToActive"),
-    
+    #path('equipmentmanager/<str:ID>', views.equimentmanagerpage, name = "equipmentmanagerpage"),
+    #path('administration/<str:ID>', views.adminpage, name = "adminpage"),
     path('operator/<str:ID>', views.operatorpage, name = "operatorpage"),
-    path('administration/<str:ID>', views.Adminpage, name="Adminpage")
-    
+    path('Adminpage', views.Adminpage, name="Adminpage")
 ]
+

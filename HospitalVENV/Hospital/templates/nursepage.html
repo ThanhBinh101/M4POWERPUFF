@@ -68,52 +68,7 @@
             </div>
 
             <div style = "margin-top: 5%" class = 'testingHistory'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nurseHistory">Result History</button>
-
-                <div class="modal fade" id="nurseHistory" tabindex="-1" aria-labelledby="viewNurseHistoryLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title" id="viewNurseHistoryLabel">Testing History</h4>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body viewNurseHistory">
-                            <div class="table-wrapper">
-                                <table class="table table-bordered" id="myTable">
-                                    <thead>
-                                        <tr class="table-danger">
-                                            <th style="width:15%;">Date</th>
-                                            <th style="width:15%">Department</th>
-                                            <th style="width:15%;">Doctor Name</th>
-                                            <th style="width:20%;">Patient Name</th>
-                                            <th style="width:10%;">Type</th>
-                                            <th style="width:25%;">Result</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for res in testResult%}
-                                            {% if nurse.id == res.nurseid%}
-                                            <tr class="table-danger">
-                                                <td>{{res.date}}</td>
-                                                <td>{{res.department}}</td>
-                                                <td>{{res.doctorname}}</td>
-                                                <td>{{res.patientname}}</td>
-                                                <td>{{res.type}}</td>
-                                                <td>{{res.result}}</td>
-                                            </tr>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="modal-footer viewNurseHistory">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Appointment">Result History</button>
             </div>
 
             <div style = "margin-top: 5%" class = 'Schedule'>
@@ -134,75 +89,35 @@
                 <thead>
                     <tr class="table-danger">
                         <th scope="col" style = "width: 20%">Date</th>
-                        <th scope="col" style = "width: 20%">Patient Name</th>
-                        <th scope="col" style = "width: 20%">Doctor Name</th>
+                        <th scope="col" style = "width: 20%">PatientName</th>
+                        <th scope="col" style = "width: 20%">DoctorName</th>
                         <th scope="col" style = "width: 20%">Type</th>
                         <th scope="col" style = "width: 20%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {%for process in processList%}
                     <tr class="table-danger">
-                        <td>{{process.date}}</td>
-                        <td>{{process.patientname}}</td>
-                        <td>{{process.doctorname}}</td>
-                        <td>{{process.type}}</td>
+                        <td>13/11/2024</td>
+                        <td>Harvey</td>
+                        <td>Ngoc Nhon</td>
+                        <td>MRI</td>
                         <td>
-                            {% if nurse.id == process.nurseid %}
-                            <button type="button" class="bx bx-alarm-add" data-bs-toggle="modal" data-bs-target="#addResultTesting" style="background-color: transparent; border-width: 0"></button>
-
-                            <div class="modal fade" id="addResultTesting" tabindex="-1" aria-labelledby="addResult" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                            <div class="modal-header newResult">
-                                                <h4 class="modal-title" id="addResult">Adding Test Result</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                        <div class="modal-body newResult">
-                                            <form method="POST"> {% csrf_token %}
-                                                <input type="hidden" name="testID" value={{process.id}}>
-                                                <div class="mb-3" style="text-align: left">
-                                                    <label class="form-label">Result</label>
-                                                    <textarea class="form-control" name="resultNote" placeholder="" required></textarea>
-                                                </div>
-                                                <div style="text-align: left">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer newResult">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>  
-                                </div>
-                            </div>
-
-                            <a class="ri-close-fill" href='cancelProcess/{{process.id}}/{{nurse.id}}'></a>
-
-                            {% else %}
-
-                            <button type="button" class="bx bx-alarm-add" onclick="showAlert()" style="background-color: transparent; border-width: 0"></button>
-                            
-                            {% endif %}
-
+                            <a class="ri-check-fill" href=''></a>
+                            <a class="ri-close-fill" href = ''></a>
+                            <a class="bx bx-alarm-add" href = ''></a>
                         </td>
                     </tr>
-                    {% endfor %}
-
-                    {%for test in testList%}
                     <tr class="table-danger">
-                        <td>{{test.date}}</td>
-                        <td>{{test.patientname}}</td>
-                        <td>{{test.doctorname}}</td>
-                        <td>{{test.type}}</td>
+                        <td>13/11/2024</td>
+                        <td>Harvey</td>
+                        <td>Le Vy</td>
+                        <td>MRI</td>
                         <td>
-                            <a class="ri-check-fill" href='nurseStartTesting/{{test.id}}/{{nurse.id}}'></a>
-
-                            <a class="ri-close-fill" href ='deleteTesting/{{test.id}}/{{nurse.id}}'></a>
-
+                            <a class="ri-check-fill" href=''></a>
+                            <a class="ri-close-fill" href = ''></a>
+                            <a class="bx bx-alarm-add" href = ''></a>
                         </td>
                     </tr>
-                    {% endfor %}
                     
                 </tbody>
             </table>
@@ -216,10 +131,6 @@
     document.getElementById("go-back").addEventListener("click", () => {
         history.back();
       });
-
-    function showAlert() {
-        alert("Already In Process");
-    }
 </script>
 
 </html>

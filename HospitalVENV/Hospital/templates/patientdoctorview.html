@@ -147,50 +147,6 @@
                     </div>  
                 </div>
             </div>
-
-            <div class="modal fade" id="Result" tabindex="-1" aria-labelledby="testingResultLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="testingResultLabel">Testing Result</h4>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body testingResult">
-                        <div class="table-wrapper">
-                            <table class="table table-bordered" id="myTable">
-                                <thead>
-                                    <tr class="table-danger">
-                                        <th style="width:10%;">Date</th>
-                                        <th style="width:15%;">DoctorName</th>
-                                        <th style="width:15%;">NurseName</th>
-                                        <th style="width:15%">Department</th>
-                                        <th style="width:15%;">Type</th>
-                                        <th style="width:30%;">Result</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for res in testResult%}
-                                        {% if res.patientid == patient.id%}
-                                        <tr class="table-danger">
-                                            <td>{{res.date}}</td>
-                                            <td>{{res.doctorname}}</td>
-                                            <td>{{res.nursename}}</td>
-                                            <td>{{res.department}}</td>
-                                            <td>{{res.type}}</td>
-                                            <td>{{res.result}}</td>
-                                        </tr>
-                                        {% endif %}
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer viewNurseHistory">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
             
         </div>
 

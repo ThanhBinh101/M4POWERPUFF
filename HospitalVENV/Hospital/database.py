@@ -13,6 +13,11 @@ def connectDBPatient(key = ""):
     connect()
     return db.reference("Patient/{}".format(key))
 
+def connectDBStaff(key1 = "", key2 = ""):
+    if key1 == "":
+        return connectDBDoctor() + connectDBNurse()
+    return  db.reference("{}/{}".format(key1, key2))
+
 def connectDBDoctor(key = ""):
     connect()
     return db.reference("Doctor/{}".format(key))
@@ -37,18 +42,6 @@ def connectDBEquipmentManager(key = ""):
     connect()
     return db.reference("EquipmentManager/{}".format(key))
 
-def connectDBEquipment(key = ""):
-    connect()
-    return db.reference("Equipment/{}".format(key))
-
-def connectDBEquipmentHistory(key1="", key2=""):
-    connect()
-    return db.reference("Equipment/{}/History/{}".format(key1, key2))
-
-def connectDBEquipmentManagerHistory(key1="", key2=""):
-    connect()
-    return db.reference("EquipmentManager/{}/History/{}".format(key1, key2))
-
 def connectDBAdmin(key = ""):
     connect()
     return db.reference("Admin/{}".format(key))
@@ -57,13 +50,9 @@ def connectDBMedicine(key = ""):
     connect()
     return db.reference("Medicine/{}".format(key))
 
-def connectDBMedicineHistory(key1 = "", key2 = ""):
+def connectDBMedicineHistory(key = ""):
     connect()
-    return db.reference("Medicine/{}/History/".format(key1, key2))
-
-def connectDBMedicineManagerHistory(key1, key2 = ""):
-    connect()
-    return db.reference("MedicineManager/{}/History/{}".format(key1, key2))
+    return db.reference("Medicine/{}/History/".format(key))
 
 def connectDBMedicalRecord(key1, key2 = ""):
     connect()
@@ -80,10 +69,6 @@ def connectDBNurse(key = ""):
 def connectDBOperator(key = ""):
     connect()
     return db.reference("Operator/{}".format(key))
-
-def connectDBOperatorHistory(key1, key2 = ""):
-    connect()
-    return db.reference("Operator/{}/History/{}".format(key1, key2))
 
 def connectDBAppointment(key = ""):
     connect()
