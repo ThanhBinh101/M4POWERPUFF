@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -51,16 +52,18 @@
         <div class = "textbox">
             <h2>Medicine Manager Information</h2>
             <h6>Name</h6>
-            <p id = "ManagerName">{{manager.name}}</p>
-            <h6>Phone</h6>
-            <p id = "ManagerPhone">{{manager.phone}}</p>
+            <p id = "ManagerName" style="color: #ff66b2;">{{manager.name}}</p>
             <h6>Gmail</h6>
             <p id = "ManagerGmail">{{manager.gmail}}</p>
+            <h6>Date of Birth</h6>
+            <p id = "DateofBirth">{{manager.dob}}</p>
+            <h6>Years</h6>
+            <p id = "DoctorYear">{{manager.years}}</p>
         </div> 
 
         <div class = "MedicineManagerinfo">
             <div class = "MedicineManagerimg">
-                <img src="{%static 'MedicineManager.png'%}">
+                <img src="{%static 'medicine.png'%}">
             </div>
 
             <div style = "margin-top: 5%" class = 'newMedicine'>
@@ -68,7 +71,7 @@
             </div>
 
             <div style = "margin-top: 5%" class = 'MediHistory'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MedicineManagerHistory">Medicine History</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MedicineManagerHistory">Cancel History</button>
             </div>
 
             <div style = "margin-top: 5%" class = 'schedule'>
@@ -78,28 +81,28 @@
             <div class="modal fade" id="addMedicineModal" tabindex="-1" aria-labelledby="addMedicineModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header AddmedicineHeader">
                             <h1 class="modal-title fs-5" id="addMedicineModalLabel">Add Medicine</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body AddmedicineBody">
                             <form id="formAddMedicine" method="POST" > {% csrf_token %}
                                 <input type="hidden" name="newMedicine-deleteMedicine" value="form1">
                                 <div class="mb-3" style="text-align: left">
-                                    <label for="medicinename" class="form-label">Medicine Name</label>
+                                    <label for="medicinename" class="form-label" style="color:#ff66b2">Medicine Name</label>
                                     <input class="form-control" name="medicinename" placeholder="Enter name" required>
                                 </div>
                                 <div class="mb-3" style="text-align: left">
-                                    <label for="quantity" class="form-label">Quantity</label>
+                                    <label for="quantity" class="form-label"style="color:#ff66b2">Quantity</label>
                                     <input class="form-control" name="quantity" placeholder="Enter quantity" required>
                                 </div>
                                 <div class="mb-3" style="text-align: left">
-                                    <label class="form-label">Expire Day</label>      
+                                    <label class="form-label" style="color:#ff66b2">Expire Day</label>      
                                     <input class="form-control" name="date" placeholder="DD/MM/YYY" type="text" required>
                                 </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer AddmedicineFooter" style="background-color: rgba(4, 135, 217, 0.5);">
                             <button id="sumbitAddMedicine" type="submit" form="formAddMedicine" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
@@ -109,7 +112,7 @@
             <div class="modal fade" id="MedicineManagerHistory" tabindex="-1" aria-labelledby="viewMedicineManagerHistoryLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered">
                   <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header HistoryHeader">
                       <h4 class="modal-title" id="viewMedicineManagerHistoryLabel">Medicine History</h4>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -141,7 +144,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="modal-footer viewMedicineManagerHistory">
+                    <div class="modal-footer HistoryFooter" style="background-color: rgba(4, 135, 217, 0.5)">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                   </div>
@@ -155,7 +158,7 @@
     <section class="medicinemanagement">
         <div class="col">
             <div class="box">
-              <p class="boxTitle">MEDICINE MANAGEMENT</p>
+              <p class="boxTitle">Medicine Management</p>
             </div>
             <div class="container">
                 <div class="searchMedicine">
@@ -166,22 +169,22 @@
                         <table id="medicine-table" class="medicine-table">
                             <thead>
                                 <tr class="ethead">
-                                    <th class="headColumn" style="width: 25%">Medicine ID</th>
-                                    <th class="headColumn" style="width: 15%">Name</th>
-                                    <th class="headColumn" style="width: 15%">Import Date</th>
-                                    <th class="headColumn" style="width: 15%">Expire Date</th>
-                                    <th class="headColumn" style="width: 10%">Total</th>
-                                    <th class="action-column" style="width: 20%">Action</th>
+                                    <th class="headColumn" style="width: 25%; text-align: center;">Medicine ID</th>
+                                    <th class="headColumn" style="width: 15%; text-align: center;">Name</th>
+                                    <th class="headColumn" style="width: 15%; text-align: center;">Import Date</th>
+                                    <th class="headColumn" style="width: 15%; text-align: center;">Expire Date</th>
+                                    <th class="headColumn" style="width: 10%; text-align: center;">Total</th>
+                                    <th class="action-column" style="width: 20%; text-align: center;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for medi in medicineTable%}
                                 <tr class="etbody">
-                                    <td class="et-td">{{ medi.id }}</td>
-                                    <td class="et-td">{{ medi.name }}</td>
-                                    <td class="et-td">{{ medi.importdate }}</td>
-                                    <td class="et-td">{{ medi.expiredate }}</td>
-                                    <td class="et-td">{{ medi.quantity }}</td>
+                                    <td class="et-td" style="text-align: center;">{{ medi.id }}</td>
+                                    <td class="et-td" style="text-align: center;">{{ medi.name }}</td>
+                                    <td class="et-td" style="text-align: center;">{{ medi.importdate }}</td>
+                                    <td class="et-td" style="text-align: center;">{{ medi.expiredate }}</td>
+                                    <td class="et-td" style="text-align: center;">{{ medi.quantity }}</td>
                                     <td>
                                         <button type="button" class="bx bx-search-alt bx-flip-horizontal" 
                                             style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
@@ -191,11 +194,11 @@
                                         <div class="modal fade" id="historyUsage{{ medi.id }}" tabindex="-1" aria-labelledby="historyUsageLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
+                                                    <div class="modal-header UsageHeader">
                                                         <h1 class="modal-title fs-5" id="historyUsageLabel">History Usage</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body" style="overflow-y: auto; max-height: 450px;">
+                                                    <div class="modal-body Usagebody" style="overflow-y: auto; max-height: 450px;">
                                                         <table class="table table-bordered">
                                                             <thead>
                                                                 <tr class="table-danger">
@@ -219,7 +222,7 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div class="modal-footer">
+                                                    <div class="modal-footer UsageFooter" style="background-color: rgba(4, 135, 217, 0.5)">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
@@ -234,11 +237,11 @@
                                         <div class="modal fade" id="removeApartModal{{ medi.id }}" tabindex="-1" aria-labelledby="removeApartModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
+                                                    <div class="modal-header RemoveHeader">
                                                         <h1 class="modal-title fs-5" id="removeApartModalLabel">Remove Medicine</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div class="modal-body RemoveBody">
                                                         <form id="formRemoveApartMedicine{{ medi.id }}" method="POST" > {% csrf_token %}
                                                             <input type="hidden" name="newMedicine-deleteMedicine" value="form2">
                                                             <input type="hidden" name="medicineID" value={{medi.id}}>
@@ -248,11 +251,11 @@
                                                             </div>
                                                             <div class="mb-3" style="text-align: left">
                                                                 <label for="reasonRemove" class="form-label">Reason</label>
-                                                                <textarea class="form-control" name="reasonRemove" id="reasonRemove" rows="3" placeholder="Enter reason to remove medicine" required></textarea>
+                                                                <textarea class="form-control" name="reasonRemove" id="reasonRemove" rows="3" placeholder="Enter reason for removing medicine" required></textarea>
                                                             </div>
                                                         </form>
                                                     </div>
-                                                    <div class="modal-footer">
+                                                    <div class="modal-footer RemoveFooter" style="background-color: rgba(4, 135, 217, 0.5)">
                                                         <button id="sumbitRemoveApartMedicine" type="submit" form="formRemoveApartMedicine{{ medi.id }}" class="btn btn-primary">Submit</button>
                                                     </div>
                                                 </div>
@@ -267,21 +270,21 @@
                                         <div class="modal fade" id="removeAllModal{{ medi.id }}" tabindex="-1" aria-labelledby="removeAllModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
+                                                    <div class="modal-header DeleteHeader">
                                                         <h1 class="modal-title fs-5" id="removeAllModalLabel">Remove Medicine</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div class="modal-body DeleteBody">
                                                         <form id="formRemoveMedicine{{ medi.id }}" method="POST" > {% csrf_token %}
                                                             <input type="hidden" name="newMedicine-deleteMedicine" value="form3">
                                                             <input type="hidden" name="medicineID" value={{medi.id}}>
                                                             <div class="mb-3" style="text-align: left">
-                                                                <label for="reasonRemove" class="form-label">Reason</label>
-                                                                <textarea class="form-control" name="reasonRemove" id="reasonRemove" rows="3" placeholder="Enter reason to remove medicine" required></textarea>
+                                                                <label for="reasonRemove" class="form-label" style="color:#ff66b2">Reason</label>
+                                                                <textarea class="form-control" name="reasonRemove" id="reasonRemove" rows="3" placeholder="Enter reason for removing medicine" required></textarea>
                                                             </div>
                                                         </form>
                                                     </div>
-                                                    <div class="modal-footer">
+                                                    <div class="modal-footer DeleteFooter" style="background-color: rgba(4, 135, 217, 0.5)">
                                                         <button id="sumbitRemoveMedicine" type="submit" form="formRemoveMedicine{{ medi.id }}" class="btn btn-primary">Submit</button>
                                                     </div>
                                                 </div>
