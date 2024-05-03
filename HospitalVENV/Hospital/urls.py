@@ -24,9 +24,7 @@ urlpatterns = [
     path('equipmentmanager/InActiveToMaintain/<str:managerID>/<str:equipID>', views.InActiveToMaintain, name = "InActiveToMaintain"),
     path('equipmentmanager/MaintainToActive/<str:managerID>/<str:equipID>', views.MaintainToActive, name = "MaintainToActive"),
     
-    
-    path('administration/<str:ID>', views.adminpage, name = "adminpage"),
     path('operator/<str:ID>', views.operatorpage, name = "operatorpage"),
-    
+    path('administration/<str:ID>', views.Adminpage, name="Adminpage")
     
 ]
