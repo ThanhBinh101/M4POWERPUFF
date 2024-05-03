@@ -84,7 +84,7 @@
         <div class = "textbox1">
             <h2>Medical History</h2>
         </div> 
-        <div class="table-wrapper" style="border-radius:28px;">
+        <div class="table-wrapper">
             <table class="table table-bordered custom-table">
                 <thead>
                     <tr class="table-danger">
@@ -99,21 +99,29 @@
                         <td class = "align">{{ record.date }}</td>
                         <td class = "align">{{ record.diagnose }}</td>
                         <td class = "align">
-                            <button class="ri-eye-line" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ forloop.counter }}"></button>
-                            <div class="modal fade" id="exampleModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ forloop.counter }}" aria-hidden="true">
+                            <button class="ri-eye-line" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
-                                    <div class="modal-content" style="z-index: 1000;">
-                                        <div class="modal-header" style="display: flex; justify-content: center; align-items: center;">
-                                            <h4 class="modal-title" id="exampleModalLabel{{ forloop.counter }}" style="color:#ff66b2; width: 100%; text-align: center; padding: 0 3rem; margin-left:2%;">Medical Record</h4>
+                                    <div class="modal-content" style="z-index: 1000; border: none !important">
+                                        <div class="modal-header" style="display: flex; justify-content: center; align-items: center; background-color: rgba(242, 206, 216, 0.5); border: none !important">
+                                            <h4 class="modal-title" id="exampleModalLabel" style="color:#0487D9; width: 100%; text-align: center; padding: 0 3rem; margin: 0;">Medical Record</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body prescriptionHistory" style="margin-top: -10px !important;">
-                                            <div class="basicinfo" style="margin-top: -10px;">
-                                                <h6 style = "text-align: left; margin-left:3%;">Status: {{ record.status }}</h6>
-                                                <h6 style = "text-align: left; margin-left:3%;">Revisit Day: {{ record.revisit }}</h6>
-                                                <h5 style = "text-align: center; color:#0487D9; margin-bottom:2%"> Prescription History</h5>
+                                        <div class="modal-body prescriptionHistory" style="background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5)); border: none !important">
+                                            <div class="basicinfo">
+                                                <div style="display: flex; justify-content: center;">
+                                                    <div style="background-color: rgba(4, 135, 217, 0.5); margin: 0 6rem; padding: 2% 5%; width: 40rem; text-align: center; border-radius: 20px;">
+                                                        <h6 style="color: black;">Status: {{ record.status }}</h6>
+                                                        <h6 style="color: black;">Diagnose: {{ record.diagnose}}</h6>
+                                                    </div>
+                                                    <div style="background-color: rgba(4, 135, 217, 0.5); margin: 0 6rem; padding: 2% 5%; width: 40rem; text-align: center; border-radius: 20px">
+                                                        <h6 style="color: black;">Date: {{ record.date}}</h6>
+                                                        <h6 style="color: black;">Revisit Day: {{ record.revisit }}</h6>
+                                                    </div>
+                                                </div>                                                
+                                                <h5 style = "text-align: center; color:#0487D9; margin-top: 2%; margin-bottom:2%"> Prescription History</h5>
                                                 <div class="tablePrescription">
-                                                    <table class="table table-bordered prescription-table">
+                                                    <table class="table table-bordered prescription-table" style="border-radius: 20px">
                                                         <thead>
                                                             <tr class="table-danger">
                                                                 <th scope="col" style="width:10%;">Date</th>
@@ -163,32 +171,30 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 <div class="modal-body appointmentModalBody">
-                    <form method="POST" > {% csrf_token %}
-                        <input type="hidden" name="createnewrecord" value="form1">
+                    <form id="appointForm" method="POST" > {% csrf_token %}
                         <div class="mb-3">
                             <label class="form-label">Department</label>
-                            <select class="form-select" style = "color: #ff66b2"; aria-label="Department">
+                            <select class="form-select" name="department" style = "color: #ff66b2"; aria-label="Department" required>
                                 <option selected>Choose department</option>
-                                <option value="1">Tai</option>
-                                <option value="2">Mũi</option>
-                                <option value="3">Họng</option>
-                              </select>
+                                <option value="Otology">Otology</option>
+                                <option value="Rhinology">Rhinology</option>
+                                <option value="Laryngology">Laryngology</option>
+                            </select>
                         </div>
                     
                         <div class="mb-3">
                             <label class="form-label">Time</label>
-                           
-                            <select class="form-select" style = "color: #ff66b2"; aria-label="Time">
+                            <select class="form-select" name="wantedTime" style = "color: #ff66b2"; aria-label="Time" required>
                                 <option selected>Choose time</option>
-                                <option value="1">12:00</option>
-                                <option value="2">12:30</option>
-                                <option value="3">13:00</option>
-                              </select>
+                                {% for time in timeintervals%}
+                                <option value={{time}}>{{time}}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer appointmentModalFooter" style = "background-color: rgba(4, 135, 217, 0.5);">
-                    <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
+                    <button type="submit" class="btn btn-primary" form="appointForm" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Submit</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
                 </div>  
             </div>
@@ -212,6 +218,50 @@
                
             </div>
         </div>     
+    </div>
+
+    <div class="modal fade" id="Result" tabindex="-1" aria-labelledby="testingResultLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header TestingresultHeader" style="background-color:rgba(4, 135, 217, 0.3)">
+              <h4 class="modal-title" id="testingResultLabel" style="text-align: center;">Testing Result</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body testingResultBody" style="background-color:rgba(4, 135, 217, 0.3)">
+                <div class="table-wrapper">
+                    <table class="table table-bordered" id="myTable">
+                        <thead>
+                            <tr class="table-danger">
+                                <th style="width:10%;text-align: center;">Date</th>
+                                <th style="width:15%;text-align: center;">Doctor Name</th>
+                                <th style="width:15%;text-align: center;">Nurse Name</th>
+                                <th style="width:15%;text-align: center;">Department</th>
+                                <th style="width:15%;text-align: center;">Type</th>
+                                <th style="width:30%;text-align: center;">Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for res in testResult%}
+                                {% if res.patientid == patient.id%}
+                                <tr class="table-danger">
+                                    <td style="text-align: center;">{{res.date}}</td>
+                                    <td style="text-align: center;">{{res.doctorname}}</td>
+                                    <td style="text-align: center;">{{res.nursename}}</td>
+                                    <td style="text-align: center;">{{res.department}}</td>
+                                    <td style="text-align: center;">{{res.type}}</td>
+                                    <td style="text-align: center;">{{res.result}}</td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer testingResult" style="background-color:rgba(4, 135, 217, 0.3)">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #ff66b2;">Close</button>
+            </div>
+          </div>
+        </div>
     </div>
     
 </body>

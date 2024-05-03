@@ -174,7 +174,7 @@ border: none;
   background-color: rgba(242, 206, 216, 0.5);
   text-align: center;
 }
-.appointmentModalHeader .modal-title, .registerModalHeader .modal-title{
+.appointmentModalHeader .modal-title, .registerModalHeader .modal-title, .TestingresultHeader .modal-title{
   font-family: 'Baloo 2';
   font-size: 30px;
   color: #0487d9;

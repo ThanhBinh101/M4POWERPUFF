@@ -357,39 +357,29 @@ class Operator(Information):
         connectDBAppointment(apmid).delete()
 
 class Job():
-    def __init__(self, role, personid, position):
-        self.role = role
-        self.personid = personid
-        self.position = position
+    def __init__(self, room, personID):
+        self.position = room
+        self.person = personID
 
     def to_dict(self):
         return {
-            "Role": self.role,
-            "PersonID": self.personid,
+            "PersonID": self.person,
             "Position": self.position
         }
 
     @staticmethod
-    def AddJob(shift, department, day, role, personid, position):
-        job = Job(role, personid, position)
-        dbconn = connectDBJob(shift, department, day)
-        ki = dbconn.push(job.to_dict()).key
-        conn = connectDBStaff(role, personid)
-        conn.child("Schedule").push({
-            "Shift": shift,
-            "Day": day,
-            "Position": position,
-            "ID": ki
-        })
-
-    @staticmethod
-    def DeleteJob(shift, department, day, jobid):
-        connectDBJob(shift, department, day, jobid).delete()
-
+    def DeleteJob(jobid):
+        connectDBJob(jobid).delete()
 
 class Admin(Information):
     def __init__(self, name, email, password, dob, gender):
         Information.__init__(self, name, email, password, dob, gender)
+
+    @staticmethod
+    def AddJob(shift, department, day, room, personID):
+        job = Job(room, personID)
+        dbconn = connectDBJob(shift, department, day)
+        dbconn.push(job.to_dict())
 
     @staticmethod
     def AddDoctor(name, email, password, dob, department, level, years):

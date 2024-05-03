@@ -260,7 +260,8 @@ def patientpage(request, ID):
 
 def doctorpage(request, ID):
     docInfo = get_doctor_info(ID)
-    return render(request, 'doctorpage.html', {'doctor': docInfo})
+    docScheduel = get_doctor_scheduel(ID)
+    return render(request, 'doctorpage.html', {'doctor': docInfo, 'doctorScheduel': docScheduel})
 
 def nursepage(request, ID):
     nurseInfo = get_nurse_info(ID)
@@ -454,36 +455,48 @@ def doctorhistory(request, id):
     doctors = get_doctor_list()
     return render(request,'doctorhistory.html', {'historypatient': HistoryPatient, 'medicines': medicines, 'doctors': doctors})
 
-def Adminpage(request):
-    job_list = {}
-    for shift in {"Morning", "Afternoon", "Evening"}:
-        job_list[shift] = {}
-        for depart in {"Ear", "Nose", "Throat"}:
-            job_list[shift][depart] = {} 
-            for day in {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}:
-                job_data = connectDBJob(shift, depart, day).get()
-                data = []
-                for job in job_data:
-                    personID = connectDBJob(shift, depart, day, job).child("PersonID").get()
-                    position = connectDBJob(shift, depart, day, job).child("Position").get()
-                    name = connectDBDoctor(personID).child("Name").get()
-                    data.append({"Position": position, "Name": name, "ID": job})
-                job_list[shift][depart][day] = data
+def Adminpage(request, ID):
+    if request.method == "GET":
+        job_list = connectDBJob().get()
 
-    doctor_list = connectDBDoctor().get()
-    nurse_list = connectDBNurse().get()
-    medicine_list = connectDBMedicineManager().get()
-    equiment_list = connectDBEquipmentManager().get()
-    operator_list = connectDBOperator().get()
-    return render(request, 'adminpage4.html', {'joblist': job_list, 'operatorlist':operator_list,
-                                            'doctorlist': doctor_list, 'nurselist': nurse_list,
-                                            'equipmentlist': equiment_list, 'medicinelist': medicine_list})
-
-
-
-def managerpage(request, id):
-    adInfo = get_admin_info(id)
-    return render(request, 'managerpage.html', {'admin': adInfo})
-
-def equimentmanagement(request,id):
-    return render(request, 'equimentmanagement.html')
+        otologyDoc = get_otology_doctor()
+        rhinologyDoc = get_rhinology_doctor()
+        laryngologyDoc = get_laryngology_doctor()
+        
+        
+        nurse_list = connectDBNurse().get()
+        doctor_list = connectDBDoctor().get()
+        medicine_list = connectDBMedicineManager().get()
+        equiment_list = connectDBEquipmentManager().get()
+        operator_list = connectDBOperator().get()
+        adInfo = get_admin_info(ID)
+        return render(request, 'adminpage.html', {'joblist': job_list, 'operatorlist':operator_list, 'otologyDoc': otologyDoc,
+                                                'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc, 'doctorlist': doctor_list,
+                                                'nurselist': nurse_list, 'equipmentlist': equiment_list, 'medicinelist': medicine_list, 'admin': adInfo})
+    
+    if request.method == "POST":
+        form_check = request.POST.get('addingJob')
+        if form_check == "form1":
+            doctor1 = request.POST.get('doctor1')
+            doctor2 = request.POST.get('doctor2')
+            doctor3 = request.POST.get('doctor3')
+            
+            if doctor1=="Choose doctor" and doctor2=="Choose doctor" and doctor3!="Choose doctor":
+                final_doctor = doctor3
+                department = "Laryngology"
+            elif doctor1=="Choose doctor" and doctor2!="Choose doctor" and doctor3=="Choose doctor":
+                final_doctor = doctor2
+                department = "Rhinology"
+            elif doctor1!="Choose doctor" and doctor2=="Choose doctor" and doctor3=="Choose doctor":
+                final_doctor = doctor1
+                department = "Otology"
+            else:
+                return redirect('Adminpage', ID)
+        
+            day = request.POST.get('day')
+            shift = request.POST.get('shift')
+            room = request.POST.get('room')
+            
+            Admin.AddJob(shift, department, day, room, final_doctor)
+    
+    return redirect('Adminpage', ID)
