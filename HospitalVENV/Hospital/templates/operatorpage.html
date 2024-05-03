@@ -44,10 +44,6 @@
     <section class = "displaybox">
         <div class = "textbox">
             <h2>Operator Information</h2>
-            <div class = "textboxIDDoc">
-                <h6>ID*</h6>
-                <p id = "OperatorID">{{operator.id}}</p>
-            </div>
             <h6>Name</h6>
             <p id = "OperatorName">{{operator.name}}</p>
             <h6>Phone</h6>
@@ -56,8 +52,698 @@
             <p id = "OperatorGmail">{{operator.gmail}}</p>
         </div> 
 
-        <div class = "tablebox">
+        <div class = "Operatorinfo">
+            <div class = "Operatorimg">
+                <img src="{%static 'Operator.jpg'%}">
+            </div>
 
+            <div style = "margin-top: 5%" class = 'OperatorHistory'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#OperatorHistory">Medicine History</button>
+            </div>
+
+            <div style = "margin-top: 5%" class = 'schedule'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">Schedule</button>
+            </div>
+
+            <div class="modal fade" id="OperatorHistory" tabindex="-1" aria-labelledby="viewOperatorHistoryLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width: 1300px;">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="viewOperatorHistoryLabel">Medicine History</h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body viewOperatorHistory">
+                        <div class="table-wrapper">
+                            <table class="table table-bordered" id="myTable">
+                                <thead>
+                                    <tr class="table-danger">
+                                        <th style="width:20%;">Appointment ID</th>
+                                        <th style="width:20%;">Patient ID</th>
+                                        <th style="width:15%;">Patient Name</th>
+                                        <th style="width:10%;">Department</th>
+                                        <th style="width:10%;">Wanted Time</th>
+                                        <th style="width:10%;">Remove Date</th>
+                                        <th style="width:15%;">Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for his in operatorhistory%}
+                                        <tr class="table-danger">
+                                            <td>{{his.appointmentID}}</td>
+                                            <td>{{his.patientID}}</td>
+                                            <td>{{his.patientName}}</td>
+                                            <td>{{his.department}}</td>
+                                            <td>{{his.wantedTime}}</td>
+                                            <td>{{his.removedate}}</td>
+                                            <td>{{his.reason}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer viewEquipmentManagerHistory">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="operatormanagement">
+        <h3 class="heading">OPERATOR</h3>
+        <div class ="timetable">
+            <table>
+                <tr>
+                    <th style="width: 20%">Patient</th>
+                    <th style="width: 20%">Department</th>
+                    <th style="width: 20%">Wanted Time</th>
+                    <th style="width: 20%">Doctor</th>
+                    <th style="width: 20%">Action</th>
+                </tr>
+                {% for appoint in appointmentTable%}
+                <tr>
+                    <td>{{ appoint.PatientName }}</td>
+                    <td>{{ appoint.Department }}</td>
+                    <td>{{ appoint.Time }}</td>
+                    <td>
+                        {% if appoint.Department == "Otology" %}
+                        <button type="button" class="ri-nurse-line" data-bs-toggle="modal" data-bs-target="#otologyModal{{appoint.AppointmentID}}"></button>
+
+                        <div class="modal fade" id="otologyModal{{appoint.AppointmentID}}" tabindex="-1" aria-labelledby="otologyModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 1500px;">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="otologyModalLabel">Otology Doctor</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body freetimetable ">
+                                    <table>
+                                        <tr>
+                                            <th style="width: 19%">Doctor - Time</th>
+                                            <th style="width: 4.5%">7:00</th>
+                                            <th style="width: 4.5%">7:30</th>
+                                            <th style="width: 4.5%">8:00</th>
+                                            <th style="width: 4.5%">8:30</th>
+                                            <th style="width: 4.5%">9:00</th>
+                                            <th style="width: 4.5%">9:30</th>
+                                            <th style="width: 4.5%">10:00</th>
+                                            <th style="width: 4.5%">10:30</th>
+                                            <th style="width: 4.5%">11:00</th>
+                                            <th style="width: 4.5%">11:30</th>
+                                            <th style="width: 4.5%">13:00</th>
+                                            <th style="width: 4.5%">13:30</th>
+                                            <th style="width: 4.5%">14:00</th>
+                                            <th style="width: 4.5%">14:30</th>
+                                            <th style="width: 4.5%">15:00</th>
+                                            <th style="width: 4.5%">15:30</th>
+                                            <th style="width: 4.5%">16:00</th>
+                                            <th style="width: 4.5%">16:30</th>
+                                        </tr>
+                                        {% for doc in otologyDoc %}
+                                        <tr>
+                                            <td>{{ doc.doctorName}}</td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "07:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "07:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "08:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "08:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "09:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "09:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "10:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "10:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "11:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "11:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "13:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "13:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "14:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "14:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "15:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "15:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "16:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "16:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        {% elif appoint.Department == "Rhinology" %}
+                        <button type="button" class="ri-nurse-line" data-bs-toggle="modal" data-bs-target="#rhinologyModal{{appoint.AppointmentID}}"></button>
+
+                        <div class="modal fade" id="rhinologyModal{{appoint.AppointmentID}}" tabindex="-1" aria-labelledby="rhinologyModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 1500px;">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="rhinologyModalLabel">Rhinology Doctor</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body freetimetable">
+                                    <table>
+                                        <tr>
+                                            <th style="width: 19%">Doctor - Time</th>
+                                            <th style="width: 4.5%">7:00</th>
+                                            <th style="width: 4.5%">7:30</th>
+                                            <th style="width: 4.5%">8:00</th>
+                                            <th style="width: 4.5%">8:30</th>
+                                            <th style="width: 4.5%">9:00</th>
+                                            <th style="width: 4.5%">9:30</th>
+                                            <th style="width: 4.5%">10:00</th>
+                                            <th style="width: 4.5%">10:30</th>
+                                            <th style="width: 4.5%">11:00</th>
+                                            <th style="width: 4.5%">11:30</th>
+                                            <th style="width: 4.5%">13:00</th>
+                                            <th style="width: 4.5%">13:30</th>
+                                            <th style="width: 4.5%">14:00</th>
+                                            <th style="width: 4.5%">14:30</th>
+                                            <th style="width: 4.5%">15:00</th>
+                                            <th style="width: 4.5%">15:30</th>
+                                            <th style="width: 4.5%">16:00</th>
+                                            <th style="width: 4.5%">16:30</th>
+                                        </tr>
+                                        {% for doc in rhinologyDoc %}
+                                        <tr>
+                                            <td>{{ doc.doctorName}}</td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "07:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "07:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "08:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "08:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "09:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "09:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "10:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "10:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "11:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "11:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "13:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "13:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "14:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "14:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "15:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "15:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "16:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "16:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <button type="button" class="ri-nurse-line" data-bs-toggle="modal" data-bs-target="#laryngologyModal{{appoint.AppointmentID}}"></button>
+
+                        <div class="modal fade" id="laryngologyModal{{appoint.AppointmentID}}" tabindex="-1" aria-labelledby="laryngologyModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 1500px;">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="laryngologyModalLabel">Laryngology Doctor</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body freetimetable">
+                                    <table>
+                                        <tr>
+                                            <th style="width: 19%">Doctor - Time</th>
+                                            <th style="width: 4.5%">7:00</th>
+                                            <th style="width: 4.5%">7:30</th>
+                                            <th style="width: 4.5%">8:00</th>
+                                            <th style="width: 4.5%">8:30</th>
+                                            <th style="width: 4.5%">9:00</th>
+                                            <th style="width: 4.5%">9:30</th>
+                                            <th style="width: 4.5%">10:00</th>
+                                            <th style="width: 4.5%">10:30</th>
+                                            <th style="width: 4.5%">11:00</th>
+                                            <th style="width: 4.5%">11:30</th>
+                                            <th style="width: 4.5%">13:00</th>
+                                            <th style="width: 4.5%">13:30</th>
+                                            <th style="width: 4.5%">14:00</th>
+                                            <th style="width: 4.5%">14:30</th>
+                                            <th style="width: 4.5%">15:00</th>
+                                            <th style="width: 4.5%">15:30</th>
+                                            <th style="width: 4.5%">16:00</th>
+                                            <th style="width: 4.5%">16:30</th>
+                                        </tr>
+                                        {% for doc in laryngologyDoc %}
+                                        <tr>
+                                            <td>{{ doc.doctorName}}</td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "07:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "07:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "08:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "08:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "09:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "09:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "10:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "10:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "11:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "11:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "13:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "13:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "14:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "14:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "15:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "15:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "16:00" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for time in doc.doctorFreeTime %}
+                                                    {% if time == "16:30" %}
+                                                        <i class='bx bx-check' style="color: green; font-size:20px"></i>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button class="ri-heart-add-line" data-bs-toggle="modal" data-bs-target="#addingAppointModal{{ appoint.AppointmentID }}"></button>
+
+                        <div class="modal fade" id="addingAppointModal{{ appoint.AppointmentID }}" tabindex="-1" aria-labelledby="addingAppointModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="addingAppointModalLabel">Asign Doctor And Time</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="asigndoctorandtime{{ appoint.AppointmentID }}" method="POST" > {% csrf_token %}
+                                        <input type="hidden" name="appointID" value={{ appoint.AppointmentID }}>
+                                        <input type="hidden" name="adding-removingAppoint" value="form1">
+                                        <div class="mb-3" style="text-align: left">
+                                            <label class="form-label">Choose Doctor</label>
+                                            <select class="form-select" name="doctor" style = "color: #ff66b2"; aria-label="doctor" required>
+                                                <option selected>Choose doctor</option>
+                                                {% if appoint.Department == "Otology" %}
+                                                    {% for doc in otologyDoc %}
+                                                    <option value={{doc.doctorID}}> {{ doc.doctorName }}</option>
+                                                    {% endfor %}
+                                                {% elif appoint.Department == "Rhinology" %}
+                                                    {% for doc in rhinologyDoc %}
+                                                    <option value={{doc.doctorID}}> {{ doc.doctorName }}</option>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {% for doc in laryngologyDoc %}
+                                                    <option value={{doc.doctorID}}> {{ doc.doctorName }}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                        <div class="mb-3" style="text-align: left">
+                                            <label class="form-label">Choose Time</label>
+                                            <select class="form-select" name="time" style = "color: #ff66b2"; aria-label="time" required>
+                                                <option selected>Choose time</option>
+                                                <option value="07:00">07:00</option>
+                                                <option value="07:30">07:30</option>
+                                                <option value="08:00">08:00</option>
+                                                <option value="08:30">08:30</option>
+                                                <option value="09:00">09:00</option>
+                                                <option value="09:30">09:30</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="10:30">10:30</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="11:30">11:30</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="13:30">13:30</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="14:30">14:30</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="15:30">15:30</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="16:30">16:30</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" form="asigndoctorandtime{{ appoint.AppointmentID }}" class="btn btn-primary">Submit</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <button class="ri-dislike-line" data-bs-toggle="modal" data-bs-target="#removingAppointment{{ appoint.AppointmentID }}"></button>
+
+                        <div class="modal fade" id="removingAppointment{{ appoint.AppointmentID }}" tabindex="-1" aria-labelledby="removingAppointmentLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="removingAppointmentLabel">Remove Appointment</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="removeAppoint{{ appoint.AppointmentID }}" method="POST" > {% csrf_token %}
+                                        <input type="hidden" name="appointID" value={{ appoint.AppointmentID }}>
+                                        <input type="hidden" name="patientID" value={{ appoint.PatientID }}>
+                                        <input type="hidden" name="adding-removingAppoint" value="form2">
+                                        <div class="mb-3" style="text-align: left">
+                                            <label for="reasonRemove" class="form-label">Reason</label>
+                                            <textarea class="form-control" name="reasonRemove" id="reasonRemove" rows="3" placeholder="Enter reason to remove appointment" required></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" form="removeAppoint{{ appoint.AppointmentID }}" class="btn btn-primary">Submit</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </td>      
+                </tr>
+                {% endfor %}
+            </table>
         </div>
 
     </section>

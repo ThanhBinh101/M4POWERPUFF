@@ -3,8 +3,9 @@ from django.apps import apps
 
 from .database import *
 
-from datetime import date
+from datetime import date, time
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 class Information:
     def __init__(self, name, email, password, dob, gender):
@@ -78,8 +79,8 @@ class MedicalRecord:
         })
 
 class Medicine:
-    def __init__(self, expiredate, name, quantity):
-        self.importdate = date.today()
+    def __init__(self, name, quantity, expiredate):
+        self.importdate = date.today().strftime("%d/%m/%Y")
         self.expiredate = expiredate
         self.name = name
         self.quantity = quantity
@@ -89,14 +90,8 @@ class Medicine:
             "Name": self.name,
             "Quantity": self.quantity,
             "ExpireDate": self.expiredate,
-            "ImportDate": self.importdate.strftime("%d/%m/%Y")
+            "ImportDate": self.importdate
         }
-
-    @staticmethod
-    def ImportMedicine( expiredate, name, quantity):
-        medicine = Medicine(expiredate, name, quantity)
-        dbconn = connectDBMedicine()
-        dbconn.push(medicine.to_dict())
 
     @staticmethod
     def UseMedicine(medicineID, quantity, note,reason):
@@ -123,14 +118,13 @@ class Medicine:
         dbconn.parent.update({"Quantity": 0})
 
 class Prescription:
-    def __init__(self, recordid, doctorid, status, revisit, note, medicines, endTime):
+    def __init__(self, recordid, doctorid, status, revisit, note, medicines):
         self.date = date.today()
         self.doctorid = doctorid
         self.status = status
         self.revisit = revisit
         self.note = note
         self.medicines = []
-        self.completeTime = endTime
         
         medicine_strings = medicines.split(",")
 
@@ -149,7 +143,6 @@ class Prescription:
             "Revisit": self.revisit,
             "Note": self.note,
             "Medicines": self.medicines,
-            "CompleteTime": self.completeTime
         }
 
 class Schedule:
@@ -179,7 +172,7 @@ class Doctor(Information):
     
     @staticmethod
     def AddPrescription(patientid, recordid, doctorid, status, revisit, note, medicines):
-        endTime = MedicalRecord.UpdateMedicalRecord(patientid, recordid, status, revisit)
+        MedicalRecord.UpdateMedicalRecord(patientid, recordid, status, revisit)
         prescription = Prescription(recordid, doctorid, status, revisit, note, medicines)
         dbconn = connectDBPrescription(patientid, recordid)
         dbconn.push(prescription.to_dict())
@@ -188,36 +181,124 @@ class Doctor(Information):
 
 class MedicineManager(Information):
     @staticmethod
+    def ImportMedicine(name, quantity, expiredate):
+        medicine = Medicine(name, quantity, expiredate)
+        dbconn = connectDBMedicine()
+        dbconn.push(medicine.to_dict())
+        
+    @staticmethod
+    def RemoveApartMedicine(medicineID, RemoveQuantity, reason):
+        currQuantity = connectDBMedicine(medicineID).child("Quantity").get()
+        newQuantity = currQuantity - RemoveQuantity
+        
+        dbconn = connectDBMedicineHistory(medicineID)
+        dbconn.push().set({
+            "Date": date.today().strftime("%d/%m/%Y"),
+            "Reason": reason,
+            "Quantity": RemoveQuantity
+        })
+        dbconn.parent.update({"Quantity": newQuantity})
+        
+    @staticmethod
+    def RemoveMedicine(mangerID, medicineID, reason):
+        medicinename = connectDBMedicine(medicineID).child("Name").get()
+        importdate = connectDBMedicine(medicineID).child("ImportDate").get()
+        expiredate = connectDBMedicine(medicineID).child("ExpireDate").get()
+        removedate = date.today().strftime("%d/%m/%Y")
+        
+        dbconn = connectDBMedicineManagerHistory(mangerID)
+        dbconn.push({
+            'medicineid': medicineID,
+            'reason': reason,
+            'name': medicinename,
+            'importdate': importdate,
+            'expiredate': expiredate,
+            'removedate': removedate
+        })
+        
+        deleteMedicine = connectDBMedicine().child(medicineID)
+        deleteMedicine.delete()
+        
+    @staticmethod
     def AddMedicalManager(name, email, password, dob, gender):
         manager = MedicineManager(name, email, password, dob, gender)
         dbconn = connectDBMedicineManager()
         dbconn.push(manager.to_dict())
 
 class Equipment:
-    def __init__(self, name, maintaindate, status, isuse):
+    def __init__(self, name, maintaindate, status, type):
         self.name = name
-        self.importdate = date.today()
+        self.importdate = date.today().strftime("%d/%m/%Y")
         self.maintaindate = maintaindate
         self.status = status
-        self.isuse = isuse
-        self.history = []
+        self.type = type
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'importdate': self.importdate,
+            'maintaindate': self.maintaindate,
+            'status': self.status,
+            'type': self.type
+        }
 
 class EquipmentManager(Information):
-    def importEquipment(self, name, maintaindate, status, isuse):
-        self.equipmentlist.append(Equipment( name, maintaindate, status, isuse))
+    @staticmethod
+    def importEquipment(name, maintaindate, status, type):
+        equip = Equipment( name, maintaindate, status, type)
+        dbconn = connectDBEquipment()
+        dbconn.push(equip.to_dict())
     
-    def cancelEquipment(self, equipment):
-        equipment.add_maintain()
-        self.canceledlist.append(equipment)
-        self.equipmentlist.remove(equipment)
+    @staticmethod
+    def StartMaintainEquipment(equipmentid):
+        updateItem = connectDBEquipment().child(equipmentid)
+        updateItem.update({'status': 'maintain'})
+    
+    @staticmethod
+    def NeedMaintainEquipment(equipmentid):
+        updateItem = connectDBEquipment().child(equipmentid)
+        updateItem.update({'status': 'inactive'})
+    
+    @staticmethod
+    def DoneMaintainEquipment(managerid, equipmentid):
+        newMaintainDate = (date.today() + timedelta(days=3 * 30)).strftime("%d/%m/%Y")
+        updateItem = connectDBEquipment().child(equipmentid)
+        updateItem.update({'status': 'active', 'maintaindate': newMaintainDate})
+        
+        managerName = connectDBEquipmentManager(managerid).child("Name").get()
+        maintaindate = date.today().strftime("%d/%m/%Y")
+        dbconn = connectDBEquipmentHistory(equipmentid)
+        dbconn.push({
+            'managerid': managerid,
+            'managername': managerName,
+            'maintaindate': maintaindate
+        })
+        
+    @staticmethod
+    def cancelEquipment(equipmentid, reason, managerid):
+        managerName = connectDBEquipmentManager(managerid).child("Name").get()
+        equipmentname = connectDBEquipment(equipmentid).child("name").get()
+        maintaindate = connectDBEquipment(equipmentid).child("maintaindate").get()
+        importdate = connectDBEquipment(equipmentid).child("importdate").get()
+        removedate = date.today().strftime("%d/%m/%Y")
+        
+        dbconn = connectDBEquipmentManagerHistory(managerid)
+        dbconn.push({
+            'equipmentid': equipmentid,
+            'equipmentname':equipmentname,
+            'reason': reason,
+            'managerid': managerid,
+            'managername': managerName,
+            'maintaindate': maintaindate,
+            'removedate': removedate,
+            'importdate': importdate
+        })
+        deleteItem = connectDBEquipment().child(equipmentid)
+        deleteItem.delete()
+        
 
     def add_schedule(self, day, shift):
         self.schedule.append(Schedule(day, shift))
-
-    def kill(self):
-        for s in self.schedule:
-            del s
-        del self
 
 class Test():
     def __init__(self, patientid, doctorid, department, type):
@@ -226,9 +307,11 @@ class Test():
         self.department = department
         self.type = type
         self.status = "notstarted"
+        self.date = date.today().strftime("%d/%m/%Y")
 
     def to_dict(self):
         return {
+            "date": self.date,
             "patientid": self.patientid,
             "doctorid": self.doctorid,
             "department": self.department,
@@ -237,7 +320,7 @@ class Test():
 
     @staticmethod
     def AddTest(patientid, doctorid, department, type):
-        conn = connectDBTest()
+        conn = connectDBTest("notstarted")
         test = Test(patientid, doctorid, department, type)
         conn.push(test.to_dict())
 
@@ -246,8 +329,7 @@ class Test():
         conn1 = connectDBTest("notstarted", testid)
         conn2 = connectDBTest("inprocess")
         conn1.update({
-            "status": "inprocess",         
-            "nurseid": nurseid
+           "nurseid": nurseid
         })
         conn2.push(conn1.get())
         conn1.delete()
@@ -269,9 +351,7 @@ class Test():
     def CancelProcess(testid):
         conn1 = connectDBTest("inprocess", testid)
         conn2 = connectDBTest("notstarted")
-        conn1.update({
-            "status": "notstarted"
-        })
+        
         conn1.child("nurseid").delete()
         conn2.push(conn1.get())
         conn1.delete()
@@ -297,11 +377,14 @@ class Nurse(Information):
         }
 
 class Appointment():
-    def __init__(self, patientid, department, time):
-        self.patientid = patientid,
-        self.department = department,
-        self.time = datetime.strptime(time, '%H:%M')
-        self.completeTime = self.time + timedelta(hours=1)
+    def __init__(self, patientid, department, wantedtime):
+        self.patientid = patientid
+        self.department = department
+        self.time = wantedtime
+    
+    def parse_time(self, time_str):
+        hour, minute = map(int, time_str.split(':'))
+        return time(hour, minute)
 
     @staticmethod
     def AddTime(apmid):
@@ -334,38 +417,52 @@ class Appointment():
             "PatientID": self.patientid,
             "Department": self.department,
             "Time": self.time,
+            "DoctorID": "None",
         }
 
 class Operator(Information):
     @staticmethod
-    def CheckTime(docid, time):
-        dbconn = connectDBAppointment()
-        for data in dbconn:
-            if(data.get("Time") == time and data.get("DoctorID").data() == docid):
-                return False
-        return True
-    
-    @staticmethod
     def SetAPM(docid, apmid, time):
-        dbconn = connectDBAppointment(apmid)
-        dbconn.set({"DoctorID": docid})
-        completeTime = time + timedelta(hours=1)
-        dbconn.update({"Time": time, "CompleteTime": completeTime})
+        dbconn = connectDBAppointment().child(apmid)
+        dbconn.update({"Time": time, "DoctorID": docid})
 
     @staticmethod
-    def DelAPM(apmid):
-        connectDBAppointment(apmid).delete()
-
+    def DelAPM(apmid, operatorid, patientname, reason):
+        patientid = connectDBAppointment(apmid).child("PatientID").get()
+        wantedtime = connectDBAppointment(apmid).child("Time").get()
+        department = connectDBAppointment(apmid).child("Department").get()
+        removedate = date.today().strftime("%d/%m/%Y")
+        
+        dbconn = connectDBOperatorHistory(operatorid)
+        dbconn.push({
+            'appointmentID': apmid,
+            'patientID': patientid,
+            'patientName': patientname,
+            'wantedTime': wantedtime,
+            'reason': reason,
+            'removedate': removedate,
+            'department':department
+        })
+        
+        deleteAppoint = connectDBAppointment().child(apmid)
+        deleteAppoint.delete()
+        
 class Job():
-    def __init__(self, role, personid, position):
+    def __init__(self, department, role, person, weekday, startTime, endTime, shift, position):
+        self.department = department
         self.role = role
-        self.personid = personid
+        self.person = person
+        self.weekday = weekday
+        self.shift = shift
         self.position = position
 
     def to_dict(self):
         return {
+            "Department": self.department,
             "Role": self.role,
-            "PersonID": self.personid,
+            "Person": self.person,
+            "Weekday": self.weekday,
+            "Shift": self.shift,
             "Position": self.position
         }
 
@@ -383,8 +480,8 @@ class Job():
         })
 
     @staticmethod
-    def DeleteJob(shift, department, day, jobid):
-        connectDBJob(shift, department, day, jobid).delete()
+    def DeleteJob(jobid):
+        connectDBJob(jobid).delete()
 
 
 class Admin(Information):
