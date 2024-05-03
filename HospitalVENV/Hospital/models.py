@@ -448,29 +448,15 @@ class Operator(Information):
         deleteAppoint.delete()
         
 class Job():
-    def __init__(self, department, role, person, weekday, startTime, endTime, shift, position):
-        self.department = department
-        self.role = role
-        self.person = person
-        self.weekday = weekday
-        self.shift = shift
-        self.position = position
+    def __init__(self, room, personID):
+        self.position = room
+        self.person = personID
 
     def to_dict(self):
         return {
-            "Department": self.department,
-            "Role": self.role,
-            "Person": self.person,
-            "Weekday": self.weekday,
-            "Shift": self.shift,
+            "PersonID": self.person,
             "Position": self.position
         }
-
-    @staticmethod
-    def AddJob(department, role, person, weekday, shift, position):
-        job = Job(department, role, person, weekday, shift, position)
-        dbconn = connectDBJob()
-        dbconn.push(job.to_dict())
 
     @staticmethod
     def DeleteJob(jobid):
@@ -479,6 +465,12 @@ class Job():
 class Admin(Information):
     def __init__(self, name, email, password, dob, gender):
         Information.__init__(self, name, email, password, dob, gender)
+
+    @staticmethod
+    def AddJob(shift, department, day, room, personID):
+        job = Job(room, personID)
+        dbconn = connectDBJob(shift, department, day)
+        dbconn.push(job.to_dict())
 
     @staticmethod
     def AddDoctor(name, email, password, dob, department, level, years):

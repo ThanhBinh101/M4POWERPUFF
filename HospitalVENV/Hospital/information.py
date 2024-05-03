@@ -377,9 +377,9 @@ def get_medicine_useHistory():
     return list
 
 def get_medicine_history(ID):
+    list = []
     tableHistory = connectDBMedicineHistory(ID).get()
     if tableHistory is not None:
-        list = []
         for key2, value2 in tableHistory.items():
             list.append({
                 'id':key2,
@@ -458,7 +458,8 @@ def get_otology_doctor():
                 list.append({
                     'doctorID': key,
                     'doctorName': value.get("Name"),
-                    'doctorFreeTime': get_freetime_doctor(key, "Otology")
+                    'doctorFreeTime': get_freetime_doctor(key, "Otology"),
+                    'doctorShift': get_doctor_shift(key, "Otology")
                 })
     return list
 
@@ -471,7 +472,8 @@ def get_rhinology_doctor():
                 list.append({
                     'doctorID': key,
                     'doctorName': value.get("Name"),
-                    'doctorFreeTime': get_freetime_doctor(key, "Rhinology")
+                    'doctorFreeTime': get_freetime_doctor(key, "Rhinology"),
+                    'doctorShift': get_doctor_shift(key, "Rhinology")
                 })
     return list
 
@@ -484,7 +486,8 @@ def get_laryngology_doctor():
                 list.append({
                     'doctorID': key,
                     'doctorName': value.get("Name"),
-                    'doctorFreeTime': get_freetime_doctor(key, "Laryngology")
+                    'doctorFreeTime': get_freetime_doctor(key, "Laryngology"),
+                    'doctorShift': get_doctor_shift(key, "Laryngology")
                 })
     return list
 
@@ -492,13 +495,6 @@ def get_freetime_doctor(docID, department):
     current_time = datetime.now()
     current_hour = current_time.hour
     current_minute = current_time.minute
-    
-    if department == "Otology":
-        department = "Ear"
-    elif department == "Rhinology":
-        department = "Nose"
-    else:
-        department = "Throat"
     
     shift = get_doctor_shift(docID, department)
         
@@ -586,3 +582,25 @@ def get_operator_history(ID):
                 'department': value.get('department')
             })
         return list
+    
+def get_doctor_scheduel(docID):
+    list = []
+    tableJob = connectDBJob().get()
+    if tableJob is not None:
+        for key1, value1 in tableJob.items():
+            tableDay = connectDBJob(key1).get()
+            if tableDay is not None:
+                for key2, value2 in tableDay.items():
+                    tableDepart = connectDBJob(key1, key2).get()
+                    if tableDepart is not None:
+                        for key3, value3 in tableDepart.items():
+                            tableDay = connectDBJob(key1, key2, key3).get()
+                            if tableDay is not None:
+                                for key4, value4 in tableDay.items():
+                                    if value4.get('PersonID') == docID:
+                                        list.append({
+                                            'Shift': key1,
+                                            'Department': key2,
+                                            'Day': key3,
+                                        })
+    return list
