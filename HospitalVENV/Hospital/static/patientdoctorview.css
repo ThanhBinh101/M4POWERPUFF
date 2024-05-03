@@ -1,57 +1,57 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    list-style: none;
-    text-decoration: none;
-  }
-  header {
-    position: flex;
-    right: 0;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 33px 9%;
-    background: #F2CED8;
-    border-radius: 20px 20px 0 0;
-  }
-  body {
-    background-color: white;
-  }
-  .logo-name {
-    float: left
-  }
-  .logo-name img {
-    max-width: 55px;
-    float: left;
-    margin: 0 10px 0 0;
-  }
-  .logo-name a {
-    font-size: 30px;
-    font-weight: 700;
-    color: #0487d9;
-    text-decoration: none;
-  }
-  .navlist {
-    display: flex;
-    margin-top: 15px;
-  }
-  .navlist a{
-    color: #0487d9;
-    margin-left: 60px;
-    font-size: 15px;
-    font-weight: 600;
-    border-bottom: 2px solid transparent;
-    transition: all .55s ease;
-    text-decoration: none;
-  }
-  .navlist a:hover{
-    border-bottom: 2px solid #0487d9;
-  }
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins';
+  list-style: none;
+  text-decoration: none;
+}
+header {
+  position: flex;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 9%;
+  background: #F2CED8;
+}
+body {
+  background-color: white;
+}
+.logo-name {
+  float: left
+}
+.logo-name img {
+  max-width: 55px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+.logo-name a {
+  font-family: 'Baloo 2';
+  font-size: 30px;
+  font-weight: 700;
+  color: #0487d9;
+  text-decoration: none;
+}
+.navlist {
+  display: flex;
+  margin-top: 15px;
+}
+.navlist a{
+  color: #0487d9;
+  margin-left: 60px;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all .55s ease;
+  text-decoration: none;
+}
+.navlist a:hover{
+  border-bottom: 2px solid #0487d9;
+}
   header .btn-primary {
     font-size: 20px;
     margin-right: 25px;
@@ -94,13 +94,16 @@
   .textbox {
     line-height: 0.75cm;
     display: block;
+    margin-left: 8%;
+    margin-top: 5%;
   }
   .textbox h2 {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    margin-top: 5%;
+    margin-top: 10%;
+    margin-bottom: 5%;
   }
   .textbox p {
     border-bottom: 2px solid black;
@@ -119,9 +122,13 @@
     border-radius: 47px;
     margin-left: 10%;
     margin-right: 10%;
+    margin-top: 5%;
   }
   .MedicalRecord h2 {
-    padding-top: 3%;
+    padding-top: 4%;
+    text-align: center;
+    font-size: 24px;
+    color: #ff66b2;
   }
   .MedicalRecord a {
     text-decoration: none;
