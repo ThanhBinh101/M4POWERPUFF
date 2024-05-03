@@ -13,6 +13,11 @@ def connectDBPatient(key = ""):
     connect()
     return db.reference("Patient/{}".format(key))
 
+def connectDBStaff(key1 = "", key2 = ""):
+    if key1 == "":
+        return connectDBDoctor() + connectDBNurse()
+    return  db.reference("{}/{}".format(key1, key2))
+
 def connectDBDoctor(key = ""):
     connect()
     return db.reference("Doctor/{}".format(key))
