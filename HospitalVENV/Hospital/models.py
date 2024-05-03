@@ -3,8 +3,9 @@ from django.apps import apps
 
 from .database import *
 
-from datetime import date
+from datetime import date, time
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 class Information:
     def __init__(self, name, email, password, dob, gender):
@@ -380,6 +381,10 @@ class Appointment():
         self.patientid = patientid
         self.department = department
         self.time = wantedtime
+    
+    def parse_time(self, time_str):
+        hour, minute = map(int, time_str.split(':'))
+        return time(hour, minute)
 
     @staticmethod
     def AddTime(apmid):
@@ -412,28 +417,36 @@ class Appointment():
             "PatientID": self.patientid,
             "Department": self.department,
             "Time": self.time,
+            "DoctorID": "None",
         }
 
 class Operator(Information):
     @staticmethod
-    def CheckTime(docid, time):
-        dbconn = connectDBAppointment()
-        for data in dbconn:
-            if(data.get("Time") == time and data.get("DoctorID").data() == docid):
-                return False
-        return True
-    
-    @staticmethod
     def SetAPM(docid, apmid, time):
-        dbconn = connectDBAppointment(apmid)
-        dbconn.set({"DoctorID": docid})
-        completeTime = time + timedelta(hours=1)
-        dbconn.update({"Time": time, "CompleteTime": completeTime})
+        dbconn = connectDBAppointment().child(apmid)
+        dbconn.update({"Time": time, "DoctorID": docid})
 
     @staticmethod
-    def DelAPM(apmid):
-        connectDBAppointment(apmid).delete()
-
+    def DelAPM(apmid, operatorid, patientname, reason):
+        patientid = connectDBAppointment(apmid).child("PatientID").get()
+        wantedtime = connectDBAppointment(apmid).child("Time").get()
+        department = connectDBAppointment(apmid).child("Department").get()
+        removedate = date.today().strftime("%d/%m/%Y")
+        
+        dbconn = connectDBOperatorHistory(operatorid)
+        dbconn.push({
+            'appointmentID': apmid,
+            'patientID': patientid,
+            'patientName': patientname,
+            'wantedTime': wantedtime,
+            'reason': reason,
+            'removedate': removedate,
+            'department':department
+        })
+        
+        deleteAppoint = connectDBAppointment().child(apmid)
+        deleteAppoint.delete()
+        
 class Job():
     def __init__(self, department, role, person, weekday, startTime, endTime, shift, position):
         self.department = department
