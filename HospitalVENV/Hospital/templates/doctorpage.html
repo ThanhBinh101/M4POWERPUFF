@@ -307,7 +307,7 @@
                                             <td>
                                                 {% for value in doctorSchedule %}
                                                     {% if value.Department == doctor.department and value.Day == "Sun" and value.Shift == "Evening"%}
-                                                        <div style="font-size: 20px; color:#0487D9">
+                                                        <div style="font-size: 20px; color:#0487D9;">
                                                             <i class="ri-home-heart-line"></i> 
                                                             <p>{{ value.Position}}</p>
                                                         </div>
@@ -319,6 +319,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer appointmentModalFooter" style = "background-color: rgba(4, 135, 217, 0.5);">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+                        </div>  
                     </div>
                 </div>
             </div>
