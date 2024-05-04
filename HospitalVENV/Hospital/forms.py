@@ -6,3 +6,4 @@ class UserForm(forms.Form):
     password = forms.CharField(max_length=100)
     date = forms.CharField(max_length=100)
     gender = forms.CharField(max_length=100)
+    years = forms.DecimalField(max_digits=10)

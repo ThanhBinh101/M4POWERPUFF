@@ -151,17 +151,22 @@ class Schedule:
         self.shift = shift
 
 class Doctor(Information):
-    def __init__(self, name, email, password, dob, department, level, years):
-        Information(self, name, email, password, dob)
+    def __init__(self, name, email, password, dob, gender, department, level, years):
+        super().__init__(name, email, password, dob, gender)
         self.department = department
         self.level = level
         self.years = years
     
     def to_dict(self):
-        return super().to_dict() + {
+        return {
             "Department": self.department,
             "Level": self.level,
-            "Years": self.years
+            "Years": self.years,
+            "Gmail": self.email,
+            "Name": self.name,
+            "Password": self.password,
+            "Gender": self.gender,
+            "Date of Birth": self.dob
         }
     
     @staticmethod
@@ -363,17 +368,22 @@ class Test():
 
 
 class Nurse(Information):
-    def __init__(self, name, email, password, dob, department, level, years):
-        super().__init__(self, name, email, password, dob)
+    def __init__(self, name, email, password, dob, gender, department, level, years):
+        super().__init__(name, email, password, dob, gender)
         self.department = department
         self.level = level
-        self.yearưs = years
+        self.years = years
     
     def to_dict(self):
-        return super() + {
+        return{
             "Department": self.department,
             "Level": self.level,
-            "Years": self.years
+            "Years": self.years,
+            "Gmail": self.email,
+            "Name": self.name,
+            "Password": self.password,
+            "Gender": self.gender,
+            "Date of Birth": self.dob
         }
 
 class Appointment():
@@ -473,8 +483,8 @@ class Admin(Information):
         dbconn.push(job.to_dict())
 
     @staticmethod
-    def AddDoctor(name, email, password, dob, department, level, years):
-        doctor = Doctor(name, email, password, dob, department, level, years)
+    def AddDoctor(name, email, password, dob, gender, department, level, years):
+        doctor = Doctor(name, email, password, dob, gender, department, level, years)
         dbconn = connectDBDoctor()
         dbconn.push(doctor.to_dict())
         
@@ -483,8 +493,8 @@ class Admin(Information):
         connectDBDoctor().child(id).delete()
 
     @staticmethod
-    def AddNurse(name, email, password, dob, department, level, years):
-        nurse = Nurse(name, email, password, dob, department, level, years)
+    def AddNurse(name, email, password, dob, gender, department, level, years):
+        nurse = Nurse(name, email, password, dob, gender, department, level, years)
         dbconn = connectDBNurse()
         dbconn.push(nurse.to_dict())
     @staticmethod

@@ -132,6 +132,10 @@ def patientpage(request, ID):
         from_history = request.GET.get('from_history', False)
         if from_history:
             context['from_history'] = True
+        from_admin = request.GET.get('from_admin', False)
+        if from_admin:
+            context['from_admin'] = True
+
         paInfo = get_patient_info(ID)
         context.update({'patient': paInfo})
         
@@ -154,12 +158,22 @@ def patientpage(request, ID):
 
 
 def doctorpage(request, ID):
+    context = {}
+    if request.method == "GET":
+        from_admin = request.GET.get('from_admin', False)
+        if from_admin:
+            context['from_admin'] = True
+        
     docInfo = get_doctor_info(ID)
     docSchedule = get_person_schedule(ID)
-    return render(request, 'doctorpage.html', {'doctor': docInfo, 'doctorSchedule': docSchedule})
+    return render(request, 'doctorpage.html', {'doctor': docInfo, 'doctorSchedule': docSchedule}, context)
 
 def nursepage(request, ID):
+    context = {}
     if request.method == "GET":
+        from_admin = request.GET.get('from_admin', False)
+        if from_admin:
+            context['from_admin'] = True
         nurseInfo = get_nurse_info(ID)
         
         testResult = nurseHistory()
@@ -167,16 +181,16 @@ def nursepage(request, ID):
         nurseSchedule = get_person_schedule(ID)
         
         if nurseInfo.get('department') == "Otology":
-            testList = get_testing_otology()
-            processList = get_testing_otology_inprocess()
+            testList = get_testing("Otology", "notstarted")
+            processList = get_testing("Otology", "inprocess")
         elif nurseInfo.get('department') == "Rhinology":
-            testList = get_testing_rhinology()
-            processList = get_testing_rhinology_inprocess()
+            testList = get_testing("Rhinology", "notstarted")
+            processList = get_testing("Rhinology", "inprocess")
         else:
-            testList = get_testing_laryngology()
-            processList = get_testing_laryngology_inprocess()
+            testList = get_testing("Laryngology", "notstarted")
+            processList = get_testing("Laryngology", "inprocess")
             
-        return render(request, 'nursepage.html', {'nurse': nurseInfo, 'testList': testList, 'processList': processList, 'testResult': testResult, 'nurseSchedule': nurseSchedule})
+        return render(request, 'nursepage.html', {'nurse': nurseInfo, 'testList': testList, 'processList': processList, 'testResult': testResult, 'nurseSchedule': nurseSchedule}, context)
 
     if request.method == "POST":
         result = request.POST.get('resultNote')
@@ -466,4 +480,32 @@ def Adminpage(request, ID):
                     Admin.AddJob(shift, "Manager", day, medicineManRoom, medicineMan)
                 if appointmentMan is not None and appointmentManRoom is not None:
                     Admin.AddJob(shift, "Manager", day, appointmentManRoom, appointmentMan)
-        return redirect('Adminpage', ID)
+            return redirect('Adminpage', ID)
+        
+        form_check = request.POST.get('addingStaff')
+        if form_check == 'form2':
+            department = request.POST.get('department')
+            role = request.POST.get('role')
+            name = request.POST.get('name')
+            years = request.POST.get('years')
+            email = request.POST.get('gmail')
+            password = request.POST.get('password')
+            gender = request.POST.get('gender')
+            date = request.POST.get('date')
+            level = request.POST.get('level')
+            
+            if department == 'Manager':
+                if(role == 'Medicine'):
+                    Admin.AddMedicineManager(name, email, password, date, gender)
+                if role == 'Equipment':
+                    Admin.AddEquipmentManager(name, email, password, date, gender)
+                if role == 'Appointment':
+                    Admin.AddOperator(name, email, password, date, gender)
+            else:
+                if role == 'Doctor':
+                    Admin.AddDoctor(name, email, password, date, gender, department, level, years)
+                if role == 'Nurse':
+                    Admin.AddNurse(name, email, password, date, gender, department, level, years)
+            return redirect('Adminpage', ID)
+
+

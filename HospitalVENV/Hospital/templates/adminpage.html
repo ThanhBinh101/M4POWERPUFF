@@ -59,13 +59,103 @@
             </div>
 
             <div style = "margin-top: 5%" class = 'newButton'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddPeople">Add People</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddStaff">Add Staff</button>
             </div>
 
             <div style = "margin-top: 5%" class = 'newButton'>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MedicalStaff">Medical Staff</button>
             </div>
             
+            <div class="modal fade" id="AddStaff" tabindex="-1" aria-labelledby="AddJobLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="AddJobLabel">Add New Job</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addStaff" method="POST" > {% csrf_token %}
+                            <input type="hidden" name="addingStaff" value="form2">
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Department</label>
+                                <select class="form-select" name="department" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Department</option>
+                                    <option value="Laryngology">Laryngology</option>
+                                    <option value="Rhinology">Rhinology</option>
+                                    <option value="Otology">Otology</option>
+                                    <option value="Manager">Manager</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Role</label>
+                                <select class="form-select" name="role" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Role</option>
+                                    <option value="Doctor">Doctor</option>
+                                    <option value="Nurse">Nurse</option>
+                                    <option value="Medicine">Medicine</option>
+                                    <option value="Equipment">Equipment</option>
+                                    <option value="Appointment">Appointment</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Level</label>
+                                <select class="form-select" name="level" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose level</option>
+                                    <option value="Intern">[Doctor]Intern</option>
+                                    <option value="Fellow">[Doctor]Fellow</option>
+                                    <option value="Head of department">[Doctor]Head of department</option>
+                                    <option value="Chief resident">[Doctor]Chief resident</option>
+                                    <option value="Senior resident">[Doctor]Senior resident</option>
+                                    <option value="Junior resident">[Doctor]Junior resident</option>
+                                    <option value="Medical director">[Doctor]Medical director</option>
+                                    <option value="Attending physician">[Doctor]Attending physician</option>
+                                    <option value="Certified Nursing Assistant">[Nurse]Certified Nursing Assistant</option>
+                                    <option value="Licensed practical nurse">[Nurse]Licensed practical nurse</option> 
+                                    <option value="Registered nurse">[Nurse]Registered nurse</option>
+                                    <option value="Advanced practice registered nurse">[Nurse]Advanced practice registered nurse</option>
+                                    <option value="Doctor of nursing practise">[Nurse]Doctor of nursing practise</option>
+                                    <option value="Full time">[Manager]Full time</option>
+                                    <option value="Part time">[Manager]Part time</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experienceYears" class="form-label">Experience years</label>
+                                <input type="text" class="form-control" name= "years" placeholder="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupGmail" class="form-label">Gmail</label>
+                                <input type="email" class="form-control" name= "gmail" placeholder="name@example.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupName" class="form-label">Name</label>
+                                <input type="text" class="form-control" name= "name" placeholder="James Smith" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="signupPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" name = "password" placeholder="123456" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupGender" class="form-label">Gender</label>           
+                                <select class="form-select" name="gender" required>
+                                    <option selected>M/F</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupDOB" class="form-label">Date of Birth</label>      
+                                <input class="form-control" id="signupDOB" name="date" placeholder="DD/MM/YYY" type="text" required>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" form="addStaff" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
 
             <div class="modal fade" id="AddJob" tabindex="-1" aria-labelledby="AddJobLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -273,6 +363,47 @@
                   </div>
                 </div>
             </div>
+
+            <div class="modal fade" id = "MedicalStaff" tabindex="-1" aria-labelledby="AddJobLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="AddJobLabel">Medical Staff</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <th class="title" style="width: 20%;">Name</th>
+                                        <th class="title" style="width: 20%;">Department</th>
+                                        <th class="title" style="width: 20%;">Role</th>
+                                    </tr>
+                                    {% for staff in stafflist%}
+                                    <tr>
+                                        {% if staff.Role == 'Doctor' %}
+                                            <td><a href="{% url 'doctorpage' staff.ID %}?from_admin=true">{{ staff.Name }}</a></td>
+                                        {% elif staff.Role == 'Nurse' %}
+                                            <td><a href="{% url 'nursepage' staff.ID %}?from_admin=true">{{ staff.Name }}</a></td>
+                                        {% else %}
+                                        <td>{{staff.Name}}</td>
+                                        {% endif %}
+                                        <td>{{staff.Department}}</td>
+                                        <td>{{staff.Role}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                             </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="submit" form="addStaff" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+
         </div>
     </section>
 

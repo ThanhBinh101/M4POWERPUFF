@@ -4,127 +4,104 @@ from .forms import UserForm
 from .views import *
 
 def get_patient_info(ID):
-    PatientInfo = []
-    tableUser = connectDBPatient().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            PatientInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'gender': value.get("Gender"),
-                'dateofbirth': value.get("Date of Birth"),
-                'gmail':value.get("Gmail"),
-                'medicalrecord': get_medicial_record(ID)
-            })
-            return PatientInfo[0]
-    return None
+    value = connectDBPatient(ID).get()
+    if value is None:
+        return None
+    return {
+        'id': ID,
+        'name': value.get("Name"),
+        'gender': value.get("Gender"),
+        'dateofbirth': value.get("Date of Birth"),
+        'gmail':value.get("Gmail"),
+        'medicalrecord': get_medicial_record(ID)
+    }
 
 def get_doctor_info(ID):
-    docInfo = []
-    tableUser = connectDBDoctor().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            docInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'department': value.get("Department"),
-                'years': value.get("Years"),
-                'dob': value.get('DateOfBirth'),
-                'gmail':value.get("Gmail"),
-                'level': value.get("Level"),
-                'appointments': get_doctor_appointments(key)
-            })
-            return docInfo[0]
-    return None
+    value = connectDBDoctor(ID).get()
+    if value is None:
+        return None
+    return {
+        'id': ID,
+        'name': value.get("Name"),
+        'department': value.get("Department"),
+        'years': value.get("Years"),
+        'dob': value.get('DateOfBirth'),
+        'gmail':value.get("Gmail"),
+        'level': value.get("Level"),
+        'appointments': get_doctor_appointments(ID)
+    }
 
 def get_nurse_info(ID):
-    nurseInfo = []
-    tableUser = connectDBNurse().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            nurseInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'department': value.get("Department"),
-                'gmail':value.get("Gmail"),
-                'level': value.get("Level"),
-                'year': value.get("Years"),
-                'dateofbirth': value.get("Date of Birth")
-            })
-            return nurseInfo[0]
-    return None
+    value = connectDBNurse(ID).get()
+    if value is None:
+        return None
+    return {
+        'id': ID,
+        'name': value.get("Name"),
+        'department': value.get("Department"),
+        'gmail':value.get("Gmail"),
+        'level': value.get("Level"),
+        'year': value.get("Years"),
+        'dateofbirth': value.get("Date of Birth")
+    }
 
 
 def get_medicinemanager_info(ID):
-    ManagerInfo = []
-    tableUser = connectDBMedicineManager().get()
-    if tableUser is not None:
-        for key, value in tableUser.items():
-            if key == ID:
-                ManagerInfo.append({
-                    'id': key,
-                    'name': value.get("Name"),
-                    'dob': value.get("DateOfBirth"),
-                    'gmail':value.get("Gmail"),
-                    'years':value.get("Years")
-                })
-                return ManagerInfo[0]
-    return None
+    value = connectDBMedicineManager(ID).get()
+    if value is None:
+        return None
+    return {
+        'id': ID,
+        'name': value.get("Name"),
+        'dob': value.get("DateOfBirth"),
+        'gmail':value.get("Gmail"),
+        'years':value.get("Years")
+    }
 
 
 def get_equipmentmanager_info(ID):
-    ManagerInfo = []
-    tableUser = connectDBEquipmentManager().get()
-    if tableUser is not None:
-        for key, value in tableUser.items():
-            if key == ID:
-                ManagerInfo.append({
-                    'id': key,
-                    'name': value.get("Name"),
-                    'dob': value.get("DateOfBirth"),
-                    'gmail':value.get("Gmail"),
-                    'years':value.get("Years")
-                })
-                return ManagerInfo[0]
-    return None
+    value = connectDBEquipmentManager(ID).get()
+    if value is None:
+        return None
+    return {
+        'id': ID,
+        'name': value.get("Name"),
+        'dob': value.get("DateOfBirth"),
+        'gmail':value.get("Gmail"),
+        'years':value.get("Years")
+    }
 
 
 def get_operator_info(ID):
-    operatorInfo = []
-    tableUser = connectDBOperator().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            operatorInfo.append({
-                'id':key,
-                'name': value.get("Name"),
-                'dob': value.get("DateOfBirth"),
-                'gmail':value.get("Gmail"),
-                'years':value.get("Years")
-            })
-            return operatorInfo[0]
-    return None
+    value = connectDBOperator(ID).get()
+    if value is None:
+        return None
+    return {
+        'id': ID,
+        'name': value.get("Name"),
+        'dob': value.get("DateOfBirth"),
+        'gmail':value.get("Gmail"),
+        'years':value.get("Years")
+    }
 
 
 def get_admin_info(ID):
-    AdminInfo = []
-    tableUser = connectDBAdmin().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            AdminInfo.append({
-                'id': key,
-                'name': value.get("Name"),
-                'phone': value.get("Phone"),
-                'gmail':value.get("Gmail")
-            })
-            return AdminInfo[0]
-    return None
+    value = connectDBAdmin(ID).get()
+    if value is None:
+        return None
+    return {
+        'id': ID,
+        'name': value.get("Name"),
+        'phone': value.get("Phone"),
+        'gmail':value.get("Gmail")
+    }
 
-def get_testing_otology():
+def get_testing(department, status):
     testList = []
-    test_table_notstarted = connectDBTest("notstarted").get()
+    test_table_notstarted = connectDBTest(status).get()
     if test_table_notstarted is not None:
         for key, value in test_table_notstarted.items():
-            if value.get("department") == "Otology":
+            if value.get("department") == department:
                 testList.append({
                     "id": key,
                     "date": value.get("date"),
@@ -133,97 +110,7 @@ def get_testing_otology():
                     "doctorname": get_doctor_name(value.get("doctorid")),
                     "type": value.get("type")
                 })
-    
     return testList
-
-def get_testing_otology_inprocess():
-    processList = []
-    test_table_inprocess = connectDBTest("inprocess").get()
-    if test_table_inprocess is not None:
-        for key, value in test_table_inprocess.items():
-            if value.get("department") == "Otology":
-                processList.append({
-                    "id": key,
-                    "date": value.get("date"),
-                    "department": value.get("department"),
-                    "patientname": get_patient_name(value.get("patientid")),
-                    "doctorname": get_doctor_name(value.get("doctorid")),
-                    "type": value.get("type"),
-                    "nurseid": value.get("nurseid")
-                })
-    return processList
-
-
-def get_testing_rhinology():
-    testList = []
-    test_table_notstarted = connectDBTest("notstarted").get()
-    if test_table_notstarted is not None:
-        for key, value in test_table_notstarted.items():
-            if value.get("department") == "Rhinology":
-                testList.append({
-                    "id": key,
-                    "date": value.get("date"),
-                    "department": value.get("department"),
-                    "patientname": get_patient_name(value.get("patientid")),
-                    "doctorname": get_doctor_name(value.get("doctorid")),
-                    "type": value.get("type")
-                })
-    
-    return testList
-
-def get_testing_rhinology_inprocess():
-    processList = []
-    test_table_inprocess = connectDBTest("inprocess").get()
-    if test_table_inprocess is not None:
-        for key, value in test_table_inprocess.items():
-            if value.get("department") == "Rhinology":
-                processList.append({
-                    "id": key,
-                    "date": value.get("date"),
-                    "department": value.get("department"),
-                    "patientname": get_patient_name(value.get("patientid")),
-                    "doctorname": get_doctor_name(value.get("doctorid")),
-                    "type": value.get("type"),
-                    "nurseid": value.get("nurseid")
-                })
-    return processList
-
-
-def get_testing_laryngology():
-    testList = []
-    test_table_notstarted = connectDBTest("notstarted").get()
-    if test_table_notstarted is not None:
-        for key, value in test_table_notstarted.items():
-            if value.get("department") == "Laryngology":
-                testList.append({
-                    "id": key,
-                    "date": value.get("date"),
-                    "department": value.get("department"),
-                    "patientname": get_patient_name(value.get("patientid")),
-                    "doctorname": get_doctor_name(value.get("doctorid")),
-                    "type": value.get("type")
-                })
-    
-    return testList
-
-def get_testing_laryngology_inprocess():
-    processList = []
-    test_table_inprocess = connectDBTest("inprocess").get()
-    if test_table_inprocess is not None:
-        for key, value in test_table_inprocess.items():
-            if value.get("department") == "Laryngology":
-                processList.append({
-                    "id": key,
-                    "date": value.get("date"),
-                    "department": value.get("department"),
-                    "patientname": get_patient_name(value.get("patientid")),
-                    "doctorname": get_doctor_name(value.get("doctorid")),
-                    "type": value.get("type"),
-                    "nurseid": value.get("nurseid")
-                })
-    return processList
-
-
 
 def get_doctor_appointments(doc_key):
     appointment_table = connectDBAppointment().get()
@@ -238,8 +125,7 @@ def get_doctor_appointments(doc_key):
                 })
         appointments_sorted = sorted(appointments, key=lambda x: datetime.strptime(x['time'], '%H:%M'))
         return appointments_sorted
-    else:
-        return None
+    return None
 
 
 def get_medicine_table():
@@ -300,18 +186,10 @@ def get_doctor_name(ID):
     return None
 
 def get_patient_name(ID):
-    tableUser = connectDBPatient().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            return value.get("Name")
-    return None
+    return connectDBPatient(ID).child("Name").get()
 
 def get_nurse_name(ID):
-    tableUser = connectDBNurse().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            return value.get("Name")
-    return None
+    return connectDBNurse(ID).child("Name").get()
 
 def get_medicine_list(medicinelist):
     tableMedicine = connectDBMedicine().get()
@@ -596,17 +474,11 @@ def get_person_schedule(personID):
     tableJob = connectDBJob().get()
     if tableJob is not None:
         for key1, value1 in tableJob.items():
-            tableDay = connectDBJob(key1).get()
-            if tableDay is not None:
-                for key2, value2 in tableDay.items():
-                    tableDepart = connectDBJob(key1, key2).get()
-                    if tableDepart is not None:
-                        for key3, value3 in tableDepart.items():
-                            tableDay = connectDBJob(key1, key2, key3).get()
-                            if tableDay is not None:
-                                for key4, value4 in tableDay.items():
-                                    if value4.get('PersonID') == personID:
-                                        schedule[key1][key3] = value4.get('Position')
+            for key2, value2 in value1.items():
+                for key3, value3 in value2.items():
+                    for key4, value4 in value3.items():
+                        if value4.get('PersonID') == personID:
+                            schedule[key1][key3] = value4.get('Position')
                                         
     return schedule
 
