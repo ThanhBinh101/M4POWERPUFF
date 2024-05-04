@@ -155,7 +155,7 @@ def patientpage(request, ID):
 
 def doctorpage(request, ID):
     docInfo = get_doctor_info(ID)
-    docSchedule = get_doctor_schedule(ID)
+    docSchedule = get_person_schedule(ID)
     return render(request, 'doctorpage.html', {'doctor': docInfo, 'doctorSchedule': docSchedule})
 
 def nursepage(request, ID):
@@ -163,6 +163,8 @@ def nursepage(request, ID):
         nurseInfo = get_nurse_info(ID)
         
         testResult = nurseHistory()
+        
+        nurseSchedule = get_person_schedule(ID)
         
         if nurseInfo.get('department') == "Otology":
             testList = get_testing_otology()
@@ -174,7 +176,7 @@ def nursepage(request, ID):
             testList = get_testing_laryngology()
             processList = get_testing_laryngology_inprocess()
             
-        return render(request, 'nursepage.html', {'nurse': nurseInfo, 'testList': testList, 'processList': processList, 'testResult': testResult})
+        return render(request, 'nursepage.html', {'nurse': nurseInfo, 'testList': testList, 'processList': processList, 'testResult': testResult, 'nurseSchedule': nurseSchedule})
 
     if request.method == "POST":
         result = request.POST.get('resultNote')
@@ -230,7 +232,9 @@ def medicinemanagerpage(request, ID):
         
         medicinemanagerhistory = get_medicinemanager_history(ID)
         
-        return render(request, 'medicinemanagerpage.html', {'manager': managerInfo, 'medicineTable': medicineTable , 'medicineHistory': medicineHistoryUsage, 'managerHistory': medicinemanagerhistory})
+        medicineSchedule = get_person_schedule(ID)
+        
+        return render(request, 'medicinemanagerpage.html', {'manager': managerInfo, 'medicineTable': medicineTable , 'medicineHistory': medicineHistoryUsage, 'managerHistory': medicinemanagerhistory, 'medicineSchedule': medicineSchedule})
     
     if request.method == "POST":
         form_check = request.POST.get('newMedicine-deleteMedicine')
@@ -260,7 +264,9 @@ def equipmentmanagerpage(request, ID):
         
         ManagerHistory = get_manager_history(ID)
         
-        return render(request, 'equipmentmanagerpage.html', {'manager': managerInfo, 'tableEquipment': tableEquipment, 'tableHistory': ManagerHistory})
+        equipmentSchedule = get_person_schedule(ID)
+        
+        return render(request, 'equipmentmanagerpage.html', {'manager': managerInfo, 'tableEquipment': tableEquipment, 'tableHistory': ManagerHistory, 'equipmentSchedule': equipmentSchedule})
     
     if request.method == "POST":
         form_check = request.POST.get('newEquipment-deleteEquipment')
@@ -300,7 +306,9 @@ def operatorpage(request, ID):
         rhinologyDoc = get_rhinology_doctor()
         laryngologyDoc = get_laryngology_doctor()
         
-        return render(request, 'operatorpage.html', {'operator': operatorInfo, 'appointmentTable': appointTable, 
+        operatorSchedule = get_person_schedule(ID)
+        
+        return render(request, 'operatorpage.html', {'operator': operatorInfo, 'appointmentTable': appointTable, 'operatorSchedule': operatorSchedule,
                                                      'otologyDoc' : otologyDoc, 'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc, 'operatorhistory': operatorHistory})
 
     if request.method == "POST":

@@ -50,9 +50,9 @@
             <h6>Gmail</h6>
             <p id = "OperatorGmail">{{operator.gmail}}</p>
             <h6>Date of Birth</h6>
-            <p id = "DateofBirth">{{manager.dob}}</p>
+            <p id = "DateofBirth">{{operator.dob}}</p>
             <h6>Years</h6>
-            <p id = "DoctorYear">{{manager.years}}</p>
+            <p id = "DoctorYear">{{operator.years}}</p>
         </div> 
 
         <div class = "Operatorinfo">
@@ -65,7 +65,7 @@
             </div>
 
             <div style = "margin-top: 5%" class = 'schedule'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">Schedule</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Schedule">Schedule</button>
             </div>
 
             <div class="modal fade" id="OperatorHistory" tabindex="-1" aria-labelledby="viewOperatorHistoryLabel" aria-hidden="true">
@@ -109,6 +109,237 @@
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                   </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="Schedule" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header ScheduleModalHeader" d-flex justify-content-center align-items-center>
+                            <h4 class="modal-title">SCHEDULE</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body ScheduleModalBody">
+                            <div class="pink-background">
+                                <div class ="timetable">
+                                    <table>
+                                        <tr>
+                                            <th>Shift</th>
+                                            <th>Monday</th>
+                                            <th>Tuesday</th>
+                                            <th>Wednesday</th>
+                                            <th>Thursday</th>
+                                            <th>Friday</th>
+                                            <th>Sarturday</th>
+                                            <th>Sunday</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Morning</td>
+    
+                                            {% if operatorSchedule.Morning.Mon is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black;">{{ operatorSchedule.Morning.Mon }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Morning.Tue is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Morning.Tue }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Morning.Wed is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Morning.Wed }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Morning.Thu is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Morning.Thu }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Morning.Fri is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Morning.Fri }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Morning.Sat is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Morning.Sat }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Morning.Sun is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Morning.Sun }}</p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Afternoon</td>
+    
+                                            {% if operatorSchedule.Afternoon.Mon is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Afternoon.Mon }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Afternoon.Tue is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Afternoon.Tue }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Afternoon.Wed is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Afternoon.Wed }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Afternoon.Thu is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Afternoon.Thu }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Afternoon.Fri is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Afternoon.Fri }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Afternoon.Sat is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Afternoon.Sat }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Afternoon.Sun is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Afternoon.Sun }}</p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                        <tr>
+                                            <td>Evening</td>
+    
+                                            {% if operatorSchedule.Evening.Mon is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Evening.Mon }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Evening.Tue is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Evening.Tue }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Evening.Wed is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Evening.Wed }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Evening.Thu is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Evening.Thu }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Evening.Fri is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Evening.Fri }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Evening.Sat is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Evening.Sat }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if operatorSchedule.Evening.Sun is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ operatorSchedule.Evening.Sun }}</p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer ScheduleModalFooter">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+                        </div>  
+                    </div>
                 </div>
             </div>
 

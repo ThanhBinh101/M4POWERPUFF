@@ -117,7 +117,238 @@
             </div>
 
             <div style = "margin-top: 5%" class = 'Schedule'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Result">Schedule</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Schedule">Schedule</button>
+
+                <div class="modal fade" id="Schedule" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header ScheduleModalHeader" d-flex justify-content-center align-items-center>
+                                <h4 class="modal-title">SCHEDULE</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                            <div class="modal-body ScheduleModalBody">
+                                <div class="pink-background">
+                                    <div class ="timetable">
+                                        <table>
+                                            <tr>
+                                                <th>Shift</th>
+                                                <th>Monday</th>
+                                                <th>Tuesday</th>
+                                                <th>Wednesday</th>
+                                                <th>Thursday</th>
+                                                <th>Friday</th>
+                                                <th>Sarturday</th>
+                                                <th>Sunday</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Morning</td>
+        
+                                                {% if nurseSchedule.Morning.Mon is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black;">{{ nurseSchedule.Morning.Mon }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Morning.Tue is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Morning.Tue }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Morning.Wed is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Morning.Wed }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Morning.Thu is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Morning.Thu }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Morning.Fri is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Morning.Fri }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Morning.Sat is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Morning.Sat }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Morning.Sun is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Morning.Sun }}</p>
+                                                </td>
+                                                {% endif %}
+                                            </tr>
+        
+                                            <tr>
+                                                <td>Afternoon</td>
+        
+                                                {% if nurseSchedule.Afternoon.Mon is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Mon }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Afternoon.Tue is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Tue }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Afternoon.Wed is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Wed }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Afternoon.Thu is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Thu }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Afternoon.Fri is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Fri }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Afternoon.Sat is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Sat }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Afternoon.Sun is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Sun }}</p>
+                                                </td>
+                                                {% endif %}
+                                            </tr>
+                                            <tr>
+                                                <td>Evening</td>
+        
+                                                {% if nurseSchedule.Evening.Mon is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Evening.Mon }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Evening.Tue is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Evening.Tue }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Evening.Wed is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Evening.Wed }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Evening.Thu is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Evening.Thu }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Evening.Fri is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Evening.Fri }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Evening.Sat is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Evening.Sat }}</p>
+                                                </td>
+                                                {% endif %}
+        
+                                                {% if nurseSchedule.Evening.Sun is None %}
+                                                <td></td>
+                                                {% else %}
+                                                <td class="have-schedule" style="font-size: 16px">
+                                                    <i class="ri-home-heart-line"></i> 
+                                                    <p style="color: black">{{ nurseSchedule.Evening.Sun }}</p>
+                                                </td>
+                                                {% endif %}
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer ScheduleModalFooter">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+                            </div>  
+                        </div>
+                    </div>
+                </div>
             </div>
         
         </div>

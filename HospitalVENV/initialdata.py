@@ -81,17 +81,72 @@ firebase_admin.initialize_app(cred, {
 # dbref = db.reference("Nurse/")
 # dbref.push({"Name": "ConCuuNgayTho5","Gmail":"nurse5@gmail.com","Password": "123456", "Date of Birth": "30/10/2000", "Department":"Laryngology", "Level":"Bachelor", "Years": "9"})
 
+
+
+
+dbref = db.reference("Job/Morning/Manager/Mon/")
+dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+dbref = db.reference("Job/Morning/Laryngology/Tue/")
+dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Morning/Laryngology/Wed/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Morning/Laryngology/Thu/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Morning/Laryngology/Fri/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+dbref = db.reference("Job/Morning/Laryngology/Sat/")
+dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+dbref = db.reference("Job/Morning/Laryngology/Sun/")
+dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+#-------------------------------------------------------------------------------------------------------------
+
+dbref = db.reference("Job/Afternoon/Laryngology/Mon/")
+dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Afternoon/Laryngology/Tue/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Afternoon/Laryngology/Wed/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Afternoon/Laryngology/Thu/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Afternoon/Laryngology/Fri/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Afternoon/Laryngology/Sat/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+dbref = db.reference("Job/Afternoon/Laryngology/Sun/")
+dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+#-------------------------------------------------------------------------------------------------------------
+
 dbref = db.reference("Job/Evening/Laryngology/Mon/")
-dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
-dbref = db.reference("Job/Evening/Laryngology/Tue/")
-dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
-dbref = db.reference("Job/Evening/Laryngology/Wed/")
-dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
-dbref = db.reference("Job/Evening/Laryngology/Thu/")
-dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
-dbref = db.reference("Job/Evening/Laryngology/Fri/")
-dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
-dbref = db.reference("Job/Evening/Laryngology/Sat/")
-dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Evening/Laryngology/Tue/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Evening/Laryngology/Wed/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Evening/Laryngology/Thu/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Evening/Laryngology/Fri/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
+# dbref = db.reference("Job/Evening/Laryngology/Sat/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+
 dbref = db.reference("Job/Evening/Laryngology/Sun/")
-dbref.push({"PersonID": "-NvIWN7XPalb0cRUlhAB", "Position": "A4101"})
+dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})

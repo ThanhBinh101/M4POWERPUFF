@@ -97,8 +97,9 @@ def get_operator_info(ID):
             operatorInfo.append({
                 'id':key,
                 'name': value.get("Name"),
-                'phone': value.get("Phone"),
-                'gmail':value.get("Gmail")
+                'dob': value.get("DateOfBirth"),
+                'gmail':value.get("Gmail"),
+                'years':value.get("Years")
             })
             return operatorInfo[0]
     return None
@@ -585,8 +586,13 @@ def get_operator_history(ID):
             })
         return list
     
-def get_doctor_schedule(docID):
-    list = []
+def get_person_schedule(personID):
+    schedule = {}
+    for shift in ["Morning", "Afternoon", "Evening"]:
+        schedule[shift] = {}
+        for day in ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]:
+            schedule[shift][day] = None
+    
     tableJob = connectDBJob().get()
     if tableJob is not None:
         for key1, value1 in tableJob.items():
@@ -599,11 +605,8 @@ def get_doctor_schedule(docID):
                             tableDay = connectDBJob(key1, key2, key3).get()
                             if tableDay is not None:
                                 for key4, value4 in tableDay.items():
-                                    if value4.get('PersonID') == docID:
-                                        list.append({
-                                            'Shift': key1,
-                                            'Department': key2,
-                                            'Day': key3,
-                                            'Position': value4.get('Position')
-                                        })
-    return list
+                                    if value4.get('PersonID') == personID:
+                                        schedule[key1][key3] = value4.get('Position')
+                                        
+    return schedule
+                                    

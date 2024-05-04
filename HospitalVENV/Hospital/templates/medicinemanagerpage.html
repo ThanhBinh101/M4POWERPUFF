@@ -75,7 +75,7 @@
             </div>
 
             <div style = "margin-top: 5%" class = 'schedule'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">Schedule</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Schedule">Schedule</button>
             </div>
 
             <div class="modal fade" id="addMedicineModal" tabindex="-1" aria-labelledby="addMedicineModalLabel" aria-hidden="true">
@@ -148,6 +148,237 @@
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                   </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="Schedule" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header ScheduleModalHeader" d-flex justify-content-center align-items-center>
+                            <h4 class="modal-title">SCHEDULE</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body ScheduleModalBody">
+                            <div class="pink-background">
+                                <div class ="timetable">
+                                    <table>
+                                        <tr>
+                                            <th>Shift</th>
+                                            <th>Monday</th>
+                                            <th>Tuesday</th>
+                                            <th>Wednesday</th>
+                                            <th>Thursday</th>
+                                            <th>Friday</th>
+                                            <th>Sarturday</th>
+                                            <th>Sunday</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Morning</td>
+    
+                                            {% if medicineSchedule.Morning.Mon is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black;">{{ medicineSchedule.Morning.Mon }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Tue is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Tue }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Wed is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Wed }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Thu is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Thu }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Fri is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Fri }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Sat is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Sat }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Sun is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Sun }}</p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Afternoon</td>
+    
+                                            {% if medicineSchedule.Afternoon.Mon is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Mon }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Tue is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Tue }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Wed is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Wed }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Thu is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Thu }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Fri is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Fri }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Sat is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Sat }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Sun is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Sun }}</p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                        <tr>
+                                            <td>Evening</td>
+    
+                                            {% if medicineSchedule.Evening.Mon is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Mon }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Tue is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Tue }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Wed is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Wed }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Thu is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Thu }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Fri is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Fri }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Sat is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Sat }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Sun is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Sun }}</p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer ScheduleModalFooter">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+                        </div>  
+                    </div>
                 </div>
             </div>
 
