@@ -178,19 +178,19 @@
   .modal-dialog .modal-content .modal-footer {
   border: none; 
 }
-  .newEquipmentHeader .modal-content, .HistoryHeader .modal-content, .HistoryTableHeader .modal-content, .RemoveHeader .modal-content {
+  .newEquipmentHeader .modal-content, .HistoryHeader .modal-content, .HistoryTableHeader .modal-content, .RemoveHeader .modal-content, .ScheduleModalHeader .modal-content {
     width: 240px; 
     height: 360px; 
     display: flex;
     flex-direction: column;
   }
   
-  .newEquipmentHeader, .HistoryHeader, .HistoryTableHeader, .RemoveHeader {
+  .newEquipmentHeader, .HistoryHeader, .HistoryTableHeader, .RemoveHeader, .ScheduleModalHeader {
     background-color: rgba(242, 206, 216, 0.5);
     text-align: center;
   }
 
-  .newEquipmentHeader .modal-title, .HistoryHeader .modal-title, .HistoryTableHeader .modal-title, .RemoveHeader .modal-title {
+  .newEquipmentHeader .modal-title, .HistoryHeader .modal-title, .HistoryTableHeader .modal-title, .RemoveHeader .modal-title, .ScheduleModalHeader .modal-title {
     font-family: 'Baloo 2';
     font-size: 30px;
     color: #0487d9;
@@ -198,11 +198,11 @@
     padding-left: 5%;
   }
 
-  .newEquipmentBody, .viewEquipmentManagerHistory, .HistoryTableBody, .RemoveBody {
+  .newEquipmentBody, .viewEquipmentManagerHistory, .HistoryTableBody, .RemoveBody, .ScheduleModalBody {
     background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
   }
 
-  .newEquipmentFooter .btn-primary, .HistoryTableFooter .btn-secondary, .RemoveFooter .btn-primary {
+  .newEquipmentFooter .btn-primary, .HistoryTableFooter .btn-secondary, .RemoveFooter .btn-primary, .ScheduleModalFooter .btn-secondary {
     font-size: 12px;
     background-color: #ff66b2;
     border-color: #0487D9;
@@ -216,7 +216,7 @@
     align-items: center;
   }
   
-  .newEquipmentFooter .btn-primary:hover, .HistoryTableFooter .btn-secondary:hover, .RemoveFooter .btn-primary:hover {
+  .newEquipmentFooter .btn-primary:hover, .HistoryTableFooter .btn-secondary:hover, .RemoveFooter .btn-primary:hover, .ScheduleModalFooter .btn-secondary:hover {
     background-color: #F2CED8;
     border-color: #F2CED8;
   }

@@ -160,19 +160,19 @@
   .modal-dialog .modal-content .modal-footer {
   border: none; 
 }
-  .CancelHistoryHeader .modal-content, .OtologyHeader .modal-content, .RhinologyHeader .modal-content, .LaryngologyHeader .modal-content, .AssignHeader .modal-content, .CancelHeader .modal-content {
+  .CancelHistoryHeader .modal-content, .OtologyHeader .modal-content, .RhinologyHeader .modal-content, .LaryngologyHeader .modal-content, .AssignHeader .modal-content, .CancelHeader .modal-content, .ScheduleModalHeader .modal-content {
     width: 240px; 
     height: 360px; 
     display: flex;
     flex-direction: column;
   }
   
-  .CancelHistoryHeader, .OtologyHeader, .RhinologyHeader, .LaryngologyHeader, .AssignHeader, .CancelHeader { 
+  .CancelHistoryHeader, .OtologyHeader, .RhinologyHeader, .LaryngologyHeader, .AssignHeader, .CancelHeader, .ScheduleModalHeader { 
     background-color: rgba(242, 206, 216, 0.5);
     text-align: center;
   }
 
-  .CancelHistoryHeader .modal-title, .OtologyHeader .modal-title, .RhinologyHeader .modal-title, .LaryngologyHeader .modal-title, .AssignHeader .modal-title, .CancelHeader .modal-title { 
+  .CancelHistoryHeader .modal-title, .OtologyHeader .modal-title, .RhinologyHeader .modal-title, .LaryngologyHeader .modal-title, .AssignHeader .modal-title, .CancelHeader .modal-title, .ScheduleModalHeader .modal-title { 
     font-family: 'Baloo 2';
     font-size: 30px;
     color: #0487d9;
@@ -180,11 +180,11 @@
     padding-left: 5%;
   }
 
-  .CancelHistoryBody, .AssignBody, .CancelBody {
+  .CancelHistoryBody, .AssignBody, .CancelBody, .ScheduleModalBody {
     background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
   }
 
-  .CancelHistoryFooter .btn-secondary, .OtologyFooter .btn-secondary, .RhinologyFooter .btn-secondary, .LaryngologyFooter .btn-secondary, .AssignFooter .btn-primary, .CancelFooter .btn-primary {
+  .CancelHistoryFooter .btn-secondary, .OtologyFooter .btn-secondary, .RhinologyFooter .btn-secondary, .LaryngologyFooter .btn-secondary, .AssignFooter .btn-primary, .CancelFooter .btn-primary, .ScheduleModalFooter .btn-secondary {
     font-size: 12px;
     background-color: #ff66b2;
     border-color: #0487D9;
@@ -198,7 +198,7 @@
     align-items: center;
   }
   
-  .CancelHistoryFooter .btn-secondary:hover, .OtologyFooter .btn-secondary:hover, .RhinologyFooter .btn-secondary:hover, .LaryngologyFooter .btn-secondary:hover, .AssignFooter .btn-primary:hover, .CancelFooter .btn-primary:hover {
+  .CancelHistoryFooter .btn-secondary:hover, .OtologyFooter .btn-secondary:hover, .RhinologyFooter .btn-secondary:hover, .LaryngologyFooter .btn-secondary:hover, .AssignFooter .btn-primary:hover, .CancelFooter .btn-primary:hover, .ScheduleModalFooter .btn-secondary:hover {
     background-color: #F2CED8;
     border-color: #F2CED8;
   }

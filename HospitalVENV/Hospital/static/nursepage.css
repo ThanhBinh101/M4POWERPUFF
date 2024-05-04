@@ -161,19 +161,19 @@
   .modal-dialog .modal-content .modal-footer {
   border: none; 
 }
-  .TestingHeader .modal-content, .newResultHeader .modal-content{
+  .TestingHeader .modal-content, .newResultHeader .modal-content, .ScheduleModalHeader .modal-content {
     width: 240px; 
     height: 360px; 
     display: flex;
     flex-direction: column;
   }
   
-  .TestingHeader, .newResultHeader { 
+  .TestingHeader, .newResultHeader, .ScheduleModalHeader { 
     background-color: rgba(242, 206, 216, 0.5);
     text-align: center;
   }
 
-  .TestingHeader .modal-title, .newResultHeader .modal-title {
+  .TestingHeader .modal-title, .newResultHeader .modal-title, .ScheduleModalHeader .modal-title {
     font-family: 'Baloo 2';
     font-size: 30px;
     color: #0487d9;
@@ -181,11 +181,11 @@
     padding-left: 5%;
   }
 
-  .viewNurseHistoryBody, .newResultBody {
+  .viewNurseHistoryBody, .newResultBody, .ScheduleModalBody {
     background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
   }
 
-  .viewNurseHistoryFooter .btn-secondary, .newResultFooter .btn-secondary, .newResultFooter .btn-primary {
+  .viewNurseHistoryFooter .btn-secondary, .newResultFooter .btn-secondary, .newResultFooter .btn-primary, .ScheduleModalFooter .btn-secondary {
     font-size: 12px;
     background-color: #ff66b2;
     border-color: #0487D9;
@@ -199,7 +199,7 @@
     align-items: center;
   }
   
-  .viewNurseHistoryFooter .btn-secondary:hover, .newResultFooter .btn-secondary:hover, .newResultFooter .btn-primary:hover {
+  .viewNurseHistoryFooter .btn-secondary:hover, .newResultFooter .btn-secondary:hover, .newResultFooter .btn-primary:hover, .ScheduleModalFooter .btn-secondary:hover {
     background-color: #F2CED8;
     border-color: #F2CED8;
   }
