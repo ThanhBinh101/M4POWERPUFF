@@ -179,11 +179,7 @@ def get_prescription_info(ID1, ID2):
 
 
 def get_doctor_name(ID):
-    tableUser = connectDBDoctor().get()
-    for key, value in tableUser.items():
-        if key == ID:
-            return value.get("Name")
-    return None
+     return connectDBDoctor(ID).child("Name").get()
 
 def get_patient_name(ID):
     return connectDBPatient(ID).child("Name").get()
