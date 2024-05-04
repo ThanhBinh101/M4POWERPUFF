@@ -92,3 +92,8 @@ def connectDBAppointment(key = ""):
 def connectDBJob(shift = "", depart = "", day = "", key = ""):
     connect()
     return db.reference("Job/{}/{}/{}/{}".format(shift, depart, day, key))
+
+def connectDBStaff(key1 = "", key2 = ""):
+    if key1 == "":
+        return connectDBDoctor() + connectDBNurse()
+    return  db.reference("{}/{}".format(key1, key2))

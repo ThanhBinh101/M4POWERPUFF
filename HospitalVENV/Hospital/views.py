@@ -398,44 +398,72 @@ def Adminpage(request, ID):
     if request.method == "GET":
         job_list = connectDBJob().get()
 
-        otologyDoc = get_otology_doctor()
-        rhinologyDoc = get_rhinology_doctor()
-        laryngologyDoc = get_laryngology_doctor()
-        
-        
-        nurse_list = connectDBNurse().get()
+        otologyDoc = get_depart_doctor("Otology")
+        rhinologyDoc = get_depart_doctor("Rhinology")
+        laryngologyDoc = get_depart_doctor("Laryngology")
+
+        otologyNur = get_depart_nurse("Otology")
+        rhinologyNur =get_depart_nurse("Rhinology")
+        laryngologyNur = get_depart_nurse("Laryngology")
+
+        equipmentMan = get_depart_manager("Equipment")
+        medicineMan = get_depart_manager("Medicine")
+        appointmentMan = get_depart_manager("Appointment")
+
+        stafflist = get_staff()
+
         doctor_list = connectDBDoctor().get()
-        medicine_list = connectDBMedicineManager().get()
-        equiment_list = connectDBEquipmentManager().get()
-        operator_list = connectDBOperator().get()
+        nurse_list = connectDBNurse().get()
+
         adInfo = get_admin_info(ID)
-        return render(request, 'adminpage.html', {'joblist': job_list, 'operatorlist':operator_list, 'otologyDoc': otologyDoc,
-                                                'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc, 'doctorlist': doctor_list,
-                                                'nurselist': nurse_list, 'equipmentlist': equiment_list, 'medicinelist': medicine_list, 'admin': adInfo})
+        days = ["Mon", "Tue", "Wed", "Tue", "Fri", "Sat", "Sun"]
+        return render(request, 'adminpage.html', {'joblist': job_list,  'days': days, 'stafflist': stafflist,
+                                                'doctorlist': doctor_list, 'otologyDoc': otologyDoc, 'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc, 
+                                                'nurselist': nurse_list, 'otologyNur': otologyNur, 'rhinologyNur': rhinologyNur, 'laryngologyNur': laryngologyNur, 
+                                                'appointmentMan':appointmentMan, 'equipmentMan': equipmentMan, 'medicineMan': medicineMan, 
+                                                'admin': adInfo})
     
     if request.method == "POST":
         form_check = request.POST.get('addingJob')
         if form_check == "form1":
-            doctor1 = request.POST.get('doctor1')
-            doctor2 = request.POST.get('doctor2')
-            doctor3 = request.POST.get('doctor3')
-            
-            if doctor1=="Choose doctor" and doctor2=="Choose doctor" and doctor3!="Choose doctor":
-                final_doctor = doctor3
-                department = "Laryngology"
-            elif doctor1=="Choose doctor" and doctor2!="Choose doctor" and doctor3=="Choose doctor":
-                final_doctor = doctor2
-                department = "Rhinology"
-            elif doctor1!="Choose doctor" and doctor2=="Choose doctor" and doctor3=="Choose doctor":
-                final_doctor = doctor1
-                department = "Otology"
-            else:
-                return redirect('Adminpage', ID)
-        
+            laryngologyDoc = request.POST.get('laryngologyDoc')
+            laryngologyDocRoom = request.POST.get('laryngologyDocRoom')
+            laryngologyNur = request.POST.get('laryngologyNur')
+            laryngologyNurRoom = request.POST.get('laryngologyNurRoom')
+            rhinologyDoc = request.POST.get('rhinologyDoc')
+            rhinologyDocRoom = request.POST.get('rhinologyDocRoom')
+            rhinologyNur = request.POST.get('rhinologyNur')
+            rhinologyNurRoom = request.POST.get('rhinologyNurRoom')
+            otologyDoc = request.POST.get('otologyDoc')
+            otologyDocRoom = request.POST.get('otologyDocRoom')
+            otologyNur = request.POST.get('otologyNur')
+            otologyNurRoom = request.POST.get('otologyNurRoom')
+            equipmentMan = request.POST.get('equipmentMan')
+            medicineMan = request.POST.get('medicineMan')
+            appointmentMan = request.POST.get('appointmentMan')
+            equipmentManRoom = request.POST.get('equipmentManRoom')
+            medicineManRoom = request.POST.get('medicineManRoom')
+            appointmentManRoom = request.POST.get('appointmentManRoom')
             day = request.POST.get('day')
             shift = request.POST.get('shift')
-            room = request.POST.get('room')
-            
-            Admin.AddJob(shift, department, day, room, final_doctor)
-    
-    return redirect('Adminpage', ID)
+
+            if day is not None and shift is not None:
+                if laryngologyDoc is not None and laryngologyDocRoom is not None:
+                    Admin.AddJob(shift, "Laryngology", day, laryngologyDocRoom, laryngologyDoc)
+                if rhinologyDoc is not None and rhinologyDocRoom is not None:
+                    Admin.AddJob(shift, "Rhinology", day, rhinologyDocRoom, rhinologyDoc)
+                if otologyDoc is not None and otologyDocRoom is not None:
+                    Admin.AddJob(shift, "Otology", day, otologyDocRoom, otologyDoc)
+                if laryngologyNur is not None and laryngologyNurRoom is not None:
+                    Admin.AddJob(shift, "Laryngology", day, laryngologyNurRoom, laryngologyNur)
+                if rhinologyNur is not None and rhinologyNurRoom is not None:
+                    Admin.AddJob(shift, "Rhinology", day, rhinologyNurRoom, rhinologyNur)
+                if otologyNur is not None and otologyNurRoom is not None:
+                    Admin.AddJob(shift, "Otology", day, otologyNurRoom, otologyNur)
+                if equipmentMan is not None and equipmentManRoom is not None:
+                    Admin.AddJob(shift, "Manager", day, equipmentManRoom, equipmentMan)
+                if medicineMan is not None and medicineManRoom is not None:
+                    Admin.AddJob(shift, "Manager", day, medicineManRoom, medicineMan)
+                if appointmentMan is not None and appointmentManRoom is not None:
+                    Admin.AddJob(shift, "Manager", day, appointmentManRoom, appointmentMan)
+        return redirect('Adminpage', ID)

@@ -477,6 +477,7 @@ class Admin(Information):
         doctor = Doctor(name, email, password, dob, department, level, years)
         dbconn = connectDBDoctor()
         dbconn.push(doctor.to_dict())
+        
     @staticmethod
     def DeleteDoctor(id):
         connectDBDoctor().child(id).delete()

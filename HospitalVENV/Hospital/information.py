@@ -609,4 +609,103 @@ def get_person_schedule(personID):
                                         schedule[key1][key3] = value4.get('Position')
                                         
     return schedule
+
+def get_staff():
+    list = []
+    tableDoctor = connectDBDoctor().get()
+    if tableDoctor is not None:
+        for key, value in tableDoctor.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+                'Role': "Doctor",
+                'Department': value.get("Department")
+            })
+    tableNurse = connectDBNurse().get()
+    if tableNurse is not None:
+        for key, value in tableNurse.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+                'Role': "Nurse",
+                'Department': value.get("Department")
+            })
+    
+    tableEquipment = connectDBEquipmentManager().get()
+    if tableEquipment is not None:
+        for key, value in tableEquipment.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+                'Role': "Equipment",
+                'Department': "Manager"
+            })
+
+    tableMedicine = connectDBMedicineManager().get()
+    if tableMedicine is not None:
+        for key, value in tableMedicine.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+                'Role': "Medicine",
+                'Department': "Manager"
+            })
+
+    tableAppoinment = connectDBOperator().get()
+    if tableAppoinment is not None:
+        for key, value in tableAppoinment.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+                'Role': "AppointManager",
+                'Department': "Manager"
+            })
+    return list
+
+def get_depart_nurse(department):
+    list = []
+    table = connectDBNurse().get()
+    if table is not None:
+        for key, value in table.items():
+            if value.get("Department") == department:
+                list.append({
+                    'ID': key,
+                    'Name': value.get("Name"),
+                    'Shift': get_doctor_shift(key, department)
+                })
+    return list
+
+def get_depart_doctor(department):
+    list = []
+    table = connectDBDoctor().get()
+    if table is not None:
+        for key, value in table.items():
+            if value.get("Department") == department:
+                list.append({
+                    'ID': key,
+                    'Name': value.get("Name"),
+                    'FreeTime': get_freetime_doctor(key, department),
+                    'Shift': get_doctor_shift(key, department)
+                })
+    return list
+
+def get_depart_manager(department):
+    list = []
+    table = None
+    if department == "Medicine":
+        table = connectDBMedicineManager().get()
+    if department == "Equipment":
+        table = connectDBEquipmentManager().get()
+    if department == "Appointment":
+        table = connectDBOperator().get()
+    
+    if table is not None:
+        for key, value in table.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+                'FreeTime': get_freetime_doctor(key, department),
+                'Shift': get_doctor_shift(key, department)
+            })
+    return list
                                     
