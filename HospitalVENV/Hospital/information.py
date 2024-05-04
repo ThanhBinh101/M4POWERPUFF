@@ -40,6 +40,8 @@ def get_doctor_info(ID):
 
 def get_nurse_info(ID):
     nurseInfo = []
+    nurse = connectDBNurse(ID).get()
+    
     tableUser = connectDBNurse().get()
     for key, value in tableUser.items():
         if key == ID:
@@ -504,48 +506,53 @@ def get_staff():
             })
     return list
 
-def get_otology_doctor():
+def get_depart_nurse(department):
     list = []
-    tableDoctor = connectDBDoctor().get()
-    if tableDoctor is not None:
-        for key, value in tableDoctor.items():
-            if value.get("Department") == "Otology":
+    table = connectDBNurse().get()
+    if table is not None:
+        for key, value in table.items():
+            if value.get("Department") == department:
                 list.append({
-                    'doctorID': key,
-                    'doctorName': value.get("Name"),
-                    'doctorFreeTime': get_freetime_doctor(key, "Otology"),
-                    'doctorShift': get_doctor_shift(key, "Otology")
+                    'ID': key,
+                    'Name': value.get("Name"),
+                    'Shift': get_doctor_shift(key, department)
                 })
     return list
 
-def get_rhinology_doctor():
+def get_depart_doctor(department):
     list = []
-    tableDoctor = connectDBDoctor().get()
-    if tableDoctor is not None:
-        for key, value in tableDoctor.items():
-            if value.get("Department") == "Rhinology":
+    table = connectDBDoctor().get()
+    if table is not None:
+        for key, value in table.items():
+            if value.get("Department") == department:
                 list.append({
-                    'doctorID': key,
-                    'doctorName': value.get("Name"),
-                    'doctorFreeTime': get_freetime_doctor(key, "Rhinology"),
-                    'doctorShift': get_doctor_shift(key, "Rhinology")
+                    'ID': key,
+                    'Name': value.get("Name"),
+                    'FreeTime': get_freetime_doctor(key, department),
+                    'Shift': get_doctor_shift(key, department)
                 })
     return list
 
-def get_laryngology_doctor():
+def get_depart_manager(department):
     list = []
-    tableDoctor = connectDBDoctor().get()
-    if tableDoctor is not None:
-        for key, value in tableDoctor.items():
-            if value.get("Department") == "Laryngology":
-                list.append({
-                    'doctorID': key,
-                    'doctorName': value.get("Name"),
-                    'doctorFreeTime': get_freetime_doctor(key, "Laryngology"),
-                    'doctorShift': get_doctor_shift(key, "Laryngology")
-                })
+    table = None
+    if department == "Medicine":
+        table = connectDBMedicineManager().get()
+    if department == "Equipment":
+        table = connectDBEquipmentManager().get()
+    if department == "Apointment":
+        table = connectDBOperator().get()
+    
+    if table is not None:
+        for key, value in table.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
+                'FreeTime': get_freetime_doctor(key, department),
+                'Shift': get_doctor_shift(key, department)
+            })
     return list
-
+    
 def get_freetime_doctor(docID, department):
     current_time = datetime.now()
     current_hour = current_time.hour

@@ -82,27 +82,6 @@
                         <form id="addJob" method="POST" > {% csrf_token %}
                             <input type="hidden" name="addingJob" value="form1">
                             <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Department</label>
-                                <select class="form-select" name="department" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Department</option>
-                                    <option value="Laryngology">Laryngology</option>
-                                    <option value="Rhinology">Rhinology</option>
-                                    <option value="Otology">Otology</option>
-                                    <option value="Manager">Manager</option>
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Role</label>
-                                <select class="form-select" name="role" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Role</option>
-                                        <option value="Medicine">Medicine</option>
-                                        <option value="Equipment">Equipment</option>
-                                        <option value="Appointment">Appointment</option>
-                                        <option value="Doctor">Doctor</option>
-                                        <option value="Nurse">Nurse</option>
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
                                 <label class="form-label">Choose day of the week</label>
                                 <select class="form-select" name="day" style = "color: #ff66b2"; aria-label="time" required>
                                     <option selected>Choose day</option>
@@ -124,19 +103,167 @@
                                     <option value="Evening">Evening</option>
                                 </select>
                             </div>
+                            <h3>Laryngology</h3>
                             <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Person</label>
-                                <select class="form-select" name="person" style = "color: #ff66b2"; aria-label="doctor" required>
-                                    <option selected>Choose Person</option>
-                                    {% for p in stafflist %}
-                                    <option value={{p.ID}}>{{p.Department}}- {{p.Role}} -{{p.Name}}</option>
+                                <label class="form-label">Choose Laryngology Doctor</label>
+                                <select class="form-select" name="laryngologyDoc" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Laryngology Doctor</option>
+                                    {% for p in laryngologyDoc %}
+                                        <option value={{p.ID}}>{{p.Name}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose room</label>
-                                <select class="form-select" name="room" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose room</option>
+                                <label class="form-label">Choose Laryngology Doctor room</label>
+                                <select class="form-select" name="laryngologyDocRoom" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Laryngology Doctor room</option>
+                                    <option value="A4-101">A4-101</option>
+                                    <option value="A4-102">A4-102</option>
+                                    <option value="A4-103">A4-103</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Laryngology Nurse</label>
+                                <select class="form-select" name="laryngologyNur" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Laryngology Nurse</option>
+                                    {% for p in laryngologyNur %}
+                                        <option value={{p.ID}}>{{p.Name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Laryngology Nurse room</label>
+                                <select class="form-select" name="laryngologyNurRoom" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Laryngology Nurse room</option>
+                                    <option value="A4-101">A4-101</option>
+                                    <option value="A4-102">A4-102</option>
+                                    <option value="A4-103">A4-103</option>
+                                </select>
+                            </div>
+                            <h3>Rhinology</h3>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Rhinology Doctor</label>
+                                <select class="form-select" name="rhinologyDoc" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Rhinology Doctor</option>
+                                    {% for p in rhinologyDoc %}
+                                        <option value={{p.ID}}>{{p.Name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Rhinology Doctor room</label>
+                                <select class="form-select" name="laryngologyDocRoom" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Rhinology Doctor room</option>
+                                    <option value="A4-101">A4-101</option>
+                                    <option value="A4-102">A4-102</option>
+                                    <option value="A4-103">A4-103</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">ChooseRhinology Nurse</label>
+                                <select class="form-select" name="rhinologyNur" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Rhinology Nurse</option>
+                                    {% for p in rhinologyNur %}
+                                        <option value={{p.ID}}>{{p.Name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Rhinology Nurse room</label>
+                                <select class="form-select" name="rhinologyNurRoom" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Rhinology Nurse room</option>
+                                    <option value="A4-101">A4-101</option>
+                                    <option value="A4-102">A4-102</option>
+                                    <option value="A4-103">A4-103</option>
+                                </select>
+                            </div>
+                            <h3>Otology</h3>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Otology Doctor</label>
+                                <select class="form-select" name="otologyDoc" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Otology Doctor</option>
+                                    {% for p in otologyDoc %}
+                                        <option value={{p.ID}}>{{p.Name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Otology Doctor room</label>
+                                <select class="form-select" name="otologyDocRoom" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Otology Doctor room</option>
+                                    <option value="A4-101">A4-101</option>
+                                    <option value="A4-102">A4-102</option>
+                                    <option value="A4-103">A4-103</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Otology Nurse</label>
+                                <select class="form-select" name="otologyyNur" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Otology Nurse</option>
+                                    {% for p in laryngologyNur %}
+                                        <option value={{p.ID}}>{{p.Name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Otology Nurse room</label>
+                                <select class="form-select" name="otologyNurRoom" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Otology Nurse room</option>
+                                    <option value="A4-101">A4-101</option>
+                                    <option value="A4-102">A4-102</option>
+                                    <option value="A4-103">A4-103</option>
+                                </select>
+                            </div>
+                            <h3>Manager</h3>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Medicine Manager</label>
+                                <select class="form-select" name="medicineMan" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Medicine Manager</option>
+                                    {% for p in medicineMan %}
+                                        <option value={{p.ID}}>{{p.Name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Medicine Manager room</label>
+                                <select class="form-select" name="medicineManRoom" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Medicine Manager room</option>
+                                    <option value="A4-101">A4-101</option>
+                                    <option value="A4-102">A4-102</option>
+                                    <option value="A4-103">A4-103</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Equipment Manager</label>
+                                <select class="form-select" name="equipmentMan" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Equipment Manager</option>
+                                    {% for p in equipmentMan %}
+                                        <option value={{p.ID}}>{{p.Name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Equipment Manager room</label>
+                                <select class="form-select" name="equipmentManRoom" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Equipment Manager room</option>
+                                    <option value="A4-101">A4-101</option>
+                                    <option value="A4-102">A4-102</option>
+                                    <option value="A4-103">A4-103</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Appointment Manager</label>
+                                <select class="form-select" name="appointmeneMan" style="color: #ff66b2;" aria-label="doctor" required>
+                                    <option selected disabled>Choose Appointment Manager</option>
+                                    {% for p in appointmentMan %}
+                                        <option value={{p.ID}}>{{p.Name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3" style="text-align: left">
+                                <label class="form-label">Choose Appointment Manager room</label>
+                                <select class="form-select" name="appointmentManRoom" style = "color: #ff66b2"; aria-label="time" required>
+                                    <option selected>Choose Appointment Manager room</option>
                                     <option value="A4-101">A4-101</option>
                                     <option value="A4-102">A4-102</option>
                                     <option value="A4-103">A4-103</option>
