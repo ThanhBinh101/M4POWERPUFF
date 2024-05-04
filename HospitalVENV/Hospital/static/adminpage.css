@@ -233,7 +233,7 @@ margin-bottom: 3%;
 
  }
 
- .Doctor{
+.Doctor{
   color: #ff66b2; 
   font-size: 14px; 
   text-align: left;
@@ -245,6 +245,9 @@ margin-bottom: 3%;
 .department{
   text-align: center;
   color: #0487D9 !important;
+}
+.mb-3 .form-select {
+  width: 350px !important; 
 }
  
   

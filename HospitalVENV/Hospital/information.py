@@ -708,4 +708,5 @@ def get_depart_manager(department):
                 'Shift': get_doctor_shift(key, department)
             })
     return list
+
                                     

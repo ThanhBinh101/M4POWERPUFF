@@ -68,203 +68,235 @@
             
 
             <div class="modal fade" id="AddJob" tabindex="-1" aria-labelledby="AddJobLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h1 class="modal-title fs-5" id="AddJobLabel">Add New Job</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="addJob" method="POST" > {% csrf_token %}
+                        <form id="addJob" method="POST" style="padding-left: 3%; font-size: 14px"> {% csrf_token %}
                             <input type="hidden" name="addingJob" value="form1">
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose day of the week</label>
-                                <select class="form-select" name="day" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose day</option>
-                                    <option value="Mon">Monday</option>
-                                    <option value="Tue">Tueday</option>
-                                    <option value="Wed">Wednesday</option>
-                                    <option value="Thu">Thursday</option>
-                                    <option value="Fri">Friday</option>
-                                    <option value="Sat">Saturday</option>
-                                    <option value="Sun">Sunday</option>
-                                </select>
+
+                            <div style="display: flex; justify-content: space-between; width: 100%">
+                                <div class="mb-3" style="display: inline; text-align: left; width: 400px">
+                                    <label class="form-label">Choose day of the week</label>
+                                    <select class="form-select" name="day" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose day</option>
+                                        <option value="Mon">Monday</option>
+                                        <option value="Tue">Tueday</option>
+                                        <option value="Wed">Wednesday</option>
+                                        <option value="Thu">Thursday</option>
+                                        <option value="Fri">Friday</option>
+                                        <option value="Sat">Saturday</option>
+                                        <option value="Sun">Sunday</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="display: inline; text-align: left; width: 400px">
+                                    <label class="form-label">Choose shift</label>
+                                    <select class="form-select" name="shift" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose shift</option>
+                                        <option value="Morning">Morning</option>
+                                        <option value="Afternoon">Afternoon</option>
+                                        <option value="Evening">Evening</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose shift</label>
-                                <select class="form-select" name="shift" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose shift</option>
-                                    <option value="Morning">Morning</option>
-                                    <option value="Afternoon">Afternoon</option>
-                                    <option value="Evening">Evening</option>
-                                </select>
+                            
+                            <h3 style="font-family: 'Poppins'; font-size: 16px">Laryngology</h3>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Laryngology Doctor</label>
+                                    <select class="form-select" name="laryngologyDoc" style="color: #ff66b2; font-size: 14px" aria-label="doctor" required>
+                                        <option selected disabled>Choose Laryngology Doctor</option>
+                                        {% for p in laryngologyDoc %}
+                                            <option value={{p.ID}}>{{p.Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Laryngology Doctor room</label>
+                                    <select class="form-select" name="laryngologyDocRoom" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose Laryngology Doctor room</option>
+                                        <option value="A4-101">A4-101</option>
+                                        <option value="A4-102">A4-102</option>
+                                        <option value="A4-103">A4-103</option>
+                                    </select>
+                                </div>
+                            </div>   
+
+                            <div style="display: flex; justify-content: space-between; width: 100%">
+                                <div class="mb-3" style="display: inline; text-align: left; width: 400px">
+                                    <label class="form-label">Choose Laryngology Nurse</label>
+                                    <select class="form-select" name="laryngologyNur" style="color: #ff66b2; font-size: 14px" aria-label="doctor" required>
+                                        <option selected disabled>Choose Laryngology Nurse</option>
+                                        {% for p in laryngologyNur %}
+                                            <option value={{p.ID}}>{{p.Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="display: inline; text-align: left; width: 400px">
+                                    <label class="form-label">Choose Laryngology Nurse room</label>
+                                    <select class="form-select" name="laryngologyNurRoom" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose Laryngology Nurse room</option>
+                                        <option value="A4-101">A4-101</option>
+                                        <option value="A4-102">A4-102</option>
+                                        <option value="A4-103">A4-103</option>
+                                    </select>
+                                </div>
                             </div>
-                            <h3>Laryngology</h3>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Laryngology Doctor</label>
-                                <select class="form-select" name="laryngologyDoc" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Laryngology Doctor</option>
-                                    {% for p in laryngologyDoc %}
-                                        <option value={{p.ID}}>{{p.Name}}</option>
-                                    {% endfor %}
-                                </select>
+                                
+                            <h3 style="font-family: 'Poppins'; font-size: 16px">Rhinology</h3>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Rhinology Doctor</label>
+                                    <select class="form-select" name="rhinologyDoc" style="color: #ff66b2; font-size: 14px" aria-label="doctor" required>
+                                        <option selected disabled>Choose Rhinology Doctor</option>
+                                        {% for p in rhinologyDoc %}
+                                            <option value={{p.ID}}>{{p.Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Rhinology Doctor room</label>
+                                    <select class="form-select" name="laryngologyDocRoom" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose Rhinology Doctor room</option>
+                                        <option value="A4-101">A4-101</option>
+                                        <option value="A4-102">A4-102</option>
+                                        <option value="A4-103">A4-103</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Laryngology Doctor room</label>
-                                <select class="form-select" name="laryngologyDocRoom" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose Laryngology Doctor room</option>
-                                    <option value="A4-101">A4-101</option>
-                                    <option value="A4-102">A4-102</option>
-                                    <option value="A4-103">A4-103</option>
-                                </select>
+
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">ChooseRhinology Nurse</label>
+                                    <select class="form-select" name="rhinologyNur" style="color: #ff66b2; font-size: 14px" aria-label="doctor" required>
+                                        <option selected disabled>Choose Rhinology Nurse</option>
+                                        {% for p in rhinologyNur %}
+                                            <option value={{p.ID}}>{{p.Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Rhinology Nurse room</label>
+                                    <select class="form-select" name="rhinologyNurRoom" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose Rhinology Nurse room</option>
+                                        <option value="A4-101">A4-101</option>
+                                        <option value="A4-102">A4-102</option>
+                                        <option value="A4-103">A4-103</option>
+                                    </select>
+                                </div>
+                            </div>                                
+
+                            <h3 style="font-family: 'Poppins'; font-size: 16px">Otology</h3>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Otology Doctor</label>
+                                    <select class="form-select" name="otologyDoc" style="color: #ff66b2; font-size: 14px" aria-label="doctor" required>
+                                        <option selected disabled>Choose Otology Doctor</option>
+                                        {% for p in otologyDoc %}
+                                            <option value={{p.ID}}>{{p.Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Otology Doctor room</label>
+                                    <select class="form-select" name="otologyDocRoom" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose Otology Doctor room</option>
+                                        <option value="A4-101">A4-101</option>
+                                        <option value="A4-102">A4-102</option>
+                                        <option value="A4-103">A4-103</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Laryngology Nurse</label>
-                                <select class="form-select" name="laryngologyNur" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Laryngology Nurse</option>
-                                    {% for p in laryngologyNur %}
-                                        <option value={{p.ID}}>{{p.Name}}</option>
-                                    {% endfor %}
-                                </select>
+
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Otology Nurse</label>
+                                    <select class="form-select" name="otologyyNur" style="color: #ff66b2; font-size: 14px" aria-label="doctor" required>
+                                        <option selected disabled>Choose Otology Nurse</option>
+                                        {% for p in laryngologyNur %}
+                                            <option value={{p.ID}}>{{p.Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Otology Nurse room</label>
+                                    <select class="form-select" name="otologyNurRoom" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose Otology Nurse room</option>
+                                        <option value="A4-101">A4-101</option>
+                                        <option value="A4-102">A4-102</option>
+                                        <option value="A4-103">A4-103</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Laryngology Nurse room</label>
-                                <select class="form-select" name="laryngologyNurRoom" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose Laryngology Nurse room</option>
-                                    <option value="A4-101">A4-101</option>
-                                    <option value="A4-102">A4-102</option>
-                                    <option value="A4-103">A4-103</option>
-                                </select>
+                            
+                            
+                            <h3 style="font-family: 'Poppins'; font-size: 16px">Manager</h3>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Medicine Manager</label>
+                                    <select class="form-select" name="medicineMan" style="color: #ff66b2; font-size: 14px" aria-label="doctor" required>
+                                        <option selected disabled>Choose Medicine Manager</option>
+                                        {% for p in medicineMan %}
+                                            <option value={{p.ID}}>{{p.Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Medicine Manager room</label>
+                                    <select class="form-select" name="medicineManRoom" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose Medicine Manager room</option>
+                                        <option value="A4-101">A4-101</option>
+                                        <option value="A4-102">A4-102</option>
+                                        <option value="A4-103">A4-103</option>
+                                    </select>
+                                </div>
                             </div>
-                            <h3>Rhinology</h3>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Rhinology Doctor</label>
-                                <select class="form-select" name="rhinologyDoc" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Rhinology Doctor</option>
-                                    {% for p in rhinologyDoc %}
-                                        <option value={{p.ID}}>{{p.Name}}</option>
-                                    {% endfor %}
-                                </select>
+
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Equipment Manager</label>
+                                    <select class="form-select" name="equipmentMan" style="color: #ff66b2; font-size: 14px" aria-label="doctor" required>
+                                        <option selected disabled>Choose Equipment Manager</option>
+                                        {% for p in equipmentMan %}
+                                            <option value={{p.ID}}>{{p.Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Equipment Manager room</label>
+                                    <select class="form-select" name="equipmentManRoom" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose Equipment Manager room</option>
+                                        <option value="A4-101">A4-101</option>
+                                        <option value="A4-102">A4-102</option>
+                                        <option value="A4-103">A4-103</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Rhinology Doctor room</label>
-                                <select class="form-select" name="laryngologyDocRoom" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose Rhinology Doctor room</option>
-                                    <option value="A4-101">A4-101</option>
-                                    <option value="A4-102">A4-102</option>
-                                    <option value="A4-103">A4-103</option>
-                                </select>
+                            
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Appointment Manager</label>
+                                    <select class="form-select" name="appointmeneMan" style="color: #ff66b2; font-size: 14px" aria-label="doctor" required>
+                                        <option selected disabled>Choose Appointment Manager</option>
+                                        {% for p in appointmentMan %}
+                                            <option value={{p.ID}}>{{p.Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3" style="text-align: left; width: 400px">
+                                    <label class="form-label">Choose Appointment Manager room</label>
+                                    <select class="form-select" name="appointmentManRoom" style = "color: #ff66b2; font-size: 14px"; aria-label="time" required>
+                                        <option selected>Choose Appointment Manager room</option>
+                                        <option value="A4-101">A4-101</option>
+                                        <option value="A4-102">A4-102</option>
+                                        <option value="A4-103">A4-103</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">ChooseRhinology Nurse</label>
-                                <select class="form-select" name="rhinologyNur" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Rhinology Nurse</option>
-                                    {% for p in rhinologyNur %}
-                                        <option value={{p.ID}}>{{p.Name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Rhinology Nurse room</label>
-                                <select class="form-select" name="rhinologyNurRoom" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose Rhinology Nurse room</option>
-                                    <option value="A4-101">A4-101</option>
-                                    <option value="A4-102">A4-102</option>
-                                    <option value="A4-103">A4-103</option>
-                                </select>
-                            </div>
-                            <h3>Otology</h3>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Otology Doctor</label>
-                                <select class="form-select" name="otologyDoc" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Otology Doctor</option>
-                                    {% for p in otologyDoc %}
-                                        <option value={{p.ID}}>{{p.Name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Otology Doctor room</label>
-                                <select class="form-select" name="otologyDocRoom" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose Otology Doctor room</option>
-                                    <option value="A4-101">A4-101</option>
-                                    <option value="A4-102">A4-102</option>
-                                    <option value="A4-103">A4-103</option>
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Otology Nurse</label>
-                                <select class="form-select" name="otologyyNur" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Otology Nurse</option>
-                                    {% for p in laryngologyNur %}
-                                        <option value={{p.ID}}>{{p.Name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Otology Nurse room</label>
-                                <select class="form-select" name="otologyNurRoom" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose Otology Nurse room</option>
-                                    <option value="A4-101">A4-101</option>
-                                    <option value="A4-102">A4-102</option>
-                                    <option value="A4-103">A4-103</option>
-                                </select>
-                            </div>
-                            <h3>Manager</h3>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Medicine Manager</label>
-                                <select class="form-select" name="medicineMan" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Medicine Manager</option>
-                                    {% for p in medicineMan %}
-                                        <option value={{p.ID}}>{{p.Name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Medicine Manager room</label>
-                                <select class="form-select" name="medicineManRoom" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose Medicine Manager room</option>
-                                    <option value="A4-101">A4-101</option>
-                                    <option value="A4-102">A4-102</option>
-                                    <option value="A4-103">A4-103</option>
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Equipment Manager</label>
-                                <select class="form-select" name="equipmentMan" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Equipment Manager</option>
-                                    {% for p in equipmentMan %}
-                                        <option value={{p.ID}}>{{p.Name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Equipment Manager room</label>
-                                <select class="form-select" name="equipmentManRoom" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose Equipment Manager room</option>
-                                    <option value="A4-101">A4-101</option>
-                                    <option value="A4-102">A4-102</option>
-                                    <option value="A4-103">A4-103</option>
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Appointment Manager</label>
-                                <select class="form-select" name="appointmeneMan" style="color: #ff66b2;" aria-label="doctor" required>
-                                    <option selected disabled>Choose Appointment Manager</option>
-                                    {% for p in appointmentMan %}
-                                        <option value={{p.ID}}>{{p.Name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="mb-3" style="text-align: left">
-                                <label class="form-label">Choose Appointment Manager room</label>
-                                <select class="form-select" name="appointmentManRoom" style = "color: #ff66b2"; aria-label="time" required>
-                                    <option selected>Choose Appointment Manager room</option>
-                                    <option value="A4-101">A4-101</option>
-                                    <option value="A4-102">A4-102</option>
-                                    <option value="A4-103">A4-103</option>
-                                </select>
-                            </div>
+                            
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -273,6 +305,7 @@
                   </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -299,8 +332,17 @@
                                     {% for job_id, job in joblist.Morning.Laryngology.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -309,8 +351,17 @@
                                     {% for job_id, job in joblist.Morning.Laryngology.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -319,8 +370,17 @@
                                     {% for job_id, job in joblist.Morning.Laryngology.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -329,8 +389,17 @@
                                     {% for job_id, job in joblist.Morning.Laryngology.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -339,8 +408,17 @@
                                     {% for job_id, job in joblist.Morning.Laryngology.Fri.items %}
                                     {% for p in stafflist %}
                                         {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -349,8 +427,17 @@
                                     {% for job_id, job in joblist.Morning.Laryngology.Sat.items %}
                                         {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -359,8 +446,17 @@
                                     {% for job_id, job in joblist.Morning.Laryngology.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -372,8 +468,17 @@
                                     {% for job_id, job in joblist.Morning.Rhinology.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -382,8 +487,17 @@
                                     {% for job_id, job in joblist.Morning.Rhinology.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -392,8 +506,17 @@
                                     {% for job_id, job in joblist.Morning.Rhinology.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -402,8 +525,17 @@
                                     {% for job_id, job in joblist.Morning.Rhinology.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -412,8 +544,17 @@
                                     {% for job_id, job in joblist.Morning.Rhinology.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -423,7 +564,7 @@
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
                                             <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                            <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                            <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -432,8 +573,17 @@
                                     {% for job_id, job in joblist.Morning.Rhinology.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -445,8 +595,17 @@
                                     {% for job_id, job in joblist.Morning.Otology.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -455,8 +614,17 @@
                                     {% for job_id, job in joblist.Morning.Otology.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -465,8 +633,17 @@
                                     {% for job_id, job in joblist.Morning.Otology.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -475,8 +652,17 @@
                                     {% for job_id, job in joblist.Morning.Otology.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -485,8 +671,17 @@
                                     {% for job_id, job in joblist.Morning.Otology.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -495,8 +690,17 @@
                                     {% for job_id, job in joblist.Morning.Otology.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -505,8 +709,17 @@
                                     {% for job_id, job in joblist.Morning.Otology.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -518,8 +731,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -528,8 +750,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -538,8 +769,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -548,8 +788,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -558,8 +807,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -568,8 +826,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -578,8 +845,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -592,8 +868,17 @@
                                     {% for job_id, job in joblist.Afternoon.Laryngology.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -602,8 +887,17 @@
                                     {% for job_id, job in joblist.Afternoon.Laryngology.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -612,8 +906,17 @@
                                     {% for job_id, job in joblist.Afternoon.Laryngology.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -622,8 +925,17 @@
                                     {% for job_id, job in joblist.Afternoon.Laryngology.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -632,8 +944,17 @@
                                     {% for job_id, job in joblist.Afternoon.Laryngology.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -642,8 +963,17 @@
                                     {% for job_id, job in joblist.Afternoon.Laryngology.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -652,8 +982,17 @@
                                     {% for job_id, job in joblist.Afternoon.Laryngology.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -665,8 +1004,17 @@
                                     {% for job_id, job in joblist.Afternoon.Rhinology.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -675,8 +1023,17 @@
                                     {% for job_id, job in joblist.Afternoon.Rhinology.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -685,8 +1042,17 @@
                                     {% for job_id, job in joblist.Afternoon.Rhinology.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -695,8 +1061,17 @@
                                     {% for job_id, job in joblist.Afternoon.Rhinology.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -705,8 +1080,17 @@
                                     {% for job_id, job in joblist.Afternoon.Rhinology.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -715,8 +1099,17 @@
                                     {% for job_id, job in joblist.Afternoon.Rhinology.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -725,8 +1118,17 @@
                                     {% for job_id, job in joblist.Afternoon.Rhinology.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -738,8 +1140,17 @@
                                     {% for job_id, job in joblist.Afternoon.Otology.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -748,8 +1159,17 @@
                                     {% for job_id, job in joblist.Afternoon.Otology.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -758,8 +1178,17 @@
                                     {% for job_id, job in joblist.Afternoon.Otology.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -768,8 +1197,17 @@
                                     {% for job_id, job in joblist.Afternoon.Otology.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -778,8 +1216,17 @@
                                     {% for job_id, job in joblist.Afternoon.Otology.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -788,8 +1235,17 @@
                                     {% for job_id, job in joblist.Afternoon.Otology.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -798,8 +1254,17 @@
                                     {% for job_id, job in joblist.Afternoon.Otology.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -811,8 +1276,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -821,8 +1295,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -831,8 +1314,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -841,8 +1333,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -851,8 +1352,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -861,8 +1371,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -871,8 +1390,17 @@
                                     {% for job_id, job in joblist.Morning.Manager.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -885,8 +1413,17 @@
                                     {% for job_id, job in joblist.Evening.Laryngology.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -895,8 +1432,17 @@
                                     {% for job_id, job in joblist.Evening.Laryngology.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -905,8 +1451,17 @@
                                     {% for job_id, job in joblist.Evening.Laryngology.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -915,8 +1470,17 @@
                                     {% for job_id, job in joblist.Evening.Laryngology.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -925,8 +1489,17 @@
                                     {% for job_id, job in joblist.Evening.Laryngology.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -935,8 +1508,17 @@
                                     {% for job_id, job in joblist.Evening.Laryngology.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -945,8 +1527,17 @@
                                     {% for job_id, job in joblist.Evening.Laryngology.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -958,8 +1549,17 @@
                                     {% for job_id, job in joblist.Evening.Rhinology.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -968,8 +1568,17 @@
                                     {% for job_id, job in joblist.Evening.Rhinology.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -978,8 +1587,17 @@
                                     {% for job_id, job in joblist.Evening.Rhinology.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -988,8 +1606,17 @@
                                     {% for job_id, job in joblist.Evening.Rhinology.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -998,8 +1625,17 @@
                                     {% for job_id, job in joblist.Evening.Rhinology.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1008,8 +1644,17 @@
                                     {% for job_id, job in joblist.Evening.Rhinology.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1018,8 +1663,17 @@
                                     {% for job_id, job in joblist.Evening.Rhinology.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1031,8 +1685,17 @@
                                     {% for job_id, job in joblist.Evening.Otology.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1041,8 +1704,17 @@
                                     {% for job_id, job in joblist.Evening.Otology.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1051,8 +1723,17 @@
                                     {% for job_id, job in joblist.Evening.Otology.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1061,8 +1742,17 @@
                                     {% for job_id, job in joblist.Evening.Otology.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1071,8 +1761,17 @@
                                     {% for job_id, job in joblist.Evening.Otology.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1081,8 +1780,17 @@
                                     {% for job_id, job in joblist.Evening.Otology.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1091,8 +1799,17 @@
                                     {% for job_id, job in joblist.Evening.Otology.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1104,8 +1821,17 @@
                                     {% for job_id, job in joblist.Evening.Manager.Mon.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1114,8 +1840,17 @@
                                     {% for job_id, job in joblist.Evening.Manager.Tue.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1124,8 +1859,17 @@
                                     {% for job_id, job in joblist.Evening.Manager.Wed.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1134,8 +1878,17 @@
                                     {% for job_id, job in joblist.Evening.Manager.Thu.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1144,8 +1897,17 @@
                                     {% for job_id, job in joblist.Evening.Manager.Fri.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1154,8 +1916,17 @@
                                     {% for job_id, job in joblist.Evening.Manager.Sat.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -1164,8 +1935,17 @@
                                     {% for job_id, job in joblist.Evening.Manager.Sun.items %}
                                     {% for p in stafflist %}
                                             {% if job.PersonID == p.ID%}
-                                                <h1 class="Doctor"> {{p.Role}}: <br> <span style="color: black; font-size: 14px;">{{p.Name}}</span></h1>
-                                                <h1 style="font-size: 14px; text-align: left"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div style="text-align: left;">
+                                                        <h1 class="Doctor" style="display: inline;"> {{p.Role}}:</h1> 
+                                                    </div>
+                                                    <div>
+                                                        <a class="ri-delete-bin-line" href="deleteJob/{{admin.id}}/{{job_id}}" 
+                                                            style="text-align:right !important; text-decoration: none"></a>
+                                                    </div>
+                                                </div>
+                                                <h1 style="color: black; font-size: 14px; text-align: left">{{p.Name}}</h1>
+                                                <h1 style="font-size: 14px; text-align: left; border-bottom: 1px solid #0487d9;"> <span style="color: #ff66b2;">Room: </span> {{job.Position}}</h1>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}

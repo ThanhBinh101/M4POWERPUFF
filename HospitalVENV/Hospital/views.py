@@ -467,3 +467,22 @@ def Adminpage(request, ID):
                 if appointmentMan is not None and appointmentManRoom is not None:
                     Admin.AddJob(shift, "Manager", day, appointmentManRoom, appointmentMan)
         return redirect('Adminpage', ID)
+
+def deleteJob(request, adminID, jobID):
+    tableJob = connectDBJob().get()
+    if tableJob is not None:
+        for key1, value1 in tableJob.items():
+            tableDay = connectDBJob(key1).get()
+            if tableDay is not None:
+                for key2, value2 in tableDay.items():
+                    tableDepart = connectDBJob(key1, key2).get()
+                    if tableDepart is not None:
+                        for key3, value3 in tableDepart.items():
+                            tableDay = connectDBJob(key1, key2, key3).get()
+                            if tableDay is not None:
+                                for key4, value4 in tableDay.items():
+                                    if key4 == jobID:
+                                        deleteItem = connectDBJob(key1, key2, key3).child(key4)
+                                        deleteItem.delete()
+    
+    return redirect('Adminpage', adminID)
