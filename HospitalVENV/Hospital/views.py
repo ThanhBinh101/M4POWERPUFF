@@ -466,7 +466,34 @@ def Adminpage(request, ID):
                     Admin.AddJob(shift, "Manager", day, medicineManRoom, medicineMan)
                 if appointmentMan is not None and appointmentManRoom is not None:
                     Admin.AddJob(shift, "Manager", day, appointmentManRoom, appointmentMan)
-        return redirect('Adminpage', ID)
+            return redirect('Adminpage', ID)
+    
+        form_check = request.POST.get('addingStaff')
+        if form_check == 'form2':
+            department = request.POST.get('department')
+            role = request.POST.get('role')
+            name = request.POST.get('name')
+            years = request.POST.get('years')
+            email = request.POST.get('gmail')
+            password = request.POST.get('password')
+            gender = request.POST.get('gender')
+            date = request.POST.get('date')
+            level = request.POST.get('level')
+            
+            if department == 'Manager':
+                if(role == 'Medicine'):
+                    Admin.AddMedicineManager(name, email, password, date, gender, years)
+                if role == 'Equipment':
+                    Admin.AddEquipmentManager(name, email, password, date, gender, years)
+                if role == 'Appointment':
+                    Admin.AddOperator(name, email, password, date, gender, years)
+            else:
+                if role == 'Doctor':
+                    Admin.AddDoctor(name, email, password, date, gender, department, level, years)
+                if role == 'Nurse':
+                    Admin.AddNurse(name, email, password, date, gender, department, level, years)
+            return redirect('Adminpage', ID)
+        
 
 def deleteJob(request, adminID, jobID):
     tableJob = connectDBJob().get()
@@ -485,4 +512,64 @@ def deleteJob(request, adminID, jobID):
                                         deleteItem = connectDBJob(key1, key2, key3).child(key4)
                                         deleteItem.delete()
     
+    return redirect('Adminpage', adminID)
+
+def deleteStaff(request, adminID, staffID):
+    tableJob = connectDBJob().get()
+    if tableJob is not None:
+        for key1, value1 in tableJob.items():
+            tableDay = connectDBJob(key1).get()
+            if tableDay is not None:
+                for key2, value2 in tableDay.items():
+                    tableDepart = connectDBJob(key1, key2).get()
+                    if tableDepart is not None:
+                        for key3, value3 in tableDepart.items():
+                            tableDay = connectDBJob(key1, key2, key3).get()
+                            if tableDay is not None:
+                                for key4, value4 in tableDay.items():
+                                    if value4.get("PersonID") == staffID:
+                                        deleteItem = connectDBJob(key1, key2, key3).child(key4)
+                                        deleteItem.delete()
+    
+    dbconn = connectDBDoctor()
+    tableDoc = dbconn.get()
+    if tableDoc is not None:
+        for key, value in tableDoc.items():
+            if key == staffID:
+                dbconn.child(key).delete()
+                return redirect('Adminpage', adminID)
+                
+    dbconn = connectDBNurse()
+    tableNurse = dbconn.get()
+    if tableNurse is not None:
+        for key, value in tableNurse.items():
+            if key == staffID:
+                dbconn.child(key).delete()
+                return redirect('Adminpage', adminID)
+                
+    dbconn = connectDBEquipmentManager()
+    tableManager = dbconn.get()
+    if tableManager is not None:
+        for key, value in tableManager.items():
+            if key == staffID:
+                dbconn.child(key).delete()
+                return redirect('Adminpage', adminID)
+    
+    dbconn = connectDBMedicineManager()
+    tableManager = dbconn.get()
+    if tableManager is not None:
+        for key, value in tableManager.items():
+            if key == staffID:
+                dbconn.child(key).delete()
+                return redirect('Adminpage', adminID)
+    
+    dbconn = connectDBOperator()
+    tableManager = dbconn.get()
+    if tableManager is not None:
+        for key, value in tableManager.items():
+            if key == staffID:
+                dbconn.child(key).delete()
+                return redirect('Adminpage', adminID)
+                
+                                        
     return redirect('Adminpage', adminID)

@@ -28,5 +28,6 @@ urlpatterns = [
     
     path('administration/<str:ID>', views.Adminpage, name="Adminpage"),
     path('administration/deleteJob/<str:adminID>/<str:jobID>', views.deleteJob, name="deleteJob"),
+    path('administration/deleteStaff/<str:adminID>/<str:staffID>', views.deleteStaff, name="deleteStaff"),
     
 ]

@@ -21,7 +21,7 @@ class Information:
             "Name": self.name,
             "Password": self.password,
             "Gender": self.gender,
-            "Date of Birth": self.dob
+            "DateOfBirth": self.dob
         }
         
     def kill(self):
@@ -151,17 +151,22 @@ class Schedule:
         self.shift = shift
 
 class Doctor(Information):
-    def __init__(self, name, email, password, dob, department, level, years):
-        Information(self, name, email, password, dob)
+    def __init__(self, name, email, password, dob, gender, department, level, years):
+        super().__init__(name, email, password, dob, gender)
         self.department = department
         self.level = level
         self.years = years
     
     def to_dict(self):
-        return super().to_dict() + {
+        return {
             "Department": self.department,
             "Level": self.level,
-            "Years": self.years
+            "Years": self.years,
+            "Gmail": self.email,
+            "Name": self.name,
+            "Password": self.password,
+            "Gender": self.gender,
+            "DateOfBirth": self.dob
         }
     
     @staticmethod
@@ -180,6 +185,20 @@ class Doctor(Information):
             Medicine.UseMedicine(medi['id'], medi['quantity'], medi['note'], medi['reason'])
 
 class MedicineManager(Information):
+    def __init__(self, name, email, password, dob, gender, years):
+        super().__init__(name, email, password, dob, gender)
+        self.years = years
+        
+    def to_dict(self):
+        return {
+            "Years": self.years,
+            "Gmail": self.email,
+            "Name": self.name,
+            "Password": self.password,
+            "Gender": self.gender,
+            "DateOfBirth": self.dob
+        }
+        
     @staticmethod
     def ImportMedicine(name, quantity, expiredate):
         medicine = Medicine(name, quantity, expiredate)
@@ -243,6 +262,20 @@ class Equipment:
         }
 
 class EquipmentManager(Information):
+    def __init__(self, name, email, password, dob, gender, years):
+        super().__init__(name, email, password, dob, gender)
+        self.years = years
+        
+    def to_dict(self):
+        return {
+            "Years": self.years,
+            "Gmail": self.email,
+            "Name": self.name,
+            "Password": self.password,
+            "Gender": self.gender,
+            "DateOfBirth": self.dob
+        }
+        
     @staticmethod
     def importEquipment(name, maintaindate, status, type):
         equip = Equipment( name, maintaindate, status, type)
@@ -295,10 +328,6 @@ class EquipmentManager(Information):
         })
         deleteItem = connectDBEquipment().child(equipmentid)
         deleteItem.delete()
-        
-
-    def add_schedule(self, day, shift):
-        self.schedule.append(Schedule(day, shift))
 
 class Test():
     def __init__(self, patientid, doctorid, department, type):
@@ -363,17 +392,22 @@ class Test():
 
 
 class Nurse(Information):
-    def __init__(self, name, email, password, dob, department, level, years):
-        super().__init__(self, name, email, password, dob)
+    def __init__(self, name, email, password, dob, gender, department, level, years):
+        super().__init__(name, email, password, dob, gender)
         self.department = department
         self.level = level
-        self.yearưs = years
+        self.years = years
     
     def to_dict(self):
-        return super() + {
+        return{
             "Department": self.department,
             "Level": self.level,
-            "Years": self.years
+            "Years": self.years,
+            "Gmail": self.email,
+            "Name": self.name,
+            "Password": self.password,
+            "Gender": self.gender,
+            "DateOfBirth": self.dob
         }
 
 class Appointment():
@@ -421,6 +455,20 @@ class Appointment():
         }
 
 class Operator(Information):
+    def __init__(self, name, email, password, dob, gender, years):
+        super().__init__(name, email, password, dob, gender)
+        self.years = years
+        
+    def to_dict(self):
+        return {
+            "Years": self.years,
+            "Gmail": self.email,
+            "Name": self.name,
+            "Password": self.password,
+            "Gender": self.gender,
+            "DateOfBirth": self.dob
+        }
+        
     @staticmethod
     def SetAPM(docid, apmid, time):
         dbconn = connectDBAppointment().child(apmid)
@@ -473,8 +521,8 @@ class Admin(Information):
         dbconn.push(job.to_dict())
 
     @staticmethod
-    def AddDoctor(name, email, password, dob, department, level, years):
-        doctor = Doctor(name, email, password, dob, department, level, years)
+    def AddDoctor(name, email, password, dob, gender, department, level, years):
+        doctor = Doctor(name, email, password, dob, gender, department, level, years)
         dbconn = connectDBDoctor()
         dbconn.push(doctor.to_dict())
         
@@ -483,8 +531,8 @@ class Admin(Information):
         connectDBDoctor().child(id).delete()
 
     @staticmethod
-    def AddNurse(name, email, password, dob, department, level, years):
-        nurse = Nurse(name, email, password, dob, department, level, years)
+    def AddNurse(name, email, password, dob, gender, department, level, years):
+        nurse = Nurse(name, email, password, dob, gender, department, level, years)
         dbconn = connectDBNurse()
         dbconn.push(nurse.to_dict())
     @staticmethod
@@ -492,24 +540,24 @@ class Admin(Information):
         connectDBNurse().child(id).delete()
 
     @staticmethod
-    def AddMedicineManager(name, email, password, dob, gender):
-        manager = MedicineManager(name, email, password, dob, gender)
+    def AddMedicineManager(name, email, password, dob, gender, years):
+        manager = MedicineManager(name, email, password, dob, gender, years)
         connectDBMedicineManager().push(manager.to_dict())
     @staticmethod
     def DeleteMedicalManager(id):
         connectDBMedicineManager().child(id).delete()
 
     @staticmethod
-    def AddEquipmentManager(name, email, password, dob, gender):
-        manager = EquipmentManager(name, email, password, dob, gender)
+    def AddEquipmentManager(name, email, password, dob, gender, years):
+        manager = EquipmentManager(name, email, password, dob, gender, years)
         connectDBEquipmentManager().push(manager.to_dict())
     @staticmethod
     def DeleteEquipmentManager(id):
         connectDBEquipmentManager().child(id).delete()
 
     @staticmethod
-    def AddOperator(name, email, password, dob, gender):
-        operator = Operator(name, email, password, dob, gender)
+    def AddOperator(name, email, password, dob, gender, years):
+        operator = Operator(name, email, password, dob, gender, years)
         connectDBOperator().push(operator.to_dict())
     @staticmethod
     def DeleteOperator(id):
