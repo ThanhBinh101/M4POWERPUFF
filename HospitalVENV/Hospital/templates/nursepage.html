@@ -68,287 +68,11 @@
             </div>
 
             <div style = "margin-top: 5%" class = 'testingHistory'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nurseHistory">Result History</button>
-
-                <div class="modal fade" id="nurseHistory" tabindex="-1" aria-labelledby="viewNurseHistoryLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header TestingHeader">
-                          <h4 class="modal-title" id="viewNurseHistoryLabel">Testing History</h4>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body viewNurseHistoryBody">
-                            <div class="table-wrapper">
-                                <table class="table table-bordered" id="myTable">
-                                    <thead>
-                                        <tr class="table-danger">
-                                            <th style="width:15%;">Date</th>
-                                            <th style="width:15%">Department</th>
-                                            <th style="width:15%;">Doctor Name</th>
-                                            <th style="width:20%;">Patient Name</th>
-                                            <th style="width:10%;">Type</th>
-                                            <th style="width:25%;">Result</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for res in testResult%}
-                                            {% if nurse.id == res.nurseid%}
-                                            <tr class="table-danger">
-                                                <td>{{res.date}}</td>
-                                                <td>{{res.department}}</td>
-                                                <td>{{res.doctorname}}</td>
-                                                <td>{{res.patientname}}</td>
-                                                <td>{{res.type}}</td>
-                                                <td>{{res.result}}</td>
-                                            </tr>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="modal-footer viewNurseHistoryFooter" style="background-color: rgba(4, 135, 217, 0.5);">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Appointment">Result History</button>
             </div>
 
             <div style = "margin-top: 5%" class = 'Schedule'>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Schedule">Schedule</button>
-
-                <div class="modal fade" id="Schedule" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header ScheduleModalHeader" d-flex justify-content-center align-items-center>
-                                <h4 class="modal-title">SCHEDULE</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                            <div class="modal-body ScheduleModalBody">
-                                <div class="pink-background">
-                                    <div class ="timetable">
-                                        <table>
-                                            <tr>
-                                                <th>Shift</th>
-                                                <th>Monday</th>
-                                                <th>Tuesday</th>
-                                                <th>Wednesday</th>
-                                                <th>Thursday</th>
-                                                <th>Friday</th>
-                                                <th>Sarturday</th>
-                                                <th>Sunday</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Morning</td>
-        
-                                                {% if nurseSchedule.Morning.Mon is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black;">{{ nurseSchedule.Morning.Mon }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Morning.Tue is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Morning.Tue }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Morning.Wed is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Morning.Wed }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Morning.Thu is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Morning.Thu }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Morning.Fri is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Morning.Fri }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Morning.Sat is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Morning.Sat }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Morning.Sun is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Morning.Sun }}</p>
-                                                </td>
-                                                {% endif %}
-                                            </tr>
-        
-                                            <tr>
-                                                <td>Afternoon</td>
-        
-                                                {% if nurseSchedule.Afternoon.Mon is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Mon }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Afternoon.Tue is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Tue }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Afternoon.Wed is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Wed }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Afternoon.Thu is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Thu }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Afternoon.Fri is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Fri }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Afternoon.Sat is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Sat }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Afternoon.Sun is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Afternoon.Sun }}</p>
-                                                </td>
-                                                {% endif %}
-                                            </tr>
-                                            <tr>
-                                                <td>Evening</td>
-        
-                                                {% if nurseSchedule.Evening.Mon is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Evening.Mon }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Evening.Tue is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Evening.Tue }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Evening.Wed is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Evening.Wed }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Evening.Thu is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Evening.Thu }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Evening.Fri is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Evening.Fri }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Evening.Sat is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Evening.Sat }}</p>
-                                                </td>
-                                                {% endif %}
-        
-                                                {% if nurseSchedule.Evening.Sun is None %}
-                                                <td></td>
-                                                {% else %}
-                                                <td class="have-schedule" style="font-size: 16px">
-                                                    <i class="ri-home-heart-line"></i> 
-                                                    <p style="color: black">{{ nurseSchedule.Evening.Sun }}</p>
-                                                </td>
-                                                {% endif %}
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer ScheduleModalFooter">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
-                            </div>  
-                        </div>
-                    </div>
-                </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Result">Schedule</button>
             </div>
         
         </div>
@@ -365,74 +89,35 @@
                 <thead>
                     <tr class="table-danger">
                         <th scope="col" style = "width: 20%">Date</th>
-                        <th scope="col" style = "width: 20%">Patient Name</th>
-                        <th scope="col" style = "width: 20%">Doctor Name</th>
+                        <th scope="col" style = "width: 20%">PatientName</th>
+                        <th scope="col" style = "width: 20%">DoctorName</th>
                         <th scope="col" style = "width: 20%">Type</th>
                         <th scope="col" style = "width: 20%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {%for process in processList%}
                     <tr class="table-danger">
-                        <td>{{process.date}}</td>
-                        <td>{{process.patientname}}</td>
-                        <td>{{process.doctorname}}</td>
-                        <td>{{process.type}}</td>
+                        <td>13/11/2024</td>
+                        <td>Harvey</td>
+                        <td>Ngoc Nhon</td>
+                        <td>MRI</td>
                         <td>
-                            {% if nurse.id == process.nurseid %}
-                            <button type="button" class="bx bx-alarm-add" data-bs-toggle="modal" data-bs-target="#addResultTesting" style="background-color: transparent; border-width: 0"></button>
-
-                            <div class="modal fade" id="addResultTesting" tabindex="-1" aria-labelledby="addResult" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                            <div class="modal-header newResultHeader">
-                                                <h4 class="modal-title" id="addResult">Adding Test Result</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                        <div class="modal-body newResultBody">
-                                            <form method="POST"> {% csrf_token %}
-                                                <input type="hidden" name="testID" value={{process.id}}>
-                                                <div class="mb-3" style="text-align: left">
-                                                    <label class="form-label" style="color: #ff66b2;">Result</label>
-                                                    <textarea class="form-control" name="resultNote" placeholder="" required></textarea>
-                                                </div>
-                                                <div style="text-align: right">
-                                                    <button type="submit" class="btn btn-primary" style="background-color: #ff66b2;">Submit</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer newResultFooter" style="background-color: rgba(4, 135, 217, 0.5);">
-                                        </div>
-                                    </div>  
-                                </div>
-                            </div>
-
-                            <a class="ri-close-fill" href='cancelProcess/{{process.id}}/{{nurse.id}}'></a>
-
-                            {% else %}
-
-                            <button type="button" class="bx bx-alarm-add" onclick="showAlert()" style="background-color: transparent; border-width: 0"></button>
-                            
-                            {% endif %}
-
+                            <a class="ri-check-fill" href=''></a>
+                            <a class="ri-close-fill" href = ''></a>
+                            <a class="bx bx-alarm-add" href = ''></a>
                         </td>
                     </tr>
-                    {% endfor %}
-
-                    {%for test in testList%}
                     <tr class="table-danger">
-                        <td>{{test.date}}</td>
-                        <td>{{test.patientname}}</td>
-                        <td>{{test.doctorname}}</td>
-                        <td>{{test.type}}</td>
+                        <td>13/11/2024</td>
+                        <td>Harvey</td>
+                        <td>Le Vy</td>
+                        <td>MRI</td>
                         <td>
-                            <a class="ri-check-fill" href='nurseStartTesting/{{test.id}}/{{nurse.id}}'></a>
-
-                            <a class="ri-close-fill" href ='deleteTesting/{{test.id}}/{{nurse.id}}'></a>
-
+                            <a class="ri-check-fill" href=''></a>
+                            <a class="ri-close-fill" href = ''></a>
+                            <a class="bx bx-alarm-add" href = ''></a>
                         </td>
                     </tr>
-                    {% endfor %}
                     
                 </tbody>
             </table>
@@ -446,10 +131,6 @@
     document.getElementById("go-back").addEventListener("click", () => {
         history.back();
       });
-
-    function showAlert() {
-        alert("Already In Process");
-    }
 </script>
 
 </html>

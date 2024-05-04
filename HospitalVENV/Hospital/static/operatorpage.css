@@ -1,8 +1,8 @@
-  * {
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     list-style: none;
     text-decoration: none;
   }
@@ -15,8 +15,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 9%;
+    padding: 33px 9%;
     background: #F2CED8;
+    border-radius: 20px 20px 0 0;
   }
   body {
     background-color: white;
@@ -30,7 +31,6 @@
     margin: 0 10px 0 0;
   }
   .logo-name a {
-    font-family: 'Baloo 2';
     font-size: 30px;
     font-weight: 700;
     color: #0487d9;
@@ -89,21 +89,19 @@
     margin-top: 2%;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 4%;
+    margin-bottom: 1%;
   
   }
   .textbox {
     line-height: 0.75cm;
     display: block;
-    margin-left: 8%;
-    margin-top: 5%;
   }
   .textbox h2 {
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    margin-top: 10%;
-    margin-bottom: 5%;
+    margin-top: 5%;
   }
   .textbox p {
     border-bottom: 2px solid black;
@@ -112,211 +110,11 @@
   .textbox h6{
     font-size: 20px;
   }
-  .Operatorinfo {
-    align-items: center;
-    justify-content: center;
-    margin-top: 15%;
-    margin-left: 30%;
+  .textboxIDDoc h6{
+    color: #ff66b2;
+    font-size: 20px;
   }
-  .Operatorimg img {
-    border: 2px solid black;
-    border-radius: 47px;
-    width: 60%;
-    height: 60%;
-  }
-  .schedule .btn-primary {
-    font-size: 16px;
-    background-color: #0487D9;
-    border-color: #D8D2FC;
-    text-transform: uppercase;
-    transition: all 0.55s ease;
-    text-decoration: none;
-    color: white;
-    font-style: normal;
-    width: 200px;
-    margin-left: 4%;
-  }
-  .OperatorHistory .btn-primary {
-    font-size: 16px;
-    background-color: #ff66b2;
-    border-color: #0487D9;
-    text-transform: uppercase;
-    transition: all 0.55s ease;
-    text-decoration: none;
-    color: white;
-    font-style: normal;
-    width: 200px;
-    margin-left: 5%;
-  }
-
-  .schedule .btn-primary:hover, .OperatorHistory .btn-primary:hover{
-    background-color: #D8D2FC;
-    border-color: #D8D2FC;
+  .textboxIDDoc p{
+    border-bottom: 2px solid black;
     font-size: 16px;
   }
-
-  .modal-dialog .modal-content .modal-header,
-  .modal-dialog .modal-content .modal-body,
-  .modal-dialog .modal-content .modal-footer {
-  border: none; 
-}
-  .CancelHistoryHeader .modal-content, .OtologyHeader .modal-content, .RhinologyHeader .modal-content, .LaryngologyHeader .modal-content, .AssignHeader .modal-content, .CancelHeader .modal-content {
-    width: 240px; 
-    height: 360px; 
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .CancelHistoryHeader, .OtologyHeader, .RhinologyHeader, .LaryngologyHeader, .AssignHeader, .CancelHeader { 
-    background-color: rgba(242, 206, 216, 0.5);
-    text-align: center;
-  }
-
-  .CancelHistoryHeader .modal-title, .OtologyHeader .modal-title, .RhinologyHeader .modal-title, .LaryngologyHeader .modal-title, .AssignHeader .modal-title, .CancelHeader .modal-title { 
-    font-family: 'Baloo 2';
-    font-size: 30px;
-    color: #0487d9;
-    width: 100%;
-    padding-left: 5%;
-  }
-
-  .CancelHistoryBody, .AssignBody, .CancelBody {
-    background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
-  }
-
-  .CancelHistoryFooter .btn-secondary, .OtologyFooter .btn-secondary, .RhinologyFooter .btn-secondary, .LaryngologyFooter .btn-secondary, .AssignFooter .btn-primary, .CancelFooter .btn-primary {
-    font-size: 12px;
-    background-color: #ff66b2;
-    border-color: #0487D9;
-    text-transform: uppercase;
-    transition: all 0.55s ease;
-    text-decoration: none;
-    color: white;
-    font-style: normal;
-    width: 100px;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .CancelHistoryFooter .btn-secondary:hover, .OtologyFooter .btn-secondary:hover, .RhinologyFooter .btn-secondary:hover, .LaryngologyFooter .btn-secondary:hover, .AssignFooter .btn-primary:hover, .CancelFooter .btn-primary:hover {
-    background-color: #F2CED8;
-    border-color: #F2CED8;
-  }
-
-  .operatormanagement{
-    height: 80%;
-    width: 80%;
-    min-height: 75vh;
-    position: relative;
-    background-color: rgba(4, 135, 217, 0.3);
-    border-radius: 47px;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 4%;
-  }
-
-  .heading{
-    color: #ff66b2; 
-    font-size: 26px; 
-    font-family: 'Poppins'; 
-    text-align: center;
-    padding-top: 50px;
-    margin-bottom: 4%;
-  }
-  
-  .timetable{
-    background-color: #F2CED8;
-    padding:20px;
-    border-radius: 47px;
-    margin: 20px;
-    overflow-y: auto;
-    max-height: 450px;
-   }
-   .timetable table{
-    width:100%;
-    border-collapse: collapse;
-   }
-   .timetable th, .timetable td{
-    border: 1px solid #0487d9;
-    border-top:none;
-    padding: 10px;
-    text-align: center;
-   }
-   .timetable th{
-    background-color: #F2CED8;
-    color:#ff66b2;
-   }
-
-   .freetimetable {
-    background-color: #F2CED8;
-    color:#ff66b2;
-    border: 1px solid #0487d9;
-    border-top:none;
-    padding: 10px;
-    text-align: center;
-   }
-
-  .ri-heart-add-line {
-    border-width: 0; 
-    background-color: transparent; 
-    color: #ff66b2;
-    font-size: 26px;
-    transition: all 0.55s ease;
-    margin-right: 30px;
-  }
-  .ri-dislike-line {
-    border-width: 0; 
-    background-color: transparent; 
-    color: #ff66b2;
-    font-size: 26px;
-    transition: all 0.55s ease;
-  }
-  .ri-heart-add-line:hover {
-    color: #0487d9;
-  }
-  .ri-dislike-line:hover {
-    color: #0487d9;
-  }
-  .ri-nurse-line {
-    border-width: 0; 
-    background-color: transparent; 
-    color: #ff66b2;
-    font-size: 26px;
-    transition: all 0.55s ease;
-  }
-  .ri-nurse-line:hover {
-    color: #0487d9;
-  }
-
-  .timetable{
-    background-color: #F2CED8;
-    padding:20px;
-    border-radius: 47px;
-    margin: 20px;
-   }
-   .timetable table{
-    width:100%;
-    border-collapse: collapse;
-   }
-   .timetable th, .timetable td{
-    border: 1px solid #0487d9;
-    border-top:none;
-    padding: 10px;
-    text-align: center;
-    max-width:50px;
-    height: 100px;
-    font-family: 'Baloo 2';
-  
-   }
-   .timetable th{
-    background-color: #F2CED8;
-    color:#ff66b2;
-    font-family: 'Baloo 2';
-    width:50px;
-    height: 100px;
-  
-   }
-  
-   .have-schedule{
-    background-color: rgba(4, 135, 217, 0.5);
-   }
