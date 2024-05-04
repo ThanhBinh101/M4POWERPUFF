@@ -95,6 +95,7 @@
     line-height: 0.75cm;
     display: block;
     margin-left: 8%;
+    margin-top: 3%;
   }
   .textbox h2 {
     font-style: normal;
@@ -125,7 +126,7 @@
     height: 60%;
 }
 
-.testingHistory button {
+.testingHistory .btn-primary {
   font-size: 16px;
   background-color: #ff66b2;
   border-color: #D8D2FC;
@@ -137,7 +138,7 @@
   width: 200px;
   margin-left: 5%;
 }
-.Schedule button {
+.Schedule .btn-primary {
   font-size: 16px;
   background-color: #0487D9;
   border-color: #D8D2FC;
@@ -150,10 +151,58 @@
   margin-left: 5%;
 }
 
-.testingHistory button:hover, .Schedule button:hover {
+.testingHistory .btn-primary:hover, .Schedule .btn-primary:hover {
   background-color: #F2CED8;
   border-color: #F2CED8;
 }
+
+.modal-dialog .modal-content .modal-header,
+  .modal-dialog .modal-content .modal-body,
+  .modal-dialog .modal-content .modal-footer {
+  border: none; 
+}
+  .TestingHeader .modal-content, .newResultHeader .modal-content{
+    width: 240px; 
+    height: 360px; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .TestingHeader, .newResultHeader { 
+    background-color: rgba(242, 206, 216, 0.5);
+    text-align: center;
+  }
+
+  .TestingHeader .modal-title, .newResultHeader .modal-title {
+    font-family: 'Baloo 2';
+    font-size: 30px;
+    color: #0487d9;
+    width: 100%;
+    padding-left: 5%;
+  }
+
+  .viewNurseHistoryBody, .newResultBody {
+    background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+  }
+
+  .viewNurseHistoryFooter .btn-secondary, .newResultFooter .btn-secondary, .newResultFooter .btn-primary {
+    font-size: 12px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .viewNurseHistoryFooter .btn-secondary:hover, .newResultFooter .btn-secondary:hover, .newResultFooter .btn-primary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+  }
 
 .TestingAppoint {
   height: 80%;
@@ -170,7 +219,8 @@
 .textbox1 {
   line-height: 0.75cm;
   display: block;
-  margin-left: 3%;
+  text-align: center;
+  color: #ff66b2;
   margin-bottom: 3%;
 }
 
@@ -201,7 +251,7 @@
 .ri-check-fill {
   margin-right: 10%;
   font-size: 24px;
-  color: #73e635;
+  color: #0487D9;
   transition: all 0.55s ease;
 }
 .ri-close-fill {
@@ -215,22 +265,63 @@
   transition: all 0.55s ease;
 }
 .bx-alarm-add {
-  margin-left: 10%;
-  font-size: 20px;
+  margin-right: 10%;
+  font-size: 22px;
   color: #ff66b2;
-  transition: all 0.55s ease;
 }
 .bx-alarm-add:hover {
-  font-size: 21px;
-}
-.ri-user-search-line:hover {
-  font-size: 25px;
+  color:#F2CED8;
 }
 .ri-check-fill:hover{
-  font-size: 25px;
+  color:#F2CED8;
 }
 .ri-close-fill:hover{
-  font-size: 25px;
+  color:#F2CED8;
+}
+.newResult .btn-primary {
+  font-size: 16px;
+  background-color: #ff66b2;
+  border-color: #D8D2FC;
+  text-transform: uppercase;
+  transition: all 0.55s ease;
+  text-decoration: none;
+  color: white;
+  font-style: normal;
+}
+.newResult .btn-primary:hover {
+  background-color: rgba(4, 135, 217, 0.3);
 }
 
 
+.timetable{
+  background-color: #F2CED8;
+  padding:20px;
+  border-radius: 47px;
+  margin: 20px;
+ }
+ .timetable table{
+  width:100%;
+  border-collapse: collapse;
+ }
+ .timetable th, .timetable td{
+  border: 1px solid #0487d9;
+  border-top:none;
+  padding: 10px;
+  text-align: center;
+  max-width:50px;
+  height: 100px;
+  font-family: 'Baloo 2';
+
+ }
+ .timetable th{
+  background-color: #F2CED8;
+  color:#ff66b2;
+  font-family: 'Baloo 2';
+  width:50px;
+  height: 100px;
+
+ }
+
+ .have-schedule{
+  background-color: rgba(4, 135, 217, 0.5);
+ }

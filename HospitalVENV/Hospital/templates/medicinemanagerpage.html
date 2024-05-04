@@ -7,7 +7,7 @@
     {% load static%}
     <link rel="icon" type="image/x-icon" href="{%static 'logo.png'%}">
 
-    <link rel="stylesheet" type ="text/css" href="{%static 'managerpage.css'%}">
+    <link rel="stylesheet" type ="text/css" href="{%static 'medicinemanagerpage.css'%}">
 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
@@ -16,8 +16,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--  jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 </head>
 <body>
@@ -44,23 +51,522 @@
     <section class = "displaybox">
         <div class = "textbox">
             <h2>Medicine Manager Information</h2>
-            <div class = "textboxIDDoc">
-                <h6>ID*</h6>
-                <p id = "ManagerID">{{manager.id}}</p>
-            </div>
             <h6>Name</h6>
-            <p id = "ManagerName">{{manager.name}}</p>
-            <h6>Phone</h6>
-            <p id = "ManagerPhone">{{manager.phone}}</p>
+            <p id = "ManagerName" style="color: #ff66b2;">{{manager.name}}</p>
             <h6>Gmail</h6>
             <p id = "ManagerGmail">{{manager.gmail}}</p>
+            <h6>Date of Birth</h6>
+            <p id = "DateofBirth">{{manager.dob}}</p>
+            <h6>Years</h6>
+            <p id = "DoctorYear">{{manager.years}}</p>
         </div> 
 
-        <div class = "tablebox">
+        <div class = "MedicineManagerinfo">
+            <div class = "MedicineManagerimg">
+                <img src="{%static 'medicine.png'%}">
+            </div>
+
+            <div style = "margin-top: 5%" class = 'newMedicine'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMedicineModal">New Medicine</button>
+            </div>
+
+            <div style = "margin-top: 5%" class = 'MediHistory'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MedicineManagerHistory">Cancel History</button>
+            </div>
+
+            <div style = "margin-top: 5%" class = 'schedule'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Schedule">Schedule</button>
+            </div>
+
+            <div class="modal fade" id="addMedicineModal" tabindex="-1" aria-labelledby="addMedicineModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header AddmedicineHeader">
+                            <h1 class="modal-title fs-5" id="addMedicineModalLabel">Add Medicine</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body AddmedicineBody">
+                            <form id="formAddMedicine" method="POST" > {% csrf_token %}
+                                <input type="hidden" name="newMedicine-deleteMedicine" value="form1">
+                                <div class="mb-3" style="text-align: left">
+                                    <label for="medicinename" class="form-label" style="color:#ff66b2">Medicine Name</label>
+                                    <input class="form-control" name="medicinename" placeholder="Enter name" required>
+                                </div>
+                                <div class="mb-3" style="text-align: left">
+                                    <label for="quantity" class="form-label"style="color:#ff66b2">Quantity</label>
+                                    <input class="form-control" name="quantity" placeholder="Enter quantity" required>
+                                </div>
+                                <div class="mb-3" style="text-align: left">
+                                    <label class="form-label" style="color:#ff66b2">Expire Day</label>      
+                                    <input class="form-control" name="date" placeholder="DD/MM/YYY" type="text" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer AddmedicineFooter" style="background-color: rgba(4, 135, 217, 0.5);">
+                            <button id="sumbitAddMedicine" type="submit" form="formAddMedicine" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="MedicineManagerHistory" tabindex="-1" aria-labelledby="viewMedicineManagerHistoryLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header HistoryHeader">
+                      <h4 class="modal-title" id="viewMedicineManagerHistoryLabel">Medicine History</h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body viewMedicineManagerHistory">
+                        <div class="table-wrapper">
+                            <table class="table table-bordered" id="myTable">
+                                <thead>
+                                    <tr class="table-danger">
+                                        <th style="width:20%;">Medicine ID</th>
+                                        <th style="width:10%">Name</th>
+                                        <th style="width:15%;">Import Date</th>
+                                        <th style="width:15%;">Expire Date</th>
+                                        <th style="width:15%;">Remove Date</th>
+                                        <th style="width:25%;">Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for his in managerHistory%}
+                                        <tr class="table-danger">
+                                            <td>{{his.medicineid}}</td>
+                                            <td>{{his.medicinename}}</td>
+                                            <td>{{his.importdate}}</td>
+                                            <td>{{his.expiredate}}</td>
+                                            <td>{{his.removedate}}</td>
+                                            <td>{{his.reason}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer HistoryFooter" style="background-color: rgba(4, 135, 217, 0.5)">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="Schedule" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header ScheduleModalHeader" d-flex justify-content-center align-items-center>
+                            <h4 class="modal-title">SCHEDULE</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body ScheduleModalBody">
+                            <div class="pink-background">
+                                <div class ="timetable">
+                                    <table>
+                                        <tr>
+                                            <th>Shift</th>
+                                            <th>Monday</th>
+                                            <th>Tuesday</th>
+                                            <th>Wednesday</th>
+                                            <th>Thursday</th>
+                                            <th>Friday</th>
+                                            <th>Sarturday</th>
+                                            <th>Sunday</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Morning</td>
+    
+                                            {% if medicineSchedule.Morning.Mon is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black;">{{ medicineSchedule.Morning.Mon }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Tue is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Tue }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Wed is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Wed }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Thu is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Thu }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Fri is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Fri }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Sat is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Sat }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Morning.Sun is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Morning.Sun }}</p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Afternoon</td>
+    
+                                            {% if medicineSchedule.Afternoon.Mon is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Mon }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Tue is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Tue }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Wed is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Wed }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Thu is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Thu }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Fri is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Fri }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Sat is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Sat }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Afternoon.Sun is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Afternoon.Sun }}</p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                        <tr>
+                                            <td>Evening</td>
+    
+                                            {% if medicineSchedule.Evening.Mon is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Mon }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Tue is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Tue }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Wed is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Wed }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Thu is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Thu }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Fri is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Fri }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Sat is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Sat }}</p>
+                                            </td>
+                                            {% endif %}
+    
+                                            {% if medicineSchedule.Evening.Sun is None %}
+                                            <td></td>
+                                            {% else %}
+                                            <td class="have-schedule" style="font-size: 16px">
+                                                <i class="ri-home-heart-line"></i> 
+                                                <p style="color: black">{{ medicineSchedule.Evening.Sun }}</p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer ScheduleModalFooter">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+                        </div>  
+                    </div>
+                </div>
+            </div>
 
         </div>
 
     </section>
 
+    <section class="medicinemanagement">
+        <div class="col">
+            <div class="box">
+              <p class="boxTitle">Medicine Management</p>
+            </div>
+            <div class="container">
+                <div class="searchMedicine">
+                    <input type="text" id="myInputMedicine" onkeyup="myFunctionMedicine()" placeholder="Search for names..">
+                </div>
+                <div class="row">
+                    <div class="scrollable-table-container">
+                        <table id="medicine-table" class="medicine-table">
+                            <thead>
+                                <tr class="ethead">
+                                    <th class="headColumn" style="width: 25%; text-align: center;">Medicine ID</th>
+                                    <th class="headColumn" style="width: 15%; text-align: center;">Name</th>
+                                    <th class="headColumn" style="width: 15%; text-align: center;">Import Date</th>
+                                    <th class="headColumn" style="width: 15%; text-align: center;">Expire Date</th>
+                                    <th class="headColumn" style="width: 10%; text-align: center;">Total</th>
+                                    <th class="action-column" style="width: 20%; text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for medi in medicineTable%}
+                                <tr class="etbody">
+                                    <td class="et-td" style="text-align: center;">{{ medi.id }}</td>
+                                    <td class="et-td" style="text-align: center;">{{ medi.name }}</td>
+                                    <td class="et-td" style="text-align: center;">{{ medi.importdate }}</td>
+                                    <td class="et-td" style="text-align: center;">{{ medi.expiredate }}</td>
+                                    <td class="et-td" style="text-align: center;">{{ medi.quantity }}</td>
+                                    <td>
+                                        <button type="button" class="bx bx-search-alt bx-flip-horizontal" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
+                                            data-bs-toggle="modal" data-bs-target="#historyUsage{{ medi.id }}">
+                                        </button>
+
+                                        <div class="modal fade" id="historyUsage{{ medi.id }}" tabindex="-1" aria-labelledby="historyUsageLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header UsageHeader">
+                                                        <h1 class="modal-title fs-5" id="historyUsageLabel">History Usage</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body Usagebody" style="overflow-y: auto; max-height: 450px;">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr class="table-danger">
+                                                                    <th style="width: 25%">Date</th>
+                                                                    <th style="width: 25%">Quantity</th>
+                                                                    <th style="width: 50%">Reason</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for medicine in medicineHistory %}
+                                                                    {% if medicine.medicineid == medi.id %}
+                                                                        {% for his in medicine.history%}
+                                                                        <tr class="table-danger">
+                                                                            <td>{{ his.date }}</td>
+                                                                            <td>{{ his.quantity }}</td>
+                                                                            <td>{{ his.reason }}</td>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer UsageFooter" style="background-color: rgba(4, 135, 217, 0.5)">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button type="button" class="bx bx-minus" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
+                                            data-bs-toggle="modal" data-bs-target="#removeApartModal{{ medi.id }}">
+                                        </button>
+
+                                        <div class="modal fade" id="removeApartModal{{ medi.id }}" tabindex="-1" aria-labelledby="removeApartModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header RemoveHeader">
+                                                        <h1 class="modal-title fs-5" id="removeApartModalLabel">Remove Medicine</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body RemoveBody">
+                                                        <form id="formRemoveApartMedicine{{ medi.id }}" method="POST" > {% csrf_token %}
+                                                            <input type="hidden" name="newMedicine-deleteMedicine" value="form2">
+                                                            <input type="hidden" name="medicineID" value={{medi.id}}>
+                                                            <div class="mb-3" style="text-align: left">
+                                                                <label for="quantity" class="form-label" style="color:#ff66b2">Quantity</label>
+                                                                <input class="form-control" name="quantity" placeholder="Enter quantity" required>
+                                                            </div>
+                                                            <div class="mb-3" style="text-align: left">
+                                                                <label for="reasonRemove" class="form-label" style="color:#ff66b2">Reason</label>
+                                                                <textarea class="form-control" name="reasonRemove" id="reasonRemove" rows="3" placeholder="Enter reason for removing medicine" required></textarea>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer RemoveFooter" style="background-color: rgba(4, 135, 217, 0.5)">
+                                                        <button id="sumbitRemoveApartMedicine" type="submit" form="formRemoveApartMedicine{{ medi.id }}" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="bx bx-x" 
+                                            style="border-width: 0; background-color: transparent; font-size: 26px; padding: 10px; transition: all 0.55s ease;"
+                                            data-bs-toggle="modal" data-bs-target="#removeAllModal{{ medi.id }}">
+                                        </button>
+
+                                        <div class="modal fade" id="removeAllModal{{ medi.id }}" tabindex="-1" aria-labelledby="removeAllModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header DeleteHeader">
+                                                        <h1 class="modal-title fs-5" id="removeAllModalLabel">Remove Medicine</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body DeleteBody">
+                                                        <form id="formRemoveMedicine{{ medi.id }}" method="POST" > {% csrf_token %}
+                                                            <input type="hidden" name="newMedicine-deleteMedicine" value="form3">
+                                                            <input type="hidden" name="medicineID" value={{medi.id}}>
+                                                            <div class="mb-3" style="text-align: left">
+                                                                <label for="reasonRemove" class="form-label" style="color:#ff66b2">Reason</label>
+                                                                <textarea class="form-control" name="reasonRemove" id="reasonRemove" rows="3" placeholder="Enter reason for removing medicine" required></textarea>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer DeleteFooter" style="background-color: rgba(4, 135, 217, 0.5)">
+                                                        <button id="sumbitRemoveMedicine" type="submit" form="formRemoveMedicine{{ medi.id }}" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        };
+        date_input.datepicker(options);
+    })
+    
+    function myFunctionMedicine() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInputMedicine");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("medicine-table");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+</script>
+
 </html>

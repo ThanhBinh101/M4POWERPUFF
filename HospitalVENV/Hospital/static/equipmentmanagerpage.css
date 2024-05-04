@@ -89,7 +89,7 @@
     margin-top: 2%;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 4%;
+    margin-bottom: 5%;
   
   }
   .textbox {
@@ -112,19 +112,20 @@
   .textbox h6{
     font-size: 20px;
   }
-  .Operatorinfo {
+  .equipmentmanagerinfo {
     align-items: center;
     justify-content: center;
     margin-top: 15%;
     margin-left: 30%;
   }
-  .Operatorimg img {
+  .equipmentmanagerimg img {
     border: 2px solid black;
     border-radius: 47px;
     width: 60%;
     height: 60%;
+    margin-left: 2%;
   }
-  .schedule .btn-primary {
+  .schedule .btn-primary, .equipHistory .btn-primary {
     font-size: 16px;
     background-color: #0487D9;
     border-color: #D8D2FC;
@@ -136,7 +137,7 @@
     width: 200px;
     margin-left: 4%;
   }
-  .OperatorHistory .btn-primary {
+  .newEquipment .btn-primary {
     font-size: 16px;
     background-color: #ff66b2;
     border-color: #0487D9;
@@ -149,10 +150,27 @@
     margin-left: 5%;
   }
 
-  .schedule .btn-primary:hover, .OperatorHistory .btn-primary:hover{
+  .schedule .btn-primary:hover .equipHistory .btn-primary:hover{
     background-color: #D8D2FC;
     border-color: #D8D2FC;
     font-size: 16px;
+  }
+  .newEquipment .btn-primary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+    font-size: 16px;
+  }
+
+  .equipmentmanagement {
+    height: 80%;
+    width: 80%;
+    min-height: 75vh;
+    position: relative;
+    background-color: rgba(4, 135, 217, 0.3);
+    border-radius: 47px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 4%;
   }
 
   .modal-dialog .modal-content .modal-header,
@@ -160,19 +178,19 @@
   .modal-dialog .modal-content .modal-footer {
   border: none; 
 }
-  .CancelHistoryHeader .modal-content, .OtologyHeader .modal-content, .RhinologyHeader .modal-content, .LaryngologyHeader .modal-content, .AssignHeader .modal-content, .CancelHeader .modal-content {
+  .newEquipmentHeader .modal-content, .HistoryHeader .modal-content, .HistoryTableHeader .modal-content, .RemoveHeader .modal-content {
     width: 240px; 
     height: 360px; 
     display: flex;
     flex-direction: column;
   }
   
-  .CancelHistoryHeader, .OtologyHeader, .RhinologyHeader, .LaryngologyHeader, .AssignHeader, .CancelHeader { 
+  .newEquipmentHeader, .HistoryHeader, .HistoryTableHeader, .RemoveHeader {
     background-color: rgba(242, 206, 216, 0.5);
     text-align: center;
   }
 
-  .CancelHistoryHeader .modal-title, .OtologyHeader .modal-title, .RhinologyHeader .modal-title, .LaryngologyHeader .modal-title, .AssignHeader .modal-title, .CancelHeader .modal-title { 
+  .newEquipmentHeader .modal-title, .HistoryHeader .modal-title, .HistoryTableHeader .modal-title, .RemoveHeader .modal-title {
     font-family: 'Baloo 2';
     font-size: 30px;
     color: #0487d9;
@@ -180,11 +198,11 @@
     padding-left: 5%;
   }
 
-  .CancelHistoryBody, .AssignBody, .CancelBody {
+  .newEquipmentBody, .viewEquipmentManagerHistory, .HistoryTableBody, .RemoveBody {
     background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
   }
 
-  .CancelHistoryFooter .btn-secondary, .OtologyFooter .btn-secondary, .RhinologyFooter .btn-secondary, .LaryngologyFooter .btn-secondary, .AssignFooter .btn-primary, .CancelFooter .btn-primary {
+  .newEquipmentFooter .btn-primary, .HistoryTableFooter .btn-secondary, .RemoveFooter .btn-primary {
     font-size: 12px;
     background-color: #ff66b2;
     border-color: #0487D9;
@@ -198,94 +216,72 @@
     align-items: center;
   }
   
-  .CancelHistoryFooter .btn-secondary:hover, .OtologyFooter .btn-secondary:hover, .RhinologyFooter .btn-secondary:hover, .LaryngologyFooter .btn-secondary:hover, .AssignFooter .btn-primary:hover, .CancelFooter .btn-primary:hover {
+  .newEquipmentFooter .btn-primary:hover, .HistoryTableFooter .btn-secondary:hover, .RemoveFooter .btn-primary:hover {
     background-color: #F2CED8;
     border-color: #F2CED8;
   }
 
-  .operatormanagement{
-    height: 80%;
-    width: 80%;
-    min-height: 75vh;
-    position: relative;
-    background-color: rgba(4, 135, 217, 0.3);
-    border-radius: 47px;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 4%;
+  .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .heading{
-    color: #ff66b2; 
-    font-size: 26px; 
-    font-family: 'Poppins'; 
-    text-align: center;
-    padding-top: 50px;
-    margin-bottom: 4%;
+  .boxTitle {
+    padding-top: 5%;
+    color: #F25EA3;
+    font-size: 24px;
+    font-weight: 500;
   }
-  
-  .timetable{
+
+  .scrollable-table-container {
     background-color: #F2CED8;
-    padding:20px;
-    border-radius: 47px;
-    margin: 20px;
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
     overflow-y: auto;
     max-height: 450px;
-   }
-   .timetable table{
-    width:100%;
+  }
+
+  .equipment-table {
     border-collapse: collapse;
-   }
-   .timetable th, .timetable td{
-    border: 1px solid #0487d9;
-    border-top:none;
-    padding: 10px;
-    text-align: center;
-   }
-   .timetable th{
-    background-color: #F2CED8;
-    color:#ff66b2;
-   }
+    width:1000em
+  }
 
-   .freetimetable {
-    background-color: #F2CED8;
-    color:#ff66b2;
-    border: 1px solid #0487d9;
-    border-top:none;
-    padding: 10px;
-    text-align: center;
-   }
+  .ethead {
+    border-bottom: 2px solid #1278B9;
+  }
 
-  .ri-heart-add-line {
-    border-width: 0; 
-    background-color: transparent; 
-    color: #ff66b2;
-    font-size: 26px;
-    transition: all 0.55s ease;
-    margin-right: 30px;
+  .etbody {
+    border-bottom: 2px solid rgba(4, 135, 217, 0.3);
   }
-  .ri-dislike-line {
-    border-width: 0; 
-    background-color: transparent; 
-    color: #ff66b2;
-    font-size: 26px;
-    transition: all 0.55s ease;
+
+  .equipment-table th,
+  .equipment-table td {
+    font-size: 18px;
+    padding: 8px;
+    text-align: center;
   }
-  .ri-heart-add-line:hover {
-    color: #0487d9;
+
+  .equipment-table td button:hover {
+    color: #0487D9;
   }
-  .ri-dislike-line:hover {
-    color: #0487d9;
+
+  .headColumn {
+    border-right: 2px solid #1278B9;
+    color: #F25EA3;
+    font-size: 20px !important;
+    font-weight: 500;
   }
-  .ri-nurse-line {
-    border-width: 0; 
-    background-color: transparent; 
-    color: #ff66b2;
-    font-size: 26px;
-    transition: all 0.55s ease;
+
+  .action-column {
+    color: #F25EA3;
+    font-size: 20px !important;
+    font-weight: 500;
   }
-  .ri-nurse-line:hover {
-    color: #0487d9;
+
+  .et-td {
+    border-right: 2px solid #1278B9;
   }
 
   .timetable{
