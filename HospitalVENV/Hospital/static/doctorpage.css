@@ -173,18 +173,18 @@ section {
 border: none; 
 }
 
-.appointmentModalHeader.modal-content {
+.appointmentModalHeader.modal-content, .ScheduleModalHeader .modal-content {
   width: 240px; 
   height: 360px; 
   display: flex;
   flex-direction: column;
 }
 
-.appointmentModalHeader {
+.appointmentModalHeader, .ScheduleModalHeader {
   background-color: rgba(242, 206, 216, 0.5);
   text-align: center;
 }
-.appointmentModalHeader .modal-title {
+.appointmentModalHeader .modal-title, .ScheduleModalHeader .modal-title {
   font-family: 'Baloo 2';
   font-size: 30px;
   color: #0487d9;
@@ -192,11 +192,11 @@ border: none;
   padding-left: 5%;
 }
 
-.appointmentModalBody {
+.appointmentModalBody, .ScheduleModalBody {
   background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
 }
 
-.appointmentModalFooter .btn-primary {
+.appointmentModalFooter .btn-primary, .ScheduleModalFooter .btn-secondary {
   font-size: 12px;
   background-color: #ff66b2;
   border-color: #0487D9;
@@ -210,7 +210,7 @@ border: none;
   align-items: center;
 }
 
-.appointmentModalFooter .btn-primary:hover {
+.appointmentModalFooter .btn-primary:hover, .ScheduleModalFooter .btn-secondary:hover {
   background-color: #F2CED8;
   border-color: #F2CED8;
 }

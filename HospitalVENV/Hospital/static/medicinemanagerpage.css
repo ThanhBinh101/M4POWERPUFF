@@ -178,19 +178,19 @@
   .modal-dialog .modal-content .modal-footer {
   border: none; 
 }
-  .AddmedicineHeader .modal-content, .HistoryHeader .modal-content, .UsageHeader .modal-content, .RemoveHeader .modal-content, .DeleteHeader .modal-content {
+  .AddmedicineHeader .modal-content, .HistoryHeader .modal-content, .UsageHeader .modal-content, .RemoveHeader .modal-content, .DeleteHeader .modal-content, .ScheduleModalHeader .modal-content {
     width: 240px; 
     height: 360px; 
     display: flex;
     flex-direction: column;
   }
   
-  .AddmedicineHeader, .HistoryHeader, .UsageHeader, .RemoveHeader, .DeleteHeader { 
+  .AddmedicineHeader, .HistoryHeader, .UsageHeader, .RemoveHeader, .DeleteHeader, .ScheduleModalHeader { 
     background-color: rgba(242, 206, 216, 0.5);
     text-align: center;
   }
 
-  .AddmedicineHeader .modal-title, .HistoryHeader .modal-title, .UsageHeader .modal-title, .RemoveHeader .modal-title, .DeleteHeader .modal-title {
+  .AddmedicineHeader .modal-title, .HistoryHeader .modal-title, .UsageHeader .modal-title, .RemoveHeader .modal-title, .DeleteHeader .modal-title, .ScheduleModalHeader .modal-title {
     font-family: 'Baloo 2';
     font-size: 30px;
     color: #0487d9;
@@ -198,11 +198,11 @@
     padding-left: 5%;
   }
 
-  .AddmedicineBody, .viewMedicineManagerHistory, .Usagebody, .RemoveBody, .DeleteBody {
+  .AddmedicineBody, .viewMedicineManagerHistory, .Usagebody, .RemoveBody, .DeleteBody, .ScheduleModalBody {
     background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
   }
 
-  .AddmedicineFooter .btn-primary, .HistoryFooter .btn-secondary, .UsageFooter .btn-secondary, .RemoveFooter .btn-primary, .DeleteFooter .btn-primary {
+  .AddmedicineFooter .btn-primary, .HistoryFooter .btn-secondary, .UsageFooter .btn-secondary, .RemoveFooter .btn-primary, .DeleteFooter .btn-primary, .ScheduleModalFooter .btn-secondary {
     font-size: 12px;
     background-color: #ff66b2;
     border-color: #0487D9;
@@ -216,7 +216,7 @@
     align-items: center;
   }
   
-  .AddmedicineFooter .btn-primary:hover, .HistoryFooter .btn-secondary:hover, .UsageFooter .btn-secondary:hover, .RemoveFooter .btn-primary:hover, .DeleteFooter .btn-primary:hover {
+  .AddmedicineFooter .btn-primary:hover, .HistoryFooter .btn-secondary:hover, .UsageFooter .btn-secondary:hover, .RemoveFooter .btn-primary:hover, .DeleteFooter .btn-primary:hover, .ScheduleModalFooter .btn-secondary:hover {
     background-color: #F2CED8;
     border-color: #F2CED8;
   }
