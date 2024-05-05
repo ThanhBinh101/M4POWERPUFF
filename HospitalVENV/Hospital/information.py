@@ -220,8 +220,8 @@ def get_doctor_appointments(doc_key):
 
 def get_medicine_table():
     medicine_table = connectDBMedicine().get()
+    medicineList = []
     if medicine_table is not None:
-        medicineList = []
         for key, value in medicine_table.items():
             medicineList.append({
                 'id': key,
@@ -377,6 +377,8 @@ def generate_time_intervals():
     current_minute = current_time.minute
 
     time_intervals = []
+    
+    current_hour = 19
 
     if current_hour < 12:
         for hour in range(7, 12):

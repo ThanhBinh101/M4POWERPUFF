@@ -8,7 +8,7 @@ firebase_admin.initialize_app(cred, {
 })
 
 # dbref = db.reference("Doctor")
-# dbref.push({"Name":"Ngoc Nhon 2", "Department": "Laryngology", "Phone": "0901812806", 
+# dbref.push({"Name":"Adam Black", "Department": "Laryngology", "Phone": "0901812806", 
 #             "Gmail": "doctor2@gmail.com", "Level":"Bachelor", "Password": "123456"})
 
 # dbref = db.reference("MedicineManager")
@@ -20,9 +20,9 @@ firebase_admin.initialize_app(cred, {
 # dbref.push({"Name":"Cao Ky", "Phone": 9696, 
 #             "Gmail": "equipmentmanager@gmail.com", "Password": "123456"})
 
-# dbref = db.reference("Admin")
-# dbref.push({"Name":"Song Khue", "Phone": "1123", 
-#             "Gmail": "admin@gmail.com", "Password": "123456"})
+dbref = db.reference("Admin")
+dbref.push({"Name":"John Cena", "DateOfBirth": "23/11/2000", 
+            "Gmail": "admin@gmail.com", "Password": "123456", "Years": "2"})
 
 # dbref = db.reference("Operator")
 # user_id = uuid.uuid4().hex
@@ -84,11 +84,11 @@ firebase_admin.initialize_app(cred, {
 
 
 
-dbref = db.reference("Job/Morning/Manager/Mon/")
-dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+# dbref = db.reference("Job/Morning/Manager/Mon/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
-dbref = db.reference("Job/Morning/Laryngology/Tue/")
-dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+# dbref = db.reference("Job/Morning/Laryngology/Tue/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
 # dbref = db.reference("Job/Morning/Laryngology/Wed/")
 # dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
@@ -99,16 +99,16 @@ dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 # dbref = db.reference("Job/Morning/Laryngology/Fri/")
 # dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
-dbref = db.reference("Job/Morning/Laryngology/Sat/")
-dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+# dbref = db.reference("Job/Morning/Laryngology/Sat/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
-dbref = db.reference("Job/Morning/Laryngology/Sun/")
-dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+# dbref = db.reference("Job/Morning/Laryngology/Sun/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
 #-------------------------------------------------------------------------------------------------------------
 
-dbref = db.reference("Job/Afternoon/Laryngology/Mon/")
-dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+# dbref = db.reference("Job/Afternoon/Laryngology/Mon/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
 # dbref = db.reference("Job/Afternoon/Laryngology/Tue/")
 # dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
@@ -125,13 +125,13 @@ dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 # dbref = db.reference("Job/Afternoon/Laryngology/Sat/")
 # dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
-dbref = db.reference("Job/Afternoon/Laryngology/Sun/")
-dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+# dbref = db.reference("Job/Afternoon/Laryngology/Sun/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
 #-------------------------------------------------------------------------------------------------------------
 
-dbref = db.reference("Job/Evening/Laryngology/Mon/")
-dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+# dbref = db.reference("Job/Evening/Laryngology/Mon/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
 # dbref = db.reference("Job/Evening/Laryngology/Tue/")
 # dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
@@ -148,5 +148,5 @@ dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 # dbref = db.reference("Job/Evening/Laryngology/Sat/")
 # dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
 
-dbref = db.reference("Job/Evening/Laryngology/Sun/")
-dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
+# dbref = db.reference("Job/Evening/Laryngology/Sun/")
+# dbref.push({"PersonID": "-NvIUJVfJ5gRCSxB4Tvi", "Position": "A4-302"})
