@@ -30,6 +30,7 @@ body {
   margin: 0 10px 0 0;
 }
 .logo-name a {
+  font-family: 'Baloo 2';
   font-size: 30px;
   font-weight: 700;
   color: #0487d9;
@@ -171,6 +172,54 @@ display: block;
 margin-left: 3%;
 margin-bottom: 3%;
 }
+
+  .modal-dialog .modal-content .modal-header,
+  .modal-dialog .modal-content .modal-body,
+  .modal-dialog .modal-content .modal-footer {
+  border: none; 
+}
+  .NewjobHeader .modal-content, .NewaccHeader .modal-content, .StaffHeader .modal-content, .PatientHeader .modal-content {
+    width: 240px; 
+    height: 360px; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .NewjobHeader, .NewaccHeader, .StaffHeader, .PatientHeader { 
+    background-color: rgba(242, 206, 216, 0.5);
+    text-align: center;
+  }
+
+  .NewjobHeader .modal-title, .NewaccHeader .modal-title, .StaffHeader .modal-title, .PatientHeader .modal-title { 
+    font-family: 'Baloo 2';
+    font-size: 30px;
+    color: #0487d9;
+    width: 100%;
+    padding-left: 5%;
+  }
+
+  .NewjobBody, .NewaccBody, .StaffBody, .PatientBody {
+    background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+  }
+
+  .NewjobFooter .btn-primary, .NewaccFooter .btn-primary, .StaffFooter .btn-primary,.PatientFooter .btn-primary {
+    font-size: 12px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .NewjobFooter .btn-primary:hover, .NewaccFooter .btn-primary:hover, .StaffFooter .btn-primary:hover, .PatientFooter .btn-primary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+  }
 
 .icon{
   width:20px;
