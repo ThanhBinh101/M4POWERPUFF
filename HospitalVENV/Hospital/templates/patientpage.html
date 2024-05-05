@@ -99,8 +99,8 @@
                         <td class = "align">{{ record.date }}</td>
                         <td class = "align">{{ record.diagnose }}</td>
                         <td class = "align">
-                            <button class="ri-eye-line" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <button class="ri-eye-line" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{record.id}}"></button>
+                            <div class="modal fade" id="exampleModal{{record.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content" style="z-index: 1000; border: none !important">
                                         <div class="modal-header" style="display: flex; justify-content: center; align-items: center; background-color: rgba(242, 206, 216, 0.5); border: none !important">
