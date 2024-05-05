@@ -11,7 +11,7 @@ def get_patient_info(ID):
         'id': ID,
         'name': value.get("Name"),
         'gender': value.get("Gender"),
-        'dateofbirth': value.get("Date of Birth"),
+        'dateofbirth': value.get("DateOfBirth"),
         'gmail':value.get("Gmail"),
         'medicalrecord': get_medicial_record(ID)
     }
@@ -25,7 +25,7 @@ def get_doctor_info(ID):
         'name': value.get("Name"),
         'department': value.get("Department"),
         'years': value.get("Years"),
-        'dob': value.get('Date of Birth'),
+        'dob': value.get('DateOfBirth'),
         'gmail':value.get("Gmail"),
         'level': value.get("Level"),
         'appointments': get_doctor_appointments(ID)
@@ -41,8 +41,8 @@ def get_nurse_info(ID):
         'department': value.get("Department"),
         'gmail':value.get("Gmail"),
         'level': value.get("Level"),
-        'year': value.get("Years"),
-        'dateofbirth': value.get("Date of Birth")
+        'years': value.get("Years"),
+        'dateofbirth': value.get("DateOfBirth")
     }
 
 
@@ -53,7 +53,7 @@ def get_medicinemanager_info(ID):
     return {
         'id': ID,
         'name': value.get("Name"),
-        'dob': value.get("Date of Birth"),
+        'dob': value.get("DateOfBirth"),
         'gmail':value.get("Gmail"),
         'years':value.get("Years")
     }
@@ -66,7 +66,7 @@ def get_equipmentmanager_info(ID):
     return {
         'id': ID,
         'name': value.get("Name"),
-        'dob': value.get("Date of Birth"),
+        'dob': value.get("DateOfBirth"),
         'gmail':value.get("Gmail"),
         'years':value.get("Years")
     }
@@ -79,7 +79,7 @@ def get_operator_info(ID):
     return {
         'id': ID,
         'name': value.get("Name"),
-        'dob': value.get("Date of Birth"),
+        'dob': value.get("DateOfBirth"),
         'gmail':value.get("Gmail"),
         'years':value.get("Years")
     }
@@ -92,8 +92,9 @@ def get_admin_info(ID):
     return {
         'id': ID,
         'name': value.get("Name"),
-        'phone': value.get("Phone"),
-        'gmail':value.get("Gmail")
+        'dob': value.get("DateOfBirth"),
+        'gmail':value.get("Gmail"),
+        'years':value.get("Years")
     }
 
 def get_testing_otology():
@@ -670,6 +671,17 @@ def get_depart_manager(department):
                 'Name': value.get("Name"),
                 'FreeTime': get_freetime_doctor(key, department),
                 'Shift': get_doctor_shift(key, department)
+            })
+    return list
+
+def get_patient_list():
+    tablePatient = connectDBPatient().get()
+    list = []
+    if tablePatient is not None:
+        for key, value in tablePatient.items():
+            list.append({
+                'ID': key,
+                'Name': value.get("Name"),
             })
     return list
 

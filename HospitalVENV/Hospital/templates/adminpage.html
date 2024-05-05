@@ -52,8 +52,10 @@
             <h2>Admin Information</h2>
             <h6>Name</h6>
             <p id = "AdminName">{{admin.name}}</p>
-            <h6>Phone</h6>
-            <p id = "AdminPhone">{{admin.phone}}</p>
+            <h6>Date of Birth</h6>
+            <p id = "AdminDateofBirth">{{admin.dob}}</p>
+            <h6>Years</h6>
+            <p id = "AdminYears">{{admin.years}}</p>
             <h6>Gmail</h6>
             <p id = "AdminGmail">{{admin.gmail}}</p>
         </div> 
@@ -72,6 +74,9 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MedicalStaff">Medical Staff</button>
             </div>
             
+            <div style = "margin-top: 5%" class = 'newButton'>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PatientList">Patient List</button>
+            </div>
 
             <div class="modal fade" id="AddJob" tabindex="-1" aria-labelledby="AddJobLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -312,11 +317,11 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="AddStaff" tabindex="-1" aria-labelledby="AddJobLabel" aria-hidden="true">
+            <div class="modal fade" id="AddStaff" tabindex="-1" aria-labelledby="AddStaffLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="AddJobLabel">Add New Account</h1>
+                      <h1 class="modal-title fs-5" id="AddStaffLabel">Add New Account</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -417,11 +422,11 @@
                 </div>
             </div>
 
-            <div class="modal fade" id = "MedicalStaff" tabindex="-1" aria-labelledby="AddJobLabel" aria-hidden="true">
+            <div class="modal fade" id = "MedicalStaff" tabindex="-1" aria-labelledby="MedicalStaffLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 850px;">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="AddJobLabel">Medical Staff</h1>
+                        <h1 class="modal-title fs-5" id="MedicalStaffLabel">Medical Staff</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
@@ -457,6 +462,40 @@
                                 {% endfor %}
                             </table>
                         </div>
+                       </div>
+                      <div class="modal-footer">
+                          <button type="submit" form="addStaff" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id = "PatientList" tabindex="-1" aria-labelledby="PatientListLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="PatientListLabel">Patient List</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for names">
+                        <div class="table-wrapper">
+                            <table id="myTable2">
+                                <tr class="header">
+                                    <th class="title" style="width: 40%;">ID</th>
+                                    <th class="title" style="width: 30%;">Name</th>
+                                    <th class="title" style="width: 30%;">Action</th>
+                                </tr>
+                                {% for patient in patientlist %}
+                                    <tr>
+                                        <td>{{patient.ID}}</td>
+                                        <td>{{patient.Name}}</td>
+                                        <td> <a class="ri-eye-2-line"href="{% url 'patientpage' patient.ID %}?from_history=true"></a> </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                       </div>
                       <div class="modal-footer">
                           <button type="submit" form="addStaff" class="btn btn-primary">Submit</button>
                       </div>
@@ -2141,6 +2180,28 @@
         // Loop through all table rows, and hide those who don't match the search query
         for (i = 0; i < tr.length; i++) {
           td = tr[i].getElementsByTagName("td")[2];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+
+      function myFunction2() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput2");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable2");
+        tr = table.getElementsByTagName("tr");
+      
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
           if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {

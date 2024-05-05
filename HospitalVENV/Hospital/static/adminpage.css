@@ -286,6 +286,45 @@ margin-bottom: 3%;
   background-color: #F2CED8;
   color:#ff66b2;
 }
-.bx-x:hover{
-  color: #0487D9;
+.ri-eye-2-line {
+  text-decoration: none;
+  color: #ff66b2;
+}
+
+
+#myInput2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50' fill='currentColor'%3E%3Cpath d='M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z'%3E%3C/path%3E%3C/svg%3E"); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 60%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+  margin-left: 22%;
+}
+
+#myTable2 {
+  background-color: #F2CED8;
+  border-radius: 47px;
+  margin-bottom: 10px;
+}
+#myTable2 table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-wrapper {
+  max-height: 350px; /* Adjust the maximum height as needed */
+  overflow-y: auto;
+}
+#myTable2 th, #myTable2 td {
+  text-align: center; /* Left-align text */
+  padding: 12px; /* Add padding */
+  background-color: #F2CED8;
+  border: 1px solid #0487d9;
+  border-top:none;
+}
+#myTable2 th{
+  background-color: #F2CED8;
+  color:#ff66b2;
 }

@@ -411,13 +411,14 @@ def Adminpage(request, ID):
         appointmentMan = get_depart_manager("Appointment")
 
         stafflist = get_staff()
+        patientlist = get_patient_list()
 
         doctor_list = connectDBDoctor().get()
         nurse_list = connectDBNurse().get()
 
         adInfo = get_admin_info(ID)
         days = ["Mon", "Tue", "Wed", "Tue", "Fri", "Sat", "Sun"]
-        return render(request, 'adminpage.html', {'joblist': job_list,  'days': days, 'stafflist': stafflist,
+        return render(request, 'adminpage.html', {'joblist': job_list,  'days': days, 'stafflist': stafflist, 'patientlist': patientlist,
                                                 'doctorlist': doctor_list, 'otologyDoc': otologyDoc, 'rhinologyDoc': rhinologyDoc, 'laryngologyDoc': laryngologyDoc, 
                                                 'nurselist': nurse_list, 'otologyNur': otologyNur, 'rhinologyNur': rhinologyNur, 'laryngologyNur': laryngologyNur, 
                                                 'appointmentMan':appointmentMan, 'equipmentMan': equipmentMan, 'medicineMan': medicineMan, 
