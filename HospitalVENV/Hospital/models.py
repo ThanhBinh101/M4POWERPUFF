@@ -145,11 +145,6 @@ class Prescription:
             "Medicines": self.medicines,
         }
 
-class Schedule:
-    def __intit__(self, day, shift):
-        self.day = day
-        self.shift = shift
-
 class Doctor(Information):
     def __init__(self, name, email, password, dob, gender, department, level, years):
         super().__init__(name, email, password, dob, gender)
@@ -206,15 +201,15 @@ class MedicineManager(Information):
         dbconn.push(medicine.to_dict())
         
     @staticmethod
-    def RemoveApartMedicine(medicineID, RemoveQuantity, reason):
+    def RemoveApartMedicine(medicineID, quantity, reason):
         currQuantity = connectDBMedicine(medicineID).child("Quantity").get()
-        newQuantity = currQuantity - RemoveQuantity
+        newQuantity = currQuantity - quantity
         
         dbconn = connectDBMedicineHistory(medicineID)
         dbconn.push().set({
             "Date": date.today().strftime("%d/%m/%Y"),
             "Reason": reason,
-            "Quantity": RemoveQuantity
+            "Quantity": quantity
         })
         dbconn.parent.update({"Quantity": newQuantity})
         
@@ -237,12 +232,6 @@ class MedicineManager(Information):
         
         deleteMedicine = connectDBMedicine().child(medicineID)
         deleteMedicine.delete()
-        
-    @staticmethod
-    def AddMedicalManager(name, email, password, dob, gender):
-        manager = MedicineManager(name, email, password, dob, gender)
-        dbconn = connectDBMedicineManager()
-        dbconn.push(manager.to_dict())
 
 class Equipment:
     def __init__(self, name, maintaindate, status, type):
@@ -386,10 +375,9 @@ class Test():
         conn1.delete()
 
     @staticmethod
-    def EraseProcess(testid):
+    def EraseTest(testid):
         conn1 = connectDBTest("notstarted", testid)
         conn1.delete()
-
 
 class Nurse(Information):
     def __init__(self, name, email, password, dob, gender, department, level, years):
@@ -454,7 +442,7 @@ class Appointment():
             "DoctorID": "None",
         }
 
-class Operator(Information):
+class AppointmentManager(Information):
     def __init__(self, name, email, password, dob, gender, years):
         super().__init__(name, email, password, dob, gender)
         self.years = years
@@ -470,18 +458,18 @@ class Operator(Information):
         }
         
     @staticmethod
-    def SetAPM(docid, apmid, time):
+    def SetAPM(docid, apmid, newtime):
         dbconn = connectDBAppointment().child(apmid)
-        dbconn.update({"Time": time, "DoctorID": docid})
+        dbconn.update({"Time": newtime, "DoctorID": docid})
 
     @staticmethod
-    def DelAPM(apmid, operatorid, patientname, reason):
+    def DelAPM(apmid, managerID, patientname, reason):
         patientid = connectDBAppointment(apmid).child("PatientID").get()
         wantedtime = connectDBAppointment(apmid).child("Time").get()
         department = connectDBAppointment(apmid).child("Department").get()
         removedate = date.today().strftime("%d/%m/%Y")
         
-        dbconn = connectDBOperatorHistory(operatorid)
+        dbconn = connectDBOperatorHistory(managerID)
         dbconn.push({
             'appointmentID': apmid,
             'patientID': patientid,
@@ -506,10 +494,6 @@ class Job():
             "Position": self.position
         }
 
-    @staticmethod
-    def DeleteJob(jobid):
-        connectDBJob(jobid).delete()
-
 class Admin(Information):
     def __init__(self, name, email, password, dob, gender):
         Information.__init__(self, name, email, password, dob, gender)
@@ -519,13 +503,15 @@ class Admin(Information):
         job = Job(room, personID)
         dbconn = connectDBJob(shift, department, day)
         dbconn.push(job.to_dict())
+    @staticmethod
+    def DeleteJob(shift, department, day, jobID):
+        connectDBJob(shift, department, day).child(jobID).delete()
 
     @staticmethod
     def AddDoctor(name, email, password, dob, gender, department, level, years):
         doctor = Doctor(name, email, password, dob, gender, department, level, years)
         dbconn = connectDBDoctor()
         dbconn.push(doctor.to_dict())
-        
     @staticmethod
     def DeleteDoctor(id):
         connectDBDoctor().child(id).delete()
@@ -557,7 +543,7 @@ class Admin(Information):
 
     @staticmethod
     def AddOperator(name, email, password, dob, gender, years):
-        operator = Operator(name, email, password, dob, gender, years)
+        operator = AppointmentManager(name, email, password, dob, gender, years)
         connectDBOperator().push(operator.to_dict())
     @staticmethod
     def DeleteOperator(id):

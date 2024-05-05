@@ -1,0 +1,318 @@
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+    list-style: none;
+    text-decoration: none;
+  }
+  header {
+    position: flex;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 9%;
+    background: #F2CED8;
+  }
+  body {
+    background-color: white;
+  }
+  .logo-name {
+    float: left
+  }
+  .logo-name img {
+    max-width: 55px;
+    float: left;
+    margin: 0 10px 0 0;
+  }
+  .logo-name a {
+    font-family: 'Baloo 2';
+    font-size: 30px;
+    font-weight: 700;
+    color: #0487d9;
+    text-decoration: none;
+  }
+  .navlist {
+    display: flex;
+    margin-top: 15px;
+  }
+  .navlist a{
+    color: #0487d9;
+    margin-left: 60px;
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all .55s ease;
+    text-decoration: none;
+  }
+  .navlist a:hover{
+    border-bottom: 2px solid #0487d9;
+  }
+  header .btn-primary {
+    font-size: 20px;
+    margin-right: 25px;
+    background-color: #ff66b2;
+    border-color: #ff66b2;
+    color: white;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    --bs-btn-padding-x: 1rem;
+  }
+  header button:hover {
+    --bs-btn-hover-bg: whitesmoke transparent;
+    --bs-btn-hover-border-color: 1px solid whitesmoke;
+    transform: translateY(-8px);
+  }
+  header .btn-primary a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px
+  }
+  section {
+    padding: 0 2%;
+  }
+  .displaybox {
+    height: 80%;
+    width: 80%;
+    min-height: 75vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    gap: 2rem;
+    background-color: rgba(4, 135, 217, 0.3);
+    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+    border-radius: 47px;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+  
+  }
+  .textbox {
+    line-height: 0.75cm;
+    display: block;
+    margin-left: 8%;
+    margin-top: 5%;
+  }
+  .textbox h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 10%;
+    margin-bottom: 5%;
+  }
+  .textbox p {
+    border-bottom: 2px solid black;
+    font-size: 16px;
+  }
+  .textbox h6{
+    font-size: 20px;
+  }
+  .equipmentmanagerinfo {
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+    margin-left: 30%;
+  }
+  .equipmentmanagerimg img {
+    border: 2px solid black;
+    border-radius: 47px;
+    width: 60%;
+    height: 60%;
+    margin-left: 2%;
+  }
+  .schedule .btn-primary, .equipHistory .btn-primary {
+    font-size: 16px;
+    background-color: #0487D9;
+    border-color: #D8D2FC;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 200px;
+    margin-left: 4%;
+  }
+  .newEquipment .btn-primary {
+    font-size: 16px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 200px;
+    margin-left: 5%;
+  }
+
+  .schedule .btn-primary:hover .equipHistory .btn-primary:hover{
+    background-color: #D8D2FC;
+    border-color: #D8D2FC;
+    font-size: 16px;
+  }
+  .newEquipment .btn-primary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+    font-size: 16px;
+  }
+
+  .equipmentmanagement {
+    height: 80%;
+    width: 80%;
+    min-height: 75vh;
+    position: relative;
+    background-color: rgba(4, 135, 217, 0.3);
+    border-radius: 47px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 4%;
+  }
+
+  .modal-dialog .modal-content .modal-header,
+  .modal-dialog .modal-content .modal-body,
+  .modal-dialog .modal-content .modal-footer {
+  border: none; 
+}
+  .newEquipmentHeader .modal-content, .HistoryHeader .modal-content, .HistoryTableHeader .modal-content, .RemoveHeader .modal-content {
+    width: 240px; 
+    height: 360px; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .newEquipmentHeader, .HistoryHeader, .HistoryTableHeader, .RemoveHeader {
+    background-color: rgba(242, 206, 216, 0.5);
+    text-align: center;
+  }
+
+  .newEquipmentHeader .modal-title, .HistoryHeader .modal-title, .HistoryTableHeader .modal-title, .RemoveHeader .modal-title {
+    font-family: 'Baloo 2';
+    font-size: 30px;
+    color: #0487d9;
+    width: 100%;
+    padding-left: 5%;
+  }
+
+  .newEquipmentBody, .viewEquipmentManagerHistory, .HistoryTableBody, .RemoveBody {
+    background: linear-gradient(to bottom, rgba(242, 206, 216, 0.5), rgba(4, 135, 217, 0.5));
+  }
+
+  .newEquipmentFooter .btn-primary, .HistoryTableFooter .btn-secondary, .RemoveFooter .btn-primary {
+    font-size: 12px;
+    background-color: #ff66b2;
+    border-color: #0487D9;
+    text-transform: uppercase;
+    transition: all 0.55s ease;
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .newEquipmentFooter .btn-primary:hover, .HistoryTableFooter .btn-secondary:hover, .RemoveFooter .btn-primary:hover {
+    background-color: #F2CED8;
+    border-color: #F2CED8;
+  }
+
+  .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .boxTitle {
+    padding-top: 5%;
+    color: #F25EA3;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .scrollable-table-container {
+    background-color: #F2CED8;
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    overflow-y: auto;
+    max-height: 450px;
+  }
+
+  .equipment-table {
+    border-collapse: collapse;
+    width:1000em
+  }
+
+  .ethead {
+    border-bottom: 2px solid #1278B9;
+  }
+
+  .etbody {
+    border-bottom: 2px solid rgba(4, 135, 217, 0.3);
+  }
+
+  .equipment-table th,
+  .equipment-table td {
+    font-size: 18px;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .equipment-table td button:hover {
+    color: #0487D9;
+  }
+
+  .headColumn {
+    border-right: 2px solid #1278B9;
+    color: #F25EA3;
+    font-size: 20px !important;
+    font-weight: 500;
+  }
+
+  .action-column {
+    color: #F25EA3;
+    font-size: 20px !important;
+    font-weight: 500;
+  }
+
+  .et-td {
+    border-right: 2px solid #1278B9;
+  }
+
+  .timetable{
+    background-color: #F2CED8;
+    padding:20px;
+    border-radius: 47px;
+    margin: 20px;
+   }
+   .timetable table{
+    width:100%;
+    border-collapse: collapse;
+   }
+   .timetable th, .timetable td{
+    border: 1px solid #0487d9;
+    border-top:none;
+    padding: 10px;
+    text-align: center;
+    max-width:50px;
+    height: 100px;
+    font-family: 'Baloo 2';
+  
+   }
+   .timetable th{
+    background-color: #F2CED8;
+    color:#ff66b2;
+    font-family: 'Baloo 2';
+    width:50px;
+    height: 100px;
+  
+   }
+  
+   .have-schedule{
+    background-color: rgba(4, 135, 217, 0.5);
+   }

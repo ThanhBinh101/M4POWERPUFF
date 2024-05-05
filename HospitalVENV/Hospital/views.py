@@ -17,9 +17,7 @@ def signup(request):
             password = form.cleaned_data.get("password")
             gender = form.cleaned_data.get("gender")
             date = form.cleaned_data.get("date")
-        dbconn = connectDBPatient()
-        p = Patient(name, gmail, password, date, gender)
-        dbconn.push(p.to_dict())
+        Patient.AddPatient(name, gmail, password, date, gender)
         return redirect('mainpage')
     return render(request, 'signup.html')
 
@@ -192,7 +190,7 @@ def nurseStartTesting(request, testid, nurseid):
     return redirect('nursepage', nurseid)
 
 def deleteTesting(request, testid, nurseid):
-    Test.EraseProcess(testid)
+    Test.EraseTest(testid)
     return redirect('nursepage', nurseid)
 
 def cancelProcess(request, testid, nurseid):
@@ -318,13 +316,13 @@ def operatorpage(request, ID):
             time = request.POST.get('time')
             appointid = request.POST.get('appointID')
             if( time != "Choose time" and doctorid != "Choose doctor"):
-                Operator.SetAPM(doctorid, appointid, time)
+                AppointmentManager.SetAPM(doctorid, appointid, time)
         else:
             appointid = request.POST.get('appointID')
             reason = request.POST.get('reasonRemove')
             patientid = request.POST.get('patientID')
             patientname = get_patient_name(patientid)
-            Operator.DelAPM(appointid, ID, patientname, reason)
+            AppointmentManager.DelAPM(appointid, ID, patientname, reason)
     
     return redirect('operatorpage', ID)
   
