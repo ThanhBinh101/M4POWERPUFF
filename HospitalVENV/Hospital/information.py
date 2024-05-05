@@ -220,8 +220,8 @@ def get_doctor_appointments(doc_key):
 
 def get_medicine_table():
     medicine_table = connectDBMedicine().get()
+    medicineList = []
     if medicine_table is not None:
-        medicineList = []
         for key, value in medicine_table.items():
             medicineList.append({
                 'id': key,
