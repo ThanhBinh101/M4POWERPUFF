@@ -377,6 +377,8 @@ def generate_time_intervals():
     current_minute = current_time.minute
 
     time_intervals = []
+    
+    current_hour = 19
 
     if current_hour < 12:
         for hour in range(7, 12):
