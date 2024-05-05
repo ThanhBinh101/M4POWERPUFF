@@ -58,67 +58,60 @@ def checkValidate(gmail, password):
     global userKey
     global userRole
     tableUser = connectDBPatient().get()
-    if tableUser is None:
-        return False
-    for key, value in tableUser.items():
-        if value.get("Gmail") == gmail and value.get("Password") == password:
-            userKey = key
-            userRole = "Patient"
-            return True
+    if tableUser is not None:
+        for key, value in tableUser.items():
+            if value.get("Gmail") == gmail and value.get("Password") == password:
+                userKey = key
+                userRole = "Patient"
+                return True
         
     tableUser = connectDBDoctor().get()
-    if tableUser is None:
-        return False
-    for key, value in tableUser.items():
-        if value.get("Gmail") == gmail and value.get("Password") == password:
-            userKey = key
-            userRole = "Doctor"
-            return True
+    if tableUser is not None:
+        for key, value in tableUser.items():
+            if value.get("Gmail") == gmail and value.get("Password") == password:
+                userKey = key
+                userRole = "Doctor"
+                return True
         
     tableUser = connectDBNurse().get()
-    if tableUser is None:
-        return False
-    for key, value in tableUser.items():
-        if value.get("Gmail") == gmail and value.get("Password") == password:
-            userKey = key
-            userRole = "Nurse"
-            return True
+    if tableUser is not None:
+        for key, value in tableUser.items():
+            if value.get("Gmail") == gmail and value.get("Password") == password:
+                userKey = key
+                userRole = "Nurse"
+                return True
     
     tableUser = connectDBMedicineManager().get()
-    if tableUser is None:
-        return False
-    for key, value in tableUser.items():
-        if value.get("Gmail") == gmail and value.get("Password") == password:
-            userKey = key
-            userRole = "MedicineManager"
-            return True
+    if tableUser is not None:
+        for key, value in tableUser.items():
+            if value.get("Gmail") == gmail and value.get("Password") == password:
+                userKey = key
+                userRole = "MedicineManager"
+                return True
         
     tableUser = connectDBEquipmentManager().get()
-    if tableUser is None:
-        return False
-    for key, value in tableUser.items():
-        if value.get("Gmail") == gmail and value.get("Password") == password:
-            userKey = key
-            userRole = "EquipmentManager"
-            return True
+    if tableUser is not None:
+        for key, value in tableUser.items():
+            if value.get("Gmail") == gmail and value.get("Password") == password:
+                userKey = key
+                userRole = "EquipmentManager"
+                return True
         
     tableUser = connectDBOperator().get()
-    if tableUser is None:
-        return False
-    for key, value in tableUser.items():
-        if value.get("Gmail") == gmail and value.get("Password") == password:
-            userKey = key
-            userRole = "Operator"
-            return True
+    if tableUser is not None:
+        for key, value in tableUser.items():
+            if value.get("Gmail") == gmail and value.get("Password") == password:
+                userKey = key
+                userRole = "Operator"
+                return True
         
     tableUser = connectDBAdmin().get()
-    if tableUser is None:
-        return False
-    for key, value in tableUser.items():
-        if value.get("Gmail") == gmail and value.get("Password") == password:
-            userKey = key
-            userRole = "Admin"
-            return True
+    if tableUser is not None:
+        for key, value in tableUser.items():
+            if value.get("Gmail") == gmail and value.get("Password") == password:
+                userKey = key
+                userRole = "Admin"
+                return True
         
     return False
 

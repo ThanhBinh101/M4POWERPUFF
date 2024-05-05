@@ -23,16 +23,10 @@ class Information:
             "Gender": self.gender,
             "DateOfBirth": self.dob
         }
-        
-    def kill(self):
-        del self
 
 class Patient(Information):
     def __init__(self, name, email, password, dob, gender):
         Information.__init__(self, name, email, password, dob, gender)
-
-    def kill(self):
-        del self
 
     @staticmethod
     def AddPatient(name, email, password, dob, gender):
@@ -412,19 +406,15 @@ class Appointment():
     def AddTime(apmid):
         appointment_info = connectDBAppointment().get()
         apmid_info = appointment_info.get(apmid)
-        
-        # Get the current time for apmid
+
         apmid_time_str = apmid_info.get("Time")
         apmid_time = datetime.strptime(apmid_time_str, '%H:%M')
-        
-        # Calculate the new time and complete time for apmid
+
         new_apmid_time = apmid_time + timedelta(minutes=10)
-        
-        # Update the time for apmid
+
         dbconn_apmid = connectDBAppointment(apmid)
         dbconn_apmid.update({"Time": new_apmid_time.strftime('%H:%M')})
-        
-        # Update the time for other appointments
+
         for key, value in appointment_info.items():
             if key != apmid:
                 appointment_time_str = value.get("Time")
