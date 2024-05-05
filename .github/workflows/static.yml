@@ -33,11 +33,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
         with:
-          # Upload entire repository
-          path: '.'
+          name: artifacts
+          path: artifacts
+          if-no-files-found: error
+          retention-days: 90
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
