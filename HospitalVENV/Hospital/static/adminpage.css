@@ -185,7 +185,7 @@ margin-bottom: 3%;
     flex-direction: column;
   }
   
-  .NewjobHeader, .NewaccHeader, .NewaccHeader, .PatientHeader { 
+  .NewjobHeader, .NewaccHeader, .StaffHeader, .PatientHeader { 
     background-color: rgba(242, 206, 216, 0.5);
     text-align: center;
   }
