@@ -34,11 +34,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-pages-artifact@v3
         if: always()
         with:
-          name: artifacts
-          path: artifacts
+          path: .
           if-no-files-found: error
           retention-days: 90
       - name: Deploy to GitHub Pages
