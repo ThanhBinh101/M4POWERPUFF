@@ -68,7 +68,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 For any inquiries or support, please contact [email@example.com](binh.nguyendangthanh@hcmut.edu.vn).
-
----
-
-This README section now includes code blocks for the installation steps and contributing guidelines. Let me know if you need further assistance!
