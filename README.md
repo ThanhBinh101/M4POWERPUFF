@@ -67,4 +67,4 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
-For any inquiries or support, please contact [email@example.com](binh.nguyendangthanh@hcmut.edu.vn).
+For any inquiries or support, please contact [binh.nguyendangthanh@hcmut.edu.vn](binh.nguyendangthanh@hcmut.edu.vn).
