@@ -33,7 +33,7 @@ To run the Hospital Management System locally, follow these steps:
     ```
 4. Navigate to the project directory:
     ```bash
-    cd hospital-management-system
+    cd HospitalVENV
     ```
 5. Run the Django server:
     ```bash
