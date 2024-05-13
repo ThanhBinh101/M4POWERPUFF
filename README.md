@@ -41,30 +41,5 @@ To run the Hospital Management System locally, follow these steps:
     ```
 6. Access the application at [http://localhost:8000](http://localhost:8000) in your web browser.
 
-## Contributing
-Contributions are welcome! If you'd like to contribute to this project, please follow these guidelines:
-
-1. Fork the repository on GitHub.
-2. Clone your forked repository to your local machine:
-    ```bash
-    git clone https://github.com/your-username/hospital-management-system.git
-    ```
-3. Create a new branch to work on:
-    ```bash
-    git checkout -b feature/your-feature-name
-    ```
-4. Make your changes and commit them:
-    ```bash
-    git commit -am "Add your message here"
-    ```
-5. Push your changes to your forked repository:
-    ```bash
-    git push origin feature/your-feature-name
-    ```
-6. Submit a pull request from your feature branch to the main repository's `master` branch.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Contact
 For any inquiries or support, please contact [binh.nguyendangthanh@hcmut.edu.vn](binh.nguyendangthanh@hcmut.edu.vn).
